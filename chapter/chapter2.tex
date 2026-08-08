@@ -1,0 +1,110 @@
+\chapter{单变量函数的连续性}
+\section{连续函数的基本概念}
+\subsection{连续的定义}
+\begin{definition}
+    设$f(x)$在$x_0$的邻域内有定义，如果：
+    \[\lim_{x\to x_0}f(x) = f(x_0)\]
+    那么称$f(x)$在$x_0$处是\overtext{连续的}{continuous}.
+
+    若$f(x)$在区间$I$上有定义并在$I$上任意一点都连续，则称$f(x)$在$I$上连续.
+\end{definition}
+
+用$\varepsilon-\delta$语言和集合来说，就是$\forall \varepsilon>0$，都$\exists \delta>0$使得：
+\[f\left((x-\delta, x+\delta)\right) \subset \left(f(x_0)-\varepsilon, f(x_0)+\varepsilon\right)\]
+这种表述在拓扑学中较为常见.
+
+根据连续的定义，函数在一点的连续性与在这一点和这一点附近的值都有关系，这表明函数在一点连续是一个局部的性质.
+
+\subsection{单侧连续}
+\begin{definition}
+    \begin{itemize}
+        \item 若有$f(x_0-0)=f(x_0)$则称$f(x)$\textbf{左连续}.
+        \item 若有$f(x_0+0)=f(x_0)$则称$f(x)$\textbf{右连续}.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    函数在一点左连续并且右连续，当且仅当函数在这一点连续.
+\end{theorem}
+
+
+\subsection{间断的定义}
+\begin{definition}
+    设$f(x)$在$x_0$不连续，即\overtext{间断}{discontinuity}.
+
+    \begin{itemize}
+        \item 将左右极限存在的间断点称为\overtext{第一类间断点}{simple discontinuity}.
+        \begin{itemize}
+            \item 称满足$f(x_0-0)=f(x_0+0)\neq f(x_0)$或$f$在$x_0$处无定义的间断点称为\overtext{可去间断点}{removable discontinuity}.
+            \item 称满足$f(x_0-0)\neq f(x_0+0)$的间断点为\overtext{跳跃间断点}{jump discontinuity}.
+        \end{itemize}
+        \item 将左右极限至少有一个不存在或者是无限的间断点称为\overtext{第二类间断点}{essential discontinuity}.\\
+        具体包括\overtext{振荡间断点}{oscillating discontinuity}、\overtext{无穷间断点}{infinite discontinuity}.
+    \end{itemize}
+\end{definition}
+
+\begin{extension}{处处不连续的函数}
+    \textbf{Dirichlet函数}在处处都有定义，但是处处都不连续：
+    \[D(x)=\begin{cases}
+        1,\quad x \,\text{为有理数}\\
+        0,\quad x \,\text{为无理数}
+    \end{cases}\]
+\end{extension}
+
+
+\subsection{连续函数的性质}
+\begin{enumerate}[property]
+    \item \textbf{局部有界性：}若$f(x)$在某一点处连续，则$f(x)$在这一点的邻域上有界.
+    \item 若$f(x),g(x)$在$x_0$处连续，则$\begin{cases}
+        f(x)\pm g(x)\\
+        f(x)g(x)\\
+        \dfrac{f(x)}{g(x)}\,(g(x_0)\neq 0)
+    \end{cases}$也在$x_0$处连续.
+    \item 设$u=g(x)$在$x_0$处连续，$x=f(t)$在$t_0$处连续且$f(t_0)=x_0$，那么$g(f(t))$在$t_0$处连续.
+    \item 若$y=f(x)$在$[a,b]$上连续，则$f\big|_{[a,b]}$存在反函数，当且仅当$f(x)$在$[a,b]$上严格单调.
+    
+    除此以外，$f(x)$的反函数$y=f^{-1}(x)$也是连续且严格单调的.
+\end{enumerate}
+
+
+\subsection{初等函数的连续性}
+\begin{theorem}
+    \begin{itemize}
+        \item 基本初等函数在其定义域内连续.
+        \item 经过基本初等函数由有限次四则运算和有限次复合运算所构成，能用一个解析式所描述的初等函数在其定义域内连续.
+    \end{itemize}
+\end{theorem}
+
+\begin{question}
+    证明$\lim\limits_{x\to 0}\dfrac{\ln(1+x)}{x}=1$.
+\end{question}
+
+\begin{proof}
+    因为$\lim\limits_{x\to 0}(1+x)^{1/x}=\ee$，设：
+    \[f(x)=\begin{cases}
+        (1+x)^{1/x},\quad x \neq 0\\
+        \ee,\quad x=0
+    \end{cases}\]
+    则$f(x)$在$x=0$处连续，又由于$\ln y$在$y=\ee$处连续，二者的复合函数$\ln(f(x))$在$x=0$处连续，进而有：
+    \[\lim_{x\to 0}\frac{\ln(1+x)}{x} = \ln \lim_{x\to 0}f(x) = \ln \ee = 1\]
+    得证.
+\end{proof}
+
+\begin{question}
+    设$f(x)$在$|x|<\infty$连续且满足$f(x+y)=f(x)+f(y),\,x,y\in\mathbb{R}$.求$f(x)$的表达式.
+\end{question}
+
+\begin{solution}
+    当$x=y$时，$f(2x)=2f(x)$，由此推出：
+    \[f(nx)=nf(x) \quad\Rightarrow\quad f(\frac{x}{n})=\frac{1}{n}f(x) \quad\Rightarrow\quad f\left(\frac{m}{n}x\right)=\frac{m}{n}f(x)\]
+    即对$\forall r \in \mathbb{Q}$都有$f(rx)=rf(x)$.
+
+    令$y\equiv -x$，则有$f(0)=f(x)+f(-x)$；再令$x=y=0$，则有$f(0)=2f(0)$.
+
+    由此推出$f(0)=0$，进而有$f(x)=-f(x)$.
+
+    于是，$\forall x$，取有理数列$r_n \to x\,(n\to\infty)$，有：
+    \[f(r_n)=r_n f(1)\]
+    由于$f(x)$连续，故而有$f(r_n) = f(x) = f(1)\cdot x$，取$a=f(1)=\text{const}$，故而：
+    \[f(x)=ax\,(a \in \mathbb{R})\]
+\end{solution}
