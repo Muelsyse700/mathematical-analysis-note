@@ -108,3 +108,66 @@
     由于$f(x)$连续，故而有$f(r_n) = f(x) = f(1)\cdot x$，取$a=f(1)=\text{const}$，故而：
     \[f(x)=ax\,(a \in \mathbb{R})\]
 \end{solution}
+
+
+\section{闭区间上连续函数的性质}
+\subsection{零点定理与介值定理}
+首先需要明确一个概念，$f(x)$在闭区间$[a,b]$上连续指的是对$\forall x \in (a,b)$，$f(x)$在$x$处连续，对于$x=a$和$x=b$,$f(x)$分别左连续和右连续.记在$[a,b]$上所有连续函数的集合为$C[a,b]$.
+\begin{theorem}
+    \textbf{零点定理}
+
+    设$f(x) \in C[a,b]$，有$f(a)f(b)<0$，则一定$\exists \xi \in (a,b)$使得$f(\xi)=0$.
+\end{theorem}
+
+\begin{proof}
+    不妨设$f(a)<0<f(b)$，将$[a,b]$等分，如果$f\left(\dfrac{a+b}{2}\right)=0$，即得证.
+    
+    如果$f\left(\dfrac{a+b}{2}\right)\neq 0$，则区间$\left[a,\dfrac{a+b}{2}\right]$和$\dfrac{a+b}{2},b$必有一个其两端点异号，记异号的区间为$[a_1, b_1] \subset [a,b]$，有$f(a_1)<0<f(b_1)$，且$b_1-a_1=\dfrac{1}{2}(b-a)$.
+
+    重复上述步骤，必定$\exists [a_n,b_n]$使得$f(a_n)<0<f(b_n)$并且有：
+    \begin{gather*}
+        b_n-a_n=\left(\frac{1}{2^n}\right)(b-a)\\
+        [a_n,b_n]\subset[a_{n-1},b_{n-1}]\subset\cdots\subset[a,b]
+    \end{gather*}
+    根据区间套定理，必然有$a_n\to\xi,b_n\to\xi$，进一步有：
+    \begin{gather*}
+        f(a)<0<f(b)\\
+        f(\xi)\leqslant 0 \leqslant f(\xi)
+    \end{gather*}
+    根据三明治定理和连续函数的性质，$f(\xi)=0$.
+\end{proof}
+
+\begin{theorem}
+    \textbf{介值定理}
+
+    设$f \in C[a,b]$，若有$f(a)\neq f(b)$则对任意$r$介于$f(a)$和$f(b)$之间，一定$\exists \xi \in (a,b)$使得$f(\xi)=r$.
+\end{theorem}
+
+\begin{proof}
+    设$g(x)=f(x)-r$，显然有$g(x) \in C[a,b]$，对介于$f(a)$和$f(b)$之间的$r$，必然有；
+    \[g(a)g(b) = (f(a)-r)(f(b)-r)<0\]
+    根据零点定理，必然$\exists \xi \in (a,b)$使得$g(\xi)=f(\xi)-r=0$，即$f(\xi)=r$，得证.
+\end{proof}
+
+\begin{question}
+    证明任意奇数次多项式必有实根.
+\end{question}
+
+\begin{proof}
+    设$p(x)=a_{2n+1}x^{2n+1}+\cdots+a_0\,(a_{2n+1}\neq 0)$.
+
+    当$x\to\infty$时，$p(x)\sim a_{2n+1}x^{2n+1}$，进而有$\lim\limits_{x\to\pm\infty}=\pm\infty$.
+
+    显而易见的，左侧远处和右侧远处函数值异号，根据零点定理必有一点使得$p(x)=0$，即有实根.
+\end{proof}
+
+\begin{question}
+    证明对于$f \in C[a,b]$，如果$f([a,b])\subset[a,b]$，则一定$\exists x_0 \in [a,b]$使得$f(x_0)=x_0$(称$x_0$为不动点).
+\end{question}
+
+\begin{proof}
+    设$g(x)=f(x)-x$，必然有$\begin{cases}
+        g(a)=f(a)-a\geqslant 0\\
+        g(b)=f(b)-b\leqslant 0
+    \end{cases}$，若两个等号至少有一个成立则结论显而易见，若两个等号都不成立则有$g(a)g(b)<0$，根据零点定理必有$x_0 \in [a,b]$使得$g(x_0)=f(x_0)-x_0=0$，得证.
+\end{proof}
