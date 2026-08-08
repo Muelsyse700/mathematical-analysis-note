@@ -1,0 +1,1302 @@
+\chapter{极限}
+\section{实数}
+\subsection{自然数和整数}
+\subsubsection{自然数的定义}
+\begin{definition}
+    \overtext{自然数}{natural numbers}按照\texttt{ISO 80000-2}的定义，指的是非负整数，记作$\mathbb{N}_0 = \{0,1,2,3,\cdots\}$；在数论中，认为0不属于自然数，记作$\mathbb{N}_1 = \{1,2,3,\cdots\}$.
+\end{definition}
+
+\subsubsection{自然数的性质}
+对于$\mathbb{N}_1$，其具有一些性质：
+\begin{enumerate}[property]
+    \item \textbf{加法与乘法}——$\mathbb{N}_1$对加法与乘法是封闭的，即$\mathbb{N}_1$内的元素之间做加法与乘法的结果仍在$\mathbb{N}_1$中.
+    \item \textbf{序}——具有大小关系
+    \item \textbf{归纳公理}\\
+    若$S \subset \mathbb{N}_1$满足：
+    $\begin{cases}
+        1 \in S \\
+        n \in S \quad\Rightarrow\quad n+1 \in S
+    \end{cases}$，
+    则有$S = \mathbb{N}_1$.
+\end{enumerate}
+由此可以推出：
+\begin{theorem}
+    \overtext{良序原理}{well-ordering principle}\textbf{(最小数原理)}
+
+    若$S\subset \mathbb{N}_1, S \neq \varnothing $，则$S$中一定存在最小数.
+\end{theorem}
+\begin{proof}
+    若有$S \neq \emptyset, \exists n \in S$.
+
+    则$S \cap \{1,2,3,\cdots,n\}$非空且有限.
+
+    $\Rightarrow$存在最小数.
+\end{proof}
+
+由此可以推导出数学归纳法：
+\begin{theorem}
+    \textbf{数学归纳法}
+
+    设有命题$A_n, n \in \mathbb{N}_1$满足：
+    \begin{enumerate}[circ]
+        \item $n=1,A_1$成立
+        \item 若$A_n$成立，则$A_{n+1}$成立
+    \end{enumerate}
+    则对所有命题都成立.
+\end{theorem}
+\begin{proof}
+    若$\exists A_y$不成立，记$S = \{n | A_n \text{不成立}\} \subset \mathbb{N}_1$.
+
+    $\Rightarrow\quad y \in S, S \neq \emptyset$
+    
+    $\Rightarrow\quad$根据最小数原理，一定存在最小数$m \in S$，即$A_m$不成立.
+
+    又有条件：$A_1$成立，则$1 \notin S$，所以$m > 1$.
+
+    由于$m$是不成立的最小数，故而$A_{m-1}$成立.
+    
+    又根据第二个条件：$A_{n+1}$成立，所以$A_m$应当成立.
+
+    $\Rightarrow\quad m \notin S$与前述矛盾，得证.
+\end{proof}
+
+
+\subsection{无限集合与有限集合}
+\subsubsection{无限集合与有限集合的定义}
+\begin{definition}
+    \overtext{映射}{mapping}
+
+    定义$f:A \to B$
+    \begin{itemize}
+        \item \overtext{单射}{injection}\\
+        $\forall a,a' \in A$，若$a \neq a' \Rightarrow f(a) \neq f(a')$，即每个像最多只有一个变量映射其上.
+        \item \overtext{满射}{surjection}\\
+        $\forall b \in B, \exists a \in A$使得$f(a) = b$，即每个可能的像至少有一个变量映射其上.
+        \item \overtext{双射}{bijection} \textbf{(1-1映射)}\\
+        $\forall b \in B, \exists a \in A$使得$f(a) = b$，若$a \neq a'$，则$f(a) \neq f(a')$，即一一对应.
+        
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    设$A$、$B$是两个集合.
+    \begin{itemize}
+        \item 若$A$和$B$一一对应，则称$A$与$B$具有相同的\overtext{基数}{cardinal}或\overtext{势}{potential}，基数指的是集合中所包含元素的个数，用$|S|$表示$S$的基数.
+        \item 若存在$A$到$B$的满射，但不是单射，称$A$的基数大于$B$的基数.
+        \item 若一个集合$A$与$\mathbb{N}_1$的某个子集之间为双射，则称$A$为\overtext{可数的}{countable}，其基数记作$\aleph_0$.
+        \item 若存在$A \to \mathbb{N}_1$的满射，则称$A$为\overtext{无限集合}{infinite set}.
+        \item 若$A$与$\{1,2,\cdots,n\}$一一对应，称$A$为\overtext{有限集合}{finite set}，其基数为$n$.
+    \end{itemize}
+\end{definition}
+
+可数集的特点在于，由于其与$\mathbb{N}_1$一一对应，故而可以用$\mathbb{N}_1$为可数集中的元素编号，尽管每次排序的具体编号不是唯一的，但是是可排列的.
+
+总而言之，有限集一定可数，而无限集分为可数无限集与不可数无限集.
+
+\subsubsection{可数无限集合的性质}
+\begin{enumerate}[property]
+    \item 设$U$是一个无限集合，若存在满射$f:\mathbb{N}_1 \to U$，则$U$一定是可数集合.
+    \item $\begin{cases}
+        \text{可数集} \cup \text{可数集} = \text{可数集} \\
+        \text{有限集} \cup \text{可数集} = \text{可数集} \\
+        \text{可数个可数集的并} = \text{可数集}
+    \end{cases}$
+    \begin{proof}
+        为了证明可数个可数集的并仍是可数集，把可数个可数集中的元素列出来，并记它们的并集为：
+        \[S = \bigcup^\infty_{n=1} A_n\]
+
+        若是按行编号，假如第一行的元素有无限个，那么第一行永远不能编号完，之后的元素一直无法获得编号.
+
+        于是，Cantor发明了蛇形计数法：第1条斜线上有1个元素，第2条斜线上有2个元素，第$k$条斜线上就有$k$个元素.这就解决了后续元素一直编不到号的问题，转化成了无限个有限集.
+
+        对于可数个集合，先将其中的有限集的最后一个元素无限复制使之成为一个无限集，这样就获得了可数个的可数无限集.
+
+        根据Cantor计数法，这个网格中的元素是可数的.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.8]{cantor-zigzag/fig.pdf}
+            \caption{Cantor蛇形计数法}
+        \end{figure}
+        建立一个映射$f:\mathbb{N}_1 \times \mathbb{N}_1 \to S$，对应：
+        \[f(i,j) = a_{ij}\]
+        对于上述网格中的元素，至少有一组$(i,j)$使得其成立，这就表明$f$是一个满射.根据性质1，$S$是可数集.
+    \end{proof}
+    \item 整数集$\mathbb{Z} = \mathbb{Z}_+ \cup \{0\} \cup \mathbb{Z}_-$是可数的.
+    \item 对于$A \times B = \{(a,b)|a \in A, b \in B\}$，若$A,B$可数，则$A \times B$可数.
+    
+\end{enumerate}
+
+\subsubsection{不可数集的构造}
+\begin{definition}
+    \overtext{幂集}{power set}指的是由该集合的全部子集所构成的集合，记作$\mathcal{P}(S)$或$2^S$.
+    \[\mathcal{P}(S) \coloneq \{U|U \subseteq S\}\]
+\end{definition}
+
+例如，有集合$A = \{1,2,3\}$，其幂集为：
+\[\mathcal{P}(A) = \{\emptyset, \{1\}, \{2\}, \{3\}, \{1,2\}, \{1,3\}, \{2,3\}, \{1,2,3\}\}\]
+若$A$的基数为$n$，则$\mathcal{P}(A)$的基数为$2^n$.
+
+\begin{theorem}
+    \textbf{Cantor定理}
+
+    对任意集合$A$，其幂集$\mathcal{P}(A)$的基数严格大于$A$本身的基数.
+\end{theorem}
+
+\begin{definition}
+    若有集合$S$，不存在从$\mathbb{N}_1$出发到$S$的满射，即$S$的基数严格大于$\mathbb{N}_1$，则称$S$是\overtext{不可数的}{uncountable}.
+\end{definition}
+
+利用Cantor定理可以构造不可数集：对包括$\mathbb{N}_1$在内的任意集合$A$，其幂集$\mathcal{P}(A)$永远无法被$A$满射覆盖，因此$\mathcal{P}(\mathbb{N}_1)$被严格定义为不可数集.
+
+
+\subsection{有理数}
+\subsubsection{有理数的定义}
+\begin{definition}
+    \overtext{有理数}{rational numbers}指的是可以表示为两个整数之比的数，记作$\mathbb{Q}$：
+    \[\mathbb{Q} = \left\{ \frac{p}{q} \,\middle|\, p,q \in \mathbb{Z}, q \neq 0 \right\}\]
+    为了方便，也可以按如下定义：
+    \[\mathbb{Q} = \left\{ \frac{p}{q} \,\middle|\, p \in \mathbb{Z}, q \in \mathbb{Z}_+\right\}\]
+    实际上，关于有理数更好的翻译应当为\textbf{比例数}.
+\end{definition}
+
+\subsubsection{有理数的性质}
+有理数具备如下性质：
+\begin{enumerate}[property]
+    \item $\mathbb{Q}$对加、减、乘、除四则运算是封闭的.
+    \item $\mathbb{Q}$存在序.
+    \begin{proof}
+        设有$\begin{cases}
+            m,m' \in \mathbb{Z}\\
+            n,n' \in \mathbb{Z}_+
+        \end{cases}$，由此构造两个有理数之差：
+        \[\frac{m}{n} - \frac{m'}{n'} = \frac{mn'-nm'}{nn'}\]
+        对于分母$mn'-nm'$，由于整数集$\mathbb{Z}$是有序的，并且对加法、减法与乘法封闭，故而$mn'-nm'$必然是大于0、小于0或等于0的.
+        
+        由此表明，有理数也是有序的.
+    \end{proof}
+    \item $\mathbb{Q}$是可数的.
+    \begin{proof}
+        设有映射$\begin{cases}
+            f:\mathbb{N}_1 \to \mathbb{Z}\times\mathbb{Z}_+ \\
+            g:\mathbb{Z}\times\mathbb{Z}_+ \to \mathbb{Q}
+        \end{cases}$，利用Cantor蛇形计数法不难得知映射$f$是满射，而对于映射$g$有：
+        \[g:\begin{cases}
+            \mathbb{Z}\times\mathbb{Z}_+ = \{ (p,q) | p \in \mathbb{Z}, q \in \mathbb{Z}_+\} \to \mathbb{Q} = \left\{ \dfrac{p}{q} \,\middle|\, p \in \mathbb{Z}, q \in \mathbb{Z}_+\right\} \\
+            (p,q) \mapsto \dfrac{p}{q}
+        \end{cases}\]
+        显然的，$g$是满射.
+        
+        根据可数集的性质，$\mathbb{N}_1$可数，则$\mathbb{Z}\times\mathbb{Z}_+$可数，故而$\mathbb{Q}$也可数.
+    \end{proof}
+    \item $\mathbb{Q}$与实轴上点的对应：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.9]{first-math-crisis/fig.pdf}
+        \caption{在实轴上表示有理数与第一次数学危机}
+    \end{figure}
+    \begin{extension}{第一次数学危机}
+        属于Pythagoras学派的Hippasus注意到：边长为1的正方形的对角线长度无法写成有理数的形式.由此发现了\overtext{无理数}{irrational numbers}$\sqrt{2}$.
+        
+        据传说，Hippasus被Pythagoras学派的人扔入大海淹死.
+    \end{extension}
+    \begin{proposition}
+        不存在有理数$a$，使得$a^2=2$.
+    \end{proposition}
+    \begin{proof}
+        假设：存在$a=\dfrac{p}{q}$且$p$与$q$的最小公约数为1.
+        \[a^2 = \left(\frac{p}{q}\right)^2 = 2 \quad\Rightarrow\quad p^2 = 2q^2\]
+        $p^2$是2的倍数，则$p^2$必然是偶数.只有偶数的平方才是偶数，因此$p$也是偶数.则$p$必然等于某个数$p_1$乘以2：
+        \[p = 2p_1 \quad\Rightarrow\quad 4p_1^2 = 2q^2 \quad\Rightarrow\quad p^2 = 2p_1^2\]
+        这表明$q$也是偶数，与原假设矛盾，故而不存在$a$使得$a^2=2$.
+    \end{proof}
+    \item $\mathbb{Q}$具有\overtext{稠密性}{density}，即任意两个不相等的有理数间至少存在另一个有理数.
+    \begin{proposition}
+        $\forall a,b \in \mathbb{Q}$且$a < b$，必定存在$c \in \mathbb{Q}$，使得$a < c < b$.
+    \end{proposition}
+    \begin{proof}
+        构造$c = \dfrac{a + b}{2}$，由于$a,b,2 \in \mathbb{Q}$，根据加法与除法对$\mathbb{Q}$的封闭性，则$c \in \mathbb{Q}$，且$a < c < b$.
+    \end{proof}
+    \begin{proposition}
+        对于$\begin{cases}
+            X = \{a \in \mathbb{Q} | a<0 \,\text{或}\, a^2<2\} \\
+            Y = \{a \in \mathbb{Q} | a>0 ,a^2>2\} \\
+        \end{cases}$有：
+        \[X \cap Y = \emptyset \qquad X \cup Y = \mathbb{Q}\]
+        即$X$和$Y$之间不存在有理数.
+
+        亦可表述为：$X$中无最大的有理数且$Y$中无最小的有理数.
+    \end{proposition}
+    \begin{proof}
+        设$a \in \mathbb{Q},a>0$，令：
+        \[a' \equiv a - \frac{a^2-2}{a+2} = \frac{2a+2}{a+2} \in \mathbb{Q} \quad\Rightarrow\quad a' > 0\]
+        当$a \in X$，有${a'}^2-2 = \dfrac{2(a^2-2)}{a+2} <0$，则$a' \in X$且$a'>a$.
+
+        当$a \in Y$，有${a'}^2-2 > 0$，则$a' \in Y$且$a'<a$.
+    \end{proof}
+    虽然$\mathbb{Q}$是稠密的，但是它在实轴上仍然有许许多多由无理数构成的缝隙，在引入无理数后，就构成了实数的概念.
+\end{enumerate}
+
+
+\subsection{实数}
+\subsubsection{序}
+\begin{definition}
+    对于集合$S$，$\forall a,b \in S$，若有：
+    \begin{enumerate}[circ]
+        \item \overtext{三分律}{trichotomy law}：$a<b,a>b,a=b$三者有且仅有一种成立.
+        \item \overtext{传递性}{transitivity}：对$c \in S,a<b,b<c$，有$a<c$.
+    \end{enumerate}
+    则称$S$为\overtext{有序集}{ordered set}.
+\end{definition}
+
+\subsubsection{界与确界}
+\begin{definition}
+    设$S$是有序集，对于集合$E \subset S$，若$\exists \beta \in S$使得$\forall \alpha \in E$：
+    \begin{itemize}
+        \item 有$\alpha \leqslant \beta$，则称$\beta$是$E$的\overtext{上界}{upper bound}.称最小的上界为\overtext{上确界}{supremum}，记作$\sup E$.
+        \item 有$\alpha \geqslant \beta$，则称$\beta$是$E$的\overtext{下界}{lower bound}.称最大的下界为\overtext{下确界}{infimum}，记作$\inf E$.
+    \end{itemize}
+\end{definition}
+
+例如对于集合$E$：
+\[E=\{1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\cdots\} \quad\Rightarrow\quad \sup E = 1, \inf E = 0\]
+可见一个集合的上下界和上下确界不一定在这个集合中.
+
+又或者对于$\begin{cases}
+            X = \{a \in \mathbb{Q} | a<0 \,\text{或}\, a^2<2\} \\
+            Y = \{a \in \mathbb{Q} | a>0 ,a^2>2\} \\
+\end{cases}$，$X$在$\mathbb{Q}$中不存在上确界，$Y$在$\mathbb{Q}$中不存在下确界.
+
+\begin{theorem}
+    \overtext{上确界原理}{principle of supremum}\textbf{(确界原理)}
+
+    设$S$是有序集，$S$中非空有上界的集合必有上确界，当且仅当$S$中非空有下界的集合必有下确界.
+
+    确界原理是\overtext{完备性公理}{axiom of completeness}的等价命题之一，以任意等价命题为公理，可以推导出其它等价命题.
+
+    在本章中，以确界原理作为公理.
+\end{theorem}
+
+由于$\mathbb{Q}$在实轴上有很多缝隙，所以$\mathbb{Q}$不满足确界原理是显而易见的.
+
+\begin{proof}
+    \textbf{确界原理充分必要性的证明：}设有$S$是有序集.
+    \[\underbrace{\text{$S$中非空有上界的集合必有上确界}}_\text{命题$p$}\Leftrightarrow\underbrace{\text{$S$中非空有下界的集合必有下确界}}_\text{命题$q$}\]
+    \textbf{充分性($p \Rightarrow q$)：}
+    
+    设$E \subset S$有下界，记$E' = \{a \in S |a\text{是}E\text{的下界}\}$，则$E \neq \emptyset$，且$\forall b \in E, \forall a \in E'$有$b>a$成立，即$E'$有上界.
+
+    根据命题$p$，$E'$必有上确界，记为$a_0 = \sup E'$.
+    
+    由于$a_0 \in E'$，故而$\forall b \in E$均有$a_0 \leqslant b$，即$E$有下界$a_0$.
+
+    假设有$a_0'>a_0$且$a_0'$是$E$的下界，根据$E'$的定义则$a_0' \in E'$.
+
+    又因为$\sup E' = a_0$，于是$a_0' \notin E'$.与原假设相矛盾，故而$a_0$是$E$的下确界：
+    \[a_0 = \sup E' = \inf E\]
+    即有下界必有下确界，得证.
+
+    \textbf{必要性($p \Leftarrow q$)：}
+
+    根据充分性的证明方法易证.
+
+\end{proof}
+
+\subsubsection{域}
+\begin{definition}
+    设$S$是一个集合，如果有$0,1 \in S$且有加法“$+$”和乘法“$\times$”满足如下条件，就称集合$S$为\overtext{域}{field}.
+    \begin{enumerate}[circ]
+        \item \textbf{封闭性：}$\forall x,y \in S, x+y \in S, xy \in S$.
+        \item \textbf{结合律：}$\forall x,y,z \in S,\begin{cases}
+            (x + y) + z = x + (y + z) \\
+            (x \times y) \times z = x \times (y \times z)
+        \end{cases}$
+        \item \textbf{交换律：}$\forall x,y \in S,\begin{cases}
+            x + y = y + x\\
+            x \times y = y \times x
+        \end{cases}$
+        \item \textbf{加法单位元(零元)：}$\exists 0 \in S$使得$\forall x \in S, x+0=x$.
+        \item \textbf{乘法单位元(幺元)：}$\exists 1 \in S$且$1 \neq 0$使得$\forall x \in S, x \times 1 = x$.
+        \item \textbf{加法逆元(负元)：}$\forall x \in S, \exists y \in S$使得$x+y=0$，记$y=-x$.
+        \item \textbf{乘法逆元(倒数)：}$\forall x \in S$且$x \neq 0, \exists y \in S$使得$x \times y=1$，记$y=x^{-1}$.
+    \end{enumerate}
+\end{definition}
+
+\subsubsection{有序域}
+\begin{definition}
+    若集合$S$有序且是域，满足$\forall x,y,z \in S, \begin{cases}
+        x<y \Rightarrow x+z < y+z\\
+        x>0, y>0 \Rightarrow xy>0
+    \end{cases}$，就称$S$为\overtext{有序域}{ordered field}
+\end{definition}
+
+\subsubsection{实数域}
+\begin{definition}
+    若一个集合$S$是有序域且满足确界原理，则称为\overtext{实数域}{field of real numbers}，记为$\mathbb{R}$.
+\end{definition}
+
+\begin{enumerate}[property]
+    \item $\mathbb{R}\supset\mathbb{Q}$.
+    \item $\mathbb{R}$中的数与实轴上的点一一对应.
+    \item $\mathbb{R}$的基数是不可数的.
+\end{enumerate}
+
+\begin{theorem}
+    \textbf{Archimedes原理}
+
+    $\forall x \in \mathbb{R}, x>0$必定$\exists n \in \mathbb{N}_1$使得$nx>y$.
+\end{theorem}
+
+\begin{proof}
+    设$E = \{nx | n \in \mathbb{N}_1\}$，假如Archimedes原理不成立：
+    
+    即$\forall m \in \mathbb{N}_1$，有$nx \leqslant y$.
+
+    $\Rightarrow E$有上界$y$.
+
+    由于$E \subset \mathbb{R}$，$\mathbb{R}$满足确界原理，故而$E$必有上确界，记为$\alpha = \sup E$.
+
+    对于$x \in \mathbb{R}, x>0$有$\alpha - x < \alpha$.
+
+    $\Rightarrow \exists mx \in E$使得$mx > \alpha - x \Rightarrow (m+1)x > \alpha$.
+
+    显然$(m+1) \in \mathbb{N}_1 \Rightarrow (m+1)x \in E$，这与$\alpha = \sup E$矛盾，故而Archimedes原理成立.
+\end{proof}
+
+\begin{theorem}
+    \textbf{有理数在实数域上的稠密性}
+
+    $\forall x,y \in \mathbb{R}, x<y$必定$\exists c \in \mathbb{Q}$满足$x<c<y$.
+\end{theorem}
+
+\begin{proof}
+    $\forall x,y \in \mathbb{R}, x<y \Rightarrow y-x>0$且$(y-x) \in \mathbb{R}$.
+
+    根据Archimedes原理，$\exists n \in \mathbb{N}_1$使得$n(y-x)>1$.
+
+    $\Rightarrow ny>nx+1$
+
+    对于$1$和$nx$，根据Archimedes原理，$\exists m_1 \in \mathbb{N}_1$使得$m_1 \times 1 > nx$.
+
+    设有集合$S$：
+    \[S = \{k | k \in \mathbb{N}_1, k>nx\} \subseteq \mathbb{N}_1 \quad\Rightarrow\quad m_1 \in S, S \neq \emptyset\]
+    根据最小数原理，$S$中存在最小数$m$，于是有：
+    \[m > nx \geqslant m-1\]
+    又由$ny>nx+1$有：
+    \[nx < m \leqslant nx+1 < ny\]
+    同时除以$n$，有：
+    \[x < \frac{m}{n} < y\]
+    显然$\dfrac{m}{n} \in \mathbb{Q}$，得证.
+\end{proof}
+
+
+\subsection{十进制小数}
+\begin{proposition}
+    任意实数都能被一个十进制无限循环小数表示.
+\end{proposition}
+    这也是实数完备性的一种等价表述.
+\begin{proof}
+    根据Archimedes原理，$\forall x \in \mathbb{R}, x>0, \exists a_0 \in \mathbb{Z}$使得：
+    \[a_0 \leqslant x < a_0+1\]
+    左右同乘以$10$：
+    \[10(x-a_0)<10\]
+    再次应用Archimedes原理，$\exists a_1 \in \mathbb{Z}$使得：
+    \[a_1 \leqslant 10(x-a_0) < a_1+1\]
+    若$a_1 \geqslant 10$，由于$a_1 \leqslant 10(x-a_0)$，故而有：
+    \[x-a_0 \geqslant 1 \quad\Rightarrow\quad x \geqslant a_0 + 1\]
+    与前述$x<a_0+1$矛盾，所以$0 \leqslant a_1 \leqslant 9$.进一步地，对上上式移项，有：
+    \[a_0 + \frac{a_1}{10} \leqslant x < a_0 + \frac{a_1}{10} + \frac{1}{10}\]
+    重复上述推导，易知$\exists 0 \leqslant a_1, a_2, \cdots, a_n \leqslant 9$使得：
+    \[a_0 + \frac{a_1}{10} + \cdots + \frac{a_n}{10^n} \leqslant x \leqslant a_0 + \frac{a_1}{10} + \cdots + \frac{a_n}{10^n} + \frac{1}{10^n}\]
+    设有集合$E$：
+    \[E = \left\{a_0 + \frac{a_1}{10} + \cdots + \frac{a_n}{10^n}\,\middle|\, n \in \mathbb{N}\right\}\]
+    显然，$E$有上界，根据确界原理，$E$必有上确界，经证明：
+    \[\sup E = x = a_0.a_1a_2 \cdots a_n \cdots\]
+    当把$n$一步步地取大，$E$的上确界不断向$x$靠近，当取到无限位后，最终完整表达了$x$.
+\end{proof}
+
+对于有限小数，实际上就是后面无数位都是$0$.
+
+另外，一个数是有限小数还是无限小数，并不是由这个数本身的固有性质决定的，而是由进制决定的.例如$\frac{1}{3}$在十进制下是无限小数，而在三进制下，$\frac{1}{3} = (0.1)_3$，是一个一位有限小数.
+
+
+\section{数列极限}
+\subsection{点列}
+\begin{definition}
+    \begin{itemize}
+        \item \overtext{数列}{number sequence}指的是由数字组成的序列，在几何上对应一维实数轴上的一部分点，记作$\{a_n\}$.
+        \item \overtext{点列}{point sequence}指的是由空间中的点组成的序列，它可以对应多维空间或抽象空间中的点，数列是点列在一维情况下的特例.
+    \end{itemize}
+\end{definition}
+
+
+\subsection{存在与任意}
+存在$(\exists)$与任意$(\forall)$是描述命题的数学语言，使用这门语言可以严谨且规范化地描述数学命题.
+\begin{extension}{Goldbach猜想}
+    用存在与任意来描述Goldbach猜想，就是：$\forall$大于$2$的偶数，一定$\exists$两个素数$p,q$，使得$n=p+q$.
+\end{extension}
+
+如果要把命题“$\{a_n\}$有界”用存在与任意来描述，就是：$\exists M>0$，对$\forall n \in \mathbb{N}_1$有$a_n \leqslant M$.
+
+
+\subsection{数列极限的定义}
+\begin{definition}
+    设有数列$\{a_n\}$和$a \in \mathbb{R}$.
+
+    如果$\forall \varepsilon > 0$，$\exists N$在$n > N$时，有$|a_n - a|<\varepsilon$，那么称$\{a_n\}$收敛于$a$，$a$为$\{a_n\}$的\overtext{极限}{limit}，记作$\lim\limits_{n \to \infty}a_n=a$或$a_n \to a(n \to \infty)$.
+\end{definition}
+
+将定义中的不等式去掉绝对值，就是：
+\[a-\varepsilon < a_n < a+\varepsilon\]
+从数轴上看，就是这样：
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.0]{sequence-limit/fig.pdf}
+    \caption{数列极限}
+\end{figure}
+在区间内部，有无限个点，因为在$n>N$之后有无限个点，在此之前只有有限个点.也就是说只要区间中没有无限个点，那么这个区间中就不包含极限.
+
+但也不是说这个区间中有无限个点这个数列就有极限，注意到数列极限的定义是对任意$\varepsilon$，也就是说对任意区间宽度都要有无限个点在其中才是极限.
+
+如果极限不存在，应当表述为：$\exists \varepsilon_0 > 0$，使得对$\forall N$一定$\exists n > N$使得$|a_n - a| \geqslant \varepsilon_0$.
+
+\begin{question}
+    证明：$a_n = \dfrac{n}{n+1} \to 1$.
+\end{question}
+\begin{proof}
+    对$\forall \varepsilon > 0$，要使：
+    \[\left|\frac{n}{n+1}-1\right|=\frac{1}{n+1}<\varepsilon\]
+    只需$n > \dfrac{1}{\varepsilon}-1$，故而取正整数$N > \dfrac{1}{\varepsilon}-1$，当$n>N$时必有：
+    \[\left|\frac{n}{n+1}-1\right|=\frac{1}{n+1}<\frac{1}{N+1}\leqslant\varepsilon\]
+    由数列极限的定义可知$\lim\limits_{n \to \infty}\dfrac{n}{n+1}=1$.
+\end{proof}
+
+
+\subsection{数列极限的性质}
+\begin{enumerate}[property]
+    \item \textbf{唯一性：}极限是唯一的.
+    \begin{proof}
+        假设有两个极限$a \neq b, a<b$.不妨设$\varepsilon < \dfrac{1}{2}(b-a)$，也就是说两个极限区间没有交集.
+        
+        根据前述极限的定义，极限所在区间之外应当只有有限项，所在区间之内有无限项.
+
+        此时有两个含有无限项的区间，与极限所在区间之外只有有限项矛盾，故而极限是唯一的.
+    \end{proof}
+
+    
+    \item \textbf{有界性：}$\{a_n\}$收敛是$\{a_n\}$有界的充分不必要条件.
+    \begin{proof}
+        设$a_n \to a$.
+
+        对$\varepsilon = 1$，$\exists N$使得$n>N$时有：
+        \[|a_n - a|<1 \quad\Rightarrow\quad |a_n|<|a|+1\]
+        取$M = \max\{|a_1|, \cdots, |a_N|, |a|+1\}$，则对$\forall n$有$|a_n| \leqslant M$.
+    \end{proof}
+
+    这个证明展现了一种思路：即先处理掉无限个后续项“尾巴”，再对此前的项逐个击破，从而完成证明.
+
+    \item \textbf{局部保号性(极限到数列)：}设$a_n \to a$，若有$a>l$，则对充分大的$n$有$a_n>l$.
+    \begin{proof}
+        取$0 < \varepsilon < a-l$.根据极限的定义$\exists N$在$n>N$时：
+        \[a-\varepsilon < a_n < a+\varepsilon\]
+        由$\varepsilon < a-l$有$l < a-\varepsilon$，于是有：
+        \[l < a-\varepsilon < a_n\]
+        得证.
+    \end{proof}
+
+    \item \textbf{局部保号性(数列到极限)：}设$a_n \to a$，若对充分大$n$有$a_n \geqslant l$，则$a \geqslant l$.
+    \begin{proof}
+        有$a_n \geqslant l$，若$a < l$，不妨令$\varepsilon \equiv l-a > 0$，根据极限的定义，$\exists N$在$n>N$时有：
+        \[a-\varepsilon < a_n < a+\varepsilon = l\]
+        与前提$a_n \geqslant l$矛盾，由于$\mathbb{R}$上有序，故而$a \geqslant l$.
+    \end{proof}
+    注意到，从数列推导到极限的过程中是需要取等的.
+
+    \item \textbf{保序性(极限到数列)：}设$a_n \to a, b_n \to b$，若$a < b$，则对于充分大的$n$有$a_n < b_n$.
+
+    \item \textbf{保序性(数列到极限)：}设$a_n \to a, b_n \to b$，若$a_n \geqslant b_n$或$a_n > b_n$，则对于充分大的$n$有$a \geqslant b$.
+    \begin{proof}
+        有$a_n \geqslant b_n$，若$a < b$，取$0 < \varepsilon < \frac{b-a}{2}$.
+
+        $\exists N_1$在$n>N_1$时有$a-\varepsilon < a_n < a+\varepsilon$
+
+        $\exists N_2$在$n>N_2$时有$b-\varepsilon < b_n < b+\varepsilon$
+
+        当$n>\max\{N_1, N_2\}$时，有：
+        \[a_n < a+\varepsilon < \frac{a+b}{2} < b-\varepsilon < b_n\]
+        与前提$a_n \geqslant b_n$矛盾，故而$a \geqslant b$.
+    \end{proof}
+
+    \item 极限具有四则运算.即设$a_n \to a, b_n \to b$，则
+    $\begin{cases}
+        \lim\limits_{n \to \infty}(a_n \pm b_n) = a \pm b \\
+        \lim\limits_{n \to \infty}(a_n b_n) = ab \\
+        \lim\limits_{n \to \infty}\dfrac{a_n}{b_n} = \dfrac{a}{b}(b \neq 0)
+    \end{cases}$
+    \begin{proof}
+        加减法易证，以证明乘除法为例：
+
+        根据极限的定义：
+        \[|a_n b_n - ab| = |a_n b_n - a_n b + a_n b - ab| \leqslant |a_n b_n - a_n b| + |a_n b - ab| = |a_n||b_n-b|+|a_n - a||b|\]
+        由于$a_n \to a$，则$\exists M$使得$|a_n|\leqslant M$.
+        
+        故而对$\dfrac{\varepsilon}{2(M+1)}>0$，$\exists N_1$在$n>N_1$时有：
+        \[|b_n-b|<\frac{\varepsilon}{2(M+1)}\]
+
+        对$\dfrac{\varepsilon}{2(|b|+1)}>0$，$\exists N_2$在$n>N_2$时有：
+        \[|a_n-a|<\frac{\varepsilon}{2(|b|+1)}\]
+
+        取$N = \max\{N_1, N_2\}$，当$n>N$时有：
+        \[|a_n b_n - ab| \leqslant M|b_n-b| + |a_n-a||b| < \left(\frac{M}{M+1} + \frac{|b|}{|b|+1}\right)\frac{\varepsilon}{2} < \varepsilon\]
+        即$\lim\limits_{n \to \infty}(a_n b_n) = ab$，乘法得证.
+
+        在乘法的基础上，要证明除法，只需证$\dfrac{1}{b_n}\to\dfrac{1}{b}$，不妨假定$b>0$：
+        \[\left|\frac{1}{b_n} - \frac{1}{b}\right| = \frac{|b_n-b|}{|b_n b|}\]
+        由于$b_n \to b$，故而$\exists N_1$在$n>N_1$时有：
+        \[|b_n - b|<\frac{b}{2} \quad\Rightarrow\quad b_n>\frac{b}{2} \quad\Rightarrow\quad \frac{1}{|b_n b|}<\frac{2}{b^2}\]
+        同样的$\forall \varepsilon > 0$，也$\exists N_2$在$n>N_2$时有：
+        \[|b_n - b|<\frac{b^2 \varepsilon}{2}\]
+        所以当$n > N = \max\{N_1, N_2\}$时：
+        \[\left|\frac{1}{b_n} - \frac{1}{b}\right| = \frac{|b_n-b|}{|b_n b|} < \frac{2}{b^2}\frac{b^2 \varepsilon}{2} = \varepsilon\]
+        进而除法得证.
+    \end{proof}
+
+    \begin{question}
+        求极限：$\lim\limits_{n \to \infty}\dfrac{2^n + 5 \cdot 3^n}{3^n + 5 \cdot 2^n}$.
+    \end{question}
+    \begin{solution}
+        \[\lim\limits_{n \to \infty}\frac{2^n + 5 \cdot 3^n}{3^n + 5 \cdot 2^n} = \lim\limits_{n \to \infty}\frac{\left(\frac{2}{3}\right)^n + 5}{1 + 5 \cdot \left(\frac{2}{3}\right)^n} = 5\]
+    \end{solution}
+
+    \item 改变$\{a_n\}$的有限项，不影响其敛散性和极限值.
+    \begin{proof}
+        这是因为极限所在区间宽度的$\varepsilon$是任意的，假如把$n>N$的某些点强行移出区间，那么区间宽度依定义自动缩小，使得$n>N'>N$，极限不变.
+    \end{proof}
+
+    这条性质表明，对于一个发散的数列，不可能通过改变有限项使之收敛，反之亦然.
+\end{enumerate}
+
+
+\subsection{三明治定理及其应用}
+\begin{theorem}
+    \textbf{三明治定理}
+
+    $a_n \to a, b_n \to a$，且$a_n \leqslant c_n \leqslant b_n$，则$c_n \to a$.
+\end{theorem}
+\begin{proof}
+    $\forall \varepsilon > 0 \begin{cases}
+        \exists N_1 \,\text{在}\, n>N_1 \,\text{时}\, a-\varepsilon < a_n < a+\varepsilon \\
+        \exists N_2 \,\text{在}\, n>N_2 \,\text{时}\, a-\varepsilon < b_n < a+\varepsilon \\
+    \end{cases}$
+
+    在$n > \max\{N_1, N_2\}$时：
+    \[a-\varepsilon < a_n \leqslant c_n \leqslant b_n < a+\varepsilon\]
+    即$|c_n - a| < \varepsilon$.
+\end{proof}
+
+\begin{question}
+    求极限：$\lim\limits_{n \to \infty}\sqrt{1+\dfrac{1}{n^\alpha}}(\alpha>0)$.
+\end{question}
+\begin{solution}
+    注意到：
+    \[1 < \sqrt{1+\dfrac{1}{n^\alpha}} < 1+\dfrac{1}{n^\alpha}\]
+    根据$\dfrac{1}{n^\alpha} \to 0$，故而不等式两边极限都是$1$，因此根据三明治定理：
+    \[\lim\limits_{n \to \infty}\sqrt{1+\dfrac{1}{n^\alpha}} = 1\]
+\end{solution}
+可见，解此类题的关键在于构造极限相等“夹住”中间项的不等式.
+
+\begin{question}
+    求极限：$\lim\limits_{n \to \infty}\left(\dfrac{1}{\sqrt{n^2+1}} + \dfrac{1}{\sqrt{n^2+2}} + \cdots + \dfrac{1}{\sqrt{n^2+n}}\right)$.
+\end{question}
+\begin{solution}
+    注意到括号中各项的大小是逐级递减的，共$n$项.那么括号中各项只和必然大于最小项$\dfrac{1}{\sqrt{n^2+1}}$的$n$倍，必然小于最大项$\dfrac{1}{\sqrt{n^2+n}}$的$n$倍：
+    \[\frac{n}{\sqrt{n^2+1}} < \frac{1}{\sqrt{n^2+1}} + \cdots + \frac{1}{\sqrt{n^2+n}} < \frac{n}{\sqrt{n^2+n}}\]
+    \[\dfrac{n}{\sqrt{n^2+1}} = \dfrac{1}{1+\dfrac{1}{n^2}} \to 1 \qquad\qquad\qquad\qquad
+        \dfrac{n}{\sqrt{n^2+n}} = \dfrac{1}{1+\dfrac{1}{n}} \to 1 \]
+    故而$\lim\limits_{n \to \infty}\left(\dfrac{1}{\sqrt{n^2+1}} + \dfrac{1}{\sqrt{n^2+2}} + \cdots + \dfrac{1}{\sqrt{n^2+n}}\right) = 1$.
+\end{solution}
+
+\begin{question}
+    求极限：$\lim\limits_{n \to \infty}\sqrt[n]{a}(a>0)$.
+\end{question}
+\begin{solution}
+    \begin{enumerate}[circ]
+        \item 当$a=1$，$\sqrt[n]{a} \to 1$.
+        \item 当$a>1$，$\sqrt[n]{a} > 1$，故而设：
+        \[\sqrt[n]{a} = 1 + \lambda_n(\lambda_n>0) \quad\Rightarrow\quad a=(1+\lambda_n)^n\]
+        利用二项式定理展开：
+        \[a = 1 + n \lambda_n + \frac{n(n-1)}{2}\lambda_n^2+\cdots > 1 + n \lambda_n\]
+        \[\Rightarrow\quad 0 < \lambda_n < \frac{a-1}{n} \to 0 \quad\Rightarrow\quad \lambda_n \to 0\]
+        最终有$\sqrt[n]{a} \to 1$.
+        \item 当$0<a<1$，$t \equiv \dfrac{1}{a}>1$，有：
+        \[\sqrt[n]{a} = \frac{1}{\sqrt[n]{t}} \to 1\]
+    \end{enumerate}
+    综上，$\lim\limits_{n \to \infty}\sqrt[n]{a} = 1$.
+\end{solution}
+
+有时候，二项式展开只需要保留前两项精度就已足够.当发现“夹不住”时可以考虑调整二项式展开的精度，从而保证两边极限相等.
+\begin{question}
+    求极限：$\lim\limits_{n \to \infty}\sqrt[n]{n}$.
+\end{question}
+\begin{solution}
+    \begin{enumerate}[solution]
+        \item 设$\sqrt[n]{n} = 1+\lambda_n(\lambda_n>0)$，利用二项式定理展开：
+        \[n = 1 + n \lambda_n + \frac{n(n-1)}{2}\lambda_n^2+\cdots > 1 + n \lambda_n\]
+        \[\Rightarrow\quad \lambda_n < 1-\frac{1}{n} \to 1\]
+        不等式两边极限不相等，尝试取二项式展开第一、三项：
+        \[n > 1 + \frac{n(n-1)}{2}\lambda_n^2 \quad\Rightarrow\quad \lambda_n^2 < \frac{2}{n}\]
+        \[\Rightarrow\quad 0 < \lambda_n < \sqrt{\frac{2}{n}} \to 0 \quad\Rightarrow\quad \lambda_n \to 0\]
+        故而$\lim\limits_{n \to \infty}\sqrt[n]{n} = 1$.
+
+        \item 注意到：
+        \[\sqrt[n]{n} = \sqrt[n]{\underbrace{\sqrt{n} \cdot \sqrt{n} \cdot 1 \cdot 1 \cdot \cdots \cdot 1}_\text{$n$项}}\]
+        根据几何平均数小于算术平均数的特点，有：
+        \[\sqrt[n]{\sqrt{n} \cdot \sqrt{n} \cdot 1 \cdot 1 \cdot \cdots \cdot 1} < \frac{\sqrt{n} + \sqrt{n} + 1 + \cdots + 1}{n} = \frac{2\sqrt{n}+(n-2)}{n}\]
+        \[\Rightarrow\quad 1 \leqslant \sqrt[n]{n} \leqslant \frac{2\sqrt{n}+(n-2)}{n} \to 1\]
+        故而$\lim\limits_{n \to \infty}\sqrt[n]{n} = 1$.
+    \end{enumerate}
+\end{solution}
+
+
+\subsection{子列}
+\subsubsection{子列的定义和性质}
+\begin{definition}
+    设$\{a_n\}$为一个给定的数列$a_1, a_2, \cdots, a_n, \cdots$，若存在一个严格递增的正整数序列：
+    \[n_1 < n_2 < \cdots < n_k < \cdots\]
+    则由这些正整数作为下标所对应的项$a_{n_1}, a_{n_2}, \cdots, a_{n_k}, \cdots$构成的全新数列称为原数列$\{a_n\}$的一个\overtext{子列}{subsequence}，记作$\{a_{n_k}\}$.
+\end{definition}
+
+\begin{enumerate}[property]
+    \item 子列中的元素完全按照它们出现在原数列中的先后顺序排列，且不允许重复抽取同一项，这意味着子列中元素的序数总是大于等于其在原数列中的序数，即$n_k \geqslant k$.
+    \item 无限数列的子列本身依然是一个包含无限项的数列.
+    \item $a_n$收敛于$a$，当且仅当$a_n$的任意子列收敛于$a$.\\
+    这就相当于是说，要看一个队伍走得是否整齐，就要看每一排是否走得整齐.
+    \begin{proof}
+    \[\underbrace{a_n\,\text{收敛于}\,a}_\text{命题$p$} \Leftrightarrow \underbrace{a_n\,\text{的任意子列收敛于}\,a}_\text{命题$q$}\]
+    \textbf{充分性($p \Rightarrow q$)：}因为$a_n \to a$，因而$\forall \varepsilon > 0$，必然$\exists N$在$n>N$时有$|a_n - a|<\varepsilon$.
+
+    对于$a_n$的子列，由于其下标是无限递增的，所以必然$\exists n_K > N$，在$k > K$时有$n_k > n_K > N$，使得$|a_{n_k} - a| < \varepsilon$.
+
+    \textbf{必要性($p \Leftarrow q$)：}对于子列$a_{n_k}$满足$n_k = k$，该子列就是原数列$a_n$本身.
+
+    又因为$a_n$的任意子列都收敛于$a$，所以子列$a_{n_k} \to a$可以推出$a_n \to a$.
+    \end{proof}
+\end{enumerate}
+
+
+\subsubsection{子列性质的应用}
+子列的性质一般用于证明数列发散.
+\begin{question}
+    证明$a_n = (-1)^n$发散
+\end{question}
+\begin{proof}
+    取$a_n$的两个子列：
+    \[\begin{cases}
+        a_{2k} = (-1)^{2k} = 1 \to 1 \\
+        a_{2k+1} = (-1)^{2k+1} = -1 \to -1
+    \end{cases}\]
+    两个子列极限不一致，表明$a_n$发散.
+\end{proof}
+
+\begin{proposition}
+    若$a_n \to a \neq 0$，则$\{a_n\}$中至多只有有限项为$0$.
+\end{proposition}
+\begin{proof}
+    假如有无限项为$0$，形成子列$\{a_{n_k}\}=\{0\}\Rightarrow a_{n_k} \to 0 \neq a$，与子列的性质矛盾.
+\end{proof}
+
+\begin{question}
+    证明$\{\sin n\}$发散.
+\end{question}
+\begin{proof}
+    首先，$\sin n \leqslant 1$有界.
+
+    假设$\sin n \to a$.根据和差化积公式有：
+    \[\sin(n+1) - \sin(n-1) = 2\sin 1 \cos n\]
+    等式左边极限为$a-a=0$，故而有$\cos n \to 0$.
+    
+    又有：
+    \[\sin 2n = 2\sin n \cos n\]
+    等式左边$\sin 2n \to a$，右边因为$\cos n \to 0$故而极限为$0$，于是有$a=0$.
+
+    再有：
+    \[\sin^2 n + \cos^2 n = 1\]
+    左边极限为$0$，右边极限为$1$，得到$1=0$，故而假设不成立.
+\end{proof}
+
+
+\subsection{实数完备性的若干等价命题}
+\begin{definition}
+    \overtext{实数完备性}{completeness of the real numbers}按Dedekind的表述，就是实数轴上没有“间隙”.
+    
+    具体而言，设$X \subset \mathbb{R}, Y \subset \mathbb{R}$满足$\forall x \in X, y \in Y$都有$x \leqslant y$，则一定$\exists c \in \mathbb{R}$使得$x \leqslant c \leqslant y$对$\forall x \in X, y \in Y$成立.
+
+    实数的完备性是一个公理，但是它有各种等价命题，确立其中一个命题为公理，可以推出其它等价命题.
+\end{definition}
+
+
+\subsubsection{确界原理}
+\begin{theorem}
+    \textbf{确界原理}
+
+    $\mathbb{R}$中有上界的非空数集必有上确界.
+
+    $\mathbb{R}$中有下界的非空数集必有下确界.
+\end{theorem}
+确界原理是实数完备性的等价命题之一，现在用$\varepsilon$重新给出确界的定义：
+\begin{definition}
+    设$\alpha$是数集$X$的上界，若$\forall \varepsilon > 0$，$\exists x \in X$使得$\alpha \geqslant x > \alpha-\varepsilon$，则称$\alpha$是$X$的上确界，记作$\sup X = \alpha$.
+    
+    设$\alpha$是数集$X$的下界，若$\forall \varepsilon > 0$，$\exists x \in X$使得$\alpha \leqslant x < \alpha+\varepsilon$，则称$\alpha$是$X$的下确界，记作$\inf X = \alpha$.
+\end{definition}
+
+
+\subsubsection{单调有界原理}
+\begin{definition}
+    若$\{a_n\}$满足：
+    \begin{itemize}
+        \item $a_n \leqslant a_{n+1}$，则称$\{a_n\}$\overtext{单调递增}{monotonically increasing}.
+        \item $a_n < a_{n+1}$，则称$\{a_n\}$\overtext{严格单调递增}{strictly monotonically increasing}.
+        \item $a_n \geqslant a_{n+1}$，则称$\{a_n\}$\overtext{单调递减}{monotonically decreasing}.
+        \item $a_n > a_{n+1}$，则称$\{a_n\}$\overtext{严格单调递减}{strictly monotonically decreasing}.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    \textbf{单调有界原理}
+
+    单调递增有上界的数列一定收敛且收敛于上确界.
+
+    单调递减有下界的数列一定收敛且收敛于下确界.
+\end{theorem}
+
+\begin{proof}
+    设有单调递增数列$\{a_n\}$，记$\alpha = \sup \{a_n\}$.
+
+    对$\forall a_n$有$a_n \leqslant \alpha$.对$\forall \varepsilon > 0$有$\alpha - \varepsilon < \alpha$.
+
+    由于$\alpha$是上确界，所以$\alpha-\varepsilon$不再是上界，故而必然$\exists a_{n_0} \in \{a_n\}$使得$a_{n_0} > \alpha-\varepsilon$.
+
+    又因为$\{a_n\}$单调递增，故而在$n>n_0$时$a_n > a_{n_0}$，综上有：
+    \[\alpha+\varepsilon > \alpha \geqslant a_n > a_{n_0} > \alpha-\varepsilon \quad\Rightarrow\quad \alpha-\varepsilon < a_n < \alpha+\varepsilon\]
+    即$\lim\limits_{n \to \infty}a_n = \alpha = \sup \{a_n\}$.
+\end{proof}
+
+\begin{question}
+    判断$a_n = \sqrt{2+\sqrt{2+\cdots+\sqrt{2}}}$即$a_{n+1} = \sqrt{2+a_n}, a_1 = \sqrt{2}$的敛散性.
+\end{question}
+
+\begin{solution}
+    有$a_2 = \sqrt{2 + \sqrt{2}} > \sqrt{2} = a_1$，假设$a_{n+1}>a_n$，假设若要成立，应当有$a_{n+2}>a_{n+1}$：
+    \[a_{n+2} - a_{n+1} = \sqrt{2+a_{n+1}} - \sqrt{2+a_n} = \frac{a_{n+1}-a_n}{\sqrt{2+a_{n+1}} + \sqrt{2+a_n}} > 0\]
+    假设$a_{n+1}>a_n$成立，即$\{a_n\}$单调递增.
+
+    有$a_1=\sqrt{2}<2, a_2=\sqrt{2+\sqrt{2}}<2$，假设$a_n < 2$，假设若要成立，应当有$a_{n+1} = \sqrt{2+a_n}<2$，由于$a_n<2$，显然成立，故而假设成立，即$\{a_n\}$有上界$2$.
+
+    根据单调有界原理，$\{a_n\}$收敛，记$a_n \to a$.
+
+    由于$a_{n+1}^2 = 2+a_n$，故而有：
+    $a^2 = a+2 \quad\Rightarrow\quad \begin{cases}
+        a = -1(\text{舍})\\
+        a = 2
+    \end{cases}$，
+    即$\lim\limits_{n \to \infty}a_n = 2$.
+\end{solution}
+
+\begin{question}
+    判断$x_{n+1} = \dfrac{1}{2}\left(x_n+\dfrac{2}{x_n}\right)$的敛散性.
+\end{question}
+
+\begin{solution}
+    根据算术平均大于等于几何平均，有：
+    \[x_n = \frac{x_{n-1}+\frac{2}{x_{n-1}}}{2} \geqslant \sqrt{2}\]
+    这表明$\{x_n\}$有下界.又有：
+    \[x_{n+1} - x_n = \frac{1}{2}\left(\frac{2}{x_n}-x_n\right) = \frac{2-x_n^2}{2x_n} \leqslant 0\]
+    故而$\{x_n\}$单调递减，根据单调有界原理，$\{x_n\}$收敛，设$x_n \to a$：
+    \[2x_{n+1}x_n = x_n^2 + 2 \quad\Rightarrow\quad 2a^2=a^2+2 \quad\Rightarrow\quad a=\sqrt{2}\]
+\end{solution}
+这个例题的计算结果表明，由有理数之和构成的无限数列，其极限可以是无理数，利用有理数的极限构造无理数是描述无理数的一种重要方法.
+
+\begin{question}
+    证明数列$e_n=\left(1+\dfrac{1}{n}\right)^n$是收敛的.
+\end{question}
+\begin{proof}
+    首先证明数列是递增的，根据二项式定理：
+    \begin{align*}
+        e_n &= 1 + \sum_{k=1}^n \mathrm{C}_n^k \cdot \frac{1}{n^k}\\
+        &= 1 + \sum_{k=1}^{n}\frac{1}{k!}\cdot\frac{n(n-1)(n-2) \cdots (n-k+1)}{n^k}\\
+        &= 1 + 1 + \sum_{k=2}^n\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right) \\
+        e_{n+1} &= 1 + 1 + \sum_{k=2}^n\frac{1}{k!}\left(1-\frac{1}{n+1}\right)\left(1-\frac{2}{n+1}\right)\cdots\left(1-\frac{k-1}{n+1}\right) + \left(\frac{1}{n+1}\right)^{n+1}
+    \end{align*}
+    比较$e_n$和$e_{n+1}$表达式中加和号括号中的对应项，显然$e_{n+1}$的更大，并且$e_{n+1}$的表达式还多出一项$\left(\frac{1}{n+1}\right)^{n+1}>0$，故而$e_{n+1}>e_n$，$\{e_n\}$是严格单调数列.
+
+    接下来证明其有界性，在$e_n$的展开式中，注意到：
+    \[0 < \left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right) < 1\]
+    于是有：
+    \[2 < e_n < 2 + \sum_{k=2}^n \frac{1}{k!} \cdot 1 < 2+\sum_{k=2}^2\frac{1}{k(k-1)} = 2 + 1 - \frac{1}{n} < 3\]
+    根据单调有界原理，$\{e_n\}$是收敛的.
+\end{proof}
+\begin{definition}
+    记$\ee \coloneq \lim\limits_{n \to \infty}\left(1+\dfrac{1}{n}\right)^n$，称为\overtext{自然常数}{natural constant}.
+\end{definition}
+
+
+\subsubsection{区间套定理}
+\begin{theorem}
+    \textbf{区间套定理}
+
+    设有一列闭区间$[a_n, b_n],n=1,2,\cdots$，满足下列条件：
+    \begin{enumerate}[circ]
+        \item $[a_1,b_1]\supset[a_2,b_2]\supset\cdots\supset[a_n,b_n]\supset\cdots$
+        \item $\lim\limits_{n \to \infty}(b_n-a_n) = 0$
+    \end{enumerate}
+    则存在唯一一个点$\xi$属于所有闭区间$[a_n, b_n],n=1,2,\cdots$.
+\end{theorem}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.0]{nested-interval-principle/fig.pdf}
+    \caption{区间套定理}
+\end{figure}
+
+\begin{proof}
+    由条件{\itshape\bfseries 1\,}${}^\circ$可知，所有左端点构成的数列$\{a_n\}$是单调递增的且有$b_1$为上界，所有右端点构成的数列$\{b_n\}$是单调递减的且有$a_1$为下界.根据单调有界原理，它们是收敛的，记：
+    \[\lim_{n \to \infty} a_n = a, \lim_{n \to \infty} b_n = b\]
+    因为$a_n < b_n$，所以根据数列极限保序性，有$a \leqslant b$.
+
+    由条件{\itshape\bfseries 2\,}${}^\circ$可知，$a=b$，因此有且仅有一个点$\xi = a = b$，在所有的闭区间中.
+\end{proof}
+
+
+\subsubsection{列紧性定理}
+\begin{theorem}
+    \textbf{列紧性定理(Bolzano-Weierestrass定理、聚点定理)}
+
+    从任何有界的数列中可选出一个收敛的子列.
+\end{theorem}
+\begin{proof}
+    设$\{a_n\}\subset[c,d]$是一个有界的数列，那么在$\left[c,\frac{c+d}{2}\right],\left[\frac{c+d}{2},d\right]$两个区间中必然有一个包括数列$\{a_n\}$的无限项，记这个区间为$[c_1,d_1]$.
+
+    同样的，在$\left[c_1,\frac{c_1+d_1}{2}\right],\left[\frac{c_1+d_1}{2},d_1\right]$两个区间中必然有一个包括数列$\{a_n\}$的无限项，记这个区间为$[c_2,d_2]$.
+
+    重复上述操作，可以获得一系列区间$[c_k,d_k],k=1,2,\cdots$，使得每个这样的区间都含有数列$\{a_n\}$的无限项.
+
+    进一步地，从这一系列的区间中每个区间任取一项$a_{n_k} \in \{a_n\}$且$a_{n_k} \in [c_k,d_k]$，从而$\{a_{n_k}\}$是$\{a_n\}$的子列.
+
+    不难发现：
+    \[d_k-c_k = \frac{1}{2^k}(d-c) \to 0\]
+
+    根据区间套定理，最终有$\lim\limits_{k \to \infty}a_{n_k} = \xi$.
+\end{proof}
+
+
+\subsubsection{Cauchy收敛准则}
+Cauchy收敛准则就是在研究充分大的两项之差是不是充分小，进而判定敛散性.
+\begin{definition}
+    若存在一个序列$\{a_n\}$，其对$\forall \varepsilon > 0$，$\exists N \in \mathbb{N}_1$在$m,n>N$时使得$|a_n-a_m|<\varepsilon$，那么称这个序列为\textbf{Cauchy序列}或\overtext{基本列}{fundamental sequence}.
+
+    基本列的条件也可以这样表述：对$\forall \varepsilon > 0$，$\exists N \in \mathbb{N}_1$在$n>N$时使得$|a_{n+p}-a_n|<\varepsilon$对$\forall p \in \mathbb{N}$成立.
+\end{definition}
+
+\begin{theorem}
+    \textbf{Cauchy收敛准则}
+
+    数列$\{a_n\}$收敛，当且仅当它是基本列.
+\end{theorem}
+
+\begin{proof}
+    \textbf{充分性：}已知$\{a_n\}$收敛，记$a_n \to a$，那么$\forall \varepsilon > 0$，一定$\exists N$使得在$n>N$时有
+    \[|a_n - a| < \dfrac{\varepsilon}{2}\]
+
+    当$m,n > N$时，有：
+    \[|a_n - a| < \frac{\varepsilon}{2}, |a_m -a| < \frac{\varepsilon}{2}\]
+    \[\Rightarrow\quad |a_n-a_m| = |a_n - a + a - a_m| \leqslant |a_n - a| + |a_m - a| < \varepsilon\]
+    充分性得证.
+
+    \textbf{必要性：}取$\varepsilon = 1$，$\exists N_0$在$n,m>N_0$时根据基本列的性质有：
+    \[|a_n - a_m| < 1\]
+    特别地，对$\forall n > N_0$满足：
+    \[|a_n - a_{N_0+1}| < 1 \quad\Rightarrow\quad |a_n| \leqslant |a_{N_0+1}|+1\]
+    这意味着任何$n>N_0$后续的$n$都不会再比$|a_{N_0+1}|+1$大，而在这之前的项是有限个，有限个项必然有最大数，于是这个最大项就是上界.取：
+    \[M = \max\{|a_1|, |a_2|, \cdots, |a_{N_0}|, |a_{N_0+1}|+1\}\]
+    于是有$|a_n| \leqslant M$对$\forall n$成立，进而推出$\{a_n\}$有，则$\{a_n\}$一定有收敛子列，记为$\{a_{n_k}\}$且$a_{n_k} \to a$.
+
+    在子列收敛的基础上进一步证明原数列收敛，对$\forall \varepsilon>0$，$\exists K$在$k>K$时有：
+    \[|a_{n_k} - a| < \varepsilon\]
+    
+    对$\forall \varepsilon > 0$，因为$\{a_n\}$是基本列，$\exists N>0$在$m,n>N$时有：
+    \[|a_m - a_n|<\varepsilon\]
+
+    根据上两式，可以构造：
+    \[|a_n - a| = |a_n - a_{n_k} + a_{n_k} - a| \leqslant \underbrace{|a_n - a_{n_k}|}_\text{只需要$n,n_k>N$} + \underbrace{|a_{n_k} - a|}_\text{只需要$k>K$}\]
+    于是取$N' = \max\{N, n_K\}$，$\forall n>N'$有：
+    \[|a_n - a|<2\varepsilon\]
+    进而必要性得证.
+\end{proof}
+这个证明中依然体现了先抓住后续无限项的尾巴，再对前面有限项逐个击破的思想.
+
+\begin{question}
+    证明$a_n = \dfrac{\sin 1}{1^2} + \dfrac{\sin 2}{2^2} + \cdots + \dfrac{\sin n}{n^2}$收敛.
+\end{question}
+
+\begin{proof}
+    构造：
+    \begin{align*}
+        |a_{n+p} - a_n| &= \left|\frac{\sin(n+1)}{(n+1)^2} + \cdots + \frac{\sin(n+p)}{(n+p)^2}\right| \\
+        &\leqslant \frac{1}{(n+1)^2} + \cdots + \frac{1}{(n+p)^2} \\
+        &< \frac{1}{n(n+1)} + \cdots + \frac{1}{(n+p-1)(n+p)} \\
+        &= \frac{1}{n} - \frac{1}{n+p} < \frac{1}{n}
+    \end{align*}
+    于是对$\forall \varepsilon > 0$，取$N = \left[\dfrac{1}{\varepsilon}\right]$在$n>N$时都有：
+    \[\frac{1}{n}<\frac{1}{N} = \varepsilon \quad\Rightarrow\quad |a_{n+p} - a_n| < \varepsilon\]
+    故而根据Cauchy收敛准则，$\{a_n\}$收敛.
+\end{proof}
+这个证明表明，构造基本列也是证明收敛性的一种方法.
+
+
+\begin{question}
+    证明$a_n = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n}$发散.
+\end{question}
+
+\begin{proof}
+    构造基本列定义，令$p \equiv n$：
+    \[|a_{n+n} - a_n| = \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{2n} > \frac{n}{2n} = \frac{1}{2}\]
+    取$\varepsilon < \dfrac{1}{2}$，则对$\forall n$，$\exists p=n$使得：
+    \[|a_{2n} - a_n| \geqslant \frac{1}{2} > \varepsilon\]
+    故而$\{a_n\}$不是基本列，故而其发散.
+\end{proof}
+
+
+\subsection{发散数列}
+\begin{definition}
+    对于数列$\{a_n\}$，若$\forall M>0$，都$\exists N$在$\forall n>N$时$a_n > M$，则称$a_n$发散到$+\infty$，记$\lim\limits_{n \to \infty}a_n = +\infty$，称$\{a_n\}$为\overtext{发散数列}{divergent sequence}.
+\end{definition}
+
+相较于无上界的定义，发散要求此后所有的项都大于$\forall M$，而无上界只要求至少一项大于$\forall M$.
+
+\begin{definition}
+    \begin{itemize}
+        \item 若$\lim\limits_{n\to\infty} a_n = 0$，则称数列$a_n$是$n\to\infty$时的\overtext{无穷小量}{infinitesimal}.
+        \item 若$\lim\limits_{n\to\infty} a_n = \infty$，则称数列$a_n$是$n\to\infty$时的\overtext{无穷大量}{infinity}.
+    \end{itemize}
+\end{definition}
+
+应当注意的是，无穷大(小)量并不专指数列中的某一项，而是整个数列本身.
+
+\begin{definition}
+    设$a_n\to 0, b_n \to 0$，对于$\lim\limits_{n\to\infty}\dfrac{a_n}{b_n}$：
+    \begin{itemize}
+        \item $=0$，则称$a_n$是$b_n$的\overtext{高阶无穷小}{higher-order infinitesimal}，记作$a_n = o(b_n)$.
+        \item $=c(c \neq 0)$，则称$a_n$是$b_n$的\overtext{同阶无穷小}{infinitesimal of tha same order}，记作$a_n = O(b_n)$.
+        \item $=\infty$，则称$b_n$是$a_n$的高阶无穷小.
+    \end{itemize}
+    特别地，若有$c=1$，则称$a_n$是$b_n$的\overtext{等价无穷小}{equivalent infinitesimal}.
+\end{definition}
+
+关于发散、收敛、有无极限之间的关系：收敛必有极限，且极限是有限的实数；发散要么没有极限，要么极限是无穷大量.也就是说有极限不一定就是收敛，但无极限一定是发散.
+
+
+\subsection{Stolz定理}
+\begin{theorem}
+    \textbf{Stolz定理}
+    \begin{itemize}
+        \item \textbf{“$\frac{\infty}{\infty}$”型}\\
+        设$\{a_n\},\{b_n\}$满足：
+        \begin{enumerate}[circ]
+            \item $\{b_n\}$严格单调递增且$b_n \to +\infty$.
+            \item $\lim\limits_{n\to\infty}\dfrac{a_{n+1}-a_n}{b_{n+1}-b_n} = A$，$A$可为有限的或无限的.
+        \end{enumerate}
+        则$\lim\limits_{n\to\infty}\dfrac{a_n}{b_n}=A$.
+        \item \textbf{“$\frac{0}{0}$”型}\\
+        设$\{a_n\},\{b_n\}$满足：
+        \begin{enumerate}[circ]
+            \item $\{b_n\}$严格单调递减且$a_n \to 0, b_n \to 0$.
+            \item $\lim\limits_{n\to\infty}\dfrac{a_{n+1}-a_n}{b_{n+1}-b_n} = A$，$A$可为有限的或无限的.
+        \end{enumerate}
+        则$\lim\limits_{n\to\infty}\dfrac{a_n}{b_n}=A$.
+    \end{itemize}
+\end{theorem}
+实际上对于$\frac{\infty}{\infty}$型的Stolz定理并没有要求分子的$a_n$是发散到$\infty$的，这个记法只是为了与$\frac{0}{0}$型对应.
+
+Stolz定理可以看作是一种离散的L'Hospital法则.
+
+
+\section{函数极限}
+\subsection{函数}
+\begin{definition}
+    设$A \subset \mathbb{R}$，若对$\forall x \in A$有唯一确定的$y \in \mathbb{R}$与之对应，即函数的单值性，将$y$记作$f(x)$，称$f$是$A$上的一个\overtext{实值函数}{real-valued function}.
+
+    称集合$A$为$f$的\overtext{定义域}{domain}，$f$的一切值的集合$f(A)$称为\overtext{值域}{range}
+\end{definition}
+函数的三个基本要素是定义域、值域与单值的对应关系，一个函数可以看作是一个将$A \subset \mathbb{R}$映入$\mathbb{R}$的一个映射：
+\[f:A\to\mathbb{R},\quad\text{或}\,f:x\mapsto y=f(x)\]
+
+函数值域$f(A)$的性态极其复杂，以下三种情形是值得关注的：
+\begin{itemize}
+    \item \textbf{$f(A)$是一个有界数集.}
+    
+    即$\forall x \in A$有$|f(x)|\leqslant M$，称$f$是$A$上的有界函数，或$f$在$A$上有界.
+    \item \textbf{$A$与$f(A)$同序或反序.}
+    
+    即$\forall x_1, x_2 \in A$的大小顺序与$f(x_1),f(x_2)\in f(A)$的大小顺序相同或相反，则称$f(x)$是单调的.
+
+    \item \textbf{$A \to f(A)$为双射.}
+    
+    即对$\forall y \in f(A)$都有唯一确定的$x \in A$使得$f(x)=y$.从图像上看就是任意平行于$x$轴的直线与函数的图像至多只有一个交点.称这个反向的映射为$f(x)$的反函数或逆映射，记作$f^{-1}$.
+\end{itemize}
+\begin{definition}
+    设有函数$y=f(u),f:C \to D$和$u=g(x),g:A \to B$，若$B \subseteq C$，那么定义运算“$\circ$”：
+    \[f \circ g = f(g(x))\]
+    由此定义了一个新函数$f \circ g$，称为$f$与$g$的\overtext{复合函数}{composite function}.
+\end{definition}
+一般而言，$f \circ g \neq g \circ f$并不相同，即不一定满足交换律，但复合运算满足结合律：
+\[(f \circ g) \circ h = f \circ (g \circ h)\]
+
+\subsection{函数极限的定义}
+\subsubsection{函数在无穷大处的极限}
+\begin{definition}
+    设函数$f(x)$的定义域为$[a,+\infty)$，若$\exists l$使得对$\forall \varepsilon > 0$都$\exists X$在$x > X$时满足$|f(x) - l| < \varepsilon$，就称$l$是$f(x)$在无穷大处的极限，记作：
+    \[\lim_{x\to+\infty}f(x)=l,\quad\text{或}\,f(x)\to l\,(x\to+\infty)\]
+\end{definition}
+基于上述定义，还可以给出$x\to-\infty$和$x\to\infty$时的定义，分别是$x<-X$时和$|x|>X$时，一般默认$X$是正的，注意要手动添加负号.
+
+\begin{theorem}
+    $\lim\limits_{x\to\infty}f(x)=l$，当且仅当$\lim\limits_{x\to+\infty}f(x) = \lim\limits_{x\to-\infty}f(x) = l$.
+\end{theorem}
+
+\begin{proof}
+    \textbf{必要性：}因为有$\lim\limits_{x\to+\infty}f(x) = \lim\limits_{x\to-\infty}f(x) = l$，故而$\forall \varepsilon > 0$满足：
+    \[\begin{cases}
+        \exists X_1 \,\text{当}\,x>X_1\,\text{时有}\,|f(x)-l|<\varepsilon \\
+        \exists X_2 \,\text{当}\,x<-X_2\,\text{时有}\,|f(x)-l|<\varepsilon
+    \end{cases}\]
+    取$X = \max\{X_1, X_2\}$，则当$|x|>X$时有$|f(x)-l|<\varepsilon$，必要性得证.
+
+    \textbf{充分性：}略.
+\end{proof}
+
+\begin{question}
+    证明$\lim\limits_{x\to+\infty}a^x = 0\,(0<a<1)$.
+\end{question}
+
+\begin{proof}
+    要证明$\lim\limits_{x\to+\infty}a^x = 0\,(0<a<1)$，就要证明$\forall \varepsilon > 0$满足：
+    \[|a^x - 0| < \varepsilon \quad\Rightarrow\quad a^x<\varepsilon \quad\Rightarrow\quad x>\frac{\ln \varepsilon}{\ln a}\]
+    于是，取$X=\dfrac{\ln \varepsilon}{\ln a}$，则当$x>X$时满足上式，故而得证.
+\end{proof}
+
+上述证明表明，要利用定义证明极限存在，主要就是在假设其存在的情况下利用定义式解不等式，找到使其满足极限存在的$X$，从而证明极限能够存在.
+
+\subsubsection{函数在有限点的极限}
+\begin{definition}
+    设$f(x)$在$x_0$附近有定义，若对$\forall \varepsilon > 0$，$\exists \delta > 0$在$0<|x-x_0|<\delta$时，满足$|f(x)-l|<\varepsilon$，则称当$x \to x_0$时$f(x)$的极限为$l$，记作：
+    \[\lim_{x\to x_0}f(x)=l,\quad\text{或}\,f(x)\to l\,(x\to x_0)\]
+    其中，若$x_0<x<x_0+\delta$，则称$l$为右极限，记作$f(x+0) \coloneq \lim\limits_{x\to x_0^+}f(x)=l$；若$x_0-\delta<x<x_0$，则称$l$为左极限，记作$f(x-0) \coloneq \lim\limits_{x\to x_0^-}f(x)=l$.
+\end{definition}
+
+上述定义的形式称为“$\varepsilon-\delta$语言”.这个定义实际上就是用$\delta$控制函数的输入，使其输出被限制在一个极小范围内，使得这个范围落入任意大小的目标区域，即对$\forall \varepsilon>0$成立.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{function-limit/fig.pdf}
+    \caption{$\varepsilon-\delta$语言定义极限}
+\end{figure}
+
+\begin{question}
+    设$f(x) = x \sin \dfrac{1}{x} \,(x\neq 0)$，证明$\lim\limits_{x\to 0}f(x)=0$.
+\end{question}
+
+\begin{proof}
+    $\forall \varepsilon>0$，取$\delta=\varepsilon$使得当$0<|x-0|<\delta$时，有：
+    \[|f(x) - 0| = \left|x\sin\frac{1}{x}\right| \leqslant |x| < \delta = \varepsilon\]
+    故而得证.
+\end{proof}
+不难注意到，有关此类题目的证明关键在于找到一个合适的$\delta$使得极限的定义式满足.
+
+\begin{question}
+    证明$\lim\limits_{x\to 1}\dfrac{x^2-1}{x^2-x}=2$.
+\end{question}
+
+\begin{proof}
+    考虑$1-\dfrac{1}{2}<x<1+\dfrac{1}{2}$上的$x$有：
+    \[|f(x)-2| = \left|\frac{x-1}{x}\right| < 2|x-1|\]
+    若极限存在，应当对$\forall \varepsilon>0$都$\exists \delta$使得在$0 < |x-1| < \delta$时满足：
+    \[|f(x)-2|<2|x-1|<2\delta \equiv \varepsilon \quad\Rightarrow\quad \delta=\frac{\varepsilon}{2}\]
+    即$\exists \delta = \dfrac{\varepsilon}{2}$使得极限存在且为$2$.
+\end{proof}
+
+\begin{theorem}
+    $\lim\limits_{x\to x_0}f(x)=l$，当且仅当$\lim\limits_{x\to x_0^\pm}f(x)=l$.
+\end{theorem}
+
+
+\subsection{函数极限的性质}
+\begin{enumerate}[property]
+    \item 若有$\lim\limits_{x\to x_0}f(x)=l$，则$f(x)$在$x_0$的附近有界.
+    \item 若有$\lim\limits_{x\to x_0}f(x)=l$且$a<l<b$，则在$x_0$的附近有$a<f(x)<b$.
+    \item 若在$x_0$附近有$f(x)\geqslant g(x)$成立，则有$\lim\limits_{x\to x_0}f(x)\geqslant\lim\limits_{x\to x_0}g(x)$.
+    \item 若有$\lim\limits_{x\to x_0}f(x)>\lim\limits_{x\to x_0}g(x)$成立，则在$x_0$附近有$f(x)>g(x)$.
+    \item 极限具有四则运算.若有$\lim\limits_{x\to x_0}f(x)=a,\lim\limits_{x\to x_0}g(x)=b$成立，则有：
+    \[\begin{cases}
+        \lim\limits_{x\to x_0}(f(x)\pm g(x)) = a \pm b\\
+        \lim\limits_{x\to x_0}(f(x)g(x)) = ab\\
+        \lim\limits_{x\to x_0}\left(\dfrac{f(x)}{g(x)}\right) = \dfrac{a}{b}\,(b\neq 0)
+    \end{cases}\]
+    \item 若$f(x)$在$x_0$附近有定义，$g(t)$在$t_0$附近有定义且$\lim\limits_{x\to x_0}f(x)=l, \lim\limits_{t\to t_0}g(t)=x_0$，则$\lim\limits_{t\to t_0}f(g(t))=l$.
+    \begin{proof}
+        $\forall \varepsilon > 0$，因为$f(x)$有极限，所以$\exists \delta'>0$使得在$0<|x-x_0|<\delta'$时满足：
+        \[|f(x)-l|<\varepsilon\]
+        又因为$g(t)$有极限，所以$\exists \delta>0$使得在$0<|t-t_0|<\delta$时对$\forall \delta'$满足：
+        \[0<|g(t)-x_0|<\delta'\]
+        对比前述$0<|x-x_0|<\delta'$，有$x=g(t)$，于是可以推出：
+        \[|f(g(t))-l|<\varepsilon\]
+    \end{proof}
+    \item $\lim\limits_{x\to x_0}f(x)=l$，当且仅当对任意满足$\lim\limits_{n\to\infty}a_n=x_0$的数列有$\lim\limits_{n\to\infty}f(a_n)=l$.
+    
+    这个性质主要表明，在$x\to x_0$时，如果$f(x)$的趋向性对于两个同样趋于$x_0$的点列表现得不一致，则必然没有极限.比如从左侧逼近的点列和从右侧逼近的点列趋向不同的值.
+    \begin{proof}
+        \textbf{充分性：}由于有$f(x)$的极限，于是$\forall \varepsilon>0$，$\exists \delta>0$在$0<|x-x_0|<\delta$时有：
+        \[|f(x) - l| < \varepsilon\]
+        对于任意的$a_n \to x_0 \,(n\to\infty)$，由于其存在极限，有$\forall \delta>0$，$\exists N$在$n>N$时使得：
+        \[0<|a_n - x_0|<\delta\]
+        对比$0<|x-x_0|<\delta$有$x=a_n$，则$|f(a_n)-l|<\varepsilon$.
+
+        \textbf{必要性：}假设$f(x)\nrightarrow l\,(x\to x_0)$，则$\exists \varepsilon_0>0$，对$\forall \delta>0$，$\exists x_\delta$满足$0<|x_\delta - x_0|<\delta$，又满足$|f(x_\delta)-l|\geqslant \varepsilon_0$.
+
+        特别地，对$\delta = \frac{1}{n} > 0$，必然$\exists x_\delta = a_n$使得$0<|a_n-x_0|<\frac{1}{n}$，并且又有$|f(a_n)-l|\geqslant\varepsilon_0$.
+
+        当$n\to\infty$时，根据三明治定理，$|x_n-x_0|\to 0$，进一步得到$a_n\to x_0 \,(n\to\infty)$.
+
+        注意到，在$n\to\infty$时，一方面有$a_n\to x_0$，另一方面又有$f(a_n) \nrightarrow l$，与必要条件矛盾.故而假设不成立，必要性得证.
+    \end{proof}
+
+    这个性质主要用于证明极限不存在的情形.
+
+    \begin{question}
+        设$f(x)=\sin\dfrac{1}{x}$，证明$\lim\limits_{x\to 0}f(x)$不存在.
+    \end{question}
+    \begin{proof}
+        取$a_n=\dfrac{1}{2n\pi}\to 0$，有$f(a_n)=\sin 2n\pi \to 0$.
+
+        取$a_n'=\dfrac{1}{2n\pi+\pi/2}\to 0$，有$f(a_n)=\sin \left(2n\pi + \dfrac{\pi}{2}\right) \to 1$.
+
+        则极限不存在.
+    \end{proof}
+    \item 函数的三明治定理.
+    \begin{theorem}
+        \textbf{三明治定理}
+
+        设有$h(x)\leqslant f(x) \leqslant g(x)$在$x_0$附近成立，若有$\lim\limits_{x\to x_0}g(x) = \lim\limits_{x\to x_0}h(x) = l$，则有$\lim\limits_{x\to x_0}f(x)=l$成立.
+    \end{theorem}
+    \item 函数的Cauchy收敛准则.
+    \begin{theorem}
+        \textbf{Cauchy收敛准则}
+
+        设$f(x)$在$x_0$附近有意义，那么$f(x)$在$x_0$收敛的充分必要条件是$\forall \varepsilon > 0$，$\exists \delta > 0$在$0<|x'-x_0|<\delta,0<|x''-x_0|<\delta$时，满足：
+        \[|f(x')-f(x'')|<\varepsilon\]
+    \end{theorem}
+    \begin{proof}
+        \textbf{充分性：}设$f(x)\to l\,(x\to x_0)$.按照定义，对$\forall \varepsilon>0$，$\exists \delta>0$在$0<|x-x_0|<\delta$时满足：
+        \[|f(x)-l|<\frac{\varepsilon}{2}\]
+        于是，在$0<|x'-x_0|<\delta,0<|x''-x_0|<\delta$时，有：
+        \[|f(x')-l|<\frac{\varepsilon}{2},\quad|f(x'')-l|<\frac{\varepsilon}{2} \quad\Rightarrow\quad |f(x')-f(x'')|<\varepsilon\]
+
+        \textbf{必要性：}对$\forall a_n \to x_0\,(a_n \neq x_0)$，必然满足$\forall \delta>0$，$\exists N$在$n,m>N$时满足：
+        \[0<|a_n - x_0|<\delta, \quad 0<|a_m - x_0|<\delta\]
+        于是对$\forall \varepsilon>0$都有：
+        \[|f(a_n)-f(a_m)|<\varepsilon\]
+        根据数列的Cauchy收敛准则，有$f(a_n)\to l\,(n \to \infty)$.
+
+        由于对$\forall a_n$都满足上述推导，根据\textbf{性质7}，可以推出$f(x)\to l\,(x\to x_0)$.
+    \end{proof}
+\end{enumerate}
+
+
+\subsection{两个重要极限}
+\begin{theorem}
+    \[\lim_{x\to 0}\frac{\sin x}{x} = 1\]
+\end{theorem}
+
+这个定理是后续关于导数等定义的基础，因此不能使用包括L'Hospital法则在内的基于导数的方法来证明.
+
+\begin{lemma}
+    当$0<x<\dfrac{\pi}{2}$时$\sin x < x < \tan x$.
+\end{lemma}
+这个引理可以用下面这幅图来简单证明：
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.9]{sin-x-tan-triangle/fig.pdf}
+    \caption{$\sin x<x<\tan x$的证明}
+\end{figure}
+实际上，扇形面积的定义在某种程度上基于积分的定义，再一次形成了循环论证，但是如果利用类似割圆术的办法，则可以避开这个逻辑陷阱，在此不多赘述.
+
+\begin{proof}
+    不妨设$x>0$，在$0$附近由$\sin x<x<\tan x$有：
+    \begin{gather*}
+    1 > \frac{\sin x}{x} > \cos x\\
+    \Rightarrow\quad 0 < 1-\frac{\sin x}{x} < 1-\cos x = 2\sin^2\frac{x}{2} < 2\sin\frac{x}{2} < x \to 0\\
+    \Rightarrow\quad \lim_{x\to 0^+}\frac{\sin x}{x} = 1\\
+    \Rightarrow\quad \lim_{x\to 0^-}\frac{\sin x}{x} \xlongequal[y\to 0^+]{y \equiv -x} \lim_{y\to 0^+}\frac{\sin(-y)}{-y} = \lim_{y\to 0^+}\frac{\sin y}{y} = 1\\
+    \Rightarrow\quad \lim_{x\to 0^+}\frac{\sin x}{x} = \lim_{x\to 0^-}\frac{\sin x}{x} = 1 = \lim_{x\to 0}\frac{\sin x}{x}
+    \end{gather*}
+\end{proof}
+
+\begin{theorem}
+    \[\lim_{x\to\infty}\left(1+\frac{1}{x}\right)^x = \ee \quad\text{或}\quad \lim_{x\to 0}(1+x)^{-x} = \ee\]
+\end{theorem}
+
+\begin{proof}
+    先考虑$x\to+\infty$.记$\floor{x}$为不超过$x$的最大整数，有：
+    \begin{gather*}
+        1+\frac{1}{\floor{x}+1} < 1+\frac{1}{x+1} \leqslant 1+\frac{1}{\floor{x}}\\
+        \Rightarrow\quad \left(1+\frac{1}{\floor{x}+1}\right)^{\floor{x}} < \left(1+\frac{1}{x+1}\right)^x < \left(1+\frac{1}{\floor{x}}\right)^{\floor{x}+1}\\
+    \end{gather*}
+    根据$\ee \coloneq \lim\limits_{n \to \infty}\left(1+\dfrac{1}{n}\right)^n$，有：
+    \begin{gather*}
+        \text{左边：}\lim_{x\to+\infty}\left(1+\frac{1}{\floor{x}+1}\right)^{\floor{x}} = \lim_{x\to+\infty}\left(1+\frac{1}{\floor{x}+1}\right)^{\floor{x}+1}\underbrace{\left(1+\frac{1}{\floor{x}+1}\right)^{-1}}_{\to 1} = \ee
+    \end{gather*}
+    同理右边也趋于$\ee$，根据三明治定理：
+    \[\lim_{x\to+\infty}\left(1+\frac{1}{x}\right)^x = \ee\]
+
+    接下来考虑$x\to-\infty$，令$y\equiv -x$：
+    \begin{align*}
+        \lim_{x\to-\infty}\left(1+\frac{1}{x}\right)^x &= \lim_{y\to+\infty}\left(1-\frac{1}{y}^{-y}\right) = \lim_{y\to+\infty}\left(\frac{y}{y-1}\right)^y\\
+        &= \lim_{y\to+\infty}\left(1+\frac{1}{y-1}\right)^{y-1}\left(1+\frac{1}{y-1}\right) = \ee
+    \end{align*}
+    由此得证.
+\end{proof}
+
+\begin{question}
+    证明$\lim\limits_{x\to x_0}\sin x = \sin x_0$.
+\end{question}
+
+\begin{proof}
+    \[0 < |\sin x - \sin x_0| = 2\left|\sin\frac{x-x_0}{2}\cos\frac{x+x_0}{2}\right| \leqslant 2\left|\sin\frac{x-x_0}{2}\right| \leqslant |x-x_0| \to 0\]
+    根据三明治定理，得证.
+\end{proof}
+
+
+\subsection{无穷大量与无穷小量}
+\begin{definition}
+    对可以为有限量或无限量的$x_0$：
+    \begin{itemize}
+        \item 若有$\lim\limits_{x\to x_0}f(x) = \infty$，称$f(x)$是$x\to x_0$时的\textbf{无穷大量}.
+        \item 若有$\lim\limits_{x\to x_0}f(x) = 0$，称$f(x)$是$x\to x_0$时的\textbf{无穷小量}.
+    \end{itemize}
+\end{definition}
+
+在求关于无穷小量的问题时，可以使用等价无穷小替换的方法.
+
+例如对于无穷小量$x,x^2,\sin x\,(x\to 0)$：
+\[\frac{x^2}{\sin x} = \frac{x^2}{x}\frac{x}{\sin x} = 0 \cdot 1 = 0 \quad\text{即：}\frac{x^2}{\sin x} \sim \frac{x^2}{x}=x\to 0\]
+
+\begin{question}
+    证明$\lim\limits_{x\to+\infty}\dfrac{\ln x}{x} = 0$.
+\end{question}
+
+\begin{proof}
+    不妨设$x>1$，对$\forall x>1$，$\exists k \in \mathbb{N}_1$使得$2^{k-1}<x\leqslant 2^k$，故而有：
+    \[\ln x \leqslant k\ln x < k\]
+    $x\to+\infty$时必然有$k\to+\infty$，进一步可以推出：
+    \[0<\frac{\ln x}{x}<\frac{k}{x}<\frac{k}{2^{k-1}} = \frac{2k}{(1+1)^k} < \frac{2k}{\frac{k(k-1)}{2}} = \frac{4}{k-1} \to 0\]
+    根据三明治定理，得证.
+\end{proof}

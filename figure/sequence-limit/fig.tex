@@ -1,0 +1,46 @@
+\documentclass[tikz, border=15pt]{standalone}
+\usepackage{ctex} % 引入 ctex 宏包以支持中文渲染
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing}
+
+\begin{document}
+\begin{tikzpicture}[xscale=1.5, yscale=1.2, >=Stealth]
+    % 绘制主数轴 (黑色)
+    \draw[->, thick, black] (-0.5, 0) -- (7.5, 0);
+
+    % 标记原点 0
+    \draw[thick, black] (0.5, -0.1) -- (0.5, 0.1);
+    \node[below] at (0.5, -0.15) {$0$};
+
+    % 标记左边界 a-\varepsilon (蓝色)
+    \node[blue] at (2.5, 0) {\large $($};
+    \node[below, blue] at (2.5, -0.15) {$a-\varepsilon$};
+
+    % 标记右边界 a+\varepsilon (蓝色)
+    \node[blue] at (5.5, 0) {\large $)$};
+    \node[below, blue] at (5.5, -0.15) {$a+\varepsilon$};
+
+    % 标记极限值 a (黑色加粗)
+    \draw[very thick, black] (4, -0.15) -- (4, 0.15);
+    \node[below] at (4, -0.15) {$a$};
+
+    % 标记落入邻域内的某个点 a_n (红色)，为了画面简洁取消长箭头直接标注
+    \fill[red] (4.6, 0) circle (1.5pt);
+    \node[above, red] at (4.6, 0.1) {$a_n$};
+
+    % 用区间内的线段表示 n > N 的所有项都存在于此区域 (青色)
+    \draw[thick, teal, |-|] (2.6, 0.6) -- (5.4, 0.6) node[midway, above] {$n > N$};
+
+    % 序列前期项示意 (灰色折线)
+    \draw[->, thick, gray] (0.2, 0.2) -- (2.3, 0.2);
+
+    % 区间内的大括号：无限个 a_n
+    \draw [decorate, decoration={brace, amplitude=6pt, mirror}, thick, blue] 
+          (2.5, -0.7) -- (5.5, -0.7) node [midway, below=8pt] {无限个 $a_n$};
+
+    % 区间外的大括号：有限个 a_n
+    \draw [decorate, decoration={brace, amplitude=6pt, mirror}, thick, gray] 
+          (-0.2, -0.7) -- (2.4, -0.7) node [midway, below=8pt] {有限个 $a_n$};
+
+\end{tikzpicture}
+\end{document}
