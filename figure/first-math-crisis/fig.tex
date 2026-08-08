@@ -1,0 +1,96 @@
+\documentclass[tikz, border=5pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ctex}
+
+\usetikzlibrary{arrows.meta, calc}
+
+\begin{document}
+\begin{tikzpicture}[>=Latex, thick]
+
+% --- 定义基础参数 ---
+% 适当增大单位 1 的长度，让水平实轴更宽敞
+\def\U{5} 
+% 将辅助轴角度调小至 22 度，使其与 45 度的对角线完全错开
+\def\auxAngle{22}
+
+% --- 样式定义 ---
+\tikzset{axis/.style={->, line width=0.8pt}}
+\tikzset{construction/.style={solid, line width=0.5pt}}
+\tikzset{tick/.style={line width=0.6pt}}
+\tikzset{m_label/.style={font=\large}}
+\tikzset{crisis/.style={red!75!black}} % 第一次数学危机相关的元素
+
+% --- 绘制实数轴 (\mathbb{R}) ---
+\draw[axis] (-0.5, 0) -- (\U*1.75, 0) node[right, m_label] {$\mathbb{R}$};
+\node[below, m_label, yshift=-3pt] at (0,0) {$0$};
+
+% 标记单位 1
+\coordinate (P1_real) at (\U, 0); 
+\node[below, m_label, yshift=-3pt] at (\U, -0.1) {$1$};
+\fill (P1_real) circle (1.2pt);
+
+% ==========================================
+% 第一次数学危机：构造 \sqrt{2}
+% ==========================================
+% 1. 绘制边长为 1 的正方形 (虚线)
+\draw[construction, dashed, crisis] (0,0) rectangle (\U, \U);
+
+% 2. 绘制对角线
+\draw[construction, thick, crisis] (0,0) -- (\U, \U) node[midway, above left, xshift=-2pt] {$\sqrt{2}$};
+
+% 3. 绘制圆弧将对角线长度落到实轴
+\draw[construction, thick, crisis, ->] (\U, \U) arc (45:0:{\U*sqrt(2)});
+
+% 4. 标记实轴上的 \sqrt{2} 点
+\coordinate (P_sqrt2) at ({\U*sqrt(2)}, 0);
+\draw[tick, crisis] (P_sqrt2) ++(0,-0.1) -- ++(0,0.2);
+\node[below, m_label, crisis, yshift=-3pt] at (P_sqrt2) {$\sqrt{2}$};
+\fill[crisis] (P_sqrt2) circle (1.2pt);
+
+
+% ==========================================
+% 有理数构造部分
+% ==========================================
+% 辅助轴伸长，避免拥挤
+\draw[axis] (0,0) -- (\auxAngle:8.2) node[right, m_label] {辅助轴};
+
+% 定义辅助轴上的关键节点的绝对长度，拉开它们之间的间距
+\def\Lone{1.5}
+\def\Lm{4.5}
+\def\Ln{6.5}
+
+\coordinate (A_1) at (\auxAngle:\Lone);
+\coordinate (A_m) at (\auxAngle:\Lm); 
+\coordinate (A_n) at (\auxAngle:\Ln); 
+
+% 构造平行线
+% 1. n 到 1
+\draw[construction] (A_n) -- (P1_real);
+\node[above left, m_label, xshift=-1pt, yshift=2pt] at (A_n) {$n$};
+\draw[tick] (A_n) ++({\auxAngle+90}:0.08) -- ++({\auxAngle-90}:0.16);
+
+% 2. 1 到 1/n
+\coordinate (P_1_over_n) at ($(0,0)!{\Lone/\Ln}!(P1_real)$); 
+\draw[construction] (A_1) -- (P_1_over_n);
+\draw[tick] (A_1) ++({\auxAngle+90}:0.08) -- ++({\auxAngle-90}:0.16);
+\node[below, m_label, yshift=-3pt] at (P_1_over_n) {$\frac{1}{n}$};
+\node[above left, m_label, xshift=-1pt, yshift=2pt] at (A_1) {$1$};
+
+% 3. m 到 m/n
+\coordinate (P_m_over_n) at ($(0,0)!{\Lm/\Ln}!(P1_real)$); 
+\draw[construction] (A_m) -- (P_m_over_n);
+\draw[tick] (A_m) ++({\auxAngle+90}:0.08) -- ++({\auxAngle-90}:0.16);
+\node[below, m_label, yshift=-3pt] at (P_m_over_n) {$\frac{m}{n}$};
+\node[above left, m_label, xshift=-1pt, yshift=2pt] at (A_m) {$m$};
+
+% --- 强调关键交点 ---
+\fill (0,0) circle (1.2pt);
+\fill (A_n) circle (1.2pt);
+\fill (A_1) circle (1.2pt);
+\fill (A_m) circle (1.2pt);
+\fill (P_1_over_n) circle (1.2pt);
+\fill (P_m_over_n) circle (1.2pt);
+
+\end{tikzpicture}
+\end{document}
