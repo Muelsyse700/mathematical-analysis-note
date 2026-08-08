@@ -1,0 +1,9 @@
+% !设置自定义功能
+\newcommand{\vect}[1]{\symbf{#1}} % 粗体向量
+\newcommand{\overtext}[2]{
+    \stackon[0.5pt]{\textbf{#1}}{\textsf{\textbf{\fontsize{5pt}{5pt}\selectfont #2}}}
+}
+\newcommand{\dashedmid}{\mathrel{\tikz[baseline=0pt]{\draw[dashed, dash pattern=on 2.4pt off 2.4pt, line width=0.6pt] (0,-0.55ex) -- (0,1.85ex);}}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
