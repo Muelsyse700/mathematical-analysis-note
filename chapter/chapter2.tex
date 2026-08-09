@@ -215,3 +215,63 @@
 \end{theorem}
 
 这个定理由上面的最值定理易证.
+
+
+\subsection{一致连续性}
+\begin{definition}
+    设$f(x) \in C[a,b]$，对于$\forall \varepsilon > 0$，若$\exists \delta > 0$使得$\forall x_0 \in [a,b]$都在$|x-x_0|<\delta$时满足$|f(x)-f(x_0)|<\varepsilon$，则称$f(x)$在$[a,b]$上\overtext{一致连续}{uniformly continuous}.
+\end{definition}
+
+即能否有一个在整个区间上\textbf{一致}的$\delta$满足连续性条件，而不是在各个点取不一样的$\delta$来满足连续性条件，即逐点连续.
+
+\begin{question}
+    求使得$f(x)=\sin x$在其定义域上一致连续的$\delta$.
+\end{question}
+
+\begin{solution}
+    首先根据定义，如果满足一致连续，应当有$\forall x',x'' \in I$满足$|x'-x''|<\delta$，还满足$|\sin x' - \sin x''|<\varepsilon$，注意到：
+    \[|\sin x' - \sin x''| = 2\left|\sin\frac{x'-x''}{2}\cos\frac{x'+x''}{2}\right|\leqslant|x'-x''|<\delta\]
+    故而，令$\delta=\varepsilon$，即可满足一致连续条件.
+\end{solution}
+
+\begin{theorem}
+    在闭区间上连续的函数一定在这个闭区间内一致连续.
+\end{theorem}
+
+\begin{proof}
+    假设$f\big|_{[a,b]}$不一致连续.
+
+    这意味着$\exists \varepsilon_0>0$，对$\forall \delta\equiv\frac{1}{n}>0$满足：$\forall x_n',x_n'' \in [a,b]$在$|x_n'-x_n''|<\delta=\frac{1}{n}$时有$|f(x_n')-f(x_n'')|\geqslant \varepsilon_0$，即没有一个适用于所有点的$\delta$.
+
+    根据列紧性定理，必有收敛子列$x_{n_k}'\to x'\,(k\to\infty)$.由于：
+    \[0<|x_{n_k}'-x_{n_k}''|<\frac{1}{n_k}\to 0\]
+    根据三明治定理，必然有$x_{n_k}'' \to x'$.又根据$f$连续，有：
+    \[\lim_{k\to\infty}\left(f(x_{n_k}')-f(x_{n_k}'')\right)=0 \geqslant \varepsilon_0\]
+    这与$\varepsilon_0>0$是矛盾的，所以假设不成立.
+\end{proof}
+
+这并不是说不在闭区间上连续的函数就不能一致连续，假若在无穷远处函数具有不剧烈发散等良好的性质，依然可以保持一致连续.
+
+\begin{question}
+    证明：若$f\big|_{[a,+\infty)}$连续，且在$x\to+\infty$时$f(x)\to l$是有限值，则$f$在$[a,+\infty)$上一致连续.
+\end{question}
+
+\begin{proof}
+    要证明一致连续，就表明对于一个待求取的区间宽度$\delta$，它在任何地方对于两个间距小于$\delta$的点$x',x''$都满足$|f(x')-f(x'')|<\varepsilon$.
+
+    已知在远处$f$趋于收敛，根据Cauchy收敛准则，一定存在一个边界$M$使得$x',x''>M$后，对于小于等于任意间距的两个点，总有$|f(x')-f(x'')|<\varepsilon$，即在远处一致连续，不妨设这个步长为$1$.
+
+    注意到，“远处”指的是区间$(M,+\infty)$.
+
+    进一步考虑近处的一致连续性，假如把“近处”设定为某个闭区间，由于$f$是连续的，那么它在这个闭区间上一定是一致连续的.
+
+    证明的主要目的是找到一个在任何地方都适用的$\delta$，问题在于，使得远处一致连续的$1$完全可能使得近处不一致连续，因为近处尚未趋于收敛，函数值的抖动较大.
+
+    于是，取二者的最小值作为全局的$\delta$，即$\delta=\min\{\delta_1,1\}$，这使得$\delta$在“远处”和“近处”两个区间里都满足一致连续条件.
+
+    现在，只需要把两个区间接上，就可以完成证明.
+
+    倘若将“近处”取为$[a,M]$会导致一个问题，若是间距为$\delta$的两个点各自落在“远处”和“近处”两个区间里，那么两边关于一致连续的要求都不能管到另一个点，这使得一致连续的判定失效了.
+
+    这时，只需要使得两个区间形成一个“共同管理”的交叠部分，这个部分的宽度设置为两点最大的可能间距$1$，即“近处”取为$[a,M+1]$，这就保证了关于一致连续性的判定标准能够发生平稳过渡.
+\end{proof}
