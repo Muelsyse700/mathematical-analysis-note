@@ -61,7 +61,7 @@
         \dfrac{f(x)}{g(x)}\,(g(x_0)\neq 0)
     \end{cases}$也在$x_0$处连续.
     \item 设$u=g(x)$在$x_0$处连续，$x=f(t)$在$t_0$处连续且$f(t_0)=x_0$，那么$g(f(t))$在$t_0$处连续.
-    \item 若$y=f(x)$在$[a,b]$上连续，则$f\big|_{[a,b]}$存在反函数，当且仅当$f(x)$在$[a,b]$上严格单调.
+    \item 若$y=f(x)$在$[a,b]$上连续，则$\eval{f}_{[a,b]}$存在反函数，当且仅当$f(x)$在$[a,b]$上严格单调.
     
     除此以外，$f(x)$的反函数$y=f^{-1}(x)$也是连续且严格单调的.
 \end{enumerate}
@@ -175,11 +175,11 @@
 
 \subsection{有界性与最大最小值定理}
 \begin{theorem}
-    设$f(x)\in C[a,b]$，则$f \big|_{[a,b]}$有界.
+    设$f(x)\in C[a,b]$，则$\eval{f}_{[a,b]}$有界.
 \end{theorem}
 
 \begin{proof}
-    若$f \big|_{[a,b]}$无界，那么$\forall n>0$，一定$\exists x_n \in [a,b]$使得$|f(x_n)\geqslant n$.
+    若$\eval{f}_{[a,b]}$无界，那么$\forall n>0$，一定$\exists x_n \in [a,b]$使得$|f(x_n)\geqslant n$.
 
     根据列紧性定理，有界数列必有收敛子列，即$\exists x_{n_k} \to x_n \in [a,b]$，对于子列，总有$n_k \geqslant k$，对于无穷的$k$，总是有：
     \[|f(x_{n_k})|\geqslant n_k \to \infty \quad\Rightarrow\quad |f(x_{n_k})|\to\infty\]
@@ -188,7 +188,7 @@
     矛盾，故而有界.
 \end{proof}
 
-要注意开区间和闭区间的区别，比如$f=\dfrac{1}{x}$有$f \in C(0,1]$，但是$f\big|_(0,1]$无界.只有闭区间上的连续函数满足有界性.
+要注意开区间和闭区间的区别，比如$f=\dfrac{1}{x}$有$f \in C(0,1]$，但是$\eval{f}_(0,1]$无界.只有闭区间上的连续函数满足有界性.
 
 \begin{theorem}
     \textbf{最值定理}
@@ -205,7 +205,7 @@
     \[M \geqslant f(x_{n_k}) \geqslant M-\frac{1}{n_k}\]
     取$k\to\infty$，根据三明治定理有$f(x_{n_k})\to M$，又根据连续性恰好有：
     \[\lim_{k\to\infty}f(x_{n_k}) = f(x^*) = M\]
-    由于$M$是上界，则$f(x^*)=M$就是$f(x)\big|_{[a,b]}$的最大值.
+    由于$M$是上界，则$f(x^*)=M$就是$\eval{f(x)}_{[a,b]}$的最大值.
 
     同理可证有最小值.
 \end{proof}
@@ -239,7 +239,7 @@
 \end{theorem}
 
 \begin{proof}
-    假设$f\big|_{[a,b]}$不一致连续.
+    假设$\eval{f}_{[a,b]}$不一致连续.
 
     这意味着$\exists \varepsilon_0>0$，对$\forall \delta\equiv\frac{1}{n}>0$满足：$\forall x_n',x_n'' \in [a,b]$在$|x_n'-x_n''|<\delta=\frac{1}{n}$时有$|f(x_n')-f(x_n'')|\geqslant \varepsilon_0$，即没有一个适用于所有点的$\delta$.
 
@@ -253,7 +253,7 @@
 这并不是说不在闭区间上连续的函数就不能一致连续，假若在无穷远处函数具有不剧烈发散等良好的性质，依然可以保持一致连续.
 
 \begin{question}
-    证明：若$f\big|_{[a,+\infty)}$连续，且在$x\to+\infty$时$f(x)\to l$是有限值，则$f$在$[a,+\infty)$上一致连续.
+    证明：若$\eval{f}_{[a,+\infty)}$连续，且在$x\to+\infty$时$f(x)\to l$是有限值，则$f$在$[a,+\infty)$上一致连续.
 \end{question}
 
 \begin{proof}

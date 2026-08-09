@@ -1,0 +1,24 @@
+\chapter{单变量函数的微分学}
+\section{导数}
+\subsection{导数的定义}
+\begin{definition}
+    设$f(x)$在$x_0$的邻域内有定义，若$\lim\limits_{x\to x_0}\dfrac{f(x)-f(x_0)}{x-x_0}$存在且有限，那么称它为$f(x)$在$x_0$的\overtext{导数}{derivative}，记作：
+    \[f'(x_0)\quad\text{或}\quad\eval{\dv{f}{x}}_{x_0}\quad\text{或}\quad\eval{\dv{y}{x}}_{x_0}\]
+    并称$f(x)$在$x_0$处\overtext{可导}{differentiable}.
+    \begin{itemize}
+        \item 若有$\lim\limits_{x\to x^+_0}\dfrac{f(x)-f(x_0)}{x-x_0} = \lim\limits_{\Delta x \to 0^+}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x} = f_+'(x_0)$存在且有限，称之为\textbf{右导数}.
+        \item 若有$\lim\limits_{x\to x^-_0}\dfrac{f(x)-f(x_0)}{x-x_0} = \lim\limits_{\Delta x \to 0^-}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x} = f_-'(x_0)$存在且有限，称之为\textbf{右导数}.
+    \end{itemize}
+    若$f$在$I$上任意一点都可导，则称$f$在$I$上可导.
+\end{definition}
+
+\begin{theorem}
+    $f(x)$在$x_0$可导，当且仅当$f_\pm'(x_0)$存在且相等.
+\end{theorem}
+
+\begin{theorem}
+    $f(x)$在$x_0$可导，则$f(x)$在$x_0$连续.
+\end{theorem}
+\begin{proof}
+    \[\lim_{x \to x_0}(f(x)-f(x_0)) = \lim_{x \to x_0}\left[\frac{(f(x)-f(x_0))}{x-x_0}\right](x-x_0) = f'(x)\cdot 0 = 0\]
+\end{proof}
