@@ -59,7 +59,7 @@
     \end{align*}
     在上式中，若是$g(x)-g(x_0)=0$将导致上式中用于辅助的中间项出现问题，这是构造过程中导致的问题，而不是原式所具有的性质，所以要消除这个影响，尝试构建函数$h(x)$：
     \[h(x)=\begin{cases}
-        \frac{f(y)-f(y_0)}{y-y_0},\quad y\neq y_0\\
+        \dfrac{f(y)-f(y_0)}{y-y_0},\quad y\neq y_0\\
         f'(y),\quad y=y_0
     \end{cases}\]
     若是使用$h(x)$重新构造展开式，则$g(x)-g(x_0)=0$将能够被$(f\circ g)'(x)$接受，避免被排出定义域中：
@@ -67,3 +67,30 @@
     由于$h(x)$连续，所以有$\lim\limits_{x\to x_0}h(g(x)) = h\left(\lim\limits_{x\to x_0}g(x)\right) = h(g(x_0))$，故而上式可以进一步写作：
     \[\dv{z}{x} = f'(g(x))g'(x)\]
 \end{proof}
+
+
+\subsection{反函数的求导法则}
+\begin{theorem}
+    \[\left(f^{-1}(y)\right)' = \dv{x}{y} = \left(\dv{y}{z}\right)^{-1} = \frac{1}{f'(x)}\]
+\end{theorem}
+
+\begin{proof}
+    \[\frac{f^{-1}(y)-f^{-1}(y_0)}{y-y_0} = \frac{x-x_0}{y-y_0} = \left(\frac{y-y_0}{x-x_0}\right)^{-1} \to \frac{1}{f'(x)}\]
+\end{proof}
+
+利用反函数的求导，可以方便地证明各种初等函数尤其是对数、指数、反三角函数的导数.
+
+\begin{question}
+    求$y = x \ee^x$的反函数的导数.
+\end{question}
+
+\begin{solution}
+    代入$x=f(y)$得$y = f(y)\ee^{f(y)}$，两边对$y$求导：
+    \begin{align*}
+        1 &= f'(y)\ee^{f(y)} + f(y)f'(y)\ee^{f(y)}\\
+        f'(y) &= \frac{1}{\ee^{f(y)} + f(y)\ee^{f(y)}} \\
+        f'(y) &= \frac{1}{\ee^x + x\ee^x},\quad\text{其中$x$满足$y=x\ee^x$}
+    \end{align*}
+\end{solution}
+
+在完全求不出反函数的时候，直接用一个抽象函数$x=f(y)$代表反函数并且代入到原函数表达式的$x$中，同时两边对$y$求导，最后再把抽象的$f'(y)$与$f(y)$分离，最后再把$f(y)=x$代回，最终获得表达式.
