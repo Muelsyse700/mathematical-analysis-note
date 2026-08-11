@@ -822,7 +822,7 @@
 \begin{proof}
     首先证明数列是递增的，根据二项式定理：
     \begin{align*}
-        e_n &= 1 + \sum_{k=1}^n \mathrm{C}_n^k \cdot \frac{1}{n^k}\\
+        e_n &= 1 + \sum_{k=1}^n \binom{n}{k}  \cdot \frac{1}{n^k}\\
         &= 1 + \sum_{k=1}^{n}\frac{1}{k!}\cdot\frac{n(n-1)(n-2) \cdots (n-k+1)}{n^k}\\
         &= 1 + 1 + \sum_{k=2}^n\frac{1}{k!}\left(1-\frac{1}{n}\right)\left(1-\frac{2}{n}\right)\cdots\left(1-\frac{k-1}{n}\right) \\
         e_{n+1} &= 1 + 1 + \sum_{k=2}^n\frac{1}{k!}\left(1-\frac{1}{n+1}\right)\left(1-\frac{2}{n+1}\right)\cdots\left(1-\frac{k-1}{n+1}\right) + \left(\frac{1}{n+1}\right)^{n+1}

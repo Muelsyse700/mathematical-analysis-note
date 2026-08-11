@@ -94,3 +94,51 @@
 \end{solution}
 
 在完全求不出反函数的时候，直接用一个抽象函数$x=f(y)$代表反函数并且代入到原函数表达式的$x$中，同时两边对$y$求导，最后再把抽象的$f'(y)$与$f(y)$分离，最后再把$f(y)=x$代回，最终获得表达式.
+
+
+\subsection{高阶导数}
+\begin{definition}
+    如果可导函数$f$的导数$f'$依然可导，则称其导数为$f$的\textbf{二阶导数}，记作$f''$或$f^{(2)}$；依此类推，如果函数$f$的$n-1$阶函数依然可导，则称其导数是$f$的\overtext{$n$阶导数}{$n$-th order derivative}，记作：
+    \[f^{(n)}(x)\quad\text{或}\quad\dv[n]{y}{x}\]
+\end{definition}
+
+\begin{theorem}
+    \textbf{Leibniz公式}
+
+    若函数$u,v$均有$n$阶导数：
+    \[(uv)^{(n)} = \sum_{k=0}^{n}\binom{n}{k}u^{(n-k)} v^{(k)} \]
+\end{theorem}
+
+对于$n$次多项式：
+\[P_n(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0\]
+如果$x_0$是它的$r$次重根，其可以分解为：
+\[P_n(x) = (x-x_0)^r Q_{n-r}(x)\]
+其中$Q_{n-r}(x)$是一个$n-r$次多项式，有$Q_{n-r}(x_0) \neq 0$，并且还有：
+\[P_n(x_0) = 0,\quad P^{(1)}_n(x_0) = 0,\quad \cdots,\quad P^{(r-1)}_n(x_0) = 0,\quad P^{(r)}_n(x_0) \neq 0\]
+上述关于导数的条件和因式分解所定义的根的重数是等价的，关于导数的定义可以推广到任意可导函数零点的重数，即若函数$f(x)$满足：
+\[f(x_0) = 0,\quad f^{(1)}(x_0) = 0,\quad \cdots,\quad f^{(r-1)}(x_0) = 0,\quad f^{(r)}(x_0) \neq 0\]
+则称$x_0$为$f(x)$的$r$重零点.
+
+\begin{question}
+    设$f(x)=\arctan x$，求$f^{(n)}(0)$.
+\end{question}
+
+\begin{solution}
+    由$f'(x)=\dfrac{1}{1+x^2}$可知，$f(x)$有任意阶导数，且有：
+    \[(1+x^2)f'(x)=1\]
+    对两边求$n-1$阶导，右边显然为$0$，左边：
+    \begin{align*}
+        [(1+x^2)f'(x)]^{(n-1)} =& \sum_{k=0}^{n-1}\binom{n-1}{k}(1+x^2)^{(k)}(f'(x))^{(n-k-1)}\\
+        =& \binom{n-1}{0}(1+x^2)f^{(n)} + \binom{n-2}{1}(2x)f^{(n-1)}\\
+        &+ \binom{n-3}{2}(2)f^{(n-2)}\\
+        =& (1+x^2)f^{(n)}+2(n-1)xf^{(n-1)} + (n-1)(n-2)f^{(n-2)}
+        =& 0
+    \end{align*}
+    代入$x=0$至上式，得到递推关系式：
+    \[f^{(n)}(0) = -(n-1)(n-2)f^{(n-2)}(0)\]
+    又有$f(0) = 0,f'(0) = 1$，得到：
+    \[\begin{cases}
+        f^{(2k+1)}(0) = (-1)^k (2k)!\\
+        f^{(2k)}(0) = 0
+    \end{cases},(k \in \mathbb{N}_1)\]
+\end{solution}
