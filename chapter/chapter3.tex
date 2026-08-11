@@ -13,7 +13,7 @@
 \end{definition}
 
 \begin{theorem}
-    $f(x)$在$x_0$可导，当且仅当$f_\pm'(x_0)$存在且相等.
+    $f(x)$在$x_0$可导，当且仅当$f_\pm'(x_0)$存在且i相等.
 \end{theorem}
 
 \begin{theorem}
@@ -21,4 +21,49 @@
 \end{theorem}
 \begin{proof}
     \[\lim_{x \to x_0}(f(x)-f(x_0)) = \lim_{x \to x_0}\left[\frac{(f(x)-f(x_0))}{x-x_0}\right](x-x_0) = f'(x)\cdot 0 = 0\]
+\end{proof}
+
+
+\subsection{导数的四则运算}
+\begin{theorem}
+    设$f(x)$在$x$可导，则：
+    \begin{align*}
+        (f(x)\pm g(x))' &= f'(x) \pm g'(x) \\
+        (f(x)g(x))' &= f'(x)g(x) + f(x)g'(x) \\
+        \left(\frac{f(x)}{g(x)}\right)' &= \frac{f'(x)g(x)-f(x)g'(x)}{g^2(x)}\,(g(x)\neq 0)
+    \end{align*}
+\end{theorem}
+以乘法的证明为例：
+\begin{proof}
+    设$x_0 \in I$：
+    \begin{align*}
+        \frac{f(x)g(x)-f(x_0)g(x_0)}{x-x_0} &= \frac{f(x)g(x)-f(x_0)g(x)+f(x_0)g(x)-f(x_0)g(x_0)}{x-x_0}\\
+        &= \frac{f(x)-f(x_0)}{x-x_0}g(x)+\frac{g(x)-g(x_0)}{x-x_0}f(x_0) \\
+        &= f'(x_0)g(x) + f(x_0)g'(x_0)
+    \end{align*}
+    由于$g(x)$可导，其必然连续，于是$x\to x_0$时有$g(x)\to g(x_0)$，代入上式得证.
+\end{proof}
+
+
+\subsection{复合函数的求导法则}
+\begin{theorem}
+    设$y=g(x)$定义在区间$I$上，$z=f(y)$定义在区间$J$上，且$g(I) \subset J$，如果$g(x)$在$x\in I$处可导，$f(y)$在$y=g(x)$处可导，那么$f \circ g$在$x$处可导，且有：
+    \[(f \circ g)'(x)=f'(g(x))g'(x) \quad\text{或}\quad \dv{z}{x}=\dv{z}{y}\dv{y}{x}\]
+\end{theorem}
+
+\begin{proof}
+    取$x_0 \in I$记$y_0 = g(x_0)$，先考虑$x_0$和$g(x_0)$不在所在定义域的两端点的情况，其余情况修改部分定义易证.注意到：
+    \begin{align*}
+        \dv{z}{x} =& \lim_{x\to x_0}\frac{f(g(x))-f(g(x_0))}{x-x_0}\\
+        &= \lim_{x\to x_0}\frac{f(g(x))-f(g(x_0))}{g(x)-g(x_0)}\frac{g(x)-g(x_0)}{x-x_0}
+    \end{align*}
+    在上式中，若是$g(x)-g(x_0)=0$将导致上式中用于辅助的中间项出现问题，这是构造过程中导致的问题，而不是原式所具有的性质，所以要消除这个影响，尝试构建函数$h(x)$：
+    \[h(x)=\begin{cases}
+        \frac{f(y)-f(y_0)}{y-y_0},\quad y\neq y_0\\
+        f'(y),\quad y=y_0
+    \end{cases}\]
+    若是使用$h(x)$重新构造展开式，则$g(x)-g(x_0)=0$将能够被$(f\circ g)'(x)$接受，避免被排出定义域中：
+    \[\dv{z}{x} = \lim_{x\to x_0}h(g(x))\frac{g(x)-g(x_0)}{x-x_0}\]
+    由于$h(x)$连续，所以有$\lim\limits_{x\to x_0}h(g(x)) = h\left(\lim\limits_{x\to x_0}g(x)\right) = h(g(x_0))$，故而上式可以进一步写作：
+    \[\dv{z}{x} = f'(g(x))g'(x)\]
 \end{proof}
