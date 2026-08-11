@@ -4,20 +4,25 @@
 
 % #region 导言区
 \documentclass[a4paper,12pt,fontset=none,UTF8]{ctexbook}
-\input{settings/usedPackages.tex}       % #载入宏包
-\input{settings/baseSettings.tex}       % #载入文档基础配置
-\input{settings/myCommands.tex}         % #载入自定义命令
-\graphicspath{{figure/}}                % #设置默认图片路径
+\input{settings/usedPackages.tex}                       % #载入宏包
+\input{settings/baseSettings.tex}                       % #载入文档基础配置
+\input{settings/myCommands.tex}                         % #载入自定义命令
+\graphicspath{{figure/}}                                % #设置默认图片路径
+\covertitle{数学分析}                                   % #设置封面主标题
+\coverengtitle{Mathematical Analysis}                   % #设置封面英文标题
+\coverauthor{Xu Jiamin}                                 % #设置作者姓名
+\coverdate{2026-07-22}                                  % #设置创建日期
+\covergithub{https://github.com/Muelsyse700}            % #设置github主页
+\coverorcid{https://orcid.org/0009-0005-1071-7800}      % #设置ORCID
 % #endregion
 
-
 \begin{document}
-\makemycover{数学分析}{Mathematical Analysis}
+\makemycover
 \makecontents
 % --------正文--------
 
-\input{chapter/chapter1.tex}
-\input{chapter/chapter2.tex}
+% \input{chapter/chapter1.tex}
+% \input{chapter/chapter2.tex}
 \input{chapter/chapter3.tex}
 
 \end{document}

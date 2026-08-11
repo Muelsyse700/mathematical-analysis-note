@@ -76,13 +76,25 @@
 
 % !设置封面
 % #region
-\newcommand{\makemycover}[2]{
+\makeatletter
+\newcommand{\covertitle}[1]{\def\@covertitle{#1}}
+\newcommand{\coverengtitle}[1]{\def\@coverengtitle{#1}}
+\newcommand{\coverauthor}[1]{\def\@coverauthor{#1}}
+\newcommand{\coverdate}[1]{\def\@coverdate{#1}}
+\newcommand{\covergithub}[1]{\def\@covergithub{#1}}
+\newcommand{\coverorcid}[1]{\def\@coverorcid{#1}}
+\def\@covertitle{主标题}
+\def\@coverengtitle{English Title}
+\def\@coverauthor{Your Name}
+\def\@coverdate{\today}
+\def\@covergithub{https://github.com}
+\def\@coverorcid{https://orcid.org}
+
+\newcommand{\makemycover}{
     \definecolor{covertext1}{HTML}{A49883}
     \definecolor{covertext2}{HTML}{B19F87}
-    % 1: 主标题
-    % 2: 副标题/个人信息
     \begin{titlepage}
-        \newgeometry{margin=0pt} 
+        \newgeometry{margin=0pt}
         \centering
         \begin{tikzpicture}[remember picture, overlay]
             \node[anchor=south west, inner sep=0pt] at (current page.south west) {
@@ -91,27 +103,35 @@
 
             \node[anchor=north, inner sep=0pt] at ([shift={(0.82cm, 9.2cm)}]current page.center) {
                 \begin{tabular}{c}
-                    {\fontsize{60pt}{72pt}\selectfont\heavyfont #1} \\ [0.8cm]
-                    {\fontsize{27pt}{40pt}\selectfont\calligra #2}
+                    {\fontsize{60pt}{72pt}\selectfont\heavyfont \@covertitle} \\ [0.8cm]
+                    {\fontsize{27pt}{40pt}\selectfont\calligra \@coverengtitle}
                 \end{tabular}
             };
 
             \node[anchor=south west, inner sep=0pt, text=covertext1] at ([shift={(3.5cm, 1cm)}]current page.south west) {
                 \begin{tabular}{l}
                     {\fontsize{16pt}{30pt}\selectfont \bfseries Updated:\!\!} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \today}\\
-                    {\fontsize{16pt}{30pt}\selectfont \bfseries Created:} \ {\fontsize{16pt}{30pt}\selectfont \bfseries 2026-07-22}\\
-                    {\fontsize{16pt}{30pt}\selectfont \bfseries Author:~} \ {\fontsize{16pt}{30pt}\selectfont \bfseries Xu Jiamin}
+                    {\fontsize{16pt}{30pt}\selectfont \bfseries Created:} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \@coverdate}\\
+                    {\fontsize{16pt}{30pt}\selectfont \bfseries Author:~} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \@coverauthor}
                 \end{tabular}
             };
 
             \node[anchor=south west, rotate=90, text=covertext2] at ([shift={(1.5cm, 1cm)}]current page.south west) {
-                {\fontsize{24pt}{35pt}\selectfont {\calligra Powered by} \ \bfseries \LaTeX}
+                {\fontsize{24pt}{35pt}\selectfont {\calligra Powered by} \bfseries \LaTeX}
+            };
+
+            \node[anchor=south, inner sep=0pt] at ([shift={(0.82cm, 8cm)}]current page.south west) {
+                \begin{tabular}{c}
+                    \href{\@coverorcid}{\color{covertext2}\fontsize{20pt}{24pt}\selectfont \faOrcid} \\[0.1cm]
+                    \href{\@covergithub}{\color{covertext2}\fontsize{20pt}{24pt}\selectfont \faGithub}
+                \end{tabular}
             };
         \end{tikzpicture}
         \vfill
     \end{titlepage}
     \restoregeometry
 }
+\makeatother
 % #endregion
 
 
@@ -228,6 +248,10 @@
         \stepcounter{theorem}
         \textcolor{BlueDeep}{\textbf{定理~\thetheorem}}~
     },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{BlueDeep}\faAtom};
+    },
     #1
 }
 
@@ -241,6 +265,10 @@
     before upper={
         \stepcounter{lemma}
         \textcolor{BlueDeep}{\textbf{引理~\thelemma}}~
+    },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{BlueDeep}\faAtom};
     },
     #1
 }
@@ -256,6 +284,10 @@
         \stepcounter{definition}
         \textcolor{YellowDeep}{\textbf{定义~\thedefinition}}~
     },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{YellowDeep}\faLayerGroup};
+    },
     #1
 }
 
@@ -270,6 +302,10 @@
         \stepcounter{proposition}
         \textcolor{OrangeDeep}{\textbf{命题~\theproposition}}~
     },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{OrangeDeep}\faPencil*};
+    },
     #1
 }
 
@@ -281,6 +317,10 @@
     before upper={
         \textcolor{PurpleDeep}{\textbf{推导}}~
     },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{PurpleDeep}\faRandom};
+    },
     #1
 }
 
@@ -291,6 +331,10 @@
     colframe=RedDeep,   % 边框色
     before upper={
         \textcolor{RedDeep}{\textbf{误区}}~
+    },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{RedDeep}\faExclamation};
     },
     #1
 }
@@ -306,6 +350,10 @@
         \stepcounter{question}
         \textcolor{GrayDeep}{\textbf{问题~\thequestion}}~
     },
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{GrayDeep}\faQuestion};
+    },
     #1
 }
 \newtcolorbox{solution}[1][]{
@@ -313,7 +361,12 @@
     colback=GreenLight,         % 内容背景色
     colframe=GreenDeep,         % 边框颜色
     colbacktitle=GreenDeep,     % 标题栏背景色
-    title={解答~}, % 自动编号标题 (关联问题的编号)
+    title={解答}, % 自动编号标题 (关联问题的编号)
+    after title={\hfill \faAngleDown},
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{GreenDeep}\faCheckDouble};
+    },
     #1                          % 允许传入额外参数
 }
 % 定义“证明”环境
@@ -325,8 +378,12 @@
     colback=GreenLight,         % 内容背景色
     colframe=GreenDeep,         % 边框颜色
     colbacktitle=GreenDeep,     % 标题栏背景色
-    title={证明~}, % 自动编号标题 (关联问题的编号)
-    after upper={\hfill $\square$},
+    title={证明}, % 自动编号标题 (关联问题的编号)
+    after title={\hfill \faAngleDown},
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{GreenDeep}\faSquare[regular]};
+    },
     #1                          % 允许传入额外参数
 }
 
@@ -337,6 +394,11 @@
     colframe=PurpleDeep,         % 边框颜色
     colbacktitle=PurpleDeep,     % 标题栏背景色
     title={#2},                 % 核心修改：使用第二个必选参数作为标题
+    after title={\hfill \faAngleDown},
+    overlay unbroken and last={
+        \node[anchor=south east, inner sep=6pt] 
+            at (frame.south east) {\color{PurpleDeep}\faPaperclip};
+    },
     #1                          % 允许传入额外参数（如调整边距等）
 }
 
@@ -347,6 +409,7 @@
 % #endregion
 
 
+% !列表样式设置
 % #region
 \SetEnumitemKey{circ}{ % 圆圈上标有序列表样式
     label=\bfseries\itshape\arabic*\,${}^\circ$,
@@ -379,6 +442,10 @@
     leftmargin=0pt,%
     itemindent=*%
 }
+
+% 无序列表全局样式
+\setlist[itemize,1]{label={\faCaretRight},leftmargin=2em}
+\setlist[itemize,2]{label={\faAngleRight},leftmargin=1em}
 % #endregion
 
 
