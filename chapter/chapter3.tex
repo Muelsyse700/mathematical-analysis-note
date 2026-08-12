@@ -142,3 +142,47 @@
         f^{(2k)}(0) = 0
     \end{cases},(k \in \mathbb{N}_1)\]
 \end{solution}
+
+
+\subsection{参数方程表示的函数连续性与导数}
+记平面上有一参数方程，表示为$\begin{cases}
+    x = \varphi(t) = x(t) \\
+    y = \psi(t) = y(t)
+\end{cases}$，或$\vect{r}(t) = (x(t),y(t))$.
+\begin{definition}
+    如果$\exists \vect{a}=(a_1,a_2)$，对$\forall \varepsilon>0$都$\exists \delta > 0$在$0<|t-t_0|<\delta$时，满足$|\vect{r}(t)-\vect{a}|<\varepsilon$，则称$\vect{a}$是$\vect{r}(t)$在$t\to t_0$时的极限.
+\end{definition}
+
+\begin{definition}
+    若有$\lim\limits_{t \to t_0}\vect{r}(t) = \vect{r}(t_0)$，则称$\vect{r}(t)$在$t_0$连续.
+\end{definition}
+
+\begin{definition}
+    设$\vect{r}(t)$在$t_0$的邻域内有定义，若有：
+    \[\lim\limits_{\Delta t \to 0} \dfrac{\vect{r}(t+\Delta t) - \vect{r}(t)}{\Delta t} = \vect{r}'(t) = (x'(t),y'(t))\]
+    存在且有限，则称之为$\vect{r}(t)$的导数.
+\end{definition}
+
+尽管向量值函数的几个性质看上去与一般的函数一致，但实际上并不是所有的一般函数导数的性质都能推广到向量值函数上.
+
+\begin{derivation}
+    对于平面上用参数方程表示的函数，如果在一个局部能被表示为$y=y(x)$，那么由$x,y$对参变量$t$的导数，可以求出$y$对$x$的导数.
+
+    设参数方程$\begin{cases}
+        x=x(t) \\
+        y=y(t)
+    \end{cases},t\in[\alpha,\beta]$表示的函数可导.
+
+    若$x=x(t)$存在可导的反函数$t=t(x)=x^{-1}(x)$且$x'(t)\neq 0$，将之代入至$y=y(t)$的$t$中得到$y=y(t(x))$，再将这个复合函数对$x$求导：
+    \[\dv{y}{x} = \dv{y}{t}\dv{t}{x} = y'(t)\dv{t}{x}\]
+    其中$\dfrac{\dd{t}}{\dd{x}} = \dfrac{\dd{x^{-1}(x)}}{\dd{x}}=\dfrac{1}{x'(t)}$，代入上式：
+    \[\dv{y}{x} = \frac{y'(t)}{x'(t)}\]
+    注意到，曲线切线的斜率正是切向量的两个分量之比，从运动学上看就是说：速度恰好是两个分速度矢量之和.
+
+    如果求$y$关于$x$的二阶导，则会引入交叉项：
+    \begin{align*}
+        \dv[2]{y}{x} &= \dv{x}\left(\dv{y}{x}\right) = \dv{t}\left(\frac{y'(t)}{x'(t)}\right)\dv{t}{x}\\
+        &= \frac{y''(t)x'(t)-y'(t)x''(t)}{(x'(t))^2}\frac{1}{x'(t)}\\
+        &= \frac{y''(t)x'(t)-y'(t)x''(t)}{(x'(t))^3}
+    \end{align*}
+\end{derivation}
