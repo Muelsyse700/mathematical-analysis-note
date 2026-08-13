@@ -248,3 +248,52 @@
 若$u=g(t)$，则：
 \[\dv{y}{t} = \dv{y}{u}\dv{u}{t} = f'(u)\cdot g'(t) \quad\Rightarrow\quad \dd{y} = f'(u)\cdot \underbrace{g'(t)\dd{t}}_{\dd{u}}\]
 即无论$u$是自变量还是中间变量，$\dd{y} = f'(u)\dd{u}$的形式没有变，称作\textbf{一阶微分形式的不变性}.
+
+
+\section{微分中值定理}
+\subsubsection{函数的极值}
+\begin{definition}
+    若$x_0$存在一个邻域$(x-\delta,x+\delta)$，使得对$\forall x \in (x-\delta,x+\delta)$都有：
+    \begin{itemize}
+        \item $f(x_0)\geqslant f(x)$，称$f(x_0)$为这个邻域内的\overtext{极大值}{local maximum}.
+        \item $f(x_0)\leqslant f(x)$，称$f(x_0)$为这个邻域内的\overtext{极小值}{local minimum}.
+    \end{itemize}
+\end{definition}
+
+
+\subsubsection{Fermat定理与Rolle定理}
+\begin{theorem}
+    \textbf{Fermat定理}
+
+    若函数$f(x)$在其定义域$I$的一个内点(即不是端点)$x_0$处可导并取极值，则有$f'(x_0)=0$.
+\end{theorem}
+
+\begin{proof}
+    以极大值为例，$\exists \delta > 0$使得对$\forall x \in (x_0-\delta,x_0+\delta)$有$f(x_0)\geqslant f(x)$.
+    \[\frac{f(x)-f(x_0)}{x-x_0} \begin{cases}
+        \geqslant 0, \quad x \leqslant x_0 \\
+        \leqslant 0, \quad x \geqslant x_0
+    \end{cases} \quad\Rightarrow\quad \begin{cases}
+        x \to x_0^+ \quad\Rightarrow\quad f'_+(x_0) \leqslant 0\\
+        x \to x_0^- \quad\Rightarrow\quad f'_-(x_0) \geqslant 0
+    \end{cases}\]
+    由于$f(x)$在$x_0$处可导，则必有$f'_+(x_0) = f'_-(x_0) = 0 = f'(x_0)$，得证，最小值同理易证.
+\end{proof}
+
+\begin{definition}
+    称使得$f'(x)=0$的点$x$为\overtext{驻点}{stationary point}.
+\end{definition}
+
+\begin{theorem}
+    \textbf{Rolle定理}
+
+    设$\left.f\right|_{[a,b]}$连续，$\left.f\right|_{(a,b)}$可导，若$f(a)=f(b)$，则$\exists \xi \in (a,b)$使得$f'(\xi)=0$.
+\end{theorem}
+
+\begin{proof}
+    因为$\left.f\right|_{[a,b]}$连续，根据最值定理，$f$在$[a,b]$有最大值和最小值.
+    \begin{enumerate}[circ]
+        \item 若最大最小值都在区间端点上，则$f(x)=c\Rightarrow f'(x)=0$.
+        \item 若最大最小值至少有一个不在区间端点上，则$(a,b)$内必有极值点，根据Fermat定理，该极值点$\xi$处必有$f'(\xi)=0$.
+    \end{enumerate}
+\end{proof}
