@@ -251,7 +251,7 @@
 
 
 \section{微分中值定理}
-\subsubsection{函数的极值}
+\subsection{Fermat定理与Rolle定理}
 \begin{definition}
     若$x_0$存在一个邻域$(x-\delta,x+\delta)$，使得对$\forall x \in (x-\delta,x+\delta)$都有：
     \begin{itemize}
@@ -260,8 +260,6 @@
     \end{itemize}
 \end{definition}
 
-
-\subsubsection{Fermat定理与Rolle定理}
 \begin{theorem}
     \textbf{Fermat定理}
 
@@ -296,4 +294,91 @@
         \item 若最大最小值都在区间端点上，则$f(x)=c\Rightarrow f'(x)=0$.
         \item 若最大最小值至少有一个不在区间端点上，则$(a,b)$内必有极值点，根据Fermat定理，该极值点$\xi$处必有$f'(\xi)=0$.
     \end{enumerate}
+\end{proof}
+
+
+\subsection{微分中值定理}
+\subsubsection{微分中值定理的内容}
+\begin{theorem}
+    \textbf{微分中值定理(Lagrange中值定理)}
+
+    设$\left.f\right|_{[a,b]}$连续，$\left.f\right|_{(a,b)}$可导，则一定$\exists \xi \in (a,b)$使得：
+    \[f'(\xi) = \frac{f(b)-f(a)}{b-a}\]
+\end{theorem}
+
+从动力学的角度看，Lagrange中值定理的含义是：运动的质点必有瞬时速度等于平均速度的时刻.从函数图像上看，就是某区间内函数曲线上必有一点其切线与两端点连线平行.
+
+\begin{proof}
+    不难给出两端点连线的表达式：
+    \[g(x) = \frac{f(b)-f(a)}{b-a}(x-a) + f(a)\]
+    再构造$F(x)$为函数图像到连线的差值：
+    \[F(x) = f(x)-g(x)\]
+    显然有$F(a)=F(b)=0$，由于$\left.F\right|_{[a,b]}$连续，$\left.F\right|_{(a,b)}$可导，根据Rolle定理，必定$\exists \xi \in (a,b)$使得$F'(\xi)=0$.
+    \[F'(\xi)=f'(\xi)-g'(\xi) = f'(\xi) - \frac{f(b)-f(a)}{b-a} = 0\]
+    得证.
+\end{proof}
+$F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则差值不可能一直增大或减小，即必有$F'(x)=0$.
+
+不难给出推论，区间上任意两点之间也存在中值定理，即$\exists \xi \in [x_1,x_2] \subset [a,b]$使得：
+\[f'(\xi) = \frac{f(x_2)-f(x_1)}{x_2-x_1}\]
+令$\Delta x \equiv x_2-x_1,\quad \theta \equiv \dfrac{\xi-x_1}{x_2-x_1} = \dfrac{\xi-x_1}{\Delta x}$，上式可以用增量表示为：
+\[f(x+\Delta x) - f(x) = \underbrace{f'(x+\theta\Delta x)}_\text{平均增速}\Delta x\]
+
+\begin{question}
+    证明在$f(x)=x^3-3x+c$中，对$\forall c$，$f(x)$在$[0,1]$上没有两个不同的根.
+\end{question}
+
+\begin{proof}
+    假设存在两个实根$x_1,x_2 \in [0,1],x_1<x_2$，根据Lagrange中值定理，$\exists \xi \in (x_1,x_2) \subset [0,1]$满足：
+    \[\frac{f(x_2)-f(x_1)}{x_2-x_1} = f'(\xi) = 3\xi^2-3 = 0\]
+    则$\xi = \pm 1$矛盾，故而假设不成立.
+\end{proof}
+
+
+通过构造满足Lagrange中值定理的项，可以证明一些不等式.
+\begin{question}
+    证明：$\dfrac{b-a}{b} < \ln\dfrac{b}{a} < \dfrac{b-a}{a},\quad 0<a<b$.
+\end{question}
+
+\begin{proof}
+    即证明$\dfrac{1}{b}<\dfrac{\ln b-\ln a}{b-a}<\dfrac{1}{a}$.根据Lagrange中值定理，$\exists \xi \in (a,b)$使得：
+    \[\frac{\ln b -\ln a}{b-a} = f'(\xi) = \frac{1}{\xi}\]
+    由于$a<\xi<b$，则有$\dfrac{1}{b}<\dfrac{1}{\xi}<\dfrac{1}{a}$，代入至上式得证.
+\end{proof}
+
+
+\subsubsection{微分中值定理的推论}
+\begin{theorem}
+    若$f$在一个区间上连续，且区间上的导数处处为$0$，则$f$在这个区间上是常值函数.
+\end{theorem}
+
+\begin{proof}
+    对$\forall x \in I$满足$f'(x)=0$，则对$\forall x_1,x_2 \in I,x_1\neq x_2$，满足：
+    \[f(x_1)-f(x_2) = f'(x_1+\theta(x_2-x_1))(x_2-x_1) = 0\]
+    故而$f$在$I$上是常值函数.
+\end{proof}
+
+\begin{theorem}
+    \textbf{Lipschitz连续性条件}
+
+    若$f(x)$在$I$上可导，并且$|f'(x)|\leqslant M$，即导数有界，则：
+    \[|f(x_2)-f(x_1)|\leqslant M|x_2-x_1|\]
+    称满足上式的函数Lipschitz连续.
+\end{theorem}
+
+\begin{theorem}
+    \textbf{Cauchy中值定理}
+
+    设函数$f(x),g(x)$在$[a,b]$上连续，在$(a,b)$上可导$(g'(x)\neq 0)$，则$\exists \xi \in(a,b)$使得：
+    \[\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}\]
+\end{theorem}
+
+从图像上看，Cauchy中值定理表达的是对于参数方程$\vect{r} = (f(x),g(x))$在$x \in [a,b]$上的曲线，其上必有一点的切线与曲线端点连线平行.
+
+\begin{proof}
+    这个证明实际上就是对证明Lagrange中值定理方法的推广.把构造函数里的常数都用$g(c)$来替换：
+    \[F(x) = f(x) - \frac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a)) - f(a)\]
+    显然有$F(a)=F(b)=0$，根据Rolle定理，$\exists \xi \in (a,b)$使得$F'(\xi)=0$：
+    \[F'(\xi) = f'(\xi) - \frac{f(b)-f(a)}{g(b)-g(a)}g'(\xi) = 0\]
+    得证.
 \end{proof}
