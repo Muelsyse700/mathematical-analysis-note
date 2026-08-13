@@ -230,3 +230,21 @@
 
     在多元函数下，可微分(可全微分)的英文依然是「differentiable」，但是可导(可偏导)的英文则需要具体描述为「partial derivatives exist」.
 \end{extension}
+
+
+\subsection{微分的运算与一阶微分形式的不变性}
+与求导类似，微分的四则运算为：
+\begin{theorem}
+    设函数$f,g$在$x$可微.
+    \begin{align*}
+        \dd{(f\pm g)} &= \dd{f} \pm \dd{g} \\
+        \dd{(f \cdot g)} &= g\dd{f} + f\dd{g}\\
+        \dd{\left(\dfrac{f}{g}\right)} &= \dfrac{g\dd{f} + f\dd{g}}{g^2}
+    \end{align*}
+\end{theorem}
+
+设有一个函数$y=f(u)$，若$u$是自变量，则有：
+\[\dd{y} = f'(u)\dd{u}\]
+若$u=g(t)$，则：
+\[\dv{y}{t} = \dv{y}{u}\dv{u}{t} = f'(u)\cdot g'(t) \quad\Rightarrow\quad \dd{y} = f'(u)\cdot \underbrace{g'(t)\dd{t}}_{\dd{u}}\]
+即无论$u$是自变量还是中间变量，$\dd{y} = f'(u)\dd{u}$的形式没有变，称作\textbf{一阶微分形式的不变性}.
