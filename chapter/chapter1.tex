@@ -303,7 +303,7 @@
 
 \subsubsection{域}
 \begin{definition}
-    设$S$是一个集合，如果有$0,1 \in S$且有加法“$+$”和乘法“$\times$”满足如下条件，就称集合$S$为\overtext{域}{field}.
+    设$S$是一个集合，如果有$0,1 \in S$且有加法「$+$」和乘法「$\times$」满足如下条件，就称集合$S$为\overtext{域}{field}.
     \begin{enumerate}[circ]
         \item \textbf{封闭性：}$\forall x,y \in S, x+y \in S, xy \in S$.
         \item \textbf{结合律：}$\forall x,y,z \in S,\begin{cases}
@@ -435,7 +435,7 @@
     用存在与任意来描述Goldbach猜想，就是：$\forall$大于$2$的偶数，一定$\exists$两个素数$p,q$，使得$n=p+q$.
 \end{extension}
 
-如果要把命题“$\{a_n\}$有界”用存在与任意来描述，就是：$\exists M>0$，对$\forall n \in \mathbb{N}_1$有$a_n \leqslant M$.
+如果要把命题「$\{a_n\}$有界」用存在与任意来描述，就是：$\exists M>0$，对$\forall n \in \mathbb{N}_1$有$a_n \leqslant M$.
 
 
 \subsection{数列极限的定义}
@@ -492,7 +492,7 @@
         取$M = \max\{|a_1|, \cdots, |a_N|, |a|+1\}$，则对$\forall n$有$|a_n| \leqslant M$.
     \end{proof}
 
-    这个证明展现了一种思路：即先处理掉无限个后续项“尾巴”，再对此前的项逐个击破，从而完成证明.
+    这个证明展现了一种思路：即先处理掉无限个后续项「尾巴」，再对此前的项逐个击破，从而完成证明.
 
     \item \textbf{局部保号性(极限到数列)：}设$a_n \to a$，若有$a>l$，则对充分大的$n$有$a_n>l$.
     \begin{proof}
@@ -602,7 +602,7 @@
     根据$\dfrac{1}{n^\alpha} \to 0$，故而不等式两边极限都是$1$，因此根据三明治定理：
     \[\lim\limits_{n \to \infty}\sqrt{1+\dfrac{1}{n^\alpha}} = 1\]
 \end{solution}
-可见，解此类题的关键在于构造极限相等“夹住”中间项的不等式.
+可见，解此类题的关键在于构造极限相等「夹住」中间项的不等式.
 
 \begin{question}
     求极限：$\lim\limits_{n \to \infty}\left(\dfrac{1}{\sqrt{n^2+1}} + \dfrac{1}{\sqrt{n^2+2}} + \cdots + \dfrac{1}{\sqrt{n^2+n}}\right)$.
@@ -633,7 +633,7 @@
     综上，$\lim\limits_{n \to \infty}\sqrt[n]{a} = 1$.
 \end{solution}
 
-有时候，二项式展开只需要保留前两项精度就已足够.当发现“夹不住”时可以考虑调整二项式展开的精度，从而保证两边极限相等.
+有时候，二项式展开只需要保留前两项精度就已足够.当发现「夹不住」时可以考虑调整二项式展开的精度，从而保证两边极限相等.
 \begin{question}
     求极限：$\lim\limits_{n \to \infty}\sqrt[n]{n}$.
 \end{question}
@@ -726,7 +726,7 @@
 
 \subsection{实数完备性的若干等价命题}
 \begin{definition}
-    \overtext{实数完备性}{completeness of the real numbers}按Dedekind的表述，就是实数轴上没有“间隙”.
+    \overtext{实数完备性}{completeness of the real numbers}按Dedekind的表述，就是实数轴上没有「间隙」.
     
     具体而言，设$X \subset \mathbb{R}, Y \subset \mathbb{R}$满足$\forall x \in X, y \in Y$都有$x \leqslant y$，则一定$\exists c \in \mathbb{R}$使得$x \leqslant c \leqslant y$对$\forall x \in X, y \in Y$成立.
 
@@ -999,14 +999,14 @@ Cauchy收敛准则就是在研究充分大的两项之差是不是充分小，�
 \begin{theorem}
     \textbf{Stolz定理}
     \begin{itemize}
-        \item \textbf{“$\frac{\infty}{\infty}$”型}\\
+        \item \textbf{「$\frac{\infty}{\infty}$」型}\\
         设$\{a_n\},\{b_n\}$满足：
         \begin{enumerate}[circ]
             \item $\{b_n\}$严格单调递增且$b_n \to +\infty$.
             \item $\lim\limits_{n\to\infty}\dfrac{a_{n+1}-a_n}{b_{n+1}-b_n} = A$，$A$可为有限的或无限的.
         \end{enumerate}
         则$\lim\limits_{n\to\infty}\dfrac{a_n}{b_n}=A$.
-        \item \textbf{“$\frac{0}{0}$”型}\\
+        \item \textbf{「$\frac{0}{0}$」型}\\
         设$\{a_n\},\{b_n\}$满足：
         \begin{enumerate}[circ]
             \item $\{b_n\}$严格单调递减且$a_n \to 0, b_n \to 0$.
@@ -1044,7 +1044,7 @@ Stolz定理可以看作是一种离散的L'Hospital法则.
     即对$\forall y \in f(A)$都有唯一确定的$x \in A$使得$f(x)=y$.从图像上看就是任意平行于$x$轴的直线与函数的图像至多只有一个交点.称这个反向的映射为$f(x)$的反函数或逆映射，记作$f^{-1}$.
 \end{itemize}
 \begin{definition}
-    设有函数$y=f(u),f:C \to D$和$u=g(x),g:A \to B$，若$B \subseteq C$，那么定义运算“$\circ$”：
+    设有函数$y=f(u),f:C \to D$和$u=g(x),g:A \to B$，若$B \subseteq C$，那么定义运算「$\circ$」：
     \[f \circ g = f(g(x))\]
     由此定义了一个新函数$f \circ g$，称为$f$与$g$的\overtext{复合函数}{composite function}.
 \end{definition}
@@ -1093,7 +1093,7 @@ Stolz定理可以看作是一种离散的L'Hospital法则.
     其中，若$x_0<x<x_0+\delta$，则称$l$为右极限，记作$f(x+0) \coloneq \lim\limits_{x\to x_0^+}f(x)=l$；若$x_0-\delta<x<x_0$，则称$l$为左极限，记作$f(x-0) \coloneq \lim\limits_{x\to x_0^-}f(x)=l$.
 \end{definition}
 
-上述定义的形式称为“$\varepsilon-\delta$语言”.这个定义实际上就是用$\delta$控制函数的输入，使其输出被限制在一个极小范围内，使得这个范围落入任意大小的目标区域，即对$\forall \varepsilon>0$成立.
+上述定义的形式称为「$\varepsilon-\delta$语言」.这个定义实际上就是用$\delta$控制函数的输入，使其输出被限制在一个极小范围内，使得这个范围落入任意大小的目标区域，即对$\forall \varepsilon>0$成立.
 
 \begin{figure}[H]
     \centering
