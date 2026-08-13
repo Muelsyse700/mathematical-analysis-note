@@ -13,7 +13,7 @@
 \end{definition}
 
 \begin{theorem}
-    $f(x)$在$x_0$可导，当且仅当$f_\pm'(x_0)$存在且i相等.
+    $f(x)$在$x_0$可导，当且仅当$f_\pm'(x_0)$存在且相等.
 \end{theorem}
 
 \begin{theorem}
@@ -186,3 +186,47 @@
         &= \frac{y''(t)x'(t)-y'(t)x''(t)}{(x'(t))^3}
     \end{align*}
 \end{derivation}
+
+
+\section{微分}
+\subsection{微分的定义}
+微分，就是一种以直代曲的思想.
+
+对于函数$f(x)$在$x_0$上的切线，有$k = f'(x_0)$，由$y=kx+b$可写出切线方程：
+\[y_\text{切} = f'(x_0)(x-x_0) + f(x_0)\]
+考察曲线与切线纵坐标的偏差$f(x)-y_\text{切}$，记偏移程度$\Delta x \equiv x - x_0$，构造如下分式比较偏差水平：
+\begin{align*}
+    \frac{f(x)-(f(x_0)+f'(x_0)(x-x_0))}{\Delta x}
+    =& \frac{f(x_0 + \Delta x)-(f(x_0)+f'(x_0)(\Delta x))}{\Delta x}\\
+    =& \frac{f(x_0 + \Delta x)-f(x_0)}{\Delta x} - f'(x_0)
+\end{align*}
+当$\Delta x \to 0$时，上述分式有：
+\[\frac{f(x_0 + \Delta x)-f(x_0)}{\Delta x} - f'(x_0) \to f'(x_0)-f'(x_0) = 0\]
+上述结论表明，分子是分母的高阶无穷小，即：
+\[f(x)-(f(x_0)+f'(x_0)(x-x_0)) = o(x-x_0)\]
+\begin{align*}
+\Rightarrow\quad f(x) - f(x_0) &= \underbrace{f'(x_0)}_{A}(x-x_0) + o(x-x_0)\\
+\Delta y &= A \Delta x + o(\Delta x)
+\end{align*}
+上式表明，函数$f(x)$在$x_0$附近的曲线能够被$x_0$上的切线所近似，其在$\Delta x \to 0$时的变化量$\Delta y$由主要近似变化量$A\Delta x$与近似误差高阶无穷小$o(\Delta x)$所描述.
+
+由此给出微分的定义：
+\begin{definition}
+    对于函数$y=f(x)$上的给定一点$x_0$，在这一点的改变量$\Delta x$所引发的函数值改变量$\Delta y$若在$\Delta x \to 0$时近似于线性关系，即：
+    \[\Delta y = A\Delta x + o(\Delta x),\quad\Delta x \to 0\]
+    则称函数$y=f(x)$在$x_0$处\overtext{可微}{differentiable}，记：
+    \[\dd{y} \equiv A\Delta x\]
+    称为$y=f(x)$在$x_0$处的\overtext{微分}{differential}.
+\end{definition}
+
+根据前述推导，显然有$A = f'(x)$.在这个基础上，特别有函数$y = x$，其微分：
+\[\dd{y} = \dd{(x)} = (x)' \cdot \Delta x = 1 \cdot \Delta x = \Delta x\]
+由此可以自然且自洽地给出$\dd{x}$的定义，即$\dd{x} = \Delta x$.
+
+\begin{extension}{可微与可导}
+    注意到，导数的英文是「derivative」，而微分的英文是「differential」，二者不一样.
+    
+    然而，可微和可导的英文都是「differentiable」，这是因为对于一元函数，可微和可导是等价的，但是对于多元函数而言则不等价.
+
+    在多元函数下，可微分(可全微分)的英文依然是「differentiable」，但是可导(可偏导)的英文则需要具体描述为「partial derivatives exist」.
+\end{extension}
