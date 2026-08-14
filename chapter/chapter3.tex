@@ -470,3 +470,36 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
 除了常见的$\frac{0}{0}$型和$\frac{\infty}{\infty}$型不定式，还有很多其他类型的不定式，但是通过变量代换，它们往往可以变成上述两种常见形式.
 
 除此之外，使用等价无穷小代换也是求极限的常用手段，它往往与L'Hospital法则混合使用.
+
+
+\section{函数的单调性和凸性}
+\subsection{函数的单调性与极值}
+\begin{theorem}
+    设$\left.f\right|_{I}$内部可导，对$x_0 \in I$，$f(x_0)=0$，若$f(x)$在$x_0$有二阶导数且有：
+    \begin{itemize}
+        \item $f''(x_0)<0$，则$x_0$是极大值点.
+        \item $f''(x_0)>0$，则$x_0$是极小值点.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    以证明$x_0$是极大值点为例.若有$f''(x_0)<0$，则有：
+    \[\lim_{x \to x_0}\frac{f'(x)-f'(x_0)}{x-x_0} = f''(x_0) < 0\]
+    根据保号性，必然$\exists \delta > 0$使得当$0<|x-x_0|<\delta$时有：
+    \[\frac{f'(x)-f'(x_0)}{x-x_0} < 0\]
+    若$x>x_0$，则$f'(x)<f'(x_0)=0$，$f(x)$在$x_0$右侧严格单调递减；若$x<x_0$，则$f'(x)>f'(x_0)=0$，$f(x)$在$x_0$左侧严格单调递增.
+    
+    显然$x_0$是极大值点.
+\end{proof}
+
+\begin{question}
+    设$x>0$，$0<\alpha<1$，证明$x^\alpha - \alpha x \leqslant 1 - \alpha$.
+\end{question}
+
+\begin{proof}
+    令$f(x) \equiv a^\alpha-\alpha x$，有$f'(x)=\alpha(x^{\alpha-1}-1)$，显然只有一个驻点$x=1$.
+
+    当$x<1$时，有$f'(x)>0$；当$x>1$时，有$f'(x)<0$.表明$x=1$是唯一极大值点.
+    
+    另有$\lim\limits_{x \to 0}f(x)=0,\lim\limits_{x \to +\infty}f(x)<0$，故而在$(0,+\infty)$上$x=1$是极大值点，极大值为$f(1)=1-\alpha$，得证.
+\end{proof}
