@@ -382,3 +382,46 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
     \[F'(\xi) = f'(\xi) - \frac{f(b)-f(a)}{g(b)-g(a)}g'(\xi) = 0\]
     得证.
 \end{proof}
+
+
+\subsection{导函数的介值性质}
+\begin{theorem}
+    设$\left.f(x)\right|_{[x_0，x_0+\delta]}$连续，$\left.f(x)\right|_{(x_0，x_0+\delta)}$可导.若$\lim\limits_{x \to x_0^+} f'(x) = f'(x_0+0)$存在且有限，则$f'_+(x_0)$也存在且有：
+    \[f'_+(x_0) = \lim\limits_{x \to x_0^+} f'(x)\]
+    左极限同理.
+\end{theorem}
+
+\begin{proof}
+    对于$x \in (x_0,x_0+\delta]$，由Lagrange中值定理，$\exists \xi \in (x_0,x)$使得：
+    \[\frac{f(x)-f(x_0)}{x-x_0} = f'(\xi)\]
+    对于$x_0 < \xi < x$，当$x \to x_0^+$时有$\xi \to x_0^+$，两边同时取极限，上式变为：
+    \[f'_+(x_0) = \lim\limits_{\xi \to x_0^+}  f'(\xi)\]
+    得证.
+\end{proof}
+
+上述定理表明，若一个函数在区间内处处可导，其导函数不可能具有第一类间断点，而是要么连续要么具有第二类间断点.
+
+这是因为第一类间断点要求同时具有左右极限，而对于某个函数的导函数来说一旦具有左右极限，其必然连续.
+
+\begin{theorem}
+    \textbf{Darboux定理}
+    
+    设$\left.f(x)\right|_{[a,b]}$可导，则对$\forall \lambda$介于$f'(a)$和$f'(b)$之间，一定$\exists \xi \in (a,b)$使得$f'(\xi) = \lambda$.
+\end{theorem}
+
+\begin{proof}
+    不妨设$f'(a)<f'(b)$.
+    \begin{enumerate}[circ]
+        \item 若$f'(a)<0<f'(b)$：\\
+        即$\lim\limits_{x \to a^+}\dfrac{f(x)-f(a)}{x-a} = f'(a) < 0$，根据极限的保序性，一定$\exists \delta_1 > 0$使得$x \in (a,a+\delta_1)$时有：
+        \[\frac{f(x)-f(a)}{x-a}<0 \quad\Rightarrow\quad f(x)<f(a)\]
+        同理有$\lim\limits_{x \to b^-}\dfrac{f(x)-f(b)}{x-b} = f'(b) > 0$，一定$\exists \delta_2 > 0$使得$x \in (b-\delta_2,b)$时有：
+        \[\frac{f(x)-f(b)}{x-b}>0 \quad\Rightarrow\quad f(x)<f(b)\]
+        $f(x)$分别小于左右端点，表明$\left.f\right|_{[a,b]}$上有最小值点$x_0 \in (a,b)$，则$f'(x_0) = 0$.
+        \item 若$f'(a)<\gamma<f'(b)$：\\
+        令$g(x) \equiv f(x)-\gamma x$，则有$\begin{cases}
+            g'(a) = f'(a) - \gamma < 0\\
+            g'(b) = f'(b) - \gamma > 0
+        \end{cases}$，同理于{\itshape\bfseries{1${\,}^\circ$}}，$\exists \xi \in (a,b)$使得$g'(\xi)=0\Rightarrow f'(\xi)=\gamma$得证.
+    \end{enumerate}
+\end{proof}
