@@ -503,3 +503,100 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
     
     另有$\lim\limits_{x \to 0}f(x)=0,\lim\limits_{x \to +\infty}f(x)<0$，故而在$(0,+\infty)$上$x=1$是极大值点，极大值为$f(1)=1-\alpha$，得证.
 \end{proof}
+
+
+\subsection{函数的凸性和拐点}
+\subsubsection{凸函数的定义与性质}
+函数$f(x)$图像上两点的连线可写为：
+\[g(x) = f(x_1) + \frac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)\]
+如果$f(x)$在区间$(x_1,x_2)\subset I$的图像始终在$x_1,x_2$连线的下方，则表示为：
+\[f(x) \leqslant g(x) = f(x_1) + \frac{f(x_2)-f(x_1)}{x_2-x_1}(x-x_1)\]
+为了表达的简洁，记$\alpha \equiv \dfrac{x_2-x}{x_2-x_1}$，显然有$0<\alpha<1$，从而给出凸性和凹性的定义：
+\begin{definition}
+    设$\left.f\right|_{I}$有定义，对$\forall x_1,x_2 \in I$，如果有：
+    \[\underbrace{f(\alpha x_1 + (1-\alpha)x_2)}_{f(x)} \leqslant \underbrace{\alpha f(x_1) + (1-\alpha)f(x_2)}_{g(x)}\]
+    对$\forall \alpha \in (0,1)$成立，那么称$f(x)$是\overtext{凸函数}{convex function}\textbf{(下凸函数)}.
+
+    反之若$f(x)\geqslant g(x)$，则称$f(x)$是\overtext{凹函数}{concave function}\textbf{(上凸函数)}.
+\end{definition}
+从运动学角度来看，如果$x-t$图像某一段是凸的，则对应加速度$a>0$的状态；如果某一段是凹的，则对应$a<0$的状态.
+
+\begin{theorem}
+    $f(x)$是凸函数，当且仅当对$\forall x_1,x_2 \in I$，$x_1<x<x_2$满足：
+    \[\frac{f(x_1)-f(x)}{x_1-x} \leqslant \frac{f(x_1)-f(x_2)}{x_1-x_2} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+\end{theorem}
+
+\begin{proof}
+    令$\alpha \equiv \dfrac{x_2-x}{x_2-x_1}$，则有$x=\alpha x_1 + (1-\alpha)x_2$
+    \textbf{必要性：}由$f$的凸性有：
+    \[f(x) \leqslant \alpha f(x_1) + (1-\alpha)f(x_2)\]
+    注意到$f(x) = \alpha f(x) + (1-\alpha) f(x)$，代入上式有：
+    \[\frac{f(x)-f(x_1)}{x-x_1} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+    根据不等式$\dfrac{a}{b} \leqslant \dfrac{a+c}{b+d} \leqslant \dfrac{c}{d},b>0,d>0$有：
+    \[\frac{f(x_1)-f(x)}{x_1-x} \leqslant \frac{f(x_1)-f(x_2)}{x_1-x_2} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+
+    \textbf{必要性：}
+    根据定理中成立的不等式：
+    \[\frac{f(x_1)-f(x)}{x_1-x} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+    又因为$x=\alpha x_1 + (1-\alpha)x_2$，根据凸性的定义，$f$是凸的.
+\end{proof}
+
+上述定理的几何意义是，对于凸函数上任意的$x_1<x<x_2$，作为图像割线的$\overline{M_1M},\overline{M_1M_2},\overline{M_2M}$的斜率依次增长，作为割线极限形式的切线，斜率也是递增的，这表明导数的值也应该单调递增：
+
+\begin{theorem}
+    设$\left.f\right|_{I}$连续，若$\left.f\right|_{I}$可导，则$\left.f\right|_{I}$是严格凸函数，当且仅当$f'(x)$在$I$上严格单调递增.
+\end{theorem}
+
+\begin{proof}
+    \textbf{充分性：}对于凸函数，满足不等式：
+    \[\frac{f(x_1)-f(x)}{x_1-x} \leqslant \frac{f(x_1)-f(x_2)}{x_1-x_2} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+    \[\text{令：}\begin{cases}
+        x\to x_1^+ \quad\Rightarrow\quad f'(x_1) \leqslant \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \\
+        x\to x_2^+ \quad\Rightarrow\quad \dfrac{f(x_2)-f(x_1)}{x_2-x_1} \leqslant f'(x_2)
+    \end{cases} \quad\Rightarrow\quad f'(x_1)\leqslant f'(x_2)\]
+
+    \textbf{必要性：}对任意的$x_1<x<x_2$，根据Lagrange中值定理，$\exists \xi_1 \in (x_1,x), \xi_2 \in (x,x_2)$使得
+    \[\frac{f(x)-f(x_1)}{x-x_1} = f'(\xi_1),\quad\frac{f(x_2)-f(x)}{x_2-x} = f'(\xi_2)\]
+    由于$f'(x)$单调递增且$\xi_1 < \xi_2$，因此$f'(x_1) \leqslant f'(x_2)$，即：
+    \[\frac{f(x)-f(x_1)}{x-x_1} \leqslant \frac{f(x_2)-f(x)}{x_2-x}\]
+    由此易证满足凸性.
+\end{proof}
+
+\begin{theorem}
+    若$\left.f\right|_{I}$有二阶导数，则$\left.f\right|_{I}$为凸函数，当且仅当$f''(x)\geqslant 0$.
+\end{theorem}
+
+此定理由上述定理易证.
+
+\begin{theorem}
+    \textbf{Jensen不等式}
+
+    若$\left.f\right|_{I}$上是凸的，则对$\forall x_1,x_2,\cdots,x_n \in I$有：
+    \[f(\alpha_1 x_1 + \cdots + \alpha_n x_n) \leqslant \alpha_1 f(x_1) + \cdots + \alpha_n f(x_n)\]
+    其中$\alpha_1, \cdots, \alpha_n \in (0,1)$且$\alpha_1 + \cdots + \alpha_n = 1$.
+\end{theorem}
+
+
+\subsubsection{拐点}
+\begin{definition}
+    设函数$f$在包含点$x_0$的区间上连续，若点$x_0$是$f(x)$凹凸区间的一个分界点，则称$x_0$是函数$f(x)$的一个\overtext{拐点}{inflection point}.
+\end{definition}
+
+\begin{theorem}
+    设$f(x)$在$x_0$连续，在$x_0$的去心邻域内可导，若在$x_0$的左、右邻域发生了$f'(x)$的严格单调性的变化，那么$x_0$是$f(x)$的拐点.
+\end{theorem}
+
+\begin{theorem}
+    设$f(x)$在$x_0$连续，在$x_0$的去心邻域内有二阶导，若在$x_0$的左、右邻域发生了$f''(x)$的正负性的变化，那么$x_0$是$f(x)$的拐点.特别有$f''(x_0) = 0$是$x_0$为拐点的必要条件.
+\end{theorem}
+
+\begin{extension}{对函数的了解}
+    掌握函数图像较为精确的形态是很有意义的，一般来说包括以下步骤：
+    \begin{enumerate}[circ]
+        \item 确定函数的定义域、间断点.
+        \item 确定函数是否具有某种对称性，如奇偶性、周期性.
+        \item 确定函数的单调性和极值点.
+        \item 确定函数的凹凸性和拐点.
+        \item 确定函数的渐近线.
+    \end{enumerate}
+\end{extension}
