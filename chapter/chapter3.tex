@@ -600,3 +600,56 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
         \item 确定函数的渐近线.
     \end{enumerate}
 \end{extension}
+
+
+\subsection{平面曲线的曲率}
+在了解了函数是凹还是凸之后，进一步地，还需要了解凹凸的程度.
+
+假如现在有一段凸函数，取凸区间上两点$A(x,f(x))$和$B(x+\Delta x,f(x+\Delta x))$.这两点切线与$x$轴夹角之差$\Delta \alpha$.它反映了函数经过$\Delta s = \overset{\frown}{AB}$弧长之后斜率的变化程度，显然地，在经过某个弧度后斜率变化得越大，函数在这个弧度上凸的程度越大.
+
+$\frac{\Delta \alpha}{\Delta s}$表示了这段弧的平均弯曲程度，如果把$A,B$两点逐渐靠近，就能更加近似地表示在一点的弯曲程度，即$\Delta s \to 0$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{curvature/fig.pdf}
+    \caption{曲率的定义}
+\end{figure}
+
+要构造$\frac{\Delta\alpha}{\Delta s}$，可以先构造$\frac{\Delta \alpha}{\Delta x}\big/\frac{\Delta s}{\Delta x}$.在$\Delta s$足够小的条件下，以直代曲：
+\[\Delta s = \sqrt{\Delta x^2 + (f(x+\Delta x) - f(x))^2} = \Delta x \sqrt{1+\left(\frac{f(x+\Delta x)-f(x)}{\Delta x}\right)^2}\]
+\[\Rightarrow\quad \lim\limits_{\Delta x \to 0}\frac{\Delta s}{\Delta x} = \sqrt{1+(f'(x))^2}\]
+又注意到：
+\begin{gather*}
+\begin{cases}
+    \tan \alpha = f'(x)\\
+    \tan(\alpha + \Delta\alpha) = f'(x+\Delta x)
+\end{cases} \quad\Rightarrow\quad \begin{cases}
+    \alpha = \arctan(f'(x))\\
+    \alpha + \Delta\alpha = \arctan(f'(x+\Delta x))
+\end{cases}\\
+\Rightarrow\quad \Delta\alpha = \arctan(f'(x+\Delta x)) - \arctan(f'(x))
+\quad\Rightarrow\quad \lim\limits_{\Delta x \to 0}\frac{\Delta\alpha}{\Delta x} = \frac{f''(x)}{1+(f'(x))^2}
+\end{gather*}
+
+由此给出曲率的定义：
+
+\begin{definition}
+    称平面曲线偏离直线的程度为\overtext{曲率}{curvature}，记作$\kappa$.
+    \[\kappa(x) = \lim\limits_{\Delta s \to 0}\frac{\Delta\alpha}{\Delta s} = \lim\limits_{\Delta x \to 0}\left(\frac{\Delta\alpha}{\Delta x}\middle/\frac{\Delta s}{\Delta x}\right) = \frac{f''(x)}{(1+(f'(x))^2)^{\frac{3}{2}}}\]
+    对于由参数方程$\begin{cases}
+        x = \varphi(t) \\
+        y = \psi(t)
+    \end{cases},t\in [\alpha,\beta]$表示的曲线，其曲率表示为：
+    \[\kappa(t) = \frac{\varphi'(t)\psi''(t) - \psi'(t)\varphi''(t)}{((\varphi'(t))^2+(\psi'(t))^2)^{\frac{3}{2}}}\]
+    其中$\varphi'(t)$与$\psi'(t)$不同时为$0$，且二者连续，这样的曲线称作\overtext{正则曲线}{regular curve}.
+\end{definition}
+
+\begin{extension}{曲率与广义相对论}
+    在平直平面上，两条互相平行的直线永远不会相交.而在弯曲几何中，假如有两个人沿着初始平行的经线行走，他们最终会在极点碰面.在这个过程中，二人并没有受到任何横向拉力的作用，互相靠近完全是由二维球面的正曲率决定的.
+    
+    这表明，在弯曲空间中沿着“最直的路径”，即\overtext{测地线}{geodesic}行进本身就会改变间距.
+
+    由此，Einstein的\overtext{广义相对论}{general relativity}认为，并不存在所谓的引力，只有因质量而弯曲的四维时空.地球绕太阳公转形成的椭圆轨道本质上是地球在被太阳弯曲的时空中沿测地线运动的三维投影.
+
+    正如Wheeler所言：「物质告诉时空如何弯曲，时空告诉物质如何运动.」曲率正是连接二者的桥梁.
+\end{extension}
