@@ -2,12 +2,12 @@
 \section{导数}
 \subsection{导数的定义}
 \begin{definition}
-    设$f(x)$在$x_0$的邻域内有定义，若$\lim\limits_{x\to x_0}\dfrac{f(x)-f(x_0)}{x-x_0}$存在且有限，那么称它为$f(x)$在$x_0$的\overtext{导数}{derivative}，记作：
+    设$f(x)$在$x_0\lim\limits_{x\to x_0}\dfrac{f(x)-f(x_0)}{x-x_0}$存在且有限，那么称它为$f(x)$在$x_0$的\overtext{导数}{derivative}，记作：
     \[f'(x_0)\quad\text{或}\quad\eval{\dv{f}{x}}_{x_0}\quad\text{或}\quad\eval{\dv{y}{x}}_{x_0}\]
     并称$f(x)$在$x_0$处\overtext{可导}{differentiable}.
     \begin{itemize}
         \item 若有$\lim\limits_{x\to x^+_0}\dfrac{f(x)-f(x_0)}{x-x_0} = \lim\limits_{\Delta x \to 0^+}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x} = f_+'(x_0)$存在且有限，称之为\textbf{右导数}.
-        \item 若有$\lim\limits_{x\to x^-_0}\dfrac{f(x)-f(x_0)}{x-x_0} = \lim\limits_{\Delta x \to 0^-}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x} = f_-'(x_0)$存在且有限，称之为\textbf{右导数}.
+        \item 若有$\lim\limits_{x\to x^-_0}\dfrac{f(x)-f(x_0)}{x-x_0} = \lim\limits_{\Delta x \to 0^-}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x} = f_-'(x_0)$存在且有限，称之为\textbf{左导数}.
     \end{itemize}
     若$f$在$I$上任意一点都可导，则称$f$在$I$上可导.
 \end{definition}
@@ -386,7 +386,7 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
 
 \subsection{导函数的介值性质}
 \begin{theorem}
-    设$\left.f(x)\right|_{[x_0，x_0+\delta]}$连续，$\left.f(x)\right|_{(x_0，x_0+\delta)}$可导.若$\lim\limits_{x \to x_0^+} f'(x) = f'(x_0+0)$存在且有限，则$f'_+(x_0)$也存在且有：
+    设$\left.f(x)\right|_{[x_0,x_0+\delta]}$连续，$\left.f(x)\right|_{(x_0,x_0+\delta)}$可导.若$\lim\limits_{x \to x_0^+} f'(x) = f'(x_0+0)$存在且有限，则$f'_+(x_0)$也存在且有：
     \[f'_+(x_0) = \lim\limits_{x \to x_0^+} f'(x)\]
     左极限同理.
 \end{theorem}
@@ -636,6 +636,8 @@ $\frac{\Delta \alpha}{\Delta s}$表示了这段弧的平均弯曲程度，如果
 \begin{definition}
     称平面曲线偏离直线的程度为\overtext{曲率}{curvature}，记作$\kappa$.
     \[\kappa(x) = \lim\limits_{\Delta s \to 0}\frac{\Delta\alpha}{\Delta s} = \lim\limits_{\Delta x \to 0}\left(\frac{\Delta\alpha}{\Delta x}\middle/\frac{\Delta s}{\Delta x}\right) = \frac{f''(x)}{(1+(f'(x))^2)^{\frac{3}{2}}}\]
+    同时，引进$\rho = \dfrac{1}{|\kappa|}$称为曲线在一点的\textbf{曲率半径}.
+
     对于由参数方程$\begin{cases}
         x = \varphi(t) \\
         y = \psi(t)
@@ -653,3 +655,68 @@ $\frac{\Delta \alpha}{\Delta s}$表示了这段弧的平均弯曲程度，如果
 
     正如Wheeler所言：「物质告诉时空如何弯曲，时空告诉物质如何运动.」曲率正是连接二者的桥梁.
 \end{extension}
+
+
+\section{Taylor展开}
+\subsection{Taylor公式}
+对于一个可微的函数，它的微分过程能够被表述为：
+\[f(x) = f(x_0) + f'(x_0)(x-x_0) + o(x-x_0) = T_1(x) + o(x-x_0)\]
+显然地，$T_1(x) = f(x_0) + f'(x_0)(x-x_0)$是$x_0$处的切线方程，不妨记为$T_1(x) = a_0 + a_1(x-x_0)$.
+
+那么，能否找到一条二次曲线$T_2(x)$，能够进一步地对$f(x)$进行近似，从而减小误差$o(x-x_0)$呢？设使用二次多项式近似下有：
+\[f(x) = T_2(x) + o((x-x_0)^2),\quad T_2(x) = a_0 + a_1(x-x_0) + a_2(x-x_0)^2\]
+由上式分别代入$x=x_0$和同除$x-x_0$可以得：
+\[\begin{cases}
+    f(x_0) = T_2(x_0) = a_0 \\
+    \dfrac{f(x)-a_0}{x-x_0} - a_1 - a_2(x-x_0) = \dfrac{o((x-x_0)^2)}{x-x_0}
+\end{cases}\]
+若取$x \to x_0$，则可以推出$f'(x_0) = a_1$.对$f(x) = T_2(x) + o((x-x_0)^2)$同时除以$(x-x_0)^2$可得：
+\begin{align*}
+    \frac{f(x)-a_0-a_1(x-x_0)}{(x-x_0)^2} - a_2 &= \frac{o((x-x_0)^2)}{(x-x_0)^2} \\
+    \frac{f(x)-f(x_0)-f'(x_0)(x-x_0)}{(x-x_0)^2} - a_2 &= \frac{o((x-x_0)^2)}{(x-x_0)^2}
+\end{align*}
+令$x \to x_0$，右边由于是高阶无穷小故而等于$0$，对左边的分式使用L'Hospital法则，两次求导得到：
+\[a_2 = \frac{f''(x_0)}{2}\]
+可见，用二次曲线进一步近似的猜想是可行的.那么，能否用$n$次曲线做更进一步的近似呢？
+
+\begin{proposition}
+    设$T_n(x) = a_0 + a_1(x-x_0) + \cdots + a_n(x-x_n)^n$，若$f(x) = T_n(x) + o((x-x_0)^n)$，则：
+    \[a_k = \frac{f^{(k)}(x_0)}{k!},\,k=0,1,\cdots,n\]
+\end{proposition}
+
+\begin{proof}
+    在$f(x) = T_n(x) + o((x-x_0)^n)$中，令$x \to x_0$，有$a_0 = f(x_0)$.
+
+    若有$a_0=f(x_0)$，假设：
+    \[a_k = \frac{f^{(k)}(x_0)}{k!},\,k<n\]
+    求证$k+1$时也成立，对$f(x)-T_n(x) = o((x-x_0)^n)$两边同除$(x-x_0)^{k+1}$：
+    \[\frac{f(x)-T_n(x)}{(x-x_0)^{k+1}} = \frac{o((x-x_0)^n)}{(x-x_0)^{k+1}}\]
+    令$x \to x_0$，有：
+    \[\lim\limits_{x \to x_0}\frac{f(x)-T_n(x)}{(x-x_0)^{k+1}} = 0\]
+    将左边展开，连续利用L'Hospital法则：
+    \begin{align*}
+        \lim\limits_{x \to x_0}\frac{f(x)-T_n(x)}{(x-x_0)^{k+1}} &= \lim\limits_{x \to x_0}\frac{f'(x)-T_n'(x)}{(k+1)(x-x_0)^k}\\
+        &= \cdots = f^{(k+1)}(x_0) - (k+1)!a_{k+1} = 0
+    \end{align*}
+    \[\Rightarrow\quad a_{k+1} = \frac{f^{(k+1)}(x_0)}{(k+1)!}\]
+\end{proof}
+
+\begin{definition}
+    设函数$f(x)$在$x_0$处有$n$阶导数，称$f(x)$与其在$x_0$处的\textbf{Taylor多项式}$T_n(x)$之间的误差$R_n(x) = f(x)-T_n(x)$为\overtext{余项}{remainder}.
+\end{definition}
+
+\begin{theorem}
+    \textbf{带Peano余项的Taylor公式}
+
+    当$x \to x_0$时，有以下公式，称为带Peano余项的Taylor公式：
+    \[f(x) = f(x_0) + \frac{f'(x_0)}{1!}(x-x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + o((x-x_0)^n)\]
+    称在$x \to x_0$时是$(x-x_0)^n$的高阶无穷小的余项$R_n(x) = o((x-x_0)^n)$为\textbf{Peano余项}，满足：
+    \[\lim\limits_{x \to x_0}\frac{R_n(x)}{(x-x_0)^n} = 0\]
+\end{theorem}
+
+\begin{theorem}
+    \textbf{带Peano余项的Maclaurin公式}
+
+    称取$x_0=0$的Taylor公式为Maclaurin公式，其中$R_n(x) = o(x^n)$为Peano余项：
+    \[f(x) = f(0) + \frac{f'(0)}{1!}x + \cdots + \frac{f^{(n)}(0)}{n!}x^n + o(x^n)\]
+\end{theorem}
