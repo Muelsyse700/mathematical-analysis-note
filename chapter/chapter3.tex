@@ -710,8 +710,8 @@ $\frac{\Delta \alpha}{\Delta s}$表示了这段弧的平均弯曲程度，如果
 
     当$x \to x_0$时，有以下公式，称为带Peano余项的Taylor公式：
     \[f(x) = f(x_0) + \frac{f'(x_0)}{1!}(x-x_0) + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + o((x-x_0)^n)\]
-    称在$x \to x_0$时是$(x-x_0)^n$的高阶无穷小的余项$R_n(x) = o((x-x_0)^n)$为\textbf{Peano余项}，满足：
-    \[\lim\limits_{x \to x_0}\frac{R_n(x)}{(x-x_0)^n} = 0\]
+    称在$x \to x_0$时是$(x-x_0)^n$的高阶无穷小的余项$R_n(x,x_0) = o((x-x_0)^n)$为\textbf{Peano余项}，满足：
+    \[\lim\limits_{x \to x_0}\frac{R_n(x,x_0)}{(x-x_0)^n} = 0\]
 \end{theorem}
 
 \begin{theorem}
@@ -720,3 +720,85 @@ $\frac{\Delta \alpha}{\Delta s}$表示了这段弧的平均弯曲程度，如果
     称取$x_0=0$的Taylor公式为Maclaurin公式，其中$R_n(x) = o(x^n)$为Peano余项：
     \[f(x) = f(0) + \frac{f'(0)}{1!}x + \cdots + \frac{f^{(n)}(0)}{n!}x^n + o(x^n)\]
 \end{theorem}
+
+
+\subsection{余项的表示与估计}
+尽管已经知道余项$R_n(x)$是$(x-x_0)^n$的高阶无穷小，如果能进一步得到这个高阶无穷小的结构就更好了.
+
+首先观察$n=1$时$R_1$的结构：
+\begin{align*}
+f(x) &= f(x_0) + f'(x_0)(x-x_0) + R_1\\
+    \Rightarrow\quad R_1 &= \underbrace{f(x)-f(x_0)}_\text{Lagrange中值定理}-f'(x_0)(x-x_0)\\
+    &= f'(\xi_1)(x-x_0) - f'(x_0)(x-x_0)\\
+    &= (\underbrace{f'(\xi_1) - f'(x_0)}_\text{Lagrange中值定理})(x-x_0)\\
+    &= f''(\xi)(\xi_1 - x_0)(x-x_0)
+\end{align*}
+在这个过程中得到一个猜想：如果$f(x)$存在$n+1$阶的导数，或许能够使得$R_n$的结构显现.
+
+接下来观察$n=2$时$R_2$的结构，首先构造函数：
+\[g(t) = f(t) - T_2(t) - \frac{f(x)-T_2(x)}{(x-x_0)^3}(t-x_0)^3\]
+注意到对上述函数有$g(t=x_0)=0,g(t=x)=0$，因而根据Lagrange中值定理，$\exists \xi_1$介于$x_0$与$x$之间使得$g'(\xi_1) = 0$.
+
+又注意到，$g'(t=x_0) = 0$，与前述结论$g'(\xi_1) = 0$结合，根据Lagrange中值定理，$\exists \xi_2$介于$x_0$和$\xi_1$之间使得$g''(\xi_2) = 0$.
+
+接下来，依旧有$g''(t=x_0) = 0$，与前述结论$g''(\xi_2) = 0$结合，又一次根据Lagerange中值定理，$\exists \xi$介于$x_0$和$\xi_2$之间使得$g^{(3)}(\xi)=0$
+
+对$g(t)$求三阶导：
+\[g^{(3)}(t) = f^{(3)}(t) - 3!\frac{f(x)-T_2(x)}{(x-x_0)^3}\]
+令$t=\xi$代入：
+\[g^{(3)}(\xi) = 0 = f^{(3)}(\xi) - 3!\frac{f(x)-T_2(x)}{(x-x_0)^3}\]
+由上式移项可得：
+\[R_2 = f(x) - T_2(x) = \frac{f^{(3)}(\xi)}{3!}(x-x_0)^3\]
+注意到$\xi$介于$x$与$x_0$之间.
+
+猜想：对于$n$阶余项$R_n$，也具有类似的形式.
+
+\begin{proposition}
+    设$f(x)$具有$n+1$阶导数，在$x=x_0$附近有：
+    \[f(x) = T_n(x) + \underbrace{\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}}_{R_n}\]
+    其中$\xi$介于$x$与$x_0$之间.
+\end{proposition}
+
+\begin{proof}
+    这个命题的证明过程类似于$n=2$的证明，构造函数：
+    \[g(t) = f(t) - T_n(t) - \frac{f(x)-T_n(x)}{(x-x_0)^{n+1}}(t-x_0)^{n+1}\]
+    得出$g(x)=0,g(x_0)=0$进而连续使用Lagrange中值定理，如下图所示：
+    \vspace{-1.5em}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=1]{lagrange-remainder/fig.pdf}
+        \caption{Lagrange余项的证明}
+    \end{figure}
+    令$\xi \equiv \xi_{n+1}$，再令$t = \xi$代回$g(t)$的$n+1$阶导的表达式：
+    \[g^{(n+1)}(\xi) = 0 = f^{(n+1)}(\xi) - (n+1)!\frac{f(x)-T_n(x)}{(x-x_0)^{n+1}}\]
+    由此可得：
+    \[R_n = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}\]
+    称之为\textbf{Lagrange余项}，由于$\xi$介于$x_0$与$x$之间，所以也可以有：
+    \[\xi = x_0 + \theta(x-x_0),\quad 0<\theta<1\]
+    \[R_n = \frac{f^{(n+1)}(x_0 + \theta(x-x_0))}{(n+1)!}(x-x_0)^{n+1}\]
+\end{proof}
+
+根据有关Lagrange余项的诸推导，可以得到以下推论：
+
+\begin{theorem}
+    设在$x=x_0$的邻域内$\exists M > 0$使得$|f^{(n+1)}(x)| \leqslant M$，则满足：
+    \[|R_n(x)| \leqslant \frac{M}{(n+1)!}|x-x_0|^{n+1}\]
+\end{theorem}
+上述不等式使得误差更加清晰——它是有界的.特别是当$n \to \infty$时$R_n(x) \to 0$，这是将函数用无穷次多项式表示的基础.
+
+\begin{theorem}
+    若$x=x_0$的邻域内$f(x)$有$n+1$阶导数，则$x_0$是$f(x)$的$r(r<n)$重零点，当且仅当存在一个在$x=x_0$邻域内$n+1$阶可导的函数$g(x)$使得：
+    \[f(x) = (x-x_0)^r g(x),\quad g(x_0)\neq 0\]
+\end{theorem}
+上述两个定理，是计算机进行数值计算的基础.
+
+\begin{extension}{Lagrange余项与计算机数值计算}
+    CPU的算术逻辑单元(ALU)只支持加、减、乘运算，无法直接求取三角函数或指数函数等超越函数的值.利用Taylor展开使得用多项式近似函数成为可能，而Lagrange余项的价值在于为这个近似提供了可定量的误差上界.
+
+    在C语言标准库\texttt{libm}中，这样的计算主要分为三步：
+    \begin{enumerate}[circ]
+        \item \textbf{区间规约：}利用目标函数的周期性与对称性，将任意输入的自变量收缩至展开点附近的微小邻域.
+        \item \textbf{截断误差控制：}由于$|R_n(x)|$的上界中包含阶乘项$(n+1)!$，在足够小的邻域内只需保留较低的阶数(通常为5到7阶)即可使得截断误差低于双精度浮点值的机器精度(\texttt{IEEE 754}双精度浮点标准的机器精度为$2^{-53}\approx 1.11 \times 10^{-16}$).
+        \item \textbf{乘加求值：}利用\overtext{秦九韶算法}{Hornor's method}将多项式改写为嵌套形式，直接交由乘加指令单元(FMA)快速计算.
+    \end{enumerate}
+\end{extension}
