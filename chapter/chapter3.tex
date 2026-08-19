@@ -778,6 +778,11 @@ f(x) &= f(x_0) + f'(x_0)(x-x_0) + R_1\\
     \[R_n = \frac{f^{(n+1)}(x_0 + \theta(x-x_0))}{(n+1)!}(x-x_0)^{n+1}\]
 \end{proof}
 
+\begin{theorem}
+    \textbf{带Lagrange余项的Maclaurin公式}
+    \[f(x) = f(0) + \frac{f'(0)}{1!}x + \cdots + \frac{f^{(n)}(0)}{n!}x^n + \frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1}\]
+\end{theorem}
+
 根据有关Lagrange余项的诸推导，可以得到以下推论：
 
 \begin{theorem}
@@ -802,3 +807,62 @@ f(x) &= f(x_0) + f'(x_0)(x-x_0) + R_1\\
         \item \textbf{乘加求值：}利用\overtext{秦九韶算法}{Hornor's method}将多项式改写为嵌套形式，直接交由乘加指令单元(FMA)快速计算.
     \end{enumerate}
 \end{extension}
+
+
+\subsection{初等函数的展开}
+\begin{theorem}
+    \textbf{初等函数带Lagrange余项的Maclaurin公式}
+    \[\ee^x = 1 + x + \frac{x^2}{1!}x + \cdots + \frac{x^n}{n!}x^n \textcolor{BlueDeep}{ + \frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{(n+1)}}\]
+    \[\ln(1+x) = x - \frac{x^2}{2} + \cdots +(-1)^{n-1}\frac{x^n}{n} \textcolor{BlueDeep}{ + \frac{(-1)^n x^{n+1}}{(n+1)(1+\theta x)^{n+1}}}\]
+    \[\sin x = x - \frac{x^3}{3!} + \cdots + (-1)^{m-1}\frac{x^{2m-1}}{(2m-1)!} \textcolor{BlueDeep}{ + \frac{(-1)^m x^{2m+1}}{(2m+1)!}\cos\theta x}\]
+    \[\cos x = 1 - \frac{x^2}{2!} + \cdots + (-1)^{m-1}\frac{x^{2m-2}}{(2m-2)!} \textcolor{BlueDeep}{ + \frac{(-1)^m x^{2m}}{(2m)!}\cos\theta x}\]
+    \begin{align*}
+        (1+x)^\alpha =~& 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots + \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n \\
+        &\textcolor{BlueDeep}{ + \frac{\alpha(\alpha-1)\cdots(\alpha-n)}{(n+1)!}x^{n+1}(1+\theta x)^{\alpha-n-1}}
+    \end{align*}
+\end{theorem}
+
+利用换元法，可以快速求取一些复杂函数的Maclaurin公式.
+
+\begin{question}
+    求函数$\ee^{-x^4}$的$4n$次Maclaurin公式.
+\end{question}
+
+\begin{solution}
+    当$x \to 0$时，$-x^4 \to 0$，利用$\ee^x$的展开式换元：
+    \begin{align*}
+        \ee^{-x^4} &= 1 + (-x^4) + \frac{(-x^4)^2}{2!} + \frac{(-x^4)^3}{3!} + \cdots + \frac{(-x^4)^n}{n!} + o((-x^4)^n) \\
+        &= 1 - x^4 + \frac{x^8}{2!} - \frac{x^{12}}{3!} + \cdots + \frac{(-1)^n x^{4n}}{n!} + o(x^{4n})
+    \end{align*}
+\end{solution}
+
+求$x \nrightarrow 0$时的Taylor公式，可以考虑先凑出一个趋于$0$的多项式，再将之代入相应的Maclaurin公式.
+
+\begin{question}
+    设$f = \dfrac{1}{x}$，求$f(x)$在$x=2$的Taylor公式.
+\end{question}
+
+\begin{solution}
+    注意到有$x-2 \to 0$，尝试凑$x-2$：
+    \[\frac{1}{x} = \frac{1}{x-2+2} = \frac{1}{2}\left(\frac{x-2}{2} + 1\right)^{-1}\]
+    换元至$(1+x)^{-1}$的Maclaurin公式中：
+    \begin{align*}
+    \frac{1}{x} &= \frac{1}{2}\left(1 - \frac{x-2}{2} + \cdots + (-1)^n\left(\frac{x-2}{2}\right)^n + R\right) \\
+    &= \frac{1}{2} - \frac{x-2}{2^2} + \cdots + (-1)^n \frac{(x-2)^n}{2^{n+1}} + \frac{1}{2}R
+    \end{align*}
+    其中$R = \dfrac{(-1)^{n+1}(x-2)^{n+1}}{2^{n+1}}\left(1+\dfrac{\theta(x-2)}{2}\right)^{-(n+2)}$.
+\end{solution}
+
+\begin{question}
+    证明$\ee$是无理数.
+\end{question}
+
+\begin{proof}
+    首先已知$\ee$不是整数，假如$\ee$是有理数，设$\ee = \dfrac{q}{p}$，其中$p,q \in \mathbb{N}_1,\,p\geqslant 2$，展开阶数$n$的选取具有任意性，不妨选取$n>3$且$n>p$.根据$e^x$的Maclaurin公式：
+    \[\ee =\frac{q}{p} = 1 + 1 + \frac{1}{2!} + \cdots + \frac{1}{n!} + \frac{\ee^\theta}{(n+1)!}\]
+    两边同乘$n!$：
+    \[\frac{n!q}{p} = n! + n! + \frac{n!}{2!} + \cdots + \frac{n!}{n!} + \frac{n!\ee^\theta}{(n+1)!}\]
+    由于$n>p$，$n!$的展开项中必然包含$p$，则$n!q$可以被$p$整除，由于除最后的余项外其余各项都是整数，因此最后的余项也应当是整数：
+    \[0 < \frac{n!\ee^\theta}{(n+1)!} = \frac{\ee^\theta}{n+1} < \frac{3}{n+1} < \frac{3}{4} < 1\]
+    这表明最后的余项不是整数，与假设矛盾，因此$\ee$不是有理数.
+\end{proof}
