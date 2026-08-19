@@ -866,3 +866,56 @@ f(x) &= f(x_0) + f'(x_0)(x-x_0) + R_1\\
     \[0 < \frac{n!\ee^\theta}{(n+1)!} = \frac{\ee^\theta}{n+1} < \frac{3}{n+1} < \frac{3}{4} < 1\]
     这表明最后的余项不是整数，与假设矛盾，因此$\ee$不是有理数.
 \end{proof}
+
+带Lagrange余项的Taylor公式不再是一个近似式，而是一个高阶微分中值恒等式，它可以把函数在两点间的差值$f(a)-f(b)$用各阶导数在中值点$\xi$处的线性组合表示.
+
+\begin{question}
+    设$f(x)$在$[0,1]$二阶可导，且对$\forall x \in [0,1]$有$|f''(x)|\leqslant M$，$f(0)=f(1)=0$.证明$|f(x)|\leqslant\frac{M}{8}$.
+\end{question}
+
+\begin{proof}
+    不妨将$0$和$1$在$x_0=x$处展开(第三项为Lagrange余项)：
+    \[\begin{cases}
+        0 = f(0) = f(x) + f'(x)(0-x) + \dfrac{f''(\xi_1)}{2!}(0-x)^2,\quad 0<\xi_1<x \\[1em]
+        0 = f(1) = f(x) + f'(x)(1-x) + \dfrac{f''(\xi_2)}{2!}(1-x)^2,\quad x<\xi_2<1
+    \end{cases}\]
+    题中有关于$f(x)$和$f''(x)$的信息，与$f'(x)$无关，尝试消除$f'(x)$：
+    \[0 = (1-x)f(0) + xf(1) = f(x) + \frac{1}{2}f''(\xi_1) x^2 (1-x) + \frac{1}{2}f''(\xi_2) x (1-x)^2\]
+    移项并两边取绝对值：
+    \[|f(x)| \leqslant \frac{1}{2}(|f''(\xi_1) x^2 (1-x)| + |f''(\xi_2) x (1-x)^2|)\]
+    由于$0 \leqslant |f''(x)| \leqslant M$，且$x \in [0,1]\Rightarrow x(1-x)\geqslant 0$：
+    \[|f(x)| \leqslant \frac{M}{2}x(1-x)|x+1-x| = \frac{M}{2}x(1-x)\]
+    根据几何平均小于等于算术平均$\sqrt{x(1-x)}\leqslant\dfrac{x+1-x}{2}=\dfrac{1}{2}\Rightarrow x(1-x)\leqslant\dfrac{1}{4}$：
+    \[|f(x)|\leqslant\frac{M}{8}\]
+\end{proof}
+
+\begin{question}
+    设函数$f(x) = \begin{cases}
+        \ee^{-x^{-2}},\quad x\neq 0\\
+        0,\quad x=0
+    \end{cases}$在$x=0$处有任一阶导数.
+\end{question}
+
+\begin{proof}
+    当$x \neq 0$时，$f'(x) = 2\cdot\dfrac{1}{x^3}\ee^{-x^{-2}}$，于是有：
+    \[f''(x) = \left(-\frac{6}{x^4}+\frac{4}{x^6}\right) \ee^{-x^{-2}} = P_6\left(\frac{1}{x}\right) \ee^{-x^{-2}}\]
+    上式表明对于$n$阶导的$f(x)$，似乎总是能将$\ee^{-x^{-2}}$前的系数写为最高到$\dfrac{1}{x}$的$3n$次的多项式$P_{3n}\left(\dfrac{1}{x}\right)$.
+
+    尝试求$x\to 0$时$f'(x)$的值：
+    \[f'(0) = \lim\limits_{x \to 0}\frac{f(x)-f(0)}{x-0} = \lim\limits_{x \to 0}\frac{\ee^{-x^{-2}}}{x}\]
+    令$y \equiv \dfrac{1}{x}$，有$y \to \infty$，代入至上式：
+    \[f'(0) = \lim\limits_{y \to \infty}y \ee^{-y^2} = \lim\limits_{y \to \infty}\frac{y}{\ee^{y^2}}\]
+    根据L'Hospital法则，上下同时求导一次，显然有$f'(0)=0$.不难注意到，对于分母，经过若干次求导仍然不变，而如果分子是多项式$P_{3n}\left(\dfrac{1}{x}\right)=P_{3n}(y)$，那么经过若干次求导，其值必然变为$1$.
+
+    根据此前关于$n$阶导系数是多项式的猜想，假设：
+    \[f^{(n)}(x) = P_{3n}\left(\frac{1}{x}\right)\ee^{-x^{-2}},\quad f^{(n)}(0) = 0\]
+    利用数学归纳法，验证$n+1$时的情况：
+    \begin{align*}
+        f^{(n+1)}(x) = \left(f^{(n)}(x)\right)' &= P_{3n}'\left(\frac{1}{x}\right)\left(-\frac{1}{x^2}\right)\ee^{-x^{-2}} + P_{3n}\left(\frac{1}{x}\right)\left(\frac{2}{x^3}\right)\ee^{-x^{-2}} \\
+        &= P_{3n+3}\left(\frac{1}{x}\right)\ee^{-x^{-2}}
+    \end{align*}
+    这里证明了关于$n$阶导系数的猜想成立，接下来证明关于$n$阶导为$0$的猜想：
+    \[f^{(n+1)}(0) = \lim\limits_{x \to 0}\frac{f^{(n)}(x) - f^{(n)}(0)}{x-0} = \lim\limits_{x \to 0}\frac{P_{3n}\left(\frac{1}{x}\right)\ee^{-x^{-2}}}{x}\]
+    同样地，利用$y$换元，经过若干次L'Hospital法则，分子变为$1$，极限值为$0$，所以有：
+    \[f^{(n)}(0) = 0,\quad n = 1,2,\cdots\]
+\end{proof}
