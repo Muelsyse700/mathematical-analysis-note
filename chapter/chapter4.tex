@@ -101,3 +101,47 @@
         C_2 = C + \dfrac{\pi}{2\sqrt{3}}
     \end{cases}\]
 \end{solution}
+
+
+\subsection{分部积分法}
+正如换元积分法是复合函数微分法的逆运算一样，分部积分法实际上是函数乘法微分的逆运算：
+\[\dd{(uv)} = u\dd{v} + v\dd{u}\]
+两边取积分：
+\[\int \dd{(uv)} = \int u\dd{v} + \int v\dd{u}\]
+\begin{theorem}
+    \textbf{分部积分法}
+
+    设$u(x),v(x)$有连续的微商，则有：
+    \[\int u\dd{v} = uv -\int v\dd{u}\]
+\end{theorem}
+
+\begin{question}
+    计算：$\displaystyle I = \int \ee^{ax} \sin bx \dd{x},\quad a,b\in \{x \in \mathbb{R} | x\neq 0\}$.
+\end{question}
+
+\begin{solution}
+    由分部积分公式：
+    \[I = \frac{1}{a}\int\sin bx \cdot \dd{(\ee^{ax})} = \frac{\ee^{ax}}{a}\sin bx - \frac{b}{a}\int \ee^{ax}\cos bx \dd{x}\]
+    继续使用分部积分公式，上式中：
+    \[\int \ee^{ax}\cos bx \dd{x} = \frac{\ee^{ax}}{a}\cos bx + \frac{b}{a}\int \ee^{ax} \sin bx \dd{x}\]
+    进而有：
+    \begin{gather*}
+        I = \frac{\ee^{ax}}{a}\sin bx - \frac{b}{a^2} \ee^{ax} \cos bx - \frac{b^2}{a^2}I\\
+        \Rightarrow\quad I = \frac{\ee^{ax}}{a^2+b^2}(a\sin bx - b\cos bx) + C
+    \end{gather*}
+\end{solution}
+
+\begin{question}
+    记$\displaystyle I_n = \int\frac{1}{(x^2+a^2)^n}\dd{x},\quad n =1,2,\cdots$，其中$a$是非零实数，证明下述递推公式成立：
+    \[I_{n+1} = \frac{1}{2na^2}\frac{x}{(x^2+a^2)^n} + \frac{2n-1}{2na^2} I_n\]
+    由此及$\displaystyle I_1 = \frac{1}{a}\arctan\frac{x}{a}$.
+\end{question}
+
+\begin{proof}
+    分部积分得：
+    \begin{align*}
+        I_n &= \frac{x}{(x^2+a^2)^n} + 2n \int\frac{x^2}{(x^2+a^2)^{n+1}}\dd{x} \\
+        &= \frac{x}{(x^2+a^2)^n} + 2n\left(\int\frac{1}{(x^2+a^2)^n}\dd{x} - a^2 \int\frac{1}{(x^2+a^2)^{n+1}}\dd{x}\right)\\
+        &= \frac{x}{(x^2+a^2)^n} + 2n(I_n - a^2 I_{n+1})
+    \end{align*}
+\end{proof}
