@@ -4,11 +4,100 @@
 \begin{definition}
     设$\left.f(x)\right|_{I}$上有定义，如果$\exists F(x)$使得：
     \[F'(x) = f(x) \quad\Leftrightarrow\quad \dd{F(x)} = f(x)\dd{x}\]
-    称$F(x)$是$f(x)$的原函数.$f(x)$若有原函数$F(x)$，则$\{F(x)+C\}$都是原函数.记：
+    称$F(x)$是$f(x)$的\overtext{原函数}{antiderivative}.
+\end{definition}
+
+\begin{definition}
+    $f(x)$若有原函数$F(x)$，则$\{F(x)+C\}$都是原函数.记：
     \[F(x) + C \eqcolon \int f(x)\dd{x}\]
+    $f(x)$的全体原函数称为$f(x)$的\overtext{不定积分}{indefinite integration}.
 \end{definition}
 
 \begin{theorem}
     \[\int (f(x)\pm g(x))\dd{x} = \int f(x)\dd{x} \pm \int g(x)\dd{x}\]
     \[\int c f(x)\dd{x} = c \int f(x)\dd{x}\]
 \end{theorem}
+
+\subsection{换元积分法}
+换元积分法实际上是复合函数微分法的逆运算.
+\begin{theorem}
+    \textbf{第一换元法(凑微分法)}
+
+    设$F(u)$是$f(u)$的一个原函数，$u = \varphi(x)$可微，则：
+    \[\int f(\varphi(x))\cdot\varphi'(x)\dd{x} = \int f(\varphi(x))\dd{\varphi(x)} = F(\varphi(x)) + C\]
+\end{theorem}
+
+\begin{proof}
+    由一阶微分形式的不变性，关系式：
+    \[\dd{F(u)} = f(u)\dd{u}\]
+    将自变量$u$用函数$\varphi(x)$替换，上式依然成立.
+\end{proof}
+
+\begin{question}
+    计算：$\displaystyle\int\frac{\ln x}{x \sqrt{1+\ln x}}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    \begin{align*}
+        \int\frac{\ln x}{x \sqrt{1+\ln x}}\dd{x} &= \int\frac{\ln x}{\sqrt{1+\ln x}}\dd{(\ln x)}\\
+        &\xlongequal{u = \ln x} \int\frac{u}{\sqrt{1+u}}\dd{u} = \int\frac{1+u-1}{\sqrt{1+u}}\dd{u}\\
+        &= \int\sqrt{1+u}\dd{u} - \int\frac{1}{\sqrt{1+u}}\dd{u}\\
+        &= \frac{2}{3}(1+u)^{\frac{3}{2}} - 2\sqrt{1+u} + C\\
+        &= \frac{2}{3}(1+\ln x)^{\frac{3}{2}} - 2\sqrt{1+\ln x} + C
+    \end{align*}
+\end{solution}
+
+\begin{theorem}
+    \textbf{第二换元法}
+
+    设函数$x = \varphi(t)$是严格单调的可微函数且$\varphi'(t)\neq 0$(即$\varphi$有可导的反函数$\varphi^{-1}$)，若$G(t)$是$f(\varphi(t))\varphi'(t)$的一个原函数：
+    \[\int f(\varphi(t))\varphi'(t)\dd{t} = G(t) + C\]
+    则有：
+    \[\int f(x)\dd{x} = G(\varphi^{-1}(x)) + C\]
+\end{theorem}
+
+\begin{proof}
+    已知$G(t)$是$f(\varphi(t))\varphi'(t)$的一个原函数，根据复合函数求导法则：
+    \begin{align*}
+        \dv{G(\varphi^{-1}(x))}{t} &= \dv{G}{t} \cdot \dv{t}{x} \\
+        &= G'(t) \cdot \frac{1}{\varphi'(t)} = f(\varphi(t))\varphi'(t)\cdot\frac{1}{\varphi'(t)} \\
+        &= f(\varphi(t)) = f(x)
+    \end{align*}
+\end{proof}
+
+\begin{question}
+    计算：$\displaystyle \int \sqrt{a^2-x^2}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    \begin{align*}
+        \int \sqrt{a^2-x^2}\dd{x} &\xlongequal{x = a\sin u} \int \sqrt{a^2 - a^2 \sin^2 u} \cdot a \cos u \dd{u}\\
+        &= \int a^2 \cos^2 u \dd{u} = a^2 \int \cos^2 u \dd{u}\\
+        &= a^2 \int \frac{1+\cos 2u}{2}\dd{u} = \frac{a^2}{2}u + \frac{a^2}{4}\sin 2u + C\\
+        \intertext{其中$\sin 2u = 2\sin u \cos u = 2\dfrac{x}{a}\dfrac{\sqrt{a^2-x^2}}{a}$：}
+        &= \frac{a^2}{2}\arcsin\frac{x}{a} + \frac{x}{2}\sqrt{a^2-x^2} + C
+    \end{align*}
+\end{solution}
+
+\begin{question}
+    计算：$\displaystyle \int \frac{x^2+1}{x^4+x^2+1}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    当$x \neq 0$时，上下同除$x^2$，得到：
+    \begin{align*}
+        \frac{x^2+1}{x^4+x^2+1}\dd{x} &= \int \frac{1+\frac{1}{x^2}}{\left(x-\frac{1}{x}\right)^2 + 3}\dd{x} = \int\frac{1}{\left(x-\frac{1}{x}\right)^2 + 3}\dd{\left(x-\frac{1}{x}\right)}\\
+        &= \frac{1}{\sqrt{3}}\arctan\frac{x^2-1}{\sqrt{3}x} + C
+    \end{align*}
+    此时还需要处理$x=0$的情况，设在$(-\infty,+\infty)$上原函数$F(x)$为：
+    \[F(x)=\begin{cases}
+        \displaystyle\frac{1}{\sqrt{3}}\arctan\frac{x^2-1}{\sqrt{3}x} + C_1,\quad x<0 \\
+        C,\quad x=0 \\
+        \displaystyle\frac{1}{\sqrt{3}}\arctan\frac{x^2-1}{\sqrt{3}x} + C_2,\quad x<0 \\
+    \end{cases}\]
+    可导必连续，因而应当有：
+    \[\lim\limits_{x \to 0^+}F(x) = \lim\limits_{x \to 0^-}F(x) = F(0) \quad\Rightarrow\quad \begin{cases}
+        C_1 = C - \dfrac{\pi}{2\sqrt{3}} \\
+        C_2 = C + \dfrac{\pi}{2\sqrt{3}}
+    \end{cases}\]
+\end{solution}
