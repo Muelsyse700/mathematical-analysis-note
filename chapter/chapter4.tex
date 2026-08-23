@@ -18,6 +18,15 @@
     \[\int c f(x)\dd{x} = c \int f(x)\dd{x}\]
 \end{theorem}
 
+\begin{theorem}
+    连续函数一定有原函数.
+\end{theorem}
+
+上述定理表明，初等函数一定有其原函数，但是初等函数的原函数不一定是用初等函数表达的.
+
+这样的特性表明，利用初等函数的不定积分，可以构造一些新的函数.
+
+
 \subsection{换元积分法}
 换元积分法实际上是复合函数微分法的逆运算.
 \begin{theorem}
@@ -104,6 +113,7 @@
 
 
 \subsection{分部积分法}
+\label{subsec:IntegrationByParts}
 正如换元积分法是复合函数微分法的逆运算一样，分部积分法实际上是函数乘法微分的逆运算：
 \[\dd{(uv)} = u\dd{v} + v\dd{u}\]
 两边取积分：
@@ -145,3 +155,105 @@
         &= \frac{x}{(x^2+a^2)^n} + 2n(I_n - a^2 I_{n+1})
     \end{align*}
 \end{proof}
+
+
+\section{有理函数的不定积分}
+\subsection{多项式与有理函数基础}
+\subsubsection{有理函数的定义}
+\begin{definition}
+    \overtext{有理函数}{rational function}指的是一个分子、分母都是$x$的\overtext{多项式}{polynomial}的分式$\dfrac{P(x)}{Q(x)}$，其中：
+    \begin{align*}
+        P(x) &= a_n x^n + a_{n-1} x^{n-1} + \cdots + a_0,\quad a_n \neq 0\\
+        Q(x) &= b_m x^m + b_{m-1} x^{m-1} + \cdots + b_0,\quad b_m \neq 0
+    \end{align*}
+    记多项式$P(x)$的次数为$\deg P(x) = n$，同理有$\deg Q(x) = m$.
+
+    若$n \geqslant m$，则称$\dfrac{P(x)}{Q(x)}$为\overtext{有理假分式}{improper rational fraction}，若$n < m$则称为\overtext{有理真分式}{proper rational fraction}.
+\end{definition}
+
+\begin{theorem}
+    对于一个有理假分式$\dfrac{P(x)}{Q(x)}$，一定存在多项式$D(x),R(x)$，且$\deg R(x) < \deg Q(x)$，使得：
+    \[\frac{P(x)}{Q(x)} = D(x) + \frac{R(x)}{Q(x)} \quad\text{或}\quad P(x) = Q(x)D(x) + R(x)\]
+\end{theorem}
+
+即总是能将有理假分式写为一个多项式与有理真分式之和.
+
+
+\subsubsection{多项式分解}
+\begin{theorem}
+    \textbf{代数学基本定理}
+
+    对任意$n$次实系数多项式：
+    \[P(x) = \alpha_n x^n + \alpha_{n-1} x^{n-1} + \cdots + \alpha_1 x + \alpha_0,\quad \alpha_n \neq 0\]
+    在复数域$\mathbb{C}$中，一定$\exists \alpha_1,\alpha_2,\cdots,\alpha_n \in \mathbb{C}$使得：
+    \[P(x) = \alpha_n(x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_n)\]
+    其中若有$\alpha_1,\cdots,\alpha_k$是实根，则剩余的根的数量必为偶数且两两互相共轭.
+\end{theorem}
+
+这个定理的常见证明，需要基于复分析领域的Liouville定理.
+
+上述定理表明任意$n$次多项式在$\mathbb{C}$中能够被完全分解为一次因式.
+
+在上述定理的基础上，对于一对共轭复根$\alpha,\bar{\alpha}$有：
+\[(x-\alpha)(x-\bar{\alpha}) = x^2 + \beta x +\gamma,\quad \beta^2 - 4\gamma < 0\]
+则在实数域$\mathbb{R}$中，任意$n$次多项式能够被分解为一次因式与无实根的二次因式：
+\[P(x) = (x-\alpha_1)\cdots(x-\alpha_k)(x^2 + \beta_1 x + \gamma_1)\cdots(x^2 + \beta_l x + \gamma_l),\quad \beta_i^2 - 4\gamma_i < 0\]
+
+
+\subsubsection{有理函数的分解}
+将多项式$Q(x)$在$\mathbb{R}$中分解后的重根乘到一起：
+\[Q(x) = (x-\alpha_1)^{r_1}\cdots(x-\alpha_k)^{r_k} (x^2+\beta_1 x+\gamma_1)^{s_1}\cdots(x^2+\beta_l x+\gamma_l)^{s_l}\]
+其中$r_1 + \cdots + r_k + 2s_1 + \cdots + 2s_l = \deg Q(x)$.
+\begin{theorem}
+    设$\dfrac{P(x)}{Q(x)}$是真分式，则其可以被分解为：
+    \begin{align*}
+        \frac{P(x)}{Q(x)} =& \left(\frac{A_{1,1}}{x-\alpha_1} + \cdots + \frac{A_{1,r_1}}{(x-\alpha_1)^{r_1}}\right) + \cdots + \left(\frac{A_{k,1}}{x-\alpha_k} + \cdots + \frac{A_{k,r_k}}{(x-\alpha_k)^{r_k}}\right) + \\
+        &\left(\frac{B_{1,1}x + C_{1,1}}{x^2 + \beta_1 x + \gamma_1} + \cdots + \frac{B_{1,s_1}x + C_{1,s_1}}{(x^2 + \beta_1 x + \gamma_1)^{s_1}}\right) + \cdots + \\
+        &\left(\frac{B_{l,1}x + C_{l,1}}{x^2 + \beta_l x + \gamma_l} + \cdots + \frac{B_{l,s_l}x + C_{l,s_l}}{(x^2 + \beta_l x + \gamma_l)^{s_l}}\right)
+    \end{align*}
+\end{theorem}
+
+
+\subsection{有理函数的不定积分}
+在前述定理的指导下，注意到求任意有理真分式$\dfrac{P(x)}{Q(x)}$不定积分的问题都可以化为求以下两类不定积分的问题：
+\begin{enumerate}[circ]
+    \item $\displaystyle\int\frac{1}{(x-\alpha)^r}\dd{x},\quad r\in\mathbb{N}_1$.
+    \item $\displaystyle\int\frac{Bx+C}{(x^2 + \beta x + \gamma)^s}\dd{x},\quad \beta^2-4\gamma<0,s\in\mathbb{N}_1$.
+\end{enumerate}
+
+对于形式\circnum{1}，不难有：
+\[\int\frac{1}{(x-\alpha)^r}\dd{x} = \begin{cases}
+    \ln|x-\alpha| + C,\quad r=1\\
+    \dfrac{1}{1-r}\dfrac{1}{(x-\alpha)^{r-1}} + C,\quad r>1
+\end{cases}\]
+显然积分的结果是初等函数.
+
+对于形式\circnum{2}，有：
+\[I = \int\frac{Bx+C}{(x^2 + \beta x + \gamma)^s}\dd{x} = \int\frac{Bx+C}{\left(\left(x + \frac{\beta}{2}\right)^2 + \gamma - \frac{\beta^2}{4}\right)^s}\]
+上式中，令$t \equiv x + \dfrac{\beta}{2}, \alpha^2 \equiv \gamma - \dfrac{\beta^2}{4} > 0$：
+\[I = \int\frac{Bt + C - \frac{\beta}{2}B}{(t^2 + \alpha^2)^s}\dd{t} = \frac{B}{2}\underbrace{\int\frac{1}{(t^2+\alpha^2)^s}\dd{t^2}}_{I_1} + \left(C-\frac{\beta}{2}B\right)\underbrace{\int\frac{1}{(t^2+\alpha^2)^s}\dd{t}}_{I_2}\]
+对于$I_1$，把情形\circnum{1}中的减号换成加号即可，即其积分结果是初等函数.
+对于$I_2$，根据\Cref{subsec:IntegrationByParts}的最后一道例题中的递推公式，其结果也是初等函数.
+
+由此表明，有理函数的原函数都是初等函数.
+
+\begin{question}
+    计算：$\displaystyle\int\frac{1}{x^3+1}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    注意到有$(x^3+1) = (x+1)(x^2-x+1)$，那么有：
+    \[\frac{1}{x^3+1} = \frac{A}{x+1} + \frac{Bx+C}{x^2-x+1}\]
+    上式可以化为$A(x^2-x+1)+(Bx+C)(x+1)=1$，比较等式两边同次幂的系数有：
+    \[\begin{cases}
+        A+B = 0\\
+        -A+B+C=0\\
+        A+C=1
+    \end{cases} \quad\Rightarrow\quad A=\frac{1}{3}, B=-\frac{1}{3}, C=\frac{2}{3}\]
+    故而现在有：
+    \begin{align*}
+        \int\frac{1}{x^3+1}\dd{x} &= \frac{1}{3}\int\frac{1}{x+1}\dd{x} - \frac{1}{3}\int\frac{x-2}{x^2-x+1}\dd{x}\\
+        &= \frac{1}{3}\ln|x+1| - \frac{1}{6}\int\frac{\dd{(x^2-x+1)}}{x^2-x+1} + \frac{1}{2}\int\frac{1}{\left(x-\frac{1}{2}\right)^2 + \frac{3}{4}}\dd{\left(x-\frac{1}{2}\right)}\\
+        &= \frac{1}{6}\ln\frac{(x+1)^2}{x^2-x+1} + \frac{1}{\sqrt{3}}\arctan\frac{2x-1}{\sqrt{3}} + C
+    \end{align*}
+\end{solution}
