@@ -49,7 +49,7 @@
 \begin{solution}
     \begin{align*}
         \int\frac{\ln x}{x \sqrt{1+\ln x}}\dd{x} &= \int\frac{\ln x}{\sqrt{1+\ln x}}\dd{(\ln x)}\\
-        &\xlongequal{u = \ln x} \int\frac{u}{\sqrt{1+u}}\dd{u} = \int\frac{1+u-1}{\sqrt{1+u}}\dd{u}\\
+        &\xlongequal{u \equiv \ln x} \int\frac{u}{\sqrt{1+u}}\dd{u} = \int\frac{1+u-1}{\sqrt{1+u}}\dd{u}\\
         &= \int\sqrt{1+u}\dd{u} - \int\frac{1}{\sqrt{1+u}}\dd{u}\\
         &= \frac{2}{3}(1+u)^{\frac{3}{2}} - 2\sqrt{1+u} + C\\
         &= \frac{2}{3}(1+\ln x)^{\frac{3}{2}} - 2\sqrt{1+\ln x} + C
@@ -80,7 +80,7 @@
 
 \begin{solution}
     \begin{align*}
-        \int \sqrt{a^2-x^2}\dd{x} &\xlongequal{x = a\sin u} \int \sqrt{a^2 - a^2 \sin^2 u} \cdot a \cos u \dd{u}\\
+        \int \sqrt{a^2-x^2}\dd{x} &\xlongequal{x \equiv a\sin u} \int \sqrt{a^2 - a^2 \sin^2 u} \cdot a \cos u \dd{u}\\
         &= \int a^2 \cos^2 u \dd{u} = a^2 \int \cos^2 u \dd{u}\\
         &= a^2 \int \frac{1+\cos 2u}{2}\dd{u} = \frac{a^2}{2}u + \frac{a^2}{4}\sin 2u + C\\
         \intertext{其中$\sin 2u = 2\sin u \cos u = 2\dfrac{x}{a}\dfrac{\sqrt{a^2-x^2}}{a}$：}
@@ -257,3 +257,46 @@
         &= \frac{1}{6}\ln\frac{(x+1)^2}{x^2-x+1} + \frac{1}{\sqrt{3}}\arctan\frac{2x-1}{\sqrt{3}} + C
     \end{align*}
 \end{solution}
+
+
+\subsection{三角函数有理式的不定积分}
+\begin{definition}
+    设有$\displaystyle R(u,v) = \frac{\displaystyle\sum_{i,j=0}^{n,m}a_{i,j}u^i v^j}{\displaystyle\sum_{i,j=0}^{l,k}b_{i,j}u^i v^j}$，称$R(\sin x,\cos x)$为\textbf{三角函数有理式}.
+\end{definition}
+
+利用\textbf{万能变换}，可以将$R(\sin x,\cos x)$中的三角函数用$t$替换，从而使之变成普通的有理函数$R(t)$：
+\[t \equiv \tan\frac{x}{2},\quad -\pi<x<\pi\]
+由此可以推出常用的代换式：
+\[\sin x = \frac{2t}{1+t^2}, \qquad \cos x =\frac{1-t^2}{1+t^2}, \qquad \dd{x} = \frac{2}{1+t^2}\dd{t}\]
+于是关于三角函数有理式的不定积分：
+\[\int R(\sin x,\cos x)\dd{x} = \int R\left(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2}\right)\frac{2}{1+t^2}\dd{t}\]
+由此可知三角函数有理式的不定积分也可以表示为关于$x$的初等函数.
+
+\begin{question}
+    计算：$\displaystyle \int\frac{1}{5+4\sin x}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    利用万能变换，$5+4\sin x = \dfrac{5t^2+8t+5}{t^2+1}$，于是有：
+    \begin{align*}
+        \int\frac{1}{5+4\sin x}\dd{x} &= \frac{1}{2}\int\frac{\dd{(t^2+1)}}{5t^2+8t+5} = \frac{2}{3}\arctan\frac{5t+4}{3} + C\\
+        &= \frac{2}{3}\arctan\frac{5\tan\frac{x}{2} + 4}{3} + C
+    \end{align*}
+\end{solution}
+
+对于双曲函数有理式的积分$\displaystyle\int R(\sinh x,\cosh x) \dd{x}$，令$u \equiv \tanh \dfrac{x}{2}$，从而也可以用类似的方法将之变换为普通的有理函数并进行积分.
+
+万能变换的几何意义是将圆上除初始点的任意一点映射到坐标轴上任意一点.
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \includegraphics[scale=0.4]{universal-formula-geometry/fig.pdf}
+    \caption{万能变换的几何意义}
+\end{wrapfigure}
+\qquad 例如右图中圆上一点$P(u,v)$经由线段$SP$被映射到$v$轴上一点$R$，且$OR = t$.
+
+$P$从$S$出发，经由$SP$(或其延长线)与$v$轴的交点，圆上除$S$点外的任意一点都被映射到了$v$轴上$(-\infty,+\infty)$的区间中，并对应一个$t \in (-\infty,+\infty)$.
+圆上的一般点$P(u,v)$，可以通过关于参数$t$的有理式来表示：
+\[u = \frac{1-t^2}{1+t^2},\qquad v = \frac{2t}{1+t^2}\]
+根据$u^2+v^2=1$，有恒等式：
+\[(t^2-1)^2 + (2t)^2 = (t^2+1)^2,\quad t \in (-\infty,+\infty)\]
+对于上式，当$t \in \mathbb{Z}$时，有整数$a = t^2+1, b =2t, c=t^2+1$满足勾股定理，即上式是勾股定理的整数解，称为\textbf{Pythagoras整数}.
