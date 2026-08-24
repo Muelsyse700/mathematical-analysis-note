@@ -18,5 +18,69 @@
     \[|S_n(T) - I| < \varepsilon \quad\text{或}\quad \lim\limits_{\left\|T\right\| \to 0} S_n(T) = I\]
     那么称$f(x)$在$[a,b]$上\textbf{Riemann}\overtext{可积}{integrable}，记作：
     \[I = \int_{a}^{b} f(x)\dd{x}\]
-    称此定义下的积分为\textbf{Riemann积分}，它是\overtext{定积分}{definite integral}的一种定义.
+    称此定义下的积分为\textbf{Riemann积分}，它是\overtext{定积分}{definite integral}的一种定义.如果不特别注明，「可积」一般指的都是「Riemann可积」.
 \end{definition}
+上述的定义中包含了两个任意性，一方面是分割取点的任意性，另一方面是取小区间高度的任意性，即$\xi_i \in [x_{i-1},x_i]$的任意性.
+
+
+\subsection{可积函数类}
+\begin{theorem}
+    若$\left.f\right|_{[a,b]}$可积，则$\left.f\right|_{[a,b]}$有界.
+\end{theorem}
+
+\begin{proof}
+    根据Riemann积分的定义，不妨取$\varepsilon = 1$，必然$\exists \delta_1>0$在$\left\|T\right\| < \delta_1$时有：
+    \[I-1 < \sum_{i=1}^{n} f(\xi_i)\Delta x_i < I+1\]
+    对$\forall \xi_i \in [x_{i-1},x_i]$成立.
+
+    假设$\left.f\right|_{[a,b]}$无界，至少$\exists [x_{k-1},x_k] \subset [a,b]$使得$f$在其上无界.于是将其它有界的部分剥离，有：
+    \[I - 1 - \sum_{i \neq k}f(\xi_i)\Delta x_i < f(\xi_k)\Delta x_k < I + 1 - \sum_{i \neq k}f(\xi_i)\Delta x_i\]
+    现在取定$\xi_i = x_i$，此处$i = 1,2,\cdots,n$但$i \neq k$.则对于上式，左右两边将是一个固定的数，即：
+    \[|f(\xi_k)|\Delta x_k < M\]
+    与$\left.f\right|_{[x_{k-1},x_k]}$无界矛盾，故而对于在$[a,b]$上可积的$f$，其在$[a,b]$上必有界.
+\end{proof}
+
+接下来列出一些重要的可积函数类，此处暂不证明.
+\begin{theorem}
+    \label{thm:ClassOfIntegrableFunctions}
+    \begin{enumerate}[circ]
+        \item 在闭区间$[a,b]$上连续的函数，在$[a,b]$上必可积\textbf{(连续必可积)}.
+        \item 若$\left.f\right|_{[a,b]}$有界，且该区间上至多只有有限个间断点，则$\left.f\right|_{[a,b]}$上可积.
+        \item 若$\left.f\right|_{[a,b]}$上单调，即使有无限个间断点，$\left.f\right|_{[a,b]}$上也可积\textbf{(单调必可积)}.
+    \end{enumerate}
+\end{theorem}
+
+在上述诸定理中，\circnum{2}是对\circnum{1}的扩充，这表明可积函数类是大于连续函数类的，可积比连续的宽容度要高.
+
+\begin{extension}{测度论与Lebesgue定理}
+    对于Dirichlet函数
+    $D(x) = \begin{cases}
+        1, \quad x \in \mathbb{Q}\\
+        0, \quad x \in \mathbb{R\setminus Q}
+    \end{cases}$，其是有界的，但其Riemann不可积，这是因为其处处间断，有无限个间断点.又注意到在\cref{thm:ClassOfIntegrableFunctions}的\circnum{3}中提到，如果$\left.f\right|_{[a,b]}$上单调，即使有无限个间断点也Riemann可积.
+
+    这表明，间断点的「无限多」亦有差异，是否能够通过精确刻画「间断点集合的大小」来判断函数是否Riemann可积？研究这个问题的数学领域称为\overtext{测度论}{measure theory}.
+
+    可以认为\overtext{测度}{measure}是描述集合的「尺度」的一种概念.例如对于集合$E=[a,b]$，其Lebesgue测度$m(E)=b-a$.
+    
+    在测度的基础上，判断具有间断点函数是否Riemann可积的条件是：
+    \begin{theorem}
+        \textbf{Lebesgue定理}
+
+        有界函数在$[a,b]$上Riemann可积，当且仅当其间断点的集合测度为$0$.
+    \end{theorem}
+
+    在Dirichlet函数中，由于无理数和有理数的稠密性，其处处有间断点，即其在$[0,1]$上间断点集合的测度为$1 \neq 0$，从而其Riemann不可积.
+
+    \begin{definition}
+        设有集合$E$，若对$\forall \varepsilon > 0$，都$\exists$可数个开区间$I_n$使得：
+        \[E \subset \bigcup_{n=1}^{\infty} I_n \quad\text{且}\quad \sum_{n=1}^{\infty} |I_n| < \varepsilon\]
+        称$E$是一个\overtext{零测集}{null set}，其可以被任意小总长度的可数个开区间覆盖.
+    \end{definition}
+    
+    对于零测集，其有一些奇妙的特性，例如对于$E=\{r_1,r_2,\cdots\}$是$[0,1]$上的有理数集，$\forall \varepsilon > 0$，设有：
+    \[I_n = \left(r_n - \frac{\varepsilon}{2^{n+1}},r_n + \frac{\varepsilon}{2^{n+1}}\right)\]
+    由于有理数是可数的，所以$I_n$是可数的，根据有理数的稠密性显然可以得知$E$是零测集：
+    \[E \subset \bigcup_{n=1}^{\infty} I_n \quad\text{且}\quad \sum_{k=1}^{n} |I_k| = \sum_{k=1}^{n} \frac{\varepsilon}{2^n} = \left(1-\frac{1}{2^n}\right)\varepsilon < \varepsilon\]
+    这表明即使有理数稠密，把区间中所有有理数及其附近的任意小区间都抽掉，也只是抽走了任意小的长度！
+\end{extension}
