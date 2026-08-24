@@ -84,3 +84,41 @@
     \[E \subset \bigcup_{n=1}^{\infty} I_n \quad\text{且}\quad \sum_{k=1}^{n} |I_k| = \sum_{k=1}^{n} \frac{\varepsilon}{2^n} = \left(1-\frac{1}{2^n}\right)\varepsilon < \varepsilon\]
     这表明即使有理数稠密，把区间中所有有理数及其附近的任意小区间都抽掉，也只是抽走了任意小的长度！
 \end{extension}
+
+
+\subsection{积分的初等例子}
+\begin{question}
+    求$f(x) = \sin x$在区间$[a,b]$上的积分.
+\end{question}
+
+\begin{solution}
+    由于$f(x)$是连续函数，其必然Riemann可积，取分割点：
+    \[a,a+h,\cdots,a+(n-1)h,b=a+nh\]
+    这使得$[a,b]$被分为$n$等份，有$h=\dfrac{b-a}{n}$.取每个小区间右端点作为$\xi_i$，则Riemann和为：
+    \[S_n = h(\sin(a+h) + \sin(a+2h) + \cdots + \sin(a+nh))\]
+    对上式中括号内的项乘以$2\sin\dfrac{h}{2}$，利用积化和差公式可以裂项相消：
+    \begin{align*}
+        \Rightarrow\quad  S_n &= \frac{h}{2\sin\frac{h}{2}}\left(\cos\left(a+\frac{h}{2}\right) - \cos\left(a+\frac{2n+1}{2}h\right)\right)\\
+        &= \frac{h}{2\sin\frac{h}{2}}\left(\cos\left(a+\frac{h}{2}\right) - \cos\left(b+\frac{h}{2}\right)\right)
+    \end{align*}
+    当$h \to 0$时有：
+    \[S_n \to (-\cos b) - (-\cos a) = \int_{a}^{b}\sin x\dd{x}\]
+\end{solution}
+
+\begin{question}
+    设$a<b$，而$c$满足$a \leqslant c \leqslant b$，考虑如下函数$J(x)$，证明$\displaystyle\int_{a}^{b}J(x)\dd{x} = 0$.
+    \[J(x) = \begin{cases}
+        0,\quad x \in [a,b],x\neq c\\
+        1,\quad x = c
+    \end{cases}\]
+\end{question}
+
+\begin{proof}
+    取$[a,b]$上的任意分割$T:a=x_0<x_1<\cdots<x_n=b$，不妨设$c \in [x_{l-1},x_l]$，对$\forall \xi_i \in [x_{i-1},x_i],1\leqslant i \leqslant n$，有：
+    \[\left|\sum_{i=1}^{n}J(\xi_i)\Delta x_i - 0\right| = |J(\xi_l)\Delta x_l - 0| \leqslant \Delta x_l \leqslant \left\|T\right\|\]
+    则$\forall \varepsilon > 0$，只需取$\delta = \varepsilon$，在$\left\|T\right\| < \delta = \varepsilon$时有：
+    \[\left|\sum_{i=1}^{n}J(\xi_i)\Delta x_i - 0\right| \leqslant \left\|T\right\| < \delta = \varepsilon\]
+    对$\forall \xi_i \in [x_{i-1},x_i]$成立，即$\displaystyle\int_{a}^{b}J(x)\dd{x} = 0$.
+\end{proof}
+
+上述证明表明，单个点下的面积为$0$.
