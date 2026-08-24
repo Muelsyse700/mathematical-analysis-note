@@ -87,6 +87,7 @@
 
 
 \subsection{积分的初等例子}
+\label{subsec:ExampleOfIntegral}
 \begin{question}
     求$f(x) = \sin x$在区间$[a,b]$上的积分.
 \end{question}
@@ -105,7 +106,10 @@
     \[S_n \to (-\cos b) - (-\cos a) = \int_{a}^{b}\sin x\dd{x}\]
 \end{solution}
 
+应当注意的是，在求取Riemann和之前，应当先行证明函数Riemann可积.
+
 \begin{question}
+    \label{ques:DefinitionOfJ(x)}
     设$a<b$，而$c$满足$a \leqslant c \leqslant b$，考虑如下函数$J(x)$，证明$\displaystyle\int_{a}^{b}J(x)\dd{x} = 0$.
     \[J(x) = \begin{cases}
         0,\quad x \in [a,b],x\neq c\\
@@ -122,3 +126,56 @@
 \end{proof}
 
 上述证明表明，单个点下的面积为$0$.
+
+
+\subsection{积分的基本性质}
+\begin{theorem}
+    设有$a<c<b$，若函数$f$在区间$[a,b]$上可积，则$f$在区间$[a,c],[c,b]$上均可积；若$f$在$[a,c],[c,b]$上均可积，则$f$在$[a,b]$上可积，且有：
+    \[\int_{a}^{b}f(x)\dd{x} = \int_{a}^{c}f(x)\dd{x} + \int_{c}^{b}f(x)\dd{x}\]
+    可以推出，$f$在$[a,b]$的任意子区间$[a',b'] \subseteq [a,b]$上也可积.
+\end{theorem}
+
+\begin{theorem}
+    设函数$f(x)$和$g(x)$在$[a,b]$上可积，则：
+    \begin{itemize}
+        \item 对任意常数$\alpha,\beta$，函数$\alpha f(x) + \beta g(x)$在$[a,b]$上可积且有：
+        \[\int_{a}^{b}(\alpha f(x) + \beta g(x))\dd{x} = \alpha\int_{a}^{b}f(x)\dd{x} + \beta\int_{a}^{b}g(x)\dd{x}\]
+        特别令$\beta \equiv 0$，有：
+        \[\int_{a}^{b}\alpha f(x)\dd{x} = \alpha\int_{a}^{b}f(x)\dd{x}\]
+        \item 函数$f(x)\cdot g(x)$在$[a,b]$上可积，一般而言：
+        \[\int_{a}^{b}f(x)g(x)\dd{x} \neq \int_{a}^{b}f(x)\dd{x}\cdot\int_{a}^{b}g(x)\dd{x}\]
+    \end{itemize}
+\end{theorem}
+
+在上述定理的基础上，引入\cref{subsec:ExampleOfIntegral}中的\cref{ques:DefinitionOfJ(x)}中所定义的$J(x)$，注意到：
+\[\int_{a}^{b}\alpha J(x)\dd{x} = 0 \quad\Rightarrow\quad \int_{a}^{b}(f(x) + \alpha J(x))\dd{x} = \int_{a}^{b}f(x)\dd{x}\]
+这样的结果表明：
+\begin{theorem}
+    改变可积函数$f(x)$有限个点处的值，不会破坏其可积性，也不会改变其积分值.
+\end{theorem}
+
+\begin{theorem}
+    设函数$f(x)$和$g(x)$在$[a,b]$上可积：
+    \begin{itemize}
+        \item \textbf{积分的保号性：}若对$\forall x \in [a,b]$有$f(x) \geqslant 0$，则$\displaystyle\int_{a}^{b}f(x)\dd{x}\geqslant 0$.
+        \item \textbf{积分的单调性：}若对$\forall x \in [a,b]$有$f(x)\leqslant g(x)$，则$\displaystyle\int_{a}^{b}f(x)\dd{x} \leqslant \int_{a}^{b}g(x)\dd{x}$.
+        \item 函数$|f(x)|$在$[a,b]$上也可积且$\displaystyle\left|\int_{a}^{b}f(x)\dd{x}\right|\leqslant\int_{a}^{b}|f(x)|\dd{x}$.
+    \end{itemize}
+\end{theorem}
+
+上述诸定理将在后续得到证明.
+
+\begin{theorem}
+    \textbf{积分中值定理}
+
+    设函数$\left.f\right|_{[a,b]}$连续，则$\exists \xi \in [a,b]$使得：
+    \[\int_{a}^{b}f(x)\dd{x} = f(\xi)(b-a)\]
+\end{theorem}
+
+\begin{proof}
+    由于$\left.f\right|_{[a,b]}$连续，则其在$[a,b]$上必有最大最小值：
+    \[m \leqslant f(x) \leqslant M\]
+    两边积分，有：
+    \[m \leqslant \frac{1}{b-a}\int_{a}^{b}f(x)\dd{x} \leqslant M\]
+    根据连续函数的介值定理，对于介于$m$与$M$之间的一个值$\displaystyle\frac{1}{b-a}\int_{a}^{b}f(x)\dd{x}$，必有$\xi \in [a,b]$使得$f(\xi)$等于这个值.
+\end{proof}
