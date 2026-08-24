@@ -1,0 +1,22 @@
+\chapter{单变量函数的积分学}
+\section{积分}
+\subsection{积分的定义}
+\begin{definition}
+    对于一个函数$f(x),x\in[a,b]$，在$a$与$b$之间插入$n-1$个分割点$x_1,x_2,\cdots,x_{n-1}$，并记$x_0 = a,x_n = b$，称上述过程为区间$[a,b]$的一个\overtext{分割}{partition}，记作：
+    \[T:a=x_0<x_1<\cdots<x_{n-1}<x_n=b\]
+    这个过程将$[a,b]$分割为$n$个小区间$[x_{i-1},x_i]$，设有：
+    \[\left\|T\right\| = \max_{1\leqslant i \leqslant n}\{x_i-x_{i-1}\} = \max_{1\leqslant i \leqslant n}\Delta x_i,\quad i=1,2,\cdots,n\]
+    称$\left\|T\right\|$为分割的\overtext{模}{norm}.
+
+    在每个区间$[x_{i-1},x_i]$上任取一点$\xi_i$，设有：
+    \[S_n(T) = \sum_{i=1}^{n} f(\xi_i)\Delta x_i\]
+    称$S_n(T)$是$f(x)$在$[a,b]$上对应于分割$T$的一个\textbf{Riemann和}.
+\end{definition}
+
+\begin{definition}
+    若有$I \in \mathbb{R}$使得对$\forall \varepsilon>0$，都$\exists \delta > 0$在$\left\|T\right\|<\delta$时满足：
+    \[|S_n(T) - I| < \varepsilon \quad\text{或}\quad \lim\limits_{\left\|T\right\| \to 0} S_n(T) = I\]
+    那么称$f(x)$在$[a,b]$上\textbf{Riemann}\overtext{可积}{integrable}，记作：
+    \[I = \int_{a}^{b} f(x)\dd{x}\]
+    称此定义下的积分为\textbf{Riemann积分}，它是\overtext{定积分}{definite integral}的一种定义.
+\end{definition}
