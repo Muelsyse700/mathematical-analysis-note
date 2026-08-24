@@ -284,8 +284,6 @@
     \end{align*}
 \end{solution}
 
-对于双曲函数有理式的积分$\displaystyle\int R(\sinh x,\cosh x) \dd{x}$，令$u \equiv \tanh \dfrac{x}{2}$，从而也可以用类似的方法将之变换为普通的有理函数并进行积分.
-
 万能变换的几何意义是将圆上除初始点的任意一点映射到坐标轴上任意一点.
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
@@ -300,3 +298,34 @@ $P$从$S$出发，经由$SP$(或其延长线)与$v$轴的交点，圆上除$S$�
 根据$u^2+v^2=1$，有恒等式：
 \[(t^2-1)^2 + (2t)^2 = (t^2+1)^2,\quad t \in (-\infty,+\infty)\]
 对于上式，当$t \in \mathbb{Z}$时，有整数$a = t^2+1, b =2t, c=t^2+1$满足勾股定理，即上式是勾股定理的整数解，称为\textbf{Pythagoras整数}.
+
+
+\subsection{其他类型初等函数的不定积分}
+\begin{itemize}
+    \item $\displaystyle\int R(\sinh x,\cosh x) \dd{x}$：\\[0.5em]
+    对于双曲函数有理式的积分，令$u \equiv \tanh \dfrac{x}{2}$，从而也可以用类似的方法将之变换为普通的有理函数并进行积分.
+
+    \item $\displaystyle\int R(x,\sqrt{1-x^2}) \dd{x}$：\\[0.5em]
+    注意到在这个积分中，$x$的定义域是$[-1,1]$.令$x \equiv \cos u$，于是有$\sqrt{1-x^2} = \sin u,\dd{x} = -\sin u \dd{u}$，则有：
+    \[\int R(x,\sqrt{1-x^2}) \dd{x} = -\int R(\cos u,\sin u)\sin u \dd{u}\]
+    进而利用三角函数有理式的计算方法计算.
+
+    \item $\displaystyle\int R(x,\sqrt{x^2-1}) \dd{x}$：\\[0.5em]
+    和上一个积分不同，这个积分中$x$的定义域是$|x|\geqslant 1$，注意到双曲函数满足：
+    \[\cosh u - \sinh u = 1\]
+    于是令$x \equiv \cosh u$，有$\sqrt{x^2-1} = \sinh u,\dd{x} = \sinh u \dd{u}$，于是原积分变为：
+    \[\int R(x,\sqrt{x^2-1}) \dd{x} = \int R(\cosh u,\sinh u) \sinh u \dd{u}\]
+    最后利用双曲函数有理式的积分方法计算.
+
+    \item $\displaystyle\int R(x,\sqrt{x^2+1}) \dd{x}$：\\[0.5em]
+    恰好与上式相反，令$x \equiv \sinh u$，则有$\sqrt{x^2+1} = \cosh u,\dd{x} = \cosh u \dd{u}$，于是原积分变为：
+    \[\int R(x,\sqrt{x^2+1}) \dd{x} = \int R(\sinh u,\cosh u) \cosh u \dd{u}\]
+    剩余步骤由双曲函数有理式积分的计算可得
+
+    \item $\displaystyle\int R\left(x,\sqrt[n]{\frac{ax+b}{cx+d}}\right)\dd{x}$：\\[0.5em]
+    对于该不定积分，有$a,b,c,d = \text{const}$且$ad \neq bc$，令：
+    \[t \equiv \sqrt[n]{\frac{ax+b}{cx+d}} \quad\Rightarrow\quad x = \frac{dt^n - b}{-ct^n + a}\]
+    而有理式的导数仍然是有理式，即$\displaystyle\dv{x}{t}$依然是$t$的有理式，于是：
+    \[\int R\left(x,\sqrt[n]{\frac{ax+b}{cx+d}}\right)\dd{x} = \int R\left(\frac{dt^n - b}{-ct^n + a},t\right)\dv{x}{t}\dd{t}\]
+    上式依然是有理函数的不定积分.
+\end{itemize}
