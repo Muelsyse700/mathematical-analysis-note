@@ -151,6 +151,7 @@
 \[\int_{a}^{b}\alpha J(x)\dd{x} = 0 \quad\Rightarrow\quad \int_{a}^{b}(f(x) + \alpha J(x))\dd{x} = \int_{a}^{b}f(x)\dd{x}\]
 这样的结果表明：
 \begin{theorem}
+    \label{thm:FinitePointModificationInvariance}
     改变可积函数$f(x)$有限个点处的值，不会破坏其可积性，也不会改变其积分值.
 \end{theorem}
 
@@ -189,6 +190,7 @@
 \end{definition}
 
 \begin{theorem}
+    \label{thm:VariableLimitIntegralContinuity}
     设$\left.f\right|_{[a,b]}$可积，则$f$的变上限积分$\varphi(x)$在$[a,b]$上连续.
 \end{theorem}
 
@@ -261,3 +263,164 @@
 对于情况\circnum{1}，无法使用Newton-Leibniz公式求解，通常需要基于Riemann积分的定义来求解；而对于情况\circnum{2}，需要引入一些特殊函数或积分来表示其原函数，再使用Newton-Leibniz公式求解.
 
 这表明，Newton-Leibniz公式成立的基本条件是存在原函数，而不是仅仅要求函数可积.
+
+
+\subsection{积分的计算}
+\begin{theorem}
+    \textbf{换元积分法}
+
+    设$\left.f(x)\right|_{[a,b]}$连续，而函数$x = \varphi(t)$满足：
+    \begin{enumerate}[circ]
+        \item $\varphi(\alpha) = a,\varphi(\beta) = b$且$\varphi([\alpha,\beta]) \subset [a,b]$.
+        \item $\left.\varphi(t)\right|_{[\alpha,\beta]}$具有连续的导数$\varphi'(t)$.
+    \end{enumerate}
+    则有：
+    \[\int_{a}^{b}f(x)\dd{x} = \int_{\alpha}^{\beta}f(\varphi(t))\varphi'(t)\dd{t} = \int_{\alpha}^{\beta}f(\varphi(t))\dd{\varphi(t)}\]
+\end{theorem}
+
+\begin{proof}
+    设$F(x)$是$f(x)$的一个原函数，则$F(\varphi(t))$是$f(\varphi(t))\varphi'(t)$的原函数.根据Newton-Leibniz公式：
+    \[\int_{\alpha}^{\beta}f(\varphi(t))\dd{\varphi(t)} = F(\varphi(\beta)) - F(\varphi(\alpha)) = F(b) - F(a) = \int_{a}^{b}f(x)\dd{x}\]
+\end{proof}
+
+对于含有绝对值的定积分，可以通过拆分区间从而消去绝对值.
+
+\begin{question}
+    计算：$\displaystyle I = \int_{0}^{2}|x^3-1|\dd{x}$.
+\end{question}
+
+\begin{solution}
+    \begin{align*}
+        I &= \int_{0}^{1}-(x^3-1)\dd{x} + \int_{1}^{2}(x^3-1)\dd{x} \\
+        &= -\int_{0}^{1}x^3\dd{x} + \int_{1}^{2}x^3\dd{x} = \frac{7}{2}
+    \end{align*}
+\end{solution}
+
+对于一些具有有限个「坏点」的函数积分，根据\cref{thm:FinitePointModificationInvariance}，Riemann积分对有限点修改的不敏感性，直接调整坏点的值从而使之能够计算.
+
+\begin{question}
+    计算：$\displaystyle I = \int_{-1}^{1}\text{sgn}(x)\dd{x}$.
+\end{question}
+
+\begin{solution}
+    调整符号函数在$x=0$处的值到$1$或$-1$，从而进行积分：
+    \[I = \int_{-1}^{0} -1 \dd{x} + \int_{0}^{1} 1 \dd{x} = 0\]
+\end{solution}
+
+对于一些换元后导致积分区间被迫发生变化的积分，可以将其转化为变上限积分取极限来计算.
+
+\begin{question}
+    计算：$\displaystyle I = \int_{-1}^{0}\frac{x^2+1}{x^4+1}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    先尝试求其不定积分：
+    \begin{align*}
+        \int\frac{x^2+1}{x^4+1}\dd{x} &= \int\frac{\dfrac{1}{x^2} + 1}{x^2 + \dfrac{1}{x^2}}\dd{x} = \int\frac{\dd{\left(x-\dfrac{1}{x}\right)}}{\left(x-\dfrac{1}{x}\right)^2 + 2}\\
+        &= \frac{1}{\sqrt{2}}\arctan\left(\frac{1}{\sqrt{2}}\left(x-\frac{1}{x}\right)\right)+C = F(x)
+    \end{align*}
+    显然在上式中，$x \neq 0$，这使得其无法通过Newton-Leibniz公式计算.
+
+    根据待求积分函数的可积性和\cref{thm:VariableLimitIntegralContinuity}，其变上限积分是连续的，于是以下极限成立：
+    \[\int_{-1}^{0}\frac{t^2+1}{t^4+1}\dd{t} = \lim_{x \to 0^-}\int_{-1}^{x}\frac{t^2+1}{t^4+1}\dd{t} = \lim_{x \to 0^-}(F(x)-F(-1))\]
+    由此算得结果：
+    \[\begin{cases}
+        \lim\limits_{x \to 0^-}F(x) = \frac{\sqrt{2}}{4}\pi \\
+        F(-1) = 0
+    \end{cases} \quad\Rightarrow\quad I = \frac{\sqrt{2}}{4}\pi\]
+\end{solution}
+
+\begin{theorem}
+    \textbf{分部积分法}
+
+    设函数$u(x),v(x)$在$[a,b]$上有连续的导数，则：
+    \[\int_{a}^{b}u\dd{v} = uv\Big|_a^b - \int_{a}^{b}v\dd{u}\]
+\end{theorem}
+
+\begin{proof}
+    由求导法则有：
+    \[(uv)' = u'v + uv'\]
+    根据已知条件，上式两边都是连续的，连续必可积，两边积分：
+    \[uv\Big|_a^b = \int_{a}^{b}v\dd{u} + \int_{a}^{b}u\dd{v}\]
+\end{proof}
+
+\begin{question}
+    计算：$\displaystyle I_n = \int_{0}^{\frac{\pi}{2}}\sin^n x \dd{x}$.
+\end{question}
+
+\begin{solution}
+    显然有$I_0 = \dfrac{\pi}{2},I_1 = 1$，对于$n \geqslant 2$，由分部积分法有：
+    \begin{align*}
+        I_n &= \int_{0}^{\frac{\pi}{2}}\sin^{n-1} x \dd{(-\cos x)} \\
+        &= -\sin^{n-1} x \cos x \Big|_0^{\frac{\pi}{2}} + (n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x \cdot \cos^2 x \dd{x}\\
+        &= (n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x\cdot (1-\sin^2 x)\dd{x}\\
+        &= (n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x\dd{x} - (n-1)\int_{0}^{\frac{\pi}{2}}\sin^n x\dd{x}
+    \end{align*}
+    由此得到递推关系式：
+    \[I_n = \frac{n-1}{n}I_{n-2},\quad n\geqslant 2\]
+    可以推出：
+    \begin{align*}
+        I_{2n} &= \frac{2n-1}{2n}I_{2n-2} = \cdots = \frac{2n-1}{2n}\cdot\frac{2n-3}{2n-2}\cdots\frac{3}{4}\cdot\frac{1}{2}\cdot I_0 = \frac{(2n-1)!!}{(2n)!!}\cdot\frac{\pi}{2}\\
+        I_{2n+1} &= \frac{2n}{2n+1}\cdot\frac{2n-2}{2n-1}\cdots\frac{2}{3}\cdot I_1 = \frac{(2n)!!}{(2n+1)!!}
+    \end{align*}
+    注意到，作换元$x \equiv \dfrac{\pi}{2} - t$，变换上下限，有：
+    \[\int_{0}^{\frac{\pi}{2}}\sin^n x\dd{x} = -\int_{\frac{\pi}{2}}^{0}\cos^n t\dd{t} = \int_{0}^{\frac{\pi}{2}}\cos^n x\dd{x}\]
+    综上所述，有：
+    \[\int_{0}^{\frac{\pi}{2}}\sin^n x\dd{x} = \int_{0}^{\frac{\pi}{2}}\cos^n x\dd{x} = \begin{cases}
+        \dfrac{(n-1)!!}{n!!},\quad\text{$n$为奇数}\\[0.5em]
+        \dfrac{(n-1)!!}{n!!}\cdot\dfrac{\pi}{2},\quad\text{$n$为偶数}
+    \end{cases}\]
+\end{solution}
+
+利用换元实现哑变量的代换从而消去积分也是一种计算的方法.
+
+\begin{question}
+    计算：$\displaystyle I = \int_{0}^{1}\frac{\arctan x}{1+x}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    利用分部积分法：
+    \begin{align*}
+        I &= \int_{0}^{1}\arctan x \dd{(\ln(1+x))} = \arctan x \cdot \ln(1+X)\Big|_0^1 - \int_{0}^{1}\frac{\ln(1+x)}{1+x^2}\dd{x}\\
+        &= \frac{\pi}{4}\ln 2 - \underbrace{\int_{0}^{1}\frac{\ln(1+x)}{1+x^2}\dd{x}}_{I_1}
+    \end{align*}
+    为计算$I_1$，令$x \equiv \tan\theta$，有$\displaystyle I_1 = \int_{0}^{\frac{\pi}{4}}\ln(1+\tan\theta)\dd{\theta}$，注意到有：
+    \begin{gather*}
+        1+\tan\theta = \frac{\sin\frac{\pi}{4}}{\cos\frac{\pi}{4}} + \frac{\sin\theta}{\cos\theta} = \frac{\sqrt{2}\sin\left(\frac{\pi}{4}+\theta\right)}{\cos\theta}\\
+        \Rightarrow\quad \ln(1+\tan\theta) = \frac{1}{2}\ln 2 + \left(\ln\sin\left(\frac{\pi}{4}+\theta\right) - \ln\cos\theta\right)
+    \end{gather*}
+    对于上式右边括号中的两项积分后有：
+    \[\int_{0}^{\frac{\pi}{4}}\ln\sin\left(\frac{\pi}{4}+\theta\right)\dd{\theta} - \int_{0}^{\frac{\pi}{4}}\ln\cos\theta\dd{\theta}\]
+    令$\theta\equiv\frac{\pi}{4}-\varphi$，上式左边的积分换元后进行哑变量代换有：
+    \[-\int_{\frac{\pi}{4}}^{0}\ln\sin\left(\frac{\pi}{2}-\varphi\right)\dd{\varphi} = \int_{0}^{\frac{\pi}{4}}\ln\cos\varphi\dd{\varphi} = \int_{0}^{\frac{\pi}{4}}\ln\cos\theta\dd{\theta}\]
+    最终，有$I = \dfrac{\pi}{8}\ln 2$.
+\end{solution}
+
+对于含极限的积分计算，不妨先尝试使用传统的极限计算方法.
+
+\begin{question}
+    计算：$\displaystyle I = \lim_{n\to\infty}\left(\int_{0}^{1} x^n \sin x \dd{x}\right)$.
+\end{question}
+
+\begin{solution}
+    注意到$n\to\infty$时：
+    \[0 \leqslant \left|\int_{0}^{1} x^n \sin x \dd{x}\right| \leqslant \int_{0}^{1}|x^n \sin x|\dd{x} \leqslant\int_{0}^{1}x^n\dd{x} = \frac{1}{n+1} \to 0\]
+    根据三明治定理，显然$I=0$.
+\end{solution}
+
+\begin{question}
+    计算：$\displaystyle I = \lim_{n\to\infty}I_n = \lim_{n\to\infty}\int_{0}^{\frac{\pi}{2}}\sin^n x\dd{x}$.
+\end{question}
+
+\begin{solution}
+    在$0\leqslant x \leqslant \dfrac{\pi}{2}$的范围内，有：
+    \[0 \leqslant \sin^{n+1} x \leqslant \sin^n x \leqslant 1 \quad\Rightarrow\quad 0 \leqslant I_{n+1} \leqslant I_n\]
+    对$\forall\varepsilon>0$，有：
+    \[I_n = \int_{0}^{\frac{\pi}{2}-\varepsilon}\sin^n x\dd{x} + \int_{\frac{\pi}{2}-\varepsilon}^{\frac{\pi}{2}}\sin^n x\dd{x}\]
+    对于上式，由于在$0\leqslant x \leqslant \dfrac{\pi}{2}$的范围内有$\sin^n x$单调递增，且有上界$1$：
+    \begin{gather*}
+        \left|\int_{\frac{\pi}{2}-\varepsilon}^{\frac{\pi}{2}}\sin^n x\dd{x}\right| \leqslant \int_{\frac{\pi}{2}-\varepsilon}^{\frac{\pi}{2}} 1 \dd{x} = \varepsilon\\
+        0 \leqslant \left|\int_{0}^{\frac{\pi}{2}-\varepsilon}\sin^n x\dd{x}\right| \leqslant \int_{0}^{\frac{\pi}{2}-\varepsilon}\sin^n\left(\frac{\pi}{2}-\varepsilon\right)\dd{x} = \left(\frac{\pi}{2}-\varepsilon\right)\sin^n\left(\frac{\pi}{2}-\varepsilon\right) \to 0
+    \end{gather*}
+    于是在$n\to\infty$时总是有$|I_n|\leqslant \varepsilon$，即$I = 0$.
+\end{solution}
