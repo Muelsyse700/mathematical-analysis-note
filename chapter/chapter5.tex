@@ -542,3 +542,65 @@
 从积分余项中也可以推出Lagrange余项，利用积分中值定理的加权推广有：
 \[R_n = \frac{1}{n!}f^{(n+1)}(\xi)\int_{a}^{x}(x-t)^n\dd{t} = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}\]
 相较之下，Cauchy余项对误差估计得更加精确，因为$(x-\xi)$相对$(x-a)$而言要更小.
+
+
+\section{函数的可积性}
+\subsection{函数的可积性}
+在Riemann积分的定义中有两个任意：一方面是分割的任意，另一方面是小区间内取小区间高度的任意.现在来具体研究关于区间高度的取值问题.
+
+\begin{definition}
+    设$f(x)$在给定分割$T$下的某个小区间$[x_{i-1},x_i]$中的上下确界分别为：
+    \[M_i = \sup\{f(x)|x\in[x_{i-1},x_i]\},\qquad m_i = \inf\{f(x)|x\in[x_{i-1},x_i]\}\]
+    称$\omega_i = M_i - m_i$为$f(x)$在区间$[x_{i-1},x_i]$上的\overtext{振幅}{amplitude}.
+\end{definition}
+
+\begin{definition}
+    分别称下述二式为$f(x)$的\textbf{Darboux}\overtext{上和}{upper sum}与\textbf{Darboux}\overtext{下和}{lower sum}.
+    \[\overline{S}(T) = \sum_{i=1}^{n}M_i \Delta x_i, \qquad \underline{S}(T) = \sum_{i=1}^{n}m_i \Delta x_i\]
+\end{definition}
+
+在上述定义的基础上，对$\forall \xi_i \in [x_{i-1},x_i]$满足：
+\[m \leqslant m_i \leqslant f(\xi_i) \leqslant M_i \leqslant M\]
+对上述各式求和：
+\[m(b-a) \leqslant \underline{S}(T) \leqslant S(T) \leqslant \overline{S}(T) \leqslant M(b-a)\]
+即函数的Riemann和一定介于其Darboux上下和之间.
+
+假如现在在分割$T$中增加一个分割点形成新的分割$T'$：
+\[T': a=x_0<x_1<\cdots<x_{k-1}<x_k'<x_k<\cdots<x_n=b\]
+这使得原有的小区间$[x_{k-1},x_k]$被分割为$[x_{k-1},x_k']$和$[x_k',x_k]$，并且新的小区间中的上确界不会超过原区间的上确界：
+\[M_k\geqslant\begin{cases}
+    M_k' = \sup\{f(x)|x\in[x_{k-1},x_k']\}\\
+    M_k'' = \sup\{f(x)|x\in[x_k',x_k]\}
+\end{cases}\]
+进而有：
+\begin{align*}
+    \overline{S}(T) - \overline{S}(T') &= M_k(x_k-x_{k-1})-(M_k'(x_k'-x_{k-1}) + M_k''(x_k-x_k'))\\
+    &\geqslant M_k(x_k-x_{k-1})-(M_k(x_k'-x_{k-1}) + M_k(x_k-x_k')) = 0\\
+    \overline{S}(T) - \overline{S}(T') &\leqslant M(x_k-x_{k-1})-(m(x_k'-x_{k-1}) + m(x_k-x_k'))\\
+    &= \omega(x_k-x_{k-1}) \leqslant \omega\left\|T\right\|
+\end{align*}
+上述推导过程对Darboux下和同理，最后有：
+\begin{gather*}
+    \overline{S}(T)\geqslant\overline{S}(T')\geqslant\overline{S}(T) - \omega\left\|T\right\|\\
+    \underline{S}(T)\leqslant\underline{S}(T')\leqslant\underline{S}(T) + \omega\left\|T\right\|
+\end{gather*}
+
+\begin{definition}
+    称对分割$T$增加任意有限个分割点所得到的新分割$T'$为\overtext{加细分割}{refined partition}.记有：
+    \[T' \prec T\]
+
+\end{definition}
+
+\begin{theorem}
+    设$T' \prec T$，增加的分割点个数为$l$，则有：
+    \[\begin{cases}
+    \overline{S}(T)\geqslant\overline{S}(T')\geqslant\overline{S}(T) - l\omega\left\|T\right\|\\
+    \underline{S}(T)\leqslant\underline{S}(T')\leqslant\underline{S}(T) + l\omega\left\|T\right\|
+    \end{cases} \Rightarrow\quad \overline{S}(T) - \underline{S}(T) \leqslant \overline{S}(T') - \underline{S}(T') + 2l\omega\left\|T\right\|\]
+\end{theorem}
+
+上述定理表明，在分割加细的过程中，上和不增，下和不减.
+
+\begin{definition}
+    设$T_1,T_2$是对区间$[a,b]$的分割，将二者的分割点合并形成新分割$T$的过程称为\overtext{分割合并}{join of partitions}.其中$T$满足$T \preceq T_1,T \preceq T_2$.
+\end{definition}
