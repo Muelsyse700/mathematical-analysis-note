@@ -59,7 +59,7 @@
         0, \quad x \in \mathbb{R\setminus Q}
     \end{cases}$，其是有界的，但其Riemann不可积，这是因为其处处间断，有无限个间断点.又注意到在\cref{thm:ClassOfIntegrableFunctions}的\circnum{3}中提到，如果$\left.f\right|_{[a,b]}$上单调，即使有无限个间断点也Riemann可积.
 
-    这表明，间断点的「无限多」亦有差异，是否能够通过精确刻画「间断点集合的大小」来判断函数是否Riemann可积？研究这个问题的数学领域称为\overtext{测度论}{measure theory}.
+    这表明，间断点的「无限多」亦有差异，能否通过精确刻画「间断点集合的大小」来判断函数是否Riemann可积？研究这个问题的数学领域称为\overtext{测度论}{measure theory}.
 
     可以认为\overtext{测度}{measure}是描述集合的「尺度」的一种概念.例如对于集合$E=[a,b]$，其Lebesgue测度$m(E)=b-a$.
     
@@ -424,3 +424,66 @@
     \end{gather*}
     于是在$n\to\infty$时总是有$|I_n|\leqslant \varepsilon$，即$I = 0$.
 \end{solution}
+
+
+\subsection{用积分定义函数}
+有大量的案例表明，初等函数的积分仍是初等函数.但是对于如下的一些初等函数的不定积分，不可能用初等函数表示积分的结果：
+\begin{gather*}
+    \int\ee^{-x^2}\dd{x},\qquad \int\frac{1}{\ln x}\dd{x},\qquad \int\frac{\sin x}{x}\dd{x},\qquad \int\sin x^2\dd{x}\\
+    \int\frac{\dd{x}}{\sqrt{a_0+a_1x+\cdots+a_n x^n}},\qquad \int\sqrt{a_0+a_1x+\cdots+a_n x^n}\dd{x}
+\end{gather*}
+一味地追求用初等函数表示初等函数的积分是不合理的，接受这样的缺陷，反而能够开辟一片全新的领域.
+
+积分的过程本就是产生新函数的方法，只是有的积分结果可以被现有的常见函数表达，有的不行.
+
+现在假设没有对数函数的定义，由如下积分定义一个新函数$f(x)$：
+\[f(x) = \int_{1}^{x}\frac{1}{u}\dd{u}\]
+考察这个函数的性质：
+\begin{enumerate}[circ]
+    \item 定义域为$x>0$.
+    \item 其作为变上限积分在定义域上连续且可导.
+    \item 对于$x>0,y>0$，函数$f(x)$具有如下性质：
+    \[f(xy) = \int_{1}^{xy}\frac{1}{u}\dd{u} = \int_{1}^{x}\frac{1}{u}\dd{u} + \int_{x}^{xy}\frac{1}{u}\dd{u}\]
+    设$u \equiv xt$，对右边第二个积分进行换元：
+    \[\int_{x}^{xy}\frac{1}{u}\dd{u} = \int_{1}^{y}\frac{1}{xt}x\dd{t} = \int_{1}^{y}\frac{1}{t}\dd{t} = f(y)\]
+    \[\Rightarrow\quad f(xy) = f(x) + f(y)\]
+    \item 根据性质\circnum{3}，在$x>0$的定义域内可以逐步推出：
+    \begin{align*}
+        &f(x^2) = 2f(x) \quad\Rightarrow\quad f(x^n) = nf(x),\quad n\in\mathbb{N}_1\\
+        &f(x)+f(x^{-1}) = f(1) = 0 \quad\Rightarrow\quad f(x^{-1}) = -f(x) \quad\Rightarrow\quad f(x^n) = nf(x),\quad n\in\mathbb{Z}\\
+        &n=\frac{\alpha}{\beta},x^n=y \quad\Rightarrow\quad \alpha f(x) = \beta f(y) \quad\Rightarrow\quad f(x^n)=nf(x),\quad n\in\mathbb{Q}\\
+        &\text{根据有理数的稠密性及$f(x)$的连续性，推广到：}f(x^n) = nf(x),\quad n\in\mathbb{R}
+    \end{align*}
+    \item 根据$\ee \coloneq \lim\limits_{n \to \infty}\left(1+\frac{1}{n}\right)^n$，以及$f(x)$的连续性有：
+    \[f(\ee) = f\left(\lim_{n \to \infty}\left(1+\frac{1}{n}\right)^n\right) = \lim_{n \to \infty}f\left(\left(1+\frac{1}{n}\right)^n\right) = \lim_{n \to \infty}nf\left(1+\frac{1}{n}\right)\]
+    由于有$f(1)=0$，不妨有：
+    \[f(\ee) = \lim_{n\to\infty}n\left(f\left(1+\frac{1}{n}\right)-f(1)\right)\]
+    根据Lagrange中值定理有$\xi\in\left[1,1+\dfrac{1}{n}\right]$，满足：
+    \[f(\ee) = \lim_{n\to\infty}n\left(f'(\xi)\frac{1}{n}\right)\]
+    $n\to\infty$时根据三明治定理有$\xi\to 1$，进而$f(\ee) = 1$.
+\end{enumerate}
+于是称满足上述性质的函数为对数函数$\displaystyle\ln(x) \coloneq \int_{1}^{x}\frac{1}{u}\dd{u}$.从历史上看，对数函数就是通过$\dfrac{1}{u}$曲线下的面积构造出来的.
+
+\begin{extension}{从椭圆的周长到椭圆积分与椭圆函数}
+    圆的周长$C = 2\pi r$人尽皆知，为什么在初等数学阶段不曾听闻椭圆的周长公式？
+
+    现在尝试基于微积分分析椭圆的周长.设有椭圆方程：
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1, e = \sqrt{1-\frac{b^2}{a^2}},\quad\text{令}\quad\begin{cases}
+        x \equiv a \cos t\\
+        y \equiv b \sin t
+    \end{cases}\]
+    根据曲线的弧长公式，有：
+    \begin{align*}
+        L &= \int_{0}^{2\pi}\sqrt{\left(\dv{x}{t}\right)^2 + \left(\dv{y}{t}\right)^2}\dd{t} = \int_{0}^{2\pi}\sqrt{a^2\sin^2 t + b^2\cos^2 t}\dd{t}\\
+        &= 4a \int_{0}^{\frac{\pi}{2}}\sqrt{1-e^2\sin^2 t}\dd{t}
+    \end{align*}
+    基于Liouville定理的证明表明，上述积分不能由初等函数表示，由此引进一个新的函数：
+    \[E(e) = \int_{0}^{\frac{\pi}{2}}\sqrt{1-e^2\sin^2t}\dd{t}\]
+    称$E(e)$为\textbf{第二类完全}\!\!\overtext{椭圆积分}{elliptic integral}.基于此，椭圆的周长可以表示为$L=4aE(e)$.
+
+    椭圆积分最初来源于椭圆弧长问题，Euler、Lagrange、Legendre等数学家对其进行了系统研究.19世纪，Abel和Jacobi进一步研究椭圆积分的反演问题，由此发展出椭圆函数理论，由Weierstrass建立了更加一般的椭圆函数体系.
+
+    \overtext{椭圆函数}{elliptic function}虽然脱胎于椭圆积分，是椭圆积分的反函数，但实际上描述的对象并不是椭圆.相对于只有一个周期的三角函数，椭圆函数具有两个独立的周期，在\overtext{复分析}{complex analysis}领域，这类函数被称为\overtext{双周期亚纯函数}{doubly periodic meromorphic function}.
+
+    人力有时尽，初等函数亦然.在现代数学中，还有许多重要函数，如\overtext{误差函数}{error function}、\textbf{$\Gamma$函数}、\textbf{Bessel函数}等，都是由积分构造出来的.
+\end{extension}
