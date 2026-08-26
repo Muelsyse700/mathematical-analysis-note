@@ -152,7 +152,7 @@
 这样的结果表明：
 \begin{theorem}
     \label{thm:FinitePointModificationInvariance}
-    改变可积函数$f(x)$有限个点处的值，不会破坏其可积性，也不会改变其积分值.
+    在有限范围内改变可积函数$f(x)$有限个点处的值，不会破坏其可积性，也不会改变其积分值.
 \end{theorem}
 
 \begin{theorem}
@@ -602,5 +602,77 @@
 上述定理表明，在分割加细的过程中，上和不增，下和不减.
 
 \begin{definition}
-    设$T_1,T_2$是对区间$[a,b]$的分割，将二者的分割点合并形成新分割$T$的过程称为\overtext{分割合并}{join of partitions}.其中$T$满足$T \preceq T_1,T \preceq T_2$.
+    设$T_1,T_2$是对区间$[a,b]$的分割，将二者的分割点合并形成新分割$T$的过程称为\overtext{分割合并}{join of partitions}，记为$T = T_1 + T_2$.其中$T$满足$T \preceq T_1,T \preceq T_2$.
 \end{definition}
+
+\begin{definition}
+    \begin{itemize}
+        \item 称对所有分割$T$的Darboux上和的下确界为函数$f(x)$的\overtext{上积分}{upper integral}.记作：
+        \[\overline{I} = \inf_{T} \overline{S}(T)\]
+        \item 称对所有分割$T$的Darboux下和的上确界为函数$f(x)$的\overtext{下积分}{lower integral}.记作：
+        \[\underline{I} = \sup_{T} \underline{S}(T)\]
+    \end{itemize}
+\end{definition}
+
+可以认为，上下积分就是对积分近似正负误差最小的那个值，所以显然$\forall T_1,T_2$有：
+\[\underline{S}(T_1) \leqslant \underline{I} \leqslant \overline{I} \leqslant \overline{S}(T_2)\]
+
+\begin{theorem}
+    对于$[a,b]$上的任意有界函数，其在$\left\|T\right\| \to 0$时Darboux上(下)和的极限就是其上(下)积分：
+    \[\lim_{\left\|T\right\| \to 0}\overline{S}(T) = \overline{I},\qquad \lim_{\left\|T\right\| \to 0}\underline{S}(T) = \underline{I}\]
+\end{theorem}
+
+\begin{proof}
+    以Darboux上和的证明为例.要证极限存在，就要证$\forall \varepsilon > 0$，$\exists \delta > 0$在$\left\|T\right\| < \delta$时满足：
+    \[\overline{I} - \varepsilon < \overline{S}(T) < \overline{I} + \varepsilon\]
+    根据$\overline{I}$的定义，$\forall T$都满足$\overline{S}(T) \geqslant \overline{I}$，上述不等式左边易证.
+
+    对于作为下确界的$\overline{I}$，显然$\exists T_0$使得$\overline{S}(T_0) < \overline{I} + \varepsilon$.
+
+    设有$T' = T + T_0$，记$T_0$分割点的数量为$l$，$\forall T$都满足$T' \preceq T,T' \preceq T_0$，故而有：
+    \[\overline{S}(T) \geqslant \overline{S}(T') \geqslant \overline{S}(T) - l\omega \left\|T\right\|\]
+    进一步地，有：
+    \[\overline{S}(T) \leqslant \overline{S}(T') + l\omega\left\|T\right\| \leqslant \overline{S}(T_0) + l\omega\left\|T\right\| < \overline{I} + \varepsilon + l\omega\left\|T\right\|\]
+    此时取$\left\|T\right\| < \delta$，则有：
+    \[\overline{S}(T) < \overline{I} + \varepsilon + l\omega\left\|T\right\| < \overline{I} + \varepsilon + l\omega\delta\]
+    取$\delta = \dfrac{\varepsilon}{l\omega}$，则有：
+    \[\overline{S}(T) < \overline{I} + \varepsilon + l\omega\delta = \overline{I} + 2\varepsilon\]
+    从上所述，$\forall \varepsilon > 0$，$\exists \delta = \dfrac{\varepsilon}{l\omega} > 0$使得在$\left\|T\right\| < \delta$时满足：
+    \[\overline{I} - 2\varepsilon < \overline{S}(T) < \overline{I} + 2\varepsilon\]
+    进而证明了$\overline{S}(T)$的极限存在并且为$\overline{I}$，对于Darboux下和的证明同理.
+\end{proof}
+
+\begin{theorem}
+    设$\left.f(x)\right|_{[a,b]}$有界.那么$\left.f(x)\right|_{[a,b]}$可积，当且仅当$\left\|T\right\| \to 0$时，$f(x)$的Darboux上和与下和的极限相等，即：
+    \[\lim_{\left\|T\right\| \to 0}(\overline{S}(T) - \underline{S}(T)) = \lim_{\left\|T\right\| \to 0}\sum_{i=1}^{0}\omega_i \Delta x_i = 0\]
+\end{theorem}
+
+\begin{proof}
+    \textbf{充分性：}若$\left.f(x)\right|_{[a,b]}$Riemann可积，则对$\forall \xi$有：
+    \[\lim_{\left\|T\right\| \to 0} S(T,\xi) = I\]
+    对于取$\xi$在区间特殊点的Darboux上(下)和，其极限必然满足上式，均为$I$，充分性得证.
+
+    \textbf{必要性：}已知$\underline{S}(T) \leqslant S(T) \leqslant \overline{S}(T)$，若左右两边极限相等，根据三明治定理易证必要性成立.
+\end{proof}
+
+\begin{theorem}
+    有界函数$f(x)$在$[a,b]$上的振幅等于区间上任意两点函数值之差绝对值的上界，即：
+    \[\omega = \sup\{|f(x) - f(y)|\,|\,x,y\in[a,b]\}\]
+\end{theorem}
+
+\begin{proof}
+    根据$\omega$的定义有：
+    \[\begin{cases}
+        M = \sup\{f(x) | x\in[a,b]\}\\
+        m = \inf\{f(x) | x\in[a,b]\}
+    \end{cases} \Rightarrow\quad \omega = M-m\]
+    显然$\forall x,y \in[a,b]$都有：
+    \[|f(x)-f(y)| \leqslant M-m = \omega\]
+    即表明$\omega$是$\omega = \sup\{|f(x) - f(y)|\,|\,x,y\in[a,b]\}$的上界.
+
+    $\forall \varepsilon > 0$，总是$\exists x_0,y_0\in[a,b]$使得：
+    \[f(x_0) > M - \frac{\varepsilon}{2},\qquad f(y_0) < m + \frac{\varepsilon}{2}\]
+    因此有：
+    \[\omega \geqslant |f(x_0) - f(y_0)| > M - m -\varepsilon = \omega - \varepsilon\]
+    比$\omega$任意小的值$\omega-\varepsilon$都不再是上界，所以$\omega$是上确界.
+\end{proof}
