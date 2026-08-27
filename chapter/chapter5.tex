@@ -836,3 +836,26 @@
     \textbf{极坐标系下的弧长公式}
     \[s = \int_{\alpha}^{\beta}\sqrt{r^2(\theta) + (r'(\theta))^2}\dd{\theta}\]
 \end{theorem}
+
+
+\subsection{平面图形的面积}
+设曲线由极坐标方程给出，确定这条曲线与射线$\theta=\alpha,\theta=\beta$所围成的曲边扇形的面积.
+
+根据微元法，利用扇形面积公式：
+\[\dd{S} = \frac{1}{2}r^2(\theta)\dd{\theta} \quad\Rightarrow\quad S = \frac{1}{2}\int_{\alpha}^{\beta}r^2(\theta)\dd{\theta}\]
+由此可以导出由闭曲线所围图形的面积，设有闭曲线：
+\[\begin{cases}
+    x = \varphi(t)\\
+    y = \psi(t)
+\end{cases},t\in[a,b]\]
+其中$\varphi(t),\psi(t)$具有连续的导函数且有$\varphi(a)=\varphi(b),\psi(a)=\psi(b)$，于是有：
+\[\begin{cases}
+    r^2 = x^2 + y^2\\
+    \theta = \arctan\dfrac{y}{x}
+\end{cases} \Rightarrow\quad \dv{\theta}{t} = \frac{\varphi\psi'-\varphi'\psi}{\varphi^2 + \psi^2} \quad\Rightarrow\quad \frac{1}{2}r^2(\theta)\dd{\theta} = \frac{1}{2}(\varphi\psi'-\varphi'\psi)\dd{t}\]
+两边积分，最终有：
+\begin{theorem}
+    \textbf{闭曲线所围图形的面积公式}
+
+    \[S = \frac{1}{2}\int_{a}^{b}(\varphi(t)\psi'(t) - \varphi'(t)\psi(t))\dd{t}\]
+\end{theorem}
