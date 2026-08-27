@@ -859,3 +859,34 @@
 
     \[S = \frac{1}{2}\int_{a}^{b}(\varphi(t)\psi'(t) - \varphi'(t)\psi(t))\dd{t}\]
 \end{theorem}
+
+
+\subsection{旋转体的体积}
+\begin{theorem}
+    \textbf{绕$x$轴一周所得旋转体的体积(圆盘法)}
+    \[V = \pi\int_{a}^{b}f^2(x)\dd{x}\]
+\end{theorem}
+从微元法的视角看，体积是由一个个厚度为$\dd{x}$，面积为$\pi f^2(x)$的圆盘堆叠而成的.
+
+\begin{theorem}
+    \textbf{绕$y$轴一周所得旋转体的体积(柱壳法)}
+    \[V = 2\pi\int_{a}^{b}xf(x)\dd{x}\]
+\end{theorem}
+从微元法的视角看，体积是由一个个厚度为$\dd{x}$，高度为$f(x)$，底面周长为$2\pi x$的柱壳层层包裹而成的.
+
+
+\subsection{旋转体的侧面积}
+旋转体的侧面积可以看作是由弧长微元$\dd{s}$旋转一周所形成圆台的侧面积：
+\[\dd{S} = \pi(y + (y+\dd{y}))\cdot\dd{s} = 2\pi y\dd{s} = 2\pi y\sqrt{1+(y')^2}\dd{x}\]
+又有$y=f(x)$，积分得：
+\begin{theorem}
+    \textbf{旋转体的侧面积公式}
+    \begin{itemize}
+        \item 一般方程：
+        \[S = 2\pi\int_{a}^{b}f(x)\sqrt{1+(f'(x))^2}\dd{x}\]
+        \item 参数方程(直角坐标)：
+        \[S = 2\pi\int_{\alpha}^{\beta}y(t)\sqrt{(x'(t))^2 + (y'(t))^2}\dd{t}\]
+        \item 参数方程(极坐标)：
+        \[S = 2\pi\int_{\alpha}^{\beta}r(\theta)\sin\theta\sqrt{r^2(\theta) + (r'(\theta))^2}\dd{\theta}\]
+    \end{itemize}
+\end{theorem}
