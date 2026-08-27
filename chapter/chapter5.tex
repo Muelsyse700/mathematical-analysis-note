@@ -17,7 +17,7 @@
     若有$I \in \mathbb{R}$使得对$\forall \varepsilon>0$，都$\exists \delta > 0$在$\left\|T\right\|<\delta$时满足：
     \[|S_n(T) - I| < \varepsilon \quad\text{或}\quad \lim\limits_{\left\|T\right\| \to 0} S_n(T) = I\]
     那么称$f(x)$在$[a,b]$上\textbf{Riemann}\overtext{可积}{integrable}，记作：
-    \[I = \int_{a}^{b} f(x)\dd{x}\]
+    \[I \eqcolon \int_{a}^{b} f(x)\dd{x}\]
     称此定义下的积分为\textbf{Riemann积分}，它是\overtext{定积分}{definite integral}的一种定义.如果不特别注明，「可积」一般指的都是「Riemann可积」.
 \end{definition}
 上述的定义中包含了两个任意性，一方面是分割取点的任意性，另一方面是取小区间高度的任意性，即$\xi_i \in [x_{i-1},x_i]$的任意性.
@@ -777,3 +777,62 @@
     \[\sum_{i=1}^{n}\omega_i(fg) \leqslant M\left(\sum_{i=1}^{n}\omega_i(f)+\sum_{i=1}^{n}\omega_i(g)\right)\]
     利用上式，根据$f,g$在$[a,b]$上的可积性，不难推出$fg$在$[a,b]$上的可积性.
 \end{proof}
+
+
+\section{积分的应用}
+\subsection{微元法与积分}
+依照积分的定义，求值的过程有四个步骤：分割$\rightarrow$近似代替$\rightarrow$求和$\rightarrow$取极限.具体而言，通过分割来构造Riemann和，再取极限来获得积分的值：
+\[\lim_{\left\|T\right\|\to 0}\sum_{i=1}^{n}f(\xi_i)\Delta x_i = I \eqcolon \int_{a}^{b}f(x)\dd{x}\]
+整个过程中只涉及到$f(x)$和$T$，并没有涉及到关于「$\dd{x}$」的含义的问题，也就是说，在数学分析的严格领域上看，$\dd{x}$只是积分记号的一部分，并没有实际含义.
+
+但是在物理学中，有一些具有整体性质的量$Q$与某个区域有关且具有区域可加性，即：
+\[Q([a,c])+Q([c,b])=Q([a,b]),\quad a \leqslant c \leqslant b\]
+设有$Q(x) = Q([a,x])$，首先取一个小长度$\dd{x}$使得：
+\[\Delta Q = Q(x+\dd{x}) - Q(x) = f(x)\dd{x} + o(\dd{x})\]
+按照微分的定义，上式的含义为$f(x)\dd{x}$是$\Delta Q$的微分，称$f(x)\dd{x}$为整体量$Q$的微元.
+
+第二步，将所得微元在$[a,b]$上累加，就有：
+\[\int_{a}^{b}f(x)\dd{x} = Q\]
+相比按严格定义的积分求值步骤，微元法只有近似代替$\rightarrow$求和两步.微元法只是一种求取整体量的建模方法，实质上是积分的定义本身表明了这样的建模方法成立，而不是用微元法定义积分.
+
+
+\subsection{平面曲线的弧长}
+\begin{definition}
+    设在平面直角坐标系下一条曲线段$\overset{\frown}{AB}$的方程为：
+    \[y = f(x), \quad x \in [a,b]\]
+    在$\overset{\frown}{AB}$上任取分点：
+    \[A = M_0,M_1,\cdots,M_{n-1},M_n=B\]
+    顺次连接这些分点得到一条折线，当$\displaystyle\max_{1 \leqslant i \leqslant n}\overline{M_{i-1}M_i} \to 0$时，若折线长度的极限存在，就称$\overset{\frown}{AB}$是可求长的，称这个极限值为$\overset{\frown}{AB}$的\textbf{长度}.
+\end{definition}
+
+根据勾股定理：
+\[\sum_{i=1}^{n}\overline{M_{i-1}M_i} = \sum_{i=1}^{n}\sqrt{(x_i-x_{i-1})^2 + (y_i-y_{i-1})^2} = \sum_{i=1}^{n}\sqrt{(\Delta x_i)^2 + (f(x_i)-f(x_{i-1}))^2}\]
+根据Lagrange中值定理，$\exists \xi \in [x_{i-1},x_i]$使得上式转化为：
+\[\sum_{i=1}^{n}\overline{M_{i-1}M_i} = \sum_{i=1}^{n}\sqrt{(\Delta x_i)^2 + (f(x_i)-f(x_{i-1}))^2} = \sum_{i=1}^{n}\sqrt{(\Delta x_i)^2 + (f'(\xi_i))^2(\Delta x_i)^2}\]
+当对$[a,b]$上的分割$T$取$\left\|T\right\|\to 0$时，也有$\xi_i=x_i$，进而有：
+\[\lim_{\left\|T\right\|\to 0}\sum_{i=1}^{n}\sqrt{1+(f'(x_i))^2}\Delta x_i = \int_{a}^{b}\sqrt{1+(f'(x))^2}\dd{x}\]
+\begin{theorem}
+    \textbf{直角坐标系下的弧长公式}
+    \begin{itemize}
+        \item 一般方程：
+        \[s = \int_{a}^{b}\sqrt{1+(f'(x))^2}\dd{x}\]
+        \item 参数方程：
+        \[s = \int_{\alpha}^{\beta}\sqrt{(x'(t))^2 + (y'(t))^2}\dd{t}\]
+    \end{itemize}
+\end{theorem}
+利用微元法也可以推出这个公式，设$\dd{x}>0$，在$\overset{\frown}{AB}$上任取横坐标间距为$\dd{x}$的两点，这两点的距离为：
+\[\sqrt{(\dd{x})^2 + (f(x+\dd{x}) - f(x))^2} = \sqrt{(\dd{x})^2 + (f'(x)\dd{x} + o(\dd{x}))^2}\]
+得到弧长的微元：
+\[\dd{s} = \sqrt{1+(f'(x))^2}\dd{x} = \sqrt{(\dd{x})^2 + (\dd{y})^2}\]
+两边积分即得到上述公式.
+
+在极坐标下，若由极坐标方程给出曲线：
+\[r=r(\theta) \quad\Rightarrow\quad \begin{cases}
+    x = r(\theta)\cos\theta\\
+    y = r(\theta)\sin\theta
+\end{cases},\theta\in[\alpha,\beta]\]
+有$(x'(\theta))^2 + (y'(\theta))^2 = r^2(\theta) + (r'(\theta))^2$，于是有：
+\begin{theorem}
+    \textbf{极坐标系下的弧长公式}
+    \[s = \int_{\alpha}^{\beta}\sqrt{r^2(\theta) + (r'(\theta))^2}\dd{\theta}\]
+\end{theorem}
