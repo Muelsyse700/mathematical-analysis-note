@@ -25,6 +25,7 @@
 
 \subsection{可积函数类}
 \begin{theorem}
+    \label{thm:IntegrableImpliesBounded}
     若$\left.f\right|_{[a,b]}$可积，则$\left.f\right|_{[a,b]}$有界.
 \end{theorem}
 
@@ -890,3 +891,58 @@
         \[S = 2\pi\int_{\alpha}^{\beta}r(\theta)\sin\theta\sqrt{r^2(\theta) + (r'(\theta))^2}\dd{\theta}\]
     \end{itemize}
 \end{theorem}
+
+
+\section{反常积分(广义积分)}
+Riemann积分具有两个限制：
+\begin{enumerate}[circ]
+    \item \textbf{积分区间有限：}否则无法实现取越来越多的分割点使得$\left\|T\right\|\to 0$.
+    \item \textbf{被积函数有界：}根据\cref{thm:IntegrableImpliesBounded}，可积必有界.
+\end{enumerate}
+要想将上述限制破除，需要结合积分与函数极限的定义，由此引出：
+\begin{definition}
+    对普通Riemann积分进行推广，含有无穷上(下)限，或者被积函数含有瑕点的两类积分称为\overtext{反常积分}{improper integral}或\textbf{广义积分}，与之相对的概念是\overtext{常义积分}{proper integral}.
+\end{definition}
+
+\subsection{无穷区间上的积分}
+\begin{definition}
+    设函数$f(x)$在区间$[a,+\infty)$上有定义，如果$f(x)$在任何一个有限区间$[a,A]$上可积，而且当$A\to+\infty$时，由变上限积分定义的关于$A$的函数$\varphi(A)$有极限，即满足：
+    \[\lim_{A\to+\infty}\int_{a}^{A}f(x)\dd{x} = \lim_{A\to+\infty}\varphi(A) \eqcolon \int_{a}^{+\infty}f(x)\dd{x}\]
+    称该极限值为$f(x)$在无穷区间$[a,+\infty)$上的\overtext{无穷积分}{infinite integral}.
+
+    特别地，在极限存在时称该无穷积分\textbf{收敛}，反之为\textbf{发散}.
+\end{definition}
+
+类似地，利用变下限积分能够定义区间$(-\infty,a]$上的无穷积分.而利用积分区间的可加性能够定义区间$(-\infty,+\infty)$上的无穷积分：
+\begin{align*}
+    \int_{-\infty}^{+\infty}f(x)\dd{x} &\coloneq \int_{-\infty}^{a}f(x)\dd{x} + \int_{a}^{+\infty}f(x)\dd{x}\\
+    &= \lim_{c\to -\infty}\int_{c}^{a}f(x)\dd{x} + \lim_{b\to +\infty}\int_{a}^{b}f(x)\dd{x}
+\end{align*}
+这样的定义意味着，只有当上式中两个无穷积分都独立收敛时，才有在$(-\infty,+\infty)$上的无穷积分收敛.
+
+在当前阶段判断无穷积分是否收敛都要先求出变上限积分的原函数$F(A)$，再研究这个原函数在$A \to +\infty$时的极限是否存在，记$\lim\limits_{A \to +\infty} F(A) = F(+\infty)$，根据Newton-Leibniz公式，无穷积分的结果可以表述为：
+\[\int_{a}^{+\infty}f(x)\dd{x} = F(x)\Big|_a^{+\infty} = F(+\infty) - F(a)\]
+
+\begin{extension}{Cauchy主值与定义的延拓}
+    按照前述在$(-\infty,+\infty)$上无穷积分的定义，对于函数$f(x)=x$，其在$(-\infty,+\infty)$上的无穷积分为：
+    \[\int_{-\infty}^{+\infty}x\dd{x} = \lim_{c\to -\infty}\int_{c}^{a}x\dd{x} + \lim_{b\to +\infty}\int_{a}^{b}x\dd{x}\]
+    显然等式右边的两个无穷积分都不收敛，不满足$(-\infty,+\infty)$上收敛的要求，故而$\displaystyle\int_{-\infty}^{+\infty}x\dd{x}$不收敛.
+
+    但是，显然$f(x)=x$作为一个关于原点对称的函数，从直观上看它左右两侧的面积是能够相互抵消的，其无穷积分应当收敛为$0$.
+
+    造成上述结果的原因是定义本身造成的限制，假如允许$+\infty-\infty=0$，那么积分的结果依赖于趋向于无穷的「速度」，考察下面两种趋近的方式：
+    \[\lim_{R\to+\infty}\int_{-R}^{R}x\dd{x} = 0,\qquad \lim_{R\to+\infty}\int_{-R}^{2R}x\dd{x}=+\infty\]
+    显然，如果不对无穷区间扩张的「速度」加以限制，作为极限的积分结果不具备唯一性.
+
+    但是，由于函数的对称性使得积分「正负抵消」的特性仍有其现实意义，为了保留这个良好的性质，Cauchy提出了一种新的积分的定义：\textbf{Cauchy}\overtext{主值}{principal value}.
+
+    其通过规定无穷区间上向两边趋近的速度一致，从而为某些在原定义中发散的反常积分指派一个特定的值.对于无穷区间上的积分，Cauchy主值的定义为：
+    \[\text{P.V.}\int_{-\infty}^{+\infty}f(x)\dd{x} = \lim_{R\to+\infty}\int_{-R}^{R}f(x)\dd{x}\]
+    若上述极限存在，则称该积分的Cauchy主值存在.
+
+    因此，在Cauchy主值的意义下，$f(x)=x$在$(-\infty,+\infty)$上的无穷积分Cauchy主值收敛至$0$.
+
+    应当注意的是，Cauchy主值概念的引入并没有推翻原定义关于其发散的判定，而是对「积分」这一概念进行了\overtext{延拓}{extension}.
+
+    当原有定义无法描述某些具有重要意义的现象时，可以通过保持原定义在已有范围内的性质，并增加新的规则，将其推广到更大的范围，例如负数的出现就是由于$\mathbb{N}_1$中的减法无法保证结果仍属于$\mathbb{N}_1$.这并不表明原定义存在漏洞，而是不同的定义服务于不同的问题.
+\end{extension}
