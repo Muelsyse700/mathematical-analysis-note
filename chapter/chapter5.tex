@@ -40,7 +40,7 @@
     与$\left.f\right|_{[x_{k-1},x_k]}$无界矛盾，故而对于在$[a,b]$上可积的$f$，其在$[a,b]$上必有界.
 \end{proof}
 
-接下来列出一些重要的可积函数类，此处暂不证明.
+接下来列出一些重要的可积函数类，此处暂不证明，具体证明见后续\cref{subsec:ProofsOfIntegrableFunctions}一节.
 \begin{theorem}
     \label{thm:ClassOfIntegrableFunctions}
     \begin{enumerate}[circ]
@@ -130,22 +130,27 @@
 
 \subsection{积分的基本性质}
 \begin{theorem}
-    设有$a<c<b$，若函数$f$在区间$[a,b]$上可积，则$f$在区间$[a,c],[c,b]$上均可积；若$f$在$[a,c],[c,b]$上均可积，则$f$在$[a,b]$上可积，且有：
+    \label{thm:IntegralAdditivity}
+    设有$a<c<b$，函数$f$在区间$[a,b]$上可积，当且仅当$f$在区间$[a,c],[c,b]$上均可积，且有：
     \[\int_{a}^{b}f(x)\dd{x} = \int_{a}^{c}f(x)\dd{x} + \int_{c}^{b}f(x)\dd{x}\]
     可以推出，$f$在$[a,b]$的任意子区间$[a',b'] \subseteq [a,b]$上也可积.
 \end{theorem}
 
+上述定理将在\cref{subsec:ProofsOfIntegrableFunctions}一节得到证明.
+
 \begin{theorem}
+    \label{thm:ProductIntegrability}
     设函数$f(x)$和$g(x)$在$[a,b]$上可积，则：
-    \begin{itemize}
+    \begin{enumerate}[circ]
         \item 对任意常数$\alpha,\beta$，函数$\alpha f(x) + \beta g(x)$在$[a,b]$上可积且有：
         \[\int_{a}^{b}(\alpha f(x) + \beta g(x))\dd{x} = \alpha\int_{a}^{b}f(x)\dd{x} + \beta\int_{a}^{b}g(x)\dd{x}\]
         特别令$\beta \equiv 0$，有：
         \[\int_{a}^{b}\alpha f(x)\dd{x} = \alpha\int_{a}^{b}f(x)\dd{x}\]
         \item 函数$f(x)\cdot g(x)$在$[a,b]$上可积，一般而言：
         \[\int_{a}^{b}f(x)g(x)\dd{x} \neq \int_{a}^{b}f(x)\dd{x}\cdot\int_{a}^{b}g(x)\dd{x}\]
-    \end{itemize}
+    \end{enumerate}
 \end{theorem}
+其中，\circnum{1}是\cref{thm:IntegralAdditivity}的推论易证，\circnum{2}的证明见\cref{subsec:ProofsOfIntegrableFunctions}一节.
 
 在上述定理的基础上，引入\cref{subsec:ExampleOfIntegral}中的\cref{ques:DefinitionOfJ(x)}中所定义的$J(x)$，注意到：
 \[\int_{a}^{b}\alpha J(x)\dd{x} = 0 \quad\Rightarrow\quad \int_{a}^{b}(f(x) + \alpha J(x))\dd{x} = \int_{a}^{b}f(x)\dd{x}\]
@@ -643,8 +648,9 @@
 \end{proof}
 
 \begin{theorem}
+    \label{thm:DarbouxIntegrabilityCriterion}
     设$\left.f(x)\right|_{[a,b]}$有界.那么$\left.f(x)\right|_{[a,b]}$可积，当且仅当$\left\|T\right\| \to 0$时，$f(x)$的Darboux上和与下和的极限相等，即：
-    \[\lim_{\left\|T\right\| \to 0}(\overline{S}(T) - \underline{S}(T)) = \lim_{\left\|T\right\| \to 0}\sum_{i=1}^{0}\omega_i \Delta x_i = 0\]
+    \[\lim_{\left\|T\right\| \to 0}(\overline{S}(T) - \underline{S}(T)) = \lim_{\left\|T\right\| \to 0}\sum_{i=1}^{n}\omega_i \Delta x_i = 0\]
 \end{theorem}
 
 \begin{proof}
@@ -656,6 +662,7 @@
 \end{proof}
 
 \begin{theorem}
+    \label{thm:OscillationSup}
     有界函数$f(x)$在$[a,b]$上的振幅等于区间上任意两点函数值之差绝对值的上界，即：
     \[\omega = \sup\{|f(x) - f(y)|\,|\,x,y\in[a,b]\}\]
 \end{theorem}
@@ -675,4 +682,98 @@
     因此有：
     \[\omega \geqslant |f(x_0) - f(y_0)| > M - m -\varepsilon = \omega - \varepsilon\]
     比$\omega$任意小的值$\omega-\varepsilon$都不再是上界，所以$\omega$是上确界.
+\end{proof}
+
+
+\subsection{可积函数类有关定理和性质的证明}
+\label{subsec:ProofsOfIntegrableFunctions}
+对\cref{thm:ClassOfIntegrableFunctions}中\circnum{1}\textbf{(连续必可积)}的证明：
+\begin{proof}
+    根据\cref{thm:HeineCantorTheorem}，$\left.f\right|_{[a,b]}$一致连续.根据一致连续的性质，对$\forall \varepsilon>0$，必定$\exists \delta>0$对$\forall x,y\in[a,b]$在$|x-y|<\delta$时有$|f(x)-f(y)|<\varepsilon$.
+
+    当$\left\|T\right\|<\delta$时$\forall x,y\in[x_{i-1},x_i]$都有$|x-y|<\delta$，进而$|f(x)-f(y)|<\varepsilon$.由于$x,y$的任意性，故而有：
+    \[\sup\{|f(x)-f(y)|\,|\,x,y\in[x_{i-1},x_i]\} \leqslant \varepsilon\]
+    故而根据\cref{thm:OscillationSup}有$\omega_i \leqslant \varepsilon$，于是有：
+    \[0 \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i \leqslant \varepsilon \sum_{i=1}^{n}\Delta x_i = \varepsilon(b-a)\]
+    上式表明$\left\|T\right\|\to 0$时$f(x)$的Darboux上和与下和极限相等：
+    \[\lim_{\left\|T\right\| \to 0}\sum_{i=1}^{n}\omega_i\Delta x_i = 0\]
+    根据\cref{thm:DarbouxIntegrabilityCriterion}，$\left.f(x)\right|_{[a,b]}$可积.
+\end{proof}
+
+对\cref{thm:ClassOfIntegrableFunctions}中\circnum{2}的证明：
+\begin{proof}
+    首先证明一个间断点的情况.$\left.f(x)\right|_{[a,b]}$有界，设有$a<c<b$，$f(x)$在$x=c$上间断.取以$c$点为中心的一个开区间$(c-2\delta_1,c+2\delta_2)$，为了使这个开区间不超出$[a,b]$，于是对$\delta_1$有：
+    \[\delta_1 < \min\left\{\frac{b-c}{2},\frac{c-a}{2}\right\}\]
+    由于间断点被包括在这个宽度为$4\delta_1$的开区间中心，余下左右的两区间取$\delta_1$的宽度与这个开区间重叠不会覆盖到间断点，所以在闭区间$[a,c-\delta_1],[c+\delta_1,b]$上有$f(x)$一致连续.
+    
+
+    由于$f(x)$有界，所以其在整个定义域$[a,b]$上的振幅$\omega$是有限的，根据\cref{thm:OscillationSup}可知$\omega$是区间上任意两点间$f(x)$振幅$\omega_i$的上界，即总满足$\omega_i\leqslant\omega$.
+    
+    现在取$(1):\forall [x_{i-1},x_i] \subset (c-2\delta_1,c+2\delta_1)$，对其中所有小区间的求和有：
+    \[\sum_{(1)}\omega_i\Delta x_i \leqslant \omega\sum_{(1)}\Delta x_i < \omega\cdot 4\delta_1\]
+    此时再限制$\delta_1<\frac{\varepsilon}{4\omega}$，即$\forall\varepsilon>0$，$\exists\delta_1 = \min\left\{\frac{b-c}{2},\frac{c-a}{2},\frac{\varepsilon}{4\omega}\right\}$，只要$\delta_1$作为区间的宽度参数本身足够小，就能够使得：
+    \[0 \leqslant \sum_{(1)}\omega_i\Delta x_i < \varepsilon\]
+    对剩余未求和的区域中的小区间，根据一致连续的定义，对$\forall \varepsilon>0$，都$\exists \delta_2 > 0$对$\forall x,y\in[a,c-\delta_1]$或$\forall x,y\in[c+\delta_1,b]$在$|x-y|<\delta_2$时满足$|f(x)-f(y)|<\frac{\varepsilon}{b-a}$，剩余的区间必然包含于上述两个一致连续区间中，于是只要满足$\left\|T\right\|<\delta_2$的条件，就总是有：
+
+    \[0 \leqslant \sum_{(2)}\omega_i\Delta x_i < \frac{\varepsilon}{b-a}\sum_{(2)}\Delta x_i < \varepsilon\]
+    此时若取一个总的$\delta = \min\{\delta_1,\delta_2\}$，令$\left\|T\right\|<\delta$作用于$(1)$和$(2)$两个求和中，依然满足上述两个不等式，将它们叠加：
+    \[0 \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i = \sum_{(1)}\omega_i\Delta x_i + \sum_{(2)}\omega_i\Delta x_i < 2\varepsilon\]
+    即表明存在$\displaystyle\lim_{\left\|T\right\| \to 0}\sum_{i=1}^{n}\omega_i\Delta x_i = 0$，根据\cref{thm:DarbouxIntegrabilityCriterion}，$\left.f(x)\right|_{[a,b]}$可积.进而对有限个间断点的情况也成立.
+\end{proof}
+
+对\cref{thm:ClassOfIntegrableFunctions}中\circnum{3}\textbf{(单调必可积)}的证明：
+\begin{proof}
+    不妨设$\left.f(x)\right|_{[a,b]}$上单调递增，闭区间上单调必有界，则有$m \leqslant f(x) \leqslant M$.
+
+    当$\left\|T\right\|<\delta$时有：
+    \[0 \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i < \delta\sum_{i=1}^{n}\omega_i = \delta\sum_{i=1}^{n}(f(x_i)-f(x_{i-1})) = \delta(f(b)-f(a)) = \delta(M-m)\]
+    于是$\forall \varepsilon > 0$，$\exists \delta = \dfrac{\varepsilon}{M-m+1}$，使得上式满足：
+    \[0 \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i < \varepsilon \quad\Rightarrow\quad \lim_{\left\|T\right\| \to 0}\sum_{i=1}^{n}\omega_i\Delta x_i = 0\]
+    根据\cref{thm:DarbouxIntegrabilityCriterion}，$\left.f(x)\right|_{[a,b]}$可积.
+\end{proof}
+
+对\cref{thm:IntegralAdditivity}\textbf{(积分的区间可加性)}的证明：
+\begin{proof}
+    \textbf{充分性：}现有$a<c<b$，取$[a,c]$上的任意分割$T_1$和$[c,b]$上的任意分割$T_2$如下：
+    \begin{gather*}
+        T_1:a=x_0<x_1<\cdots<x_m=c\\
+        T_2:c=x_m<x_{m+1}<\cdots<x_n=b
+    \end{gather*}
+    合并$T_1,T_2$得到$[a,b]$上的分割$T$，且满足：
+    \[\left\|T\right\| = \max\{\left\|T_1\right\|,\left\|T_2\right\|\}\]
+    
+    由此可以推出：
+    \[0 \leqslant \sum_{i=1}^{m}\omega_i\Delta x_i \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i,\qquad 0 \leqslant \sum_{i=m+1}^{n}\omega_i\Delta x_i \leqslant \sum_{i=1}^{n}\omega_i\Delta x_i\]
+    且$\left\|T_1\right\|\to 0,\left\|T_2\right\|\to 0$时必然有$\left\|T\right\|\to 0$，进一步
+    由于$\left.f\right|_{[a,b]}$可积，表明对$T$满足：
+    \[\lim_{\left\|T\right\|\to 0}\sum_{i=1}^{n}\omega_i\Delta x_i = 0\]
+    在此基础上由三明治定理得到：
+    \[\lim_{\left\|T_1\right\|\to 0}\sum_{i=1}^{m}\omega_i\Delta x_i = 0,\qquad \lim_{\left\|T_2\right\|\to 0}\sum_{i=m+1}^{n}\omega_i\Delta x_i = 0\]
+    即$\left.f\right|_{[a,c]}$和$\left.f\right|_{[c,b]}$可积，充分性得证.
+
+    \textbf{必要性：}对于$[a,b]$上任意分割$T$，加入$c$作为分割点形成一个加细分割$T'$，且$T'$可以分为$[a,c]$上的分割$T_1$和$[c,b]$上的分割$T_2$，且满足：
+    \[\left\|T\right\| \geqslant \left\|T'\right\| = \max\{\left\|T_1\right\|,\left\|T_2\right\|\} \geqslant 0\]
+    则当$\left\|T\right\|\to 0$时有$\left\|T_1\right\|\to 0,\left\|T_2\right\|\to 0$，在$\left.f\right|_{[a,c]}$和$\left.f\right|_{[c,b]}$可积的条件下，如下不等式成立：
+    \begin{align*}
+        0\leqslant\sum_{i=1}^{n}\omega_i\Delta x_i &= \overline{S}(T) - \underline{S}(T) \leqslant \overline{S}(T')-\underline{S}(T') + 2\omega\left\|T\right\|\\
+        &= \sum_{(1)}\omega_i\Delta x_i + \sum_{(2)}\omega_i\Delta x_i + 2\omega\left\|T\right\| \to 0
+    \end{align*}
+    于是有：
+    \[\lim_{\left\|T\right\|\to 0}\sum_{i=1}^{n}\omega_i\Delta x_i = 0\]
+    表明$\left.f\right|_{[a,b]}$可积，必要性得证.
+\end{proof}
+
+对\cref{thm:ProductIntegrability}中\circnum{2}\textbf{(乘积可积性)}的证明：
+\begin{proof}
+    对于在$[a,b]$上可积的$f,g$，其必有界，不妨设其均有界$M$.于是$\forall x,y\in[a,b]$有：
+    \begin{align*}
+        |f(x)g(x)-f(y)g(y)| &= |f(x)g(x)-f(y)g(x)+f(y)g(x)-f(y)g(y)|\\
+        &= |g(x)||f(x)-f(y)| + |f(y)||g(x)-g(y)|\\
+        &\leqslant M|f(x)-f(y)| + M|g(x)-g(y)|
+    \end{align*}
+    根据$x,y$的任意性，故而上式对分割的小区间中的$x,y$也成立，于是有：
+    \[\omega_i(fg) \leqslant M(\omega_i(f)+\omega_i(g))\]
+    两边求和：
+    \[\sum_{i=1}^{n}\omega_i(fg) \leqslant M\left(\sum_{i=1}^{n}\omega_i(f)+\sum_{i=1}^{n}\omega_i(g)\right)\]
+    利用上式，根据$f,g$在$[a,b]$上的可积性，不难推出$fg$在$[a,b]$上的可积性.
 \end{proof}
