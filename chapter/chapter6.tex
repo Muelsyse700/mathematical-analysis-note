@@ -14,3 +14,27 @@
     \[C_1 = c_1,\quad C_2=c_2,\quad \cdots, \quad C_n=c_n\]
     所得到的一个具体解，称为该微分方程的\overtext{特解}{particular solution}.
 \end{definition}
+
+\section{一阶微分方程}
+\subsection{分离变量法}
+对于形如$\displaystyle\dv{y}{x}=f(x,y)$的微分方程，若是有：
+\[\dv{y}{x} = f(x,y) = g(x)h(y)\]
+其中$g,h$都是连续函数且$h(y)$不恒为$0$，则原方程可化为：
+\[\frac{1}{h(y)}\dd{y} = g(x)\dd{x}\]
+两边积分：
+\[\int\frac{1}{h(y)}\dd{y} = \int g(x)\dd{x} \quad\Rightarrow\quad H(y) = G(x) + C\]
+上述结果即为原微分方程的通解.特别地，若有$y_0$使得$h(y_0) = 0$，这也是原微分方程的一个解，但是这个解在进行分离变量的时候丢失，从而无法被通解所描述，这样的解称为\textbf{例外解}.
+
+\begin{question}
+    求解方程：$(1+x^2)y\dd{y} + \sqrt{1-y^2}\dd{x} = 0$.
+\end{question}
+
+\begin{solution}
+    当$1-y^2 \neq 0$时，分离变量并积分：
+    \begin{align*}
+        \int\frac{y}{\sqrt{1-y^2}}\dd{y} &= -\int\frac{1}{1+x^2}\dd{x}\\
+        \sqrt{1-y^2} &= \arctan x + C
+    \end{align*}
+    同时注意到，若有$1-y^2=0$，即$y=\pm1$也满足原微分方程，故而这是例外解.于是这个方程的全部解为：
+    \[\sqrt{1-y^2} = \arctan x + C \quad\text{及}\quad y = \pm 1\]
+\end{solution}
