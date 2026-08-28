@@ -946,3 +946,31 @@ Riemann积分具有两个限制：
 
     当原有定义无法描述某些具有重要意义的现象时，可以通过保持原定义在已有范围内的性质，并增加新的规则，将其推广到更大的范围，例如负数的出现就是由于$\mathbb{N}_1$中的减法无法保证结果仍属于$\mathbb{N}_1$.这并不表明原定义存在漏洞，而是不同的定义服务于不同的问题.
 \end{extension}
+
+
+\subsection{瑕积分}
+\begin{definition}
+    设$f(x)$在$(a,b]$上有定义，若$\lim\limits_{x \to a^+}f(x)=\infty$，则称$a$为$f(x)$的\overtext{瑕点}{singular point}\textbf{(奇点)}.
+\end{definition}
+
+对于这些点，同样可以经由极限对Riemann积分的定义进行延拓，形成瑕积分的定义：
+\begin{definition}
+    设$f(x)$在$[a,b)$上有定义，$b$是$f(x)$的瑕点，取$0<\varepsilon<b-a$，挖去瑕点$b$附近的一个小区间$(b-\varepsilon,b)$，若$\left.f(x)\right|_{[a,b-\varepsilon]}$可积，且有下述极限收敛：
+    \[\lim_{\varepsilon\to 0^+}\int_{a}^{b-\varepsilon}f(x)\dd{x} \eqcolon \int_{a}^{b}f(x)\dd{x}\]
+    则称该极限值为$f(x)$的\overtext{瑕积分}{singular integral}.
+\end{definition}
+
+同理通过变下限积分可以定义瑕点在区间左端的瑕积分，对于瑕点在区间内部的，利用积分区间的可加性同样能够定义.
+
+\begin{question}
+    讨论$\displaystyle\int_{0}^{1}\frac{1}{x^\alpha}\dd{x},\quad\alpha>0$的敛散性.
+\end{question}
+
+\begin{solution}
+    \[\int_{0}^{1}\frac{1}{x^\alpha}\dd{x} = \begin{cases}
+        \ln x\Big|_0^1, \quad \alpha=1 \quad\Rightarrow\quad \text{发散}\\[1em]
+        \dfrac{1}{1-\alpha}x^{1-\alpha}\Big|_0^1, \quad \alpha>1 \quad\Rightarrow\quad \text{发散}\\[1em]
+        \dfrac{1}{1-\alpha}x^{1-\alpha}\Big|_0^1, \quad \alpha<1 \quad\Rightarrow\quad \text{收敛}
+    \end{cases}\]
+    即$\alpha\geqslant 1$时发散，$0<\alpha<1$时收敛.
+\end{solution}
