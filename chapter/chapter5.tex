@@ -974,3 +974,51 @@ Riemann积分具有两个限制：
     \end{cases}\]
     即$\alpha\geqslant 1$时发散，$0<\alpha<1$时收敛.
 \end{solution}
+
+
+\subsection{反常积分的换元积分和分部积分}
+设$\left.f(x)\right|_{[a,b)}$连续，$b=+\infty$，若要使用换元法，同样地，换元后应当满足$\varphi(\alpha)=a$，以及$\lim\limits_{t \to \beta}\varphi(t)=b$.
+
+对于换元后得到的新积分，若其收敛，则能够证明其原积分收敛.另一方面，换元法能够将一些反常积分转换为常义积分，此时原反常积分的收敛性便一目了然.
+
+在计算反常积分时，要先判明其敛散性：
+\begin{question}
+    设$\alpha\in\mathbb{R},\alpha>0$，求证$\displaystyle I = \int_{0}^{+\infty}\frac{1}{(1+x^2)(1+x^\alpha)}\dd{x}$收敛并求其值.
+\end{question}
+
+\begin{solution}
+    令$x \equiv \tan y,y\in\left[0,\dfrac{\pi}{2}\right)$，有：
+    \[I = \int_{0}^{\frac{\pi}{2}}\frac{1}{1+\tan^\alpha y}\dd{y}\]
+    上述积分是一个常义积分，且$y\to\dfrac{\pi}{2}^-$时有极限，故而原反常积分收敛.
+
+    拆分$I$的积分区间：
+    \[I = \int_{0}^{1}\frac{1}{(1+x^2)(1+x^\alpha)}\dd{x} + \int_{1}^{+\infty}\frac{1}{(1+x^2)(1+x^\alpha)}\dd{x}\]
+    令$x\equiv\dfrac{1}{t}$代入左边的积分：
+    \[I = \int_{1}^{+\infty}\frac{t^\alpha\dd{t}}{(1+t^2)(1+t^\alpha)} + \int_{1}^{+\infty}\frac{1}{(1+x^2)(1+x^\alpha)}\dd{x}\]
+    对于左边积分中的哑变量$t$，将之换为$x$，于是有：
+    \[I = \int_{1}^{+\infty}\frac{1+a^\alpha}{(1+x^2)(1+x^\alpha)}\dd{x} = \int_{0}^{+\infty}\frac{1}{1+x^2}\dd{x} = \arctan x\Big|_1^{+\infty} = \frac{\pi}{4}\]
+\end{solution}
+
+在反常积分中的分部积分法也是可以正常使用的，但是要注意保证分部结果的各项收敛.
+
+\begin{question}
+    证明瑕积分$\displaystyle I = \int_{0}^{\frac{\pi}{2}}\ln(\sin x)\dd{x}$收敛并求其值.
+\end{question}
+
+\begin{solution}
+    由分部积分法有：
+    \[I = x\ln(\sin x)\Big|_0^{\frac{\pi}{2}}-\int_{0}^{\frac{\pi}{2}}\frac{x}{\tan x}\dd{x} = -\int_{0}^{\frac{\pi}{2}}\frac{x}{\tan x}\dd{x}\]
+    结果为常义函数，故而$I$收敛.
+
+    令$x \equiv 2t$代入：
+    \begin{align*}
+        I &= 2\int_{0}^{\frac{\pi}{4}}\ln(\sin 2t)\dd{t}\\
+        &= 2\int_{0}^{\frac{\pi}{4}}(\ln2 + \ln(\sin t) + \ln(\cos t))\dd{t}\\
+        &= \frac{\pi}{2}\ln 2 + 2\int_{0}^{\frac{\pi}{4}}\ln(\sin t)\dd{t} + 2\int_{0}^{\frac{\pi}{4}}\ln(\cos t)\dd{t}
+    \end{align*}
+    对于最右边含$\cos$的积分，令$t \equiv \dfrac{\pi}{2} - y$：
+    \[\int_{0}^{\frac{\pi}{4}}\ln(\cos t)\dd{t} = -\int_{\frac{\pi}{2}}^{\frac{\pi}{4}}\ln\left(\cos\left(\frac{\pi}{2}-y\right)\right)\dd{y} = \int_{\frac{\pi}{4}}^{\frac{\pi}{2}}\ln(\sin y)\dd{y}\]
+    作哑变量替换代回：
+    \[I = \frac{\pi}{2}\ln 2 + 2\int_{0}^{\frac{\pi}{2}}\ln(\sin x)\dd{x} = \frac{\pi}{2}\ln 2 + 2I\]
+    最终有$I = -\dfrac{\pi}{2}\ln 2$.
+\end{solution}
