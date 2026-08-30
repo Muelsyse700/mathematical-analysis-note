@@ -125,14 +125,15 @@
     其中，若$Q(x)$恒为$0$，则称之为\textbf{线性齐次方程}；反之则为\textbf{线性非齐次方程}.应当注意，此处的「齐次」与「齐次函数」的「齐次」含义完全不同.
 \end{definition}
 \subsubsection{线性齐次方程}
-对于线性齐次方程，是可分离变量的，注意到$y=0$时有方程的例外解，现考虑$y \neq 0$时有：
+对于线性齐次方程，是可分离变量的，注意到$y=0$也满足方程，现考虑$y \neq 0$时有：
 \begin{align*}
     \dv{y}{x} + P(x)y &= 0\\
     \int\frac{\dd{y}}{y} &= -\int P(x)\dd{x}\\
     \ln|y| &= -\int P(x)\dd{x} + C_1
 \end{align*}
-取对数并去绝对值，有$C=\pm\ee^{C_1}$，同时由于$y=0$是例外解，故而$C=0$也成立，整合后有：
+取对数并去绝对值，有$C=\pm\ee^{C_1}$，同时由于$y=0$也是解，故而$C=0$也成立，整合后有：
 \[y = C \ee^{-\int P(x)\dd{x}},\quad C\text{为任意常数}\]
+这表明一阶线性微分方程不存在例外解，就算存在$y=0$这样的解也总是能被通解所描述.
 
 
 \subsubsection{线性非齐次方程}
@@ -204,7 +205,7 @@
 \end{question}
 
 \begin{solution}
-    注意到对于原方程$y=0$是一个例外解，现考虑$y \neq 0$的情况.
+    注意到对于原方程$y=0$是一个解，现考虑$y \neq 0$的情况.
 
     原方程为Bernoulli方程，设$u \equiv y^{-2}$，将之化为线性方程：
     \[\dv{u}{x} + 2xu = -2x^3\]
@@ -212,13 +213,50 @@
     \[\frac{1}{y^2} = 1-x^2+C\ee^{-x^2}\]
 \end{solution}
 
-\begin{extension}{一阶微分方程与向量场}
+
+\subsection{可降阶微分方程}
+\subsubsection{不显含未知函数的二阶方程}
+对于不显含未知函数$y$的二阶方程：
+\[f(x,y',y'') = 0\]
+引入$p \equiv y'$，则有$\displaystyle y'' = \dv{p}{x}$，原方程变为一阶方程：
+\[f(x,p,\dv{p}{x})\]
+求出上式的通解$\Phi(x,p,C)$，再将$p$代回，得到一个新的一阶微分方程$\Phi(x,y',C)$，最终求出$y$.
+
+\begin{question}
+    求解方程：$xy''+y'=4x$.
+\end{question}
+
+\begin{solution}
+    令$p \equiv y'$，方程化为：
+    \begin{align*}
+        xp' + p &= 4x\\
+        \dv{(xp)}{x} &= 4x\\
+        xp &= 2x^2 + C_1
+    \end{align*}
+    代回$p$，由此得到一个新的一阶微分方程：
+    \begin{align*}
+        xy' &= 2x^2 + C_1\\
+        \int\dd{y} &= \int \left(2x + \frac{C_1}{x}\right)\dd{x}\\
+        y &= x^2 + C_1\ln|x| + C_2
+    \end{align*}
+\end{solution}
+
+\subsubsection{不显含自变量的二阶方程}
+对于不显含自变量的二阶方程：
+\[f(y,y',y'') = 0\]
+引入$p \equiv y'$，则有：
+\[y'' = \dv{p}{x} = \dv{p}{y}\dv{y}{x} = p\dv{p}{y}\]
+原方程可降阶为：
+\[f\left(y,p,p\dv{p}{y}\right)\]
+此时上述方程中$y$变为了自变量，求出上述方程的通解$p = p(y,C)$，于是有新的一阶方程$y' = p(y,C)$，由此求得通解$y$.
+
+
+\subsection{一阶微分方程的几何意义}
 对于一阶微分方程：
 \[\dv{y}{x} = f(x,y) \quad\text{或}\quad (x,y) \mapsto k \mapsto \vect{v}\]
 这个微分方程用一个关于点$(x,y)$的函数描述了斜率在二维平面上各点的值，斜率所对应的切线可以看作是一个向量，整个平面上的所有向量则是一个向量场.
 
 也就是说一阶微分方程描述了向量场在平面上的分布，对于不同类型的一阶微分方程，向量场的分布也各有特点.求解微分方程，实际上就是求各点切线与向量场方向一致的曲线的表达式，通解对应一族曲线，特解则对应其中一条曲线.
-
 \begin{itemize}
     \item 若$f(x,y)$是可分离变量的函数，即：
     \[f(x,y) = g(x)h(y)\]
@@ -228,13 +266,68 @@
         \includegraphics[width=\textwidth]{differential-equation/separate-variable-equation/fig.pdf}
         \caption{可分离变量的一阶微分方程的解曲线与向量场}
     \end{figure}
+    \vspace{-2em}
     \item 若$f(x,y)$是齐次函数，其向量场则是在过原点的直线上表现出一致的变化规律，即斜率按照对原点距离的$n$次方变化：
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{differential-equation/homogeneous-equation/fig.pdf}
         \caption{一阶齐次微分方程的解曲线与向量场}
     \end{figure}
+    \vspace{-2em}
     特别地，对$0$次齐次方程，由于其对距离不敏感，故而每一条过原点的直线上的方向一致；对于$1$次齐次方程，其对距离的一次方和方向敏感，所以关于原点对称的两点的向量恰好是关于$x$轴对称的；对于$2$次齐次方程，由于关于距离的二次方和方向敏感，所以关于原点对称的两点的向量是一致的.
+    \item 若是一阶线性微分方程：
+    \[\dv{y}{x} + P(x)y = Q(x) \quad\Rightarrow\quad k = -P(x)y + Q(x)\]
+    故而对于固定的$x=x_0$，只要$P(x_0) \neq 0$，竖线$x=x_0$上必然有相应的$y = \frac{Q(x_0)}{P(x_0)}$使得斜率为$0$；若在$P(x_0)=0$时有$Q(x_0)=0$，则整条竖线都是对应斜率为$0$的点；若在$P(x_0)=0$时有$Q(x_0)\neq 0$，则整条竖线上都没有对应斜率为$0$的点.这意味着总是能在向量场中画出一条可能存在间断点的斜率为$0$的线.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{differential-equation/linear-equation/fig.pdf}
+        \caption{一阶线性微分方程的解曲线与向量场}
+    \end{figure}
 \end{itemize}
 
+
+\begin{extension}{动力学与状态空间(相空间)}
+    \begin{definition}
+        对于一个由常微分方程$f(x,y,y',\cdots,y^{(n)}) = 0$所描述的系统，若这些方程的表达式与自变量$x$无关，则称这个系统是\overtext{自治系统}{autonomous system}.
+
+        在动力学中，自治系统一般指的是不显含时的系统.
+    \end{definition}
+    对于一阶微分方程，不妨视其为一维上的运动，即：
+    \[v \coloneq \dot{x}  = f(t,x) \xlongequal{\text{自治系统}} f(x)\]
+    若其为自治系统，则有$x \mapsto v$.不妨认为，整个系统此刻的状态被$x$所唯一地描述，而系统下一刻的状态，可以由对应此刻状态$x$的$v$所预测.
+
+    也就是说，整个由$x$轴所张成的一维空间，包含了系统所有的可能状态.现在有一个自治的一阶微分方程，为这个空间中的每一个状态都赋予了它未来变化的趋势(速度).
+
+    现在考虑二阶微分方程所描述的一维运动：
+    \[a \coloneq \ddot{x} = f(t,x,\dot{x}) \xlongequal{\text{自治系统}} f(x,\dot{x}) \quad\text{或}\quad (x,v) \mapsto a\]
+    即整个系统此刻的状态仅由两个变量$(x,v)$所描述，由这两个变量所张成的二维空间，包含了整个系统所有的可能状态.
+
+    现在，一个自治的二阶微分方程为这个二维空间中的每一个状态都赋予了未来变化的趋势(加速度).与一维不同的是，这样的趋势包含了两方面的信息，即下一刻$x$如何变化和下一刻$v$如何变化.
+
+    不妨将描述一个系统所有可能状态的空间称为\overtext{状态空间}{state space}\!\!\textbf{(\!\!\overtext{相空间}{phase space}\!\!)}，而相空间上的一个点对应了一个状态.
+
+    而微分方程为相空间中的每一个点都赋予了「动力」，指明了当前状态未来的变化趋势.
+
+    以不忽略空气阻力的单摆系统为例，设摆长为$L$，摆质量为$m$，重力加速度为$g$，空气阻力为$c$.其可由一个二阶微分方程所描述：
+    \[\ddot{\theta} = -\frac{g}{L}\sin\theta - \frac{c}{mL^2}\dot{\theta}\]
+    显然，这是一个自治系统，其相空间为$(\theta,\dot{\theta})$.
+    
+    在相空间中用箭头标注二阶微分方程为每一点所指派的变化方向，颜色越深的箭头表明向这个方向的变化程度越高.在相空间中取定一点作为初始状态，不断按时间步进，最终绘制出的轨迹称为\overtext{相轨迹}{phase trajectory}.
+
+    假如在相空间中取所有可能的状态点，这些点都会随时间演化，它们会像流沙一样随向量场流动，形成\overtext{相流}{phase flow}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{phase-space/fig.pdf}
+        \caption{不同初速度单摆在相空间中的相轨迹}
+    \end{figure}
+    \vspace{-1.5em}
+    在上图中可以看到有初速度较慢的一条曲线，对应的状态点它在相空间中做螺旋线运动，最终随着能量被逐渐耗尽收敛至$(0,0)$处；而对于初速度较快的状态，其进行了若干次圆周运动，而后由于动能不足，由转动变为摆动，最终收敛至一点.
+
+    在上图中，相轨迹像是被捕获一样逐渐向某一点靠拢，能起到这样作用的点的集合，被称为\overtext{吸引子}{attractor}.
+
+    具体研究这些内容的数学领域是\overtext{动力系统理论}{dynamical systems theory}，物理领域是\textbf{Lagrange力学}与\textbf{Hamilton力学}.
+
+    此外，对于非自治的系统，其相空间的维数要增加一个时间维，变为\overtext{扩展相空间}{extended phase space}，就像是从相空间的每一点上长出一根根「胡须」一样的时间轴.
+
+    将一维相空间扩展出时间轴，就变成了先前讨论的$x-t$图像.「胡须」这样的比喻，实际上有着相应的数学理论，即\overtext{纤维丛}{fiber bundle}，研究它的数学领域是\overtext{微分几何}{differential geometry}与\overtext{拓扑学}{topology}.
 \end{extension}
