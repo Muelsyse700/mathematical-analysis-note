@@ -38,3 +38,108 @@
     同时注意到，若有$1-y^2=0$，即$y=\pm1$也满足原微分方程，故而这是例外解.于是这个方程的全部解为：
     \[\sqrt{1-y^2} = \arctan x + C \quad\text{及}\quad y = \pm 1\]
 \end{solution}
+
+
+\subsection{齐次方程}
+对于齐次方程，不能直接分离变量，但是经过特定步骤的换元后，就可以通过分离变量法求解.
+
+\begin{definition}
+    称$f(x,y)$是$n$次\overtext{齐次函数}{homogeneous function}，若其满足：
+    \[f(tx,ty) = t^n f(x,y)\]
+    称下述由同次齐次函数$P(x,y),Q(x,y)$构成的满足$f(tx,ty)=f(x,y)$的一阶微分方程为\textbf{齐次方程}：
+    \[P(x,y)\dd{x} + Q(x,y)\dd{y} = 0\]
+\end{definition}
+
+所谓齐次，就是每一项中所有变量的次数之和一致，它们具有一致的缩放规律，即对输入放大$t$倍，则输出放大$t^n$倍.
+
+从几何上看，如果把输入的$(x,y)$视作一个向量：
+\[(x,y) = x \left(1,\frac{y}{x}\right)\]
+其中$x$描述的是尺度，$\left(1,\dfrac{y}{x}\right)$则描述了方向，若$f$是$n$次齐次函数，则：
+\[f(x,y) = x^n f\left(1,\frac{y}{x}\right) \xlongequal{\varphi(u)\equiv f(1,u)} x^n \varphi(u)\]
+上式中$\varphi\left(\frac{y}{x}\right)$实际上就是一个控制单位矢量方向的函数.
+
+如是而言，一个齐次函数可以被看作是：
+\[\text{尺度}^n \times \text{仅与方向有关的函数}\]
+那么对于$0$次齐次函数，它是一个仅对方向敏感的函数；对于$1$次齐次函数，其是一个对一维尺度和方向敏感的函数，以此类推.
+
+对于齐次方程，由于有$\dfrac{P(x,y)}{Q(x,y)}$是$0$次齐次函数，因此可以将齐次方程化为：
+\[\dv{y}{x} = \varphi\left(\frac{y}{x}\right) \equiv \varphi(u)\]
+由于有$y = ux$，进一步有：
+\begin{align*}
+    \dv{y}{x} &= u + x\dv{u}{x}\\
+    x\dv{u}{x} &= \varphi(u) - u
+\end{align*}
+分离变量，最终原齐次微分方程可解：
+\begin{align*}
+    \frac{\dd{u}}{\varphi(u) - u} &= \frac{\dd{x}}{x}\\
+    \int\frac{\dd{u}}{\varphi(u) - u} &= \ln|x| + C
+\end{align*}
+其中$C$是任意常数，求出上式的不定积分后，再将$u$用$\dfrac{y}{x}$换回，即得到通解.若$\exists u_0$使得$\varphi(u_0)-u_0=0$，则$y=u_0 x$是方程的一个例外解.
+
+\begin{question}
+    求解方程：$\displaystyle\dv{y}{x} = \frac{x+y}{x-y}$.
+\end{question}
+
+\begin{solution}
+    令$y \equiv ux$，分离变量并积分：
+    \begin{align*}
+        \dv{y}{x} &= \frac{x+y}{x-y}\\
+        \int\frac{1-u}{1+u^2}\dd{u} &= \int\frac{\dd{x}}{x}\\
+        \arctan u - \frac{1}{2}\ln(1+u^2) &= \ln|x| + C_1
+    \end{align*}
+    将$u$换回，原方程的通解为：
+    \[\sqrt{x^2+y^2} = C \ee^{\arctan\frac{y}{x}}\]
+    这个方程是平面上一族以原点为中心的对数螺线.若采取极坐标则写为$r = C\ee^\theta$.
+\end{solution}
+
+\begin{question}
+    求解方程：$x\dd{y} = (y + \sqrt{x^2+y^2})\dd{x}$.
+\end{question}
+
+\begin{solution}
+    当$x>0$时，原方程可化为：
+    \begin{align*}
+        \dv{y}{x} &= \frac{y}{x} + \sqrt{1+\left(\frac{y}{x}\right)^2}\\
+        x\dv{u}{x} + u &= u + \sqrt{1+u^2}\\
+        \int\frac{\dd{u}}{\sqrt{1+u^2}} &= \int\frac{\dd{x}}{x}\\
+        \ln(u+\sqrt{1+u^2}) &= \ln x + C_1
+    \end{align*}
+    代回$u$得到通解为：
+    \[y + \sqrt{x^2+y^2} = Cx^2,\quad C=\ee^{C_1}>0\]
+
+    当$x<0$时，原方程可化为：
+    \begin{align*}
+        \dv{y}{x} &= \frac{y}{x} + \frac{|x|}{x}\sqrt{1+\left(\frac{y}{x}\right)}\\
+        \int\frac{\dd{u}}{\sqrt{1+u^2}} &= -\int\frac{\dd{x}}{x}\\
+        \ln|u+\sqrt{1+u^2}| &= -\ln|x| + C_2
+    \end{align*}
+    去绝对值后，注意到结果与$x>0$时一致，最终原方程的通可以写为：
+    \[y = \frac{1}{2}\left(Cx^2 - \frac{1}{C}\right),\quad C>0\]
+\end{solution}
+
+\begin{extension}{一阶微分方程与向量场}
+对于一阶微分方程：
+\[\dv{y}{x} = f(x,y) \quad\text{或}\quad (x,y) \mapsto k \mapsto \vect{v}\]
+这个微分方程用一个关于点$(x,y)$的函数描述了斜率在二维平面上各点的值，斜率所对应的切线可以看作是一个向量，整个平面上的所有向量则是一个向量场.
+
+也就是说一阶微分方程描述了向量场在平面上的分布，对于不同类型的一阶微分方程，向量场的分布也各有特点.求解微分方程，实际上就是求各点切线与向量场方向一致的曲线的表达式，通解对应一族曲线，特解则对应其中一条曲线.
+
+\begin{itemize}
+    \item 若$f(x,y)$是可分离变量的函数，即：
+    \[f(x,y) = g(x)h(y)\]
+    不难注意到，向量场在各点的值是由$x$和$y$分别控制的，下图中的向量场从每一条水平线或竖直线上看都表现出相同的变化规律：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{differential-equation/separate-variable-equation/fig.pdf}
+        \caption{可分离变量的一阶微分方程的解曲线与向量场}
+    \end{figure}
+    \item 若$f(x,y)$是齐次函数，其向量场则是在过原点的直线上表现出一致的变化规律，即斜率按照对原点距离的$n$次方变化：
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{differential-equation/homogeneous-equation/fig.pdf}
+        \caption{一阶齐次微分方程的解曲线与向量场}
+    \end{figure}
+    特别地，对$0$次齐次方程，由于其对距离不敏感，故而每一条过原点的直线上的方向一致；对于$1$次齐次方程，其对距离的一次方和方向敏感，所以关于原点对称的两点的向量恰好是关于$x$轴对称的；对于$2$次齐次方程，由于关于距离的二次方和方向敏感，所以关于原点对称的两点的向量是一致的.
+\end{itemize}
+
+\end{extension}
