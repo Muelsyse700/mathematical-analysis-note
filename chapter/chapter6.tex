@@ -117,6 +117,101 @@
     \[y = \frac{1}{2}\left(Cx^2 - \frac{1}{C}\right),\quad C>0\]
 \end{solution}
 
+
+\subsection{一阶线性方程}
+\begin{definition}
+    若一阶微分方程中的$y$和$y'$都是一次的，则称方程为\overtext{线性方程}{linear equation}，并可化为如下标准形式：
+    \[\dv{y}{x} + P(x)y = Q(x)\]
+    其中，若$Q(x)$恒为$0$，则称之为\textbf{线性齐次方程}；反之则为\textbf{线性非齐次方程}.应当注意，此处的「齐次」与「齐次函数」的「齐次」含义完全不同.
+\end{definition}
+\subsubsection{线性齐次方程}
+对于线性齐次方程，是可分离变量的，注意到$y=0$时有方程的例外解，现考虑$y \neq 0$时有：
+\begin{align*}
+    \dv{y}{x} + P(x)y &= 0\\
+    \int\frac{\dd{y}}{y} &= -\int P(x)\dd{x}\\
+    \ln|y| &= -\int P(x)\dd{x} + C_1
+\end{align*}
+取对数并去绝对值，有$C=\pm\ee^{C_1}$，同时由于$y=0$是例外解，故而$C=0$也成立，整合后有：
+\[y = C \ee^{-\int P(x)\dd{x}},\quad C\text{为任意常数}\]
+
+
+\subsubsection{线性非齐次方程}
+对于线性非齐次方程，有两种解法：
+\[\dv{y}{x} + P(x)y = Q(x) \neq 0\]
+\begin{enumerate}[solution]
+    \item 在方程两边同时乘因子$\ee^{\int P(x)\dd{x}}$：
+    \begin{align*}
+        \dv{y}{x}\cdot\ee^{\int P(x)\dd{x}} + y\cdot P(x)\ee^{\int P(x)\dd{x}} &= Q(x)\cdot\ee^{\int P(x)\dd{x}}\\
+        \dv{}{x}\left(y\ee^{\int P(x)\dd{x}}\right) &= Q(x)\cdot\ee^{\int P(x)\dd{x}}\\
+        y\ee^{\int P(x)\dd{x}} &= \int Q(x)\ee^{\int P(x)\dd{x}}\dd{x} + C
+    \end{align*}
+    移项后得到通解为：
+    \[y = \underbrace{\left(\int Q(x)\ee^{\int P(x)\dd{x}}\dd{x} + C\right)}_{C(x)}\cdot\ee^{-\int P(x)\dd{x}}\]
+
+    \item \textbf{常数变易法：}对比上一种解法得到的解及线性齐次方程的解，它们的解都是：
+    \[y = \text{一个因子} \cdot \ee^{-\int P(x)\dd{x}}\]
+    不妨设这个因子为待定的$C(x)$，即令：
+    \[y \equiv C(x)\cdot\ee^{-\int P(x)\dd{x}}\]
+    代入到原方程中求取：
+    \begin{align*}
+        \dv{}{x}\left(C(x)\ee^{-\int P(x)\dd{x}}\right) + P(x)\cdot C(x)\ee^{-\int P(x)\dd{x}} &= Q(x)\\
+        \dv{C(x)}{x} &= Q(x) \cdot \ee^{-\int P(x)\dd{x}}
+    \end{align*}
+    两边积分，解得$C(x)$的表达式：
+    \[C(x) = \int Q(x)\ee^{\int P(x)\dd{x}}\dd{x} + C,\quad C\text{为任意常数}\]
+    将$C(x)$的表达式代回至先前假设的$y$的表达式中，最终得到与第一种解法相同的结果.
+
+    上述方法通过模仿线性齐次方程的解提出试探解，假定原有的$C$不再是一个常数，而是一个变量$C(x)$，代回线性非齐次方程中求解其表达式，再代回试探解进而获得通解.
+    
+    这样的变换实现了从直接求取$y$转而变成求取$C(x)$间接求取$y$，这就是常数变易法.它适用于在已知线性齐次方程解的情况下快速求取非齐次状态下的解.
+\end{enumerate}
+
+\begin{question}
+    求解方程：$(2y^2 + y - x)\dd{y} - y\dd{x} = 0$.
+\end{question}
+
+\begin{solution}
+    注意到$y=0$是一个例外解，现在考虑$y \neq 0$的情况，方程可做如下变形：
+    \[\dv{y}{x} = \frac{y}{2y^2+y-x}\]
+    这不是一个线性方程，取倒数使之变为线性方程：
+    \[\dv{x}{y} + \frac{1}{y}\cdot x = 1+2y\]
+    故而这是一个以$y$为自变量$x$为因变量的线性非齐次方程，直接代入其通解的表达式：
+    \begin{align*}
+        x &= \left(\int(1+2y)\ee^{\int\frac{1}{y}\dd{y}}\dd{y}+C\right)\cdot\ee^{-\int\frac{1}{y}\dd{y}} = \frac{1}{|y|}\left(\int(1+2y)|y|\dd{y} + C\right)\\
+        &= \frac{1}{2}y + \frac{2}{3}y^2 + \frac{C}{y},\quad C \text{为任意常数}
+    \end{align*}
+\end{solution}
+
+
+\subsubsection{Bernoulli方程}
+有一些一阶方程经过适当的代换可以变为一阶线性方程，进而得以求解.以较为常见的Bernoulli方程为例：
+\begin{definition}
+    称形如下式的微分方程为\textbf{Bernoulli方程}：
+    \[\dv{y}{x} + P(x)y = Q(x)y^n,\quad n\in\mathbb{R},n\neq 0,1\]
+\end{definition}
+注意到对Bernoulli方程有：
+\begin{align*}
+    \dv{y}{x} + P(x)y &= Q(x)y^n\\
+    y^{-n}\dv{y}{x} + P(x)y^{1-n} &= Q(x)\\
+    \frac{1}{1-n}\dv{y^{1-n}}{x} + P(x)y^{1-n} &= Q(x)
+\end{align*}
+令$u \equiv y^{1-n}$有：
+\[\dv{u}{x} + (1-n)P(x)u = (1-n)Q(x)\]
+由此化为一阶线性非齐次方程.
+
+\begin{question}
+    求解方程：$\dv{y}{x} = xy + x^3 y^3$.
+\end{question}
+
+\begin{solution}
+    注意到对于原方程$y=0$是一个例外解，现考虑$y \neq 0$的情况.
+
+    原方程为Bernoulli方程，设$u \equiv y^{-2}$，将之化为线性方程：
+    \[\dv{u}{x} + 2xu = -2x^3\]
+    直接代公式求得其通解为$u = 1-x^2+C\ee^{-x^2}$，故而原方程的通解为：
+    \[\frac{1}{y^2} = 1-x^2+C\ee^{-x^2}\]
+\end{solution}
+
 \begin{extension}{一阶微分方程与向量场}
 对于一阶微分方程：
 \[\dv{y}{x} = f(x,y) \quad\text{或}\quad (x,y) \mapsto k \mapsto \vect{v}\]
