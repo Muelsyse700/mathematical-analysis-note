@@ -318,7 +318,7 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{phase-space/fig.pdf}
-        \caption{不同初速度单摆在相空间中的相轨迹\video{https://www.bilibili.com/video/BV1tb411G72z/?spm\_id\_from=333.337.search-card.all.click\&vd\_source=f33dc3a03154b5c0e21f702e4e6b5ce7}}
+        \caption{不同初速度单摆在相空间中的相轨迹\video{https://www.bilibili.com/video/BV1tb411G72z?t=353.1}}
     \end{figure}
     \vspace{-1.5em}
     在上图中初速度较慢的青色曲线，对应的状态点在相空间中做螺旋线运动，最终随着能量被逐渐耗尽收敛至$(0,0)$处；而对于初速度较快的状态(橙色)，其进行了若干次圆周运动，而后由于动能不足，由转动变为摆动，最终收敛至一点.
@@ -380,13 +380,13 @@
     \begin{enumerate}[circ]
         \item 对齐次方程，若$y_1,y_2$是它任意的两个解，则$c_1 y_1 + c_2 y_2$也是原方程的解.
         \item 对非齐次方程，若$y_1,y_2$是其特解，则$y_1 - y_2$是对应齐次方程的特解.
-        \item 若$y_0$是非齐次方程的解，则对任意齐次方程的解$y$有$y+y_0$仍是非齐次方程的解.
+        \item 若$y_0$是非齐次方程的解，则对任意齐次方程的解$y$有$y+y_0$是非齐次方程的解.
     \end{enumerate}
 \end{theorem}
 
 上述定理代入至齐次和非齐次方程后相加减易证.上述定理意味着只要能找出齐次方程的通解和一个非齐次方程的特解，就能找到非齐次方程的通解.
 
-\subsubsection{齐次方程解的结构}
+\subsubsection{二阶线性齐次方程解的结构}
 \begin{definition}
     设$\varphi_1(x),\varphi_2(x)$是区间$I$上的函数，如果$\exists c_1,c_2$不全为$0$，使得对$\forall x \in I$有：
     \[c_1 \varphi_1(x) + c_2 \varphi_2(x) = 0\]
@@ -524,3 +524,43 @@
         \alpha_2 & \beta_2
     \end{vmatrix} \neq 0$，故而只有在$y_1(x),y_2(x)$线性无关时，它们的线性组合才是原方程的通解.
 \end{proof}
+
+在上述诸多定理推导的过程中得知，对于一个二阶线性齐次方程，其必然存在基本解组，若有基本解组，就能基于线性组合得到原方程的通解.
+
+那么，求解基本解组成为了当前的主要矛盾.不妨先假设基本解组$(y_1(x),y_2(x))$中，$y_1(x)$是已知的一个非零解.
+
+必定$\exists x_0$使得$W(x_0) = 1$，于是有：
+\[W(x) = y_1(x)y_2'(x) - y_1'(x)y_2(x) = \ee^{-\int_{x_0}^{x}p(t)\dd{t}}\]
+两边同除$y_1^2(x)$，构造除法的导数：
+\begin{align*}
+    \frac{y_1(x)y_2'(x) - y_1'(x)y_2(x)}{y_1^2(x)} &= \frac{1}{y_1^2(x)}\ee^{-\int_{x_0}^{x}p(t)\dd{t}}\\
+    \dv{x}\left(\frac{y_2(x)}{y_1(x)}\right) &= \frac{1}{y_1^2(x)}\ee^{-\int_{x_0}^{x}p(t)\dd{t}}
+\end{align*}
+两边积分：
+\[y_2(x) = y_1(x)\int\frac{1}{y_1^2(x)}\ee^{-\int_{x_0}^{x}p(t)\dd{t}}\dd{x}\]
+上式表明，只要能得到二阶线性齐次方程的一个非零解$y_1(x)$，就能得到第二个解，进而得到通解.
+
+而对于求取第一个解的方法，则要具体问题具体分析.
+
+\begin{question}
+    求方程$xy'' - y' = 0$的通解.
+\end{question}
+
+\begin{solution}
+    原方程可化为：
+    \[y'' - \frac{1}{x}y' = 0\]
+    记$p(x) = \dfrac{1}{x}$.显然$y_1(x)= 1$是原方程的一个非零解，于是有另一个解：
+    \[y_2(x) = \int \exp(-\int_{x_0}^{x}\frac{1}{t}\dd{t})\dd{x} = C\int \left|\frac{x}{x_0}\right|\dd{x} = C_2 x^2\]
+    对于$y_1(x),y_2(x)$有$W(x) \neq 0$，则通解为：
+    \[y(x) = C_1 + C_2(x)\]
+\end{solution}
+
+
+\subsubsection{二阶线性非齐次方程解的结构}
+若$y_1(x),y_2(x)$是二阶线性齐次方程的线性无关解，那么有$c_1 y_1(x) + c_2 y_2(x)$是该方程的通解.
+
+又根据\cref{thm:SuperpositionPrincipleForLinearODEs}的\circnum{3}，若已知$y_0(x)$是相应非齐次方程的解，则：
+\[y(x) = y_0(x) + c_1 y_1(x) + c_2 y_2(x)\]
+根据$c_1,c_2$的任意性，$y(x)$是二阶线性非齐次方程的通解.
+
+也就是说，只要有非齐次方程的一个特解，和齐次方程的一个非零特解，那么就能求出非齐次方程的通解.
