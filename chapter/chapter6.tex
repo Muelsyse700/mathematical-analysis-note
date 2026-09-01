@@ -564,3 +564,57 @@
 根据$c_1,c_2$的任意性，$y(x)$是二阶线性非齐次方程的通解.
 
 也就是说，只要有非齐次方程的一个特解，和齐次方程的一个非零特解，那么就能求出非齐次方程的通解.
+
+
+\subsection{常数变易法}
+
+关于二阶线性非齐次方程，求出一个特解是求出通解的必要步骤.非齐次方程相较于齐次方程等号后不为$0$，也可以认为是相较于齐次方程增加了一些扰动.
+
+不妨模仿一阶线性非齐次方程的常数变易法，将扰动代入至无扰动的齐次方程的解的常数中.
+
+即对于线性无关的齐次方程的两个解$y_1(x),y_2(x)$，有$y = c_1 y_1(x) + c_2 y_2(x)$是其通解，进行常数变易，设相应的非齐次方程：
+\[y'' + py' + qy = f\]
+具有如下形式的解：
+\[y = c_1(x) y_1(x) + c_2(x) y_2(x)\]
+对$y$求导，得到：
+\[y' = c_1 y_1' + c_2 y_2' + c_1' y_1 + c_2' y_2\]
+为了计算的便利，不妨先设$c_1' y_1 + c_2' y_2 = 0$，在这个基础上：
+\[y'' = c_1 y_1'' + c_2 y_2'' + c_1' y_1' + c_2' y_2'\]
+此时有：
+\[\begin{cases}
+    py' = p c_1 y_1' + p c_2 y_2' \\
+    qy = q c_1 y_1 + q c_2 y_2
+\end{cases}\]
+代入回原方程：
+\[y'' + py' + qy = c_1(y_1'' + py_1' + qy_1) + c_2(y_2'' + py_2' + qy_2) + c_1' y_1' + c_2' y_2' = f\]
+由于$y_1,y_2$本就是相应齐次方程的线性无关解：
+\[\begin{cases}
+    y_1'' + py_1' + qy_1 = 0 \\
+    y_2'' + py_2' + qy_2 = 0
+\end{cases} \Rightarrow\quad y'' + py' + qy = c_1' y_1' + c_2' y_2' = f\]
+在此前假设的$c_1' y_1 + c_2' y_2 = 0$的条件下有：
+\[\begin{cases}
+    c_1' y_1 + c_2' y_2 = 0 \\
+    c_1' y_1' + c_2' y_2' = f(x)
+\end{cases} \Leftrightarrow\quad \begin{bmatrix}
+    y_1 & y_2 \\
+    y_1' & y_2'
+\end{bmatrix} \begin{bmatrix}
+    c_1' \\ c_2'
+\end{bmatrix} = \begin{bmatrix}
+    0 \\ f(x)
+\end{bmatrix}\]
+上述方程组有解$c_1',c_2'$的前提是$\begin{vmatrix}
+    y_1 & y_2 \\
+    y_1' & y_2'
+\end{vmatrix} = W(x) \neq 0$，对于线性无关的$y_1,y_2$，满足前述条件，上述方程组的一个解$c_1'$为：
+\[c_1'(x) = -\frac{y_2(x)}{W(x)}f(x)\]
+两边积分：
+\[c_1(x) = -\int\frac{y_2(x)}{W(x)}f(x)\dd{x} = -\int_{x_0}^{x}\frac{y_2(t)}{W(t)}f(t)\dd{t}\]
+同理有：
+\[c_2(x) = \int_{x_0}^{x}\frac{y_1(t)}{W(t)}f(t)\dd{t}\]
+于是非齐次方程的解$y = c_1(x)y_1(x) + c_2(x)y_2(x)$可写为：
+\begin{align*}
+    y &= y_2(x)\int_{x_0}^{x}\frac{y_1(t)}{W(t)}f(t)\dd{t} - y_1(x)\int_{x_0}^{x}\frac{y_2(t)}{W(t)}f(t)\dd{t} \\
+    &= \int_{x_0}^{x}\frac{y_2(x)y_1(t) - y_1(x)y_2(t)}{W(t)}f(t)\dd{t}
+\end{align*}
