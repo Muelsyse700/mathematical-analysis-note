@@ -102,13 +102,13 @@ latex_lines.append("\\endhead")
 latex_lines.append("\\midrule[0.05em]")
 latex_lines.append(f"\\multicolumn{{{len(header)}}}{{r@{{}}}}{{（接下表）}} \\\\")
 latex_lines.append("\\endfoot")
-latex_lines.append("\\bottomrule[0.08em]")
 latex_lines.append("\\endlastfoot")
 
 for row in rows:
     line = " & ".join([escape_latex(cell) for cell in row]) + " \\\\"
     latex_lines.append(line)
 
+latex_lines.append("\\bottomrule[0.08em]")
 latex_lines.append("\\end{xltabular}")
 
 latex_content = "\n".join(latex_lines)

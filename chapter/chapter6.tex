@@ -318,7 +318,7 @@
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{phase-space/fig.pdf}
-        \caption{不同初速度单摆在相空间中的相轨迹}
+        \caption{不同初速度单摆在相空间中的相轨迹\video{https://www.bilibili.com/video/BV1tb411G72z/?spm\_id\_from=333.337.search-card.all.click\&vd\_source=f33dc3a03154b5c0e21f702e4e6b5ce7}}
     \end{figure}
     \vspace{-1.5em}
     在上图中初速度较慢的青色曲线，对应的状态点在相空间中做螺旋线运动，最终随着能量被逐渐耗尽收敛至$(0,0)$处；而对于初速度较快的状态(橙色)，其进行了若干次圆周运动，而后由于动能不足，由转动变为摆动，最终收敛至一点.
@@ -360,6 +360,9 @@
 \end{bmatrix}\]
 
 \begin{theorem}
+    \label{thm:ExistenceAndUniquenessOfSolutions}
+    \textbf{解的存在唯一性}
+
     若$f(x),p(x),q(x)$在区间$I$上连续，并有$x_0 \in I$，则：
     \[\begin{cases}
         y'' + p(x)y' + q(x)y = f(x)\\
@@ -367,6 +370,157 @@
     \end{cases}\]
     对$\forall \alpha,\beta$，在$x_0$的邻域内存在唯一的解.
 
-    特别地，对齐次二阶线性方程满足初值$y(x_0)=0,x'(x_0)=0$的解恒为$y(x)=0$.
+    特别地，对齐次二阶线性方程满足初值$y(x_0)=0,y'(x_0)=0$的解恒为$y(x)=0$.
 \end{theorem}
 
+
+\subsection{二阶线性方程解的结构}
+\begin{theorem}
+    \label{thm:SuperpositionPrincipleForLinearODEs}
+    \begin{enumerate}[circ]
+        \item 对齐次方程，若$y_1,y_2$是它任意的两个解，则$c_1 y_1 + c_2 y_2$也是原方程的解.
+        \item 对非齐次方程，若$y_1,y_2$是其特解，则$y_1 - y_2$是对应齐次方程的特解.
+        \item 若$y_0$是非齐次方程的解，则对任意齐次方程的解$y$有$y+y_0$仍是非齐次方程的解.
+    \end{enumerate}
+\end{theorem}
+
+上述定理代入至齐次和非齐次方程后相加减易证.上述定理意味着只要能找出齐次方程的通解和一个非齐次方程的特解，就能找到非齐次方程的通解.
+
+\subsubsection{齐次方程解的结构}
+\begin{definition}
+    设$\varphi_1(x),\varphi_2(x)$是区间$I$上的函数，如果$\exists c_1,c_2$不全为$0$，使得对$\forall x \in I$有：
+    \[c_1 \varphi_1(x) + c_2 \varphi_2(x) = 0\]
+    则称$\varphi_1(x),\varphi_2(x)$是\overtext{线性相关}{linearly dependent}的，反之则为\overtext{线性无关}{linearly independent}的. 
+\end{definition}
+
+即对于线性相关的两个函数$\varphi_1(x),\varphi_2(x)$有$c_1 \varphi_1(x) + c_2 \varphi_2(x) = 0$有非零解.两边求导，易知$c_1 \varphi_1'(x) + c_2 \varphi_2'(x) = 0$也有非零解.
+
+联立这两个方程，取其系数行列式：
+
+\begin{definition}
+    若$\varphi_1(x),\varphi_2(x)$是$I$上的可导函数，称：
+    \[W(x) = \begin{vmatrix}
+        \varphi_1(x) & \varphi_2(x) \\
+        \varphi_1'(x) & \varphi_2'(x)
+    \end{vmatrix}\]
+    称$W(x)$为$\varphi_1(x),\varphi_2(x)$的\textbf{Wronski}\overtext{行列式}{determinant}\wiki{https://zh.wikipedia.org/wiki/\%E6\%9C\%97\%E6\%96\%AF\%E5\%9F\%BA\%E8\%A1\%8C\%E5\%88\%97\%E5\%BC\%8F}.
+\end{definition}
+
+根据线性方程组有非零解的条件，线性相关的两个函数$\varphi_1(x),\varphi_2(x)$的Wronski行列式等于$0$.但是Wronski行列式为$0$的两个函数不一定线性相关，即也存在线性无关但Wronski行列式为$0$的情况.
+
+但如果两个函数同为线性齐次方程的解，只要Wronski行列式为$0$，就表明二者线性相关：
+
+\begin{theorem}
+    \label{thm:WronskianCriterionForLinearDependence}
+    设函数$y_1(x),y_2(x)$是线性齐次方程的两个解，则它们在区间$I$上线性相关的充分必要条件是它们在$I$上的Wronski行列式恒为$0$.
+\end{theorem}
+
+\begin{proof}
+    \textbf{充分性：}由$y_1(x),y_2(x)$线性相关易证.
+
+    \textbf{必要性：}
+    不妨取$x=x_0 \in I$，其满足$W(x_0) = 0$，即表明方程组：
+    \[\begin{cases}
+        c_1 y_1(x) + c_2 y_2(x) = 0\\
+        c_1 y_1'(x) + c_2 y_2'(x) = 0\\
+    \end{cases}\]
+    有非零的解$c_1,c_2$，设有一个新的方程为：
+    \[y(x) = c_1 y_1(x) + c_2 y_2(x)\]
+
+    注意到$y_1(x),y_2(x)$是原方程的两个解，根据\cref{thm:SuperpositionPrincipleForLinearODEs}的\circnum{1}，上式中的$y(x)$作为$y_1(x),y_2(x)$的线性组合也是原方程的解.
+
+    代入$x=x_0$到$y(x)$，得到$y(x_0) = 0$；对上述方程两边求导后再代入，得到$y'(x_0)=0$.
+
+    根据\cref{thm:ExistenceAndUniquenessOfSolutions}\textbf{(解的存在唯一性)}，由$y(x)$作为线性齐次方程的解在$x=x_0$时满足的边界条件，故而有：
+    \[y(x) = c_1 y_1(x) + c_2 y_2(x) \equiv 0\]
+    上式表明具有非零的$c_1,c_2$使得$y_1(x),y_2(x)$的线性组合为$0$，进而其线性相关.
+\end{proof}
+
+\begin{theorem}
+    \textbf{Liouville公式}
+
+    二阶线性齐次方程的两个解$y_1(x),y_2(x)$的Wronski行列式可以用下述Liouville公式表示：
+    \[W(x) = W(x_0)\ee^{-\int_{x_0}^{x}p(t)\dd{t}}\]
+    其中$x_0 \in I$.
+\end{theorem}
+
+\begin{proof}
+    对$W(x)$求导，得到：
+    \[\dv{x}W(x) = y_1(x)y_2''(x) - y_1''(x)y_2(x)\]
+    由于$y_1(x),y_2(x)$是原方程的两个解，即：
+    \[\begin{cases}
+        y_1''(x) = - p(x)y_1'(x) - q(x)y_1 \\
+        y_2''(x) = - p(x)y_2'(x) - q(x)y_2
+    \end{cases}\]
+    代入至上式，有：
+    \[\dv{x}W(x) = -p(x)(y_1(x)y_2'(x) - y_2(x)y_1'(x)) = -p(x)W(x)\]
+    即对一阶线性齐次方程$W'(x) + p(x)W(x) = 0$，其解为：
+    \[W(x) = C'\ee^{-\int p(t)\dd{t}}\]
+    设$P(t)$为$p(t)$的一个原函数，注意到：
+    \[-\int_{x_0}^{x}p(t)\dd{t} = -P(x)+P(x_0) = -\int p(t)\dd{t} + P(x_0)\]
+    显然$\ee^{P(x_0)}$是一个常数，于是有：
+    \[W(x) = C\ee^{-\int_{x_0}^{x}p(t)\dd{t}},\quad C = C'\ee^{P(x_0)}\]
+    取$x = x_0$代入得到$W(x_0) = C$，于是上式进一步写为：
+    \[W(x) = W(x_0)\ee^{-\int_{x}^{x_0}p(t)\dd{t}}\]
+\end{proof}
+
+\begin{definition}
+    若$y_1(x),y_2(x)$是二阶线性齐次微分方程的两个线性无关解，称$(y_1(x),y_2(x))$是该方程的\overtext{基本解组}{fundamental set of solutions}.
+\end{definition}
+
+\begin{theorem}
+    二阶线性齐次方程$y''(x) + p(x)y' + q(x)y = 0$的基本解组一定存在.
+\end{theorem}
+
+\begin{proof}
+    $\exists \alpha_1,\alpha_2,\beta_1,\beta_2$使得$\begin{vmatrix}
+        \alpha_1 & \alpha_2 \\
+        \beta_1 & \beta_2
+    \end{vmatrix} \neq 0$，取其作为边界条件.
+    
+    根据\cref{thm:ExistenceAndUniquenessOfSolutions}\textbf{(解的存在唯一性)}，可知对于在前述边界条件下的二阶线性齐次微分方程：
+    \[\begin{cases}
+        y''(x) + p(x)y'(x) + q(x)y = 0\\
+        y(x_0) = \alpha_1, y'(x_0) = \beta_1
+    \end{cases}\]
+    一定$\exists y_1(x)$是其唯一解，同理在$y(x_0) = \alpha_2,y'(x_0) = \beta_2$的边界条件下具有唯一解$y_2(x)$.
+
+    对于二阶线性齐次方程的两个解$y_1(x),y_2(x)$，根据Liouville公式有：
+    \[W(x) = \begin{vmatrix}
+        y_1(x) & y_2(x) \\
+        y_1'(x) & y_2'(x)
+    \end{vmatrix} = W(x_0)\ee^{-\int_{x_0}^{x}p(t)\dd{t}} = \begin{vmatrix}
+        \alpha_1 & \beta_1 \\
+        \alpha_2 & \beta_2
+    \end{vmatrix}\ee^{-\int_{x_0}^{x}p(t)\dd{t}} \neq 0\]
+    即$\exists \alpha_1,\alpha_2,\beta_1,\beta_2$使得$W(x) \neq 0$，根据\cref{thm:WronskianCriterionForLinearDependence}，故而上述$y_1(x),y_2(x)$线性无关，二阶线性齐次方程的基本解组必定存在.
+\end{proof}
+
+\begin{theorem}
+    若$y_1(x),y_2(x)$是二阶线性齐次方程的一对线性无关解，则原方程的通解可以表示为：
+    \[y(x) = c_1 y_1 + c_2 y_2\]
+    其中$c_1,c_2$是任意常数.
+\end{theorem}
+
+上述定理与\cref{thm:SuperpositionPrincipleForLinearODEs}中\circnum{1}的区别是，前者表明了$y_1(x),y_2(x)$在线性无关的条件下的线性组合具有通解性，后者没有限定其线性无关，它们的线性组合不具有通解性.
+
+\begin{proof}
+    根据\cref{thm:SuperpositionPrincipleForLinearODEs}的\circnum{1}，对于二阶线性齐次方程任意的一个解$y(x)$，其可以分解为：
+    \[c_1 y_1(x) + c_2 y_2(x) = y(x)\]
+    沿用上一个定理证明所设的变量，取$x=x_0$代入上式，而后对上式求导后再代入得到：
+    \[\begin{cases}
+        \alpha_1 c_1 + \alpha_2 c_2 = y(x_0) \\
+        \beta_1 c_1 + \beta_2 c_2 = y'(x_0)
+    \end{cases} \Leftrightarrow\quad \begin{bmatrix}
+        \alpha_1 & \alpha_2 \\
+        \beta_1 & \beta_2
+    \end{bmatrix} \begin{bmatrix}
+        c_1 \\ c_2
+    \end{bmatrix} = \begin{bmatrix}
+        y(x_0) \\ y'(x_0)
+    \end{bmatrix}\]
+    上述方程的解$c_1,c_2$存在的条件是$\begin{vmatrix}
+        \alpha_1 & \beta_1 \\
+        \alpha_2 & \beta_2
+    \end{vmatrix} \neq 0$，故而只有在$y_1(x),y_2(x)$线性无关时，它们的线性组合才是原方程的通解.
+\end{proof}
