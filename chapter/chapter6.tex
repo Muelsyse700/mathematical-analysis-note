@@ -618,3 +618,52 @@
     y &= y_2(x)\int_{x_0}^{x}\frac{y_1(t)}{W(t)}f(t)\dd{t} - y_1(x)\int_{x_0}^{x}\frac{y_2(t)}{W(t)}f(t)\dd{t} \\
     &= \int_{x_0}^{x}\frac{y_2(x)y_1(t) - y_1(x)y_2(t)}{W(t)}f(t)\dd{t}
 \end{align*}
+
+
+\subsection{二阶常系数齐次线性微分方程}
+在前述内容的推导中，求解二阶线性齐次方程前提是必须事先知道一个非零解，才能构造另外一个解.
+
+现在讨论如何解决求取第一个解的问题，对于常系数方程：
+\[y'' + py' + qy = 0,\quad p,q\in\mathbb{R}\]
+假设上述方程有形如$y(x) = \ee^{\lambda x}$的解，上式可化为：
+\[\lambda^2 \ee^{\lambda x} + \lambda p \ee^{\lambda x} + q \ee^{\lambda x} = 0\]
+进一步有：
+\[\lambda^2 + p\lambda + q =0\]
+上式称为\overtext{特征方程}{characteristic equation}.只要有$\lambda$是特征方程的一个根，就对应了原方程的一个解$y(x)=\ee^{\lambda x}$.
+
+作为二次方程的解的$\lambda$，具有不同的情形：
+\begin{enumerate}[circ]
+    \item \textbf{若$\lambda_1,\lambda_2$是两个不同的实根：}\\
+    则对应的两个解$y_1(x)=\ee^{\lambda_1 x},y_2(x)=\ee^{\lambda_2 x}$的Wronski行列式：
+    \[W(x) = (\lambda_2 - \lambda_1)\ee^{(\lambda_2 - \lambda_1)x} \neq 0\]
+    故而$y_1(x),y_2(x)$是线性无关解，于是原方程的通解为：
+    \[y(x) = C_1\ee^{\lambda_1 x} + C_2\ee^{\lambda_2 x}\]
+    \item \textbf{若$\lambda_1,\lambda_2$是一对共轭复根：}\\
+    尝试转换为实函数解，设有$\lambda_1 = \alpha + \ii\beta,\lambda_2 = \alpha - \ii\beta$，由Euler公式：
+    \[\begin{cases}
+        y_1(x) = \ee^{\lambda_1 x} = (\cos\beta x + \ii\sin\beta x)\ee^{\alpha x} \\
+        y_2(x) = \ee^{\lambda_2 x} = (\cos\beta x - \ii\sin\beta x)\ee^{\alpha x}
+    \end{cases}\]
+    根据\cref{thm:SuperpositionPrincipleForLinearODEs}的\circnum{1}，$y_1(x),y_2(x)$的线性组合还是原齐次方程的解：
+    \[\begin{cases}
+        \ee^{\alpha x}\cos\beta x = \dfrac{\ee^{\lambda_1 x} + \ee^{\lambda_2 x}}{2} \\
+        \ee^{\alpha x}\sin\beta x = \dfrac{\ee^{\lambda_1 x} - \ee^{\lambda_2 x}}{2\ii}
+    \end{cases}\]
+    上述两个解的Wronski行列式不为$0$，故而构成原方程的实函数基本解组，于是有通解为：
+    \[y(x) = (C_1 \cos\beta x + C_2 \sin\beta x)\ee^{\alpha x}\]
+    \item \textbf{若$\lambda_1 = \lambda_2$是一对实重根：}\\
+    显然$y_1(x)= \ee^{\lambda x}$是一个解，令第二个解具有形式$y_2 = v(x)\ee^{\lambda x}$，对其有：
+    \begin{gather*}
+        y_2' = v'\ee^{\lambda x} + \lambda v \ee^{\lambda x}\\
+        y_2'' = v''\ee^{\lambda x} + 2\lambda v' \ee^{\lambda x} + \lambda^2 v \ee^{\lambda x}
+    \end{gather*}
+    代回原方程$y'' + py' + q = 0$：
+    \begin{align*}
+        ((v'' + 2\lambda v' + \lambda^2 v) + (pv' + p\lambda v) + qv)\ee^{\lambda x} &= 0 \\
+        (v'' + (2\lambda + p)v' + (\lambda^2 + p\lambda + q)v)\ee^{\lambda x} &= 0
+    \end{align*}
+    注意到上式中有$\lambda = \frac{-p \pm \sqrt{p^2 - 4q}}{2} = -\frac{p}{2} \Rightarrow 2\lambda + p = 0$；又有$\lambda^2 + p\lambda + q = 0$是原方程的特征方程，于是上式变为：
+    \[v'' = 0 \quad\Rightarrow\quad v'' = C_1 + C_2 x \quad\Rightarrow\quad y_2(x) = (C_1 + C_2 x)e^{\lambda x}\]
+    不妨取$y_2(x)$中$C_1 = 0,C_2 = 1$，得到第二个解$y_2(x) = x\ee^{\lambda x}$.显然$y_1(x),y_2(x)$的Wronski行列式不为$0$，二者构成原方程的基本解组，通解为：
+    \[y(x) = (C_1 + C_2 x)\ee^{\lambda x}\]
+\end{enumerate}
