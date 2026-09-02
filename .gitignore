@@ -330,7 +330,7 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
-# 忽略 references 目录及其内部的所有文件
-references/
+# 忽略 reference 目录及其内部的所有文件
+reference/
 
 .DS_Store

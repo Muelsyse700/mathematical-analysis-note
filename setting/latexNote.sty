@@ -1,3 +1,35 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{latexNote}
+
+\RequirePackage{geometry}                                   % 页面边距
+\RequirePackage{fancyhdr}                                   % 页眉页脚
+\RequirePackage{enumitem, ragged2e}                         % 列表格式修改、文本对齐优化
+\RequirePackage{keyval, etoolbox, xparse}                   % 宏包底层工具、环境定制、参数解析
+\RequirePackage{tikz}                                       % 矢量图绘制
+\RequirePackage{calligra, fontawesome5}                     % 花体字、图标字符支持
+\RequirePackage{amsmath, amsthm, amssymb, amsfonts}         % 基础数学与定理
+\RequirePackage{extarrows,mathtools}                        % 长等号
+\RequirePackage{stackengine}                                % 文字堆叠
+\RequirePackage{unicode-math, physics, esint, cases}        % 字体、物理符号、积分、大括号公式
+\RequirePackage{siunitx}                                    % 科学单位制
+\RequirePackage{graphicx, float, caption, subcaption, wrapfig}% 插图支持、浮动体强制位置、标题设置、子图支持
+\RequirePackage{booktabs, tabularx, xltabular, makecell, array} % 三线表、长表格、单元格强化
+\RequirePackage[dvipsnames]{xcolor}                         % 颜色支持 (建议放在tcolorbox前)
+\RequirePackage[most, theorems, breakable]{tcolorbox}       % 彩色文本框
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage[version=4]{mhchem}                          % 化学公式支持
+\RequirePackage{listings}                                   % 程序代码块渲染
+\RequirePackage{thmtools}                                   % 定理环境增强管理
+\RequirePackage{silence}                                    % 忽略警告
+\RequirePackage[style=iso]{datetime2}                       % 封面日期
+\RequirePackage[numbers, sort&compress]{natbib}             % 参考文献引注
+\RequirePackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref} % 超链接
+\RequirePackage[capitalize,nameinlink,noabbrev]{cleveref}   % 智能交叉引用 (必须在 hyperref 之后)
+
+% [usedPackages.tex]-[baseSettings.tex]
+% [usedPackages.tex]-[baseSettings.tex]
+
 % !字体和版式设置
 % #region
 \geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm} % 设定页边距
@@ -98,7 +130,7 @@
         \centering
         \begin{tikzpicture}[remember picture, overlay]
             \node[anchor=south west, inner sep=0pt] at (current page.south west) {
-                \includegraphics[width=\paperwidth, height=\paperheight]{settings/cover.pdf}
+                \includegraphics[width=\paperwidth, height=\paperheight]{setting/cover.pdf}
             };
 
             \node[anchor=north, inner sep=0pt] at ([shift={(0.82cm, 9.2cm)}]current page.center) {
@@ -615,3 +647,18 @@
 \WarningFilter{caption}{Unused \captionsetup}
 \vbadness=10000
 % #endregion
+
+% [baseSettings.tex]-[myCommands.tex]
+% [baseSettings.tex]-[myCommands.tex]
+
+% !设置自定义功能
+\newcommand{\vect}[1]{\symbf{#1}} % 粗体向量
+\newcommand{\overtext}[2]{\stackon[0.5pt]{\textbf{#1}}{\textsf{\textbf{\fontsize{5pt}{5pt}\selectfont #2}}}} % 文本顶部英文
+\newcommand{\dashedmid}{\mathrel{\tikz[baseline=0pt]{\draw[dashed, dash pattern=on 2.4pt off 2.4pt, line width=0.6pt] (0,-0.55ex) -- (0,1.85ex);}}} % 虚竖线
+\newcommand{\ee}{\mathrm{e}} % 正体自然常数e
+\newcommand{\ii}{\mathrm{i}} % 正体虚数i
+\newcommand{\circnum}[1]{{\bfseries\itshape{#1}\,${}^\circ$}} % 圆圈序号
+\newcommand{\wiki}[1]{\href{#1}{\raisebox{1.2ex}{\textcolor{black}{\scriptsize\faWikipediaW}}}} % wiki图标超链接
+\newcommand{\video}[1]{\href{#1}{\raisebox{1.2ex}{\textcolor{black}{\scriptsize\faPlayCircle[regular]}}}} % 视频超链接
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\endinput
