@@ -1,48 +1,111 @@
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{latexNote}
+% @name: core-setting
+% @description: 自动生成的LaTeX设置文件
 
-\RequirePackage{geometry}                                   % 页面边距
-\RequirePackage{fancyhdr}                                   % 页眉页脚
-\RequirePackage{enumitem, ragged2e}                         % 列表格式修改、文本对齐优化
-\RequirePackage{keyval, etoolbox, xparse}                   % 宏包底层工具、环境定制、参数解析
-\RequirePackage{tikz}                                       % 矢量图绘制
-\RequirePackage{calligra, fontawesome5}                     % 花体字、图标字符支持
-\RequirePackage{amsmath, amsthm, amssymb, amsfonts}         % 基础数学与定理
-\RequirePackage{extarrows,mathtools}                        % 长等号
-\RequirePackage{stackengine}                                % 文字堆叠
-\RequirePackage{unicode-math, physics, esint, cases}        % 字体、物理符号、积分、大括号公式
-\RequirePackage{siunitx}                                    % 科学单位制
-\RequirePackage{graphicx, float, caption, subcaption, wrapfig}% 插图支持、浮动体强制位置、标题设置、子图支持
-\RequirePackage{booktabs, tabularx, xltabular, makecell, array} % 三线表、长表格、单元格强化
-\RequirePackage[dvipsnames]{xcolor}                         % 颜色支持 (建议放在tcolorbox前)
-\RequirePackage[most, theorems, breakable]{tcolorbox}       % 彩色文本框
-\RequirePackage[explicit]{titlesec}
-\RequirePackage{titletoc}
-\RequirePackage[version=4]{mhchem}                          % 化学公式支持
-\RequirePackage{listings}                                   % 程序代码块渲染
-\RequirePackage{thmtools}                                   % 定理环境增强管理
-\RequirePackage{silence}                                    % 忽略警告
-\RequirePackage[style=iso]{datetime2}                       % 封面日期
-\RequirePackage[numbers, sort&compress]{natbib}             % 参考文献引注
-\RequirePackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref} % 超链接
-\RequirePackage[capitalize,nameinlink,noabbrev]{cleveref}   % 智能交叉引用 (必须在 hyperref 之后)
+% !宏包依赖
 
-% [usedPackages.tex]-[baseSettings.tex]
-% [usedPackages.tex]-[baseSettings.tex]
+% @order: 0
+% @description: 宏包依赖
+
+% 基础工具
+\usepackage{keyval, etoolbox, xparse}
+
+% 页面与版式基础
+\usepackage{geometry}
+\usepackage{fancyhdr}
+
+% 数学环境
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathtools}
+\usepackage{extarrows}
+\usepackage{stackengine}
+\usepackage{unicode-math, physics, esint, cases}
+\usepackage{siunitx}
+
+% 文本与列表
+\usepackage{enumitem, ragged2e}
+
+% 绘图与图像
+\usepackage{tikz}
+\usepackage{graphicx, float, caption, subcaption, wrapfig}
+
+% 表格
+\usepackage{booktabs, tabularx, xltabular, makecell, array}
+
+% 颜色与文本框
+\usepackage[dvipsnames]{xcolor}
+\usepackage[most, theorems, breakable]{tcolorbox}
+
+% 标题与目录
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+
+% 字符、图标、化学
+\usepackage{calligra, fontawesome5}
+\usepackage[version=4]{mhchem}
+
+% 代码
+\usepackage{listings}
+
+% 定理管理
+\usepackage{thmtools}
+
+% 日期
+\usepackage[style=iso]{datetime2}
+
+% 参考文献
+\usepackage[numbers, sort&compress]{natbib}
+
+% 警告控制
+\usepackage{silence}
+
+% 超链接与引用（必须最后）
+\usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
+\usepackage[capitalize, nameinlink, noabbrev]{cleveref}
+
+% !设置全局字体、页面布局
+
+% @order: 1
+% @description: 设置全局字体、页面布局
 
 % !字体和版式设置
 % #region
-\geometry{left=2.5cm, right=2.5cm, top=3cm, bottom=3cm} % 设定页边距
-%\setCJKmainfont{SimSun}[BoldFont=SimHei,ItalicFont=KaiTi] % 字体设置
+
+% 页面布局
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+
+% 中文字体设置
+%\setCJKmainfont{SimSun}[BoldFont=SimHei,ItalicFont=KaiTi]
 \setCJKmainfont{Source Han Serif SC}[
     BoldFont={Source Han Sans SC Medium},
     ItalicFont={Kaiti SC}
 ]
-\setCJKsansfont{Source Han Sans SC}[BoldFont={Source Han Sans SC Bold}]
+\setCJKsansfont{Source Han Sans SC}[
+    BoldFont={Source Han Sans SC Bold}
+]
 \newCJKfontfamily\fangsong{FangSong}
 \newCJKfontfamily\heavyfont{Source Han Serif SC Heavy}
 \setCJKmonofont{PingFang SC}
-\let\cleardoublepage\clearpage % 取消自动跨页
+
+% 数学字体设置
+\setmathfont{latinmodern-math.otf}
+\setmathfont[
+    range={"2205},
+    Scale=MatchUppercase
+]{STIX Two Math}
+
+% 文档分页与数学排版
+\let\cleardoublepage\clearpage
+\allowdisplaybreaks
+
+% 页面垂直对齐
+\raggedbottom
+
+% 章节名称设置
 \ctexset{
     chapter/name={},
     chapter/number=\arabic{chapter},
@@ -51,70 +114,88 @@
     chapter/beforeskip=0pt,
     chapter/afterskip=0pt,
 }
-\setmathfont{latinmodern-math.otf}
-\setmathfont[range={"2205}, Scale=MatchUppercase]{STIX Two Math} % 设置空集符号样式
-\allowdisplaybreaks
-\raggedbottom
 
-
-% 设置正文Chapter样式
+% Chapter样式
 \titleformat{\chapter}[display]
-    {\raggedright} % 整体左对齐
+    {\raggedright}
     {
         {\fontsize{40pt}{50pt}\selectfont\bfseries C}
         {\fontsize{25pt}{40pt}\selectfont\bfseries \!hapter~}
         {\fontsize{40pt}{50pt}\selectfont\bfseries \thechapter}
     }
-    {-15pt} % 标签和标题之间的垂直距离
+    {-15pt}
     {\huge\heavyfont #1}
-\titlespacing*{\chapter}{0pt}{-20pt}{30pt}
 
-% 设置正文Section样式
+\titlespacing*{\chapter}
+    {0pt}
+    {-20pt}
+    {30pt}
+
+% Section样式
 \tcbset{
     sectionbox/.style={
         enhanced,
-        capture=hbox,           % 宽度自适应
-        % 去掉背景色 (设为白色，或者用 standard jigsaw, opacityback=0 做透明)
+        capture=hbox,
         colback=white,
-        colframe=black,         % 边框颜色
-        boxrule=0.5pt,          % 先把所有边框归零(去掉上下边框)
-        leftrule=3pt,           % 左边框加粗 (比如 3pt)
-        rightrule=3pt,          % 右边框加粗
-        arc=5pt,                
-        left=15pt, right=15pt,
-        top=6pt, bottom=6pt,
+        colframe=black,
+        boxrule=0.5pt,
+        leftrule=3pt,
+        rightrule=3pt,
+        arc=5pt,
+        left=15pt,
+        right=15pt,
+        top=6pt,
+        bottom=6pt,
         fontupper=\Large\bfseries,
     }
 }
+
 \titleformat{\section}
     {\normalfont}
-    {}                       % 标签留空
-    {0pt}                    % 间距
-    {\begin{tcolorbox}[sectionbox]
-        \S\thesection\quad #1
-    \end{tcolorbox}}
-\titlespacing{\section}{0pt}{0pt}{-20pt} % 调整标题周围的间距 (左, 上, 下)
+    {}
+    {0pt}
+    {
+        \begin{tcolorbox}[sectionbox]
+            \S\thesection\quad #1
+        \end{tcolorbox}
+    }
 
+\titlespacing{\section}
+    {0pt}
+    {0pt}
+    {-20pt}
+
+% 单位格式
 \sisetup{
     per-mode = reciprocal,
     inter-unit-product = \ensuremath{\cdot}
 }
 
+% 表格格式
 \renewcommand{\tabularxcolumn}[1]{m{#1}}
 \newcolumntype{L}{>{\hbadness=10000\relax}X}
 
 % #endregion
 
+% !设置封面样式
+
+% @order: 2
+% @description: 设置封面样式
 
 % !设置封面
 % #region
+
 \makeatletter
+
+% 封面信息接口
 \newcommand{\covertitle}[1]{\def\@covertitle{#1}}
 \newcommand{\coverengtitle}[1]{\def\@coverengtitle{#1}}
 \newcommand{\coverauthor}[1]{\def\@coverauthor{#1}}
 \newcommand{\coverdate}[1]{\def\@coverdate{#1}}
 \newcommand{\covergithub}[1]{\def\@covergithub{#1}}
 \newcommand{\coverorcid}[1]{\def\@coverorcid{#1}}
+
+% 默认封面信息
 \def\@covertitle{主标题}
 \def\@coverengtitle{English Title}
 \def\@coverauthor{Your Name}
@@ -122,80 +203,158 @@
 \def\@covergithub{https://github.com}
 \def\@coverorcid{https://orcid.org}
 
+
+% 生成封面
 \newcommand{\makemycover}{
+    
+    % 封面颜色
     \definecolor{covertext1}{HTML}{A49883}
     \definecolor{covertext2}{HTML}{B19F87}
+
     \begin{titlepage}
+
         \newgeometry{margin=0pt}
+
         \centering
+
         \begin{tikzpicture}[remember picture, overlay]
-            \node[anchor=south west, inner sep=0pt] at (current page.south west) {
-                \includegraphics[width=\paperwidth, height=\paperheight]{setting/cover.pdf}
+
+            % 背景图片
+            \node[anchor=south west, inner sep=0pt]
+            at (current page.south west) {
+                \includegraphics[
+                    width=\paperwidth,
+                    height=\paperheight
+                ]{setting/cover.pdf}
             };
 
-            \node[anchor=north, inner sep=0pt] at ([shift={(0.82cm, 9.2cm)}]current page.center) {
+
+            % 主标题
+            \node[
+                anchor=north,
+                inner sep=0pt
+            ]
+            at ([shift={(0.82cm, 9.2cm)}]current page.center) {
                 \begin{tabular}{c}
-                    {\fontsize{60pt}{72pt}\selectfont\heavyfont \@covertitle} \\ [0.8cm]
+                    {\fontsize{60pt}{72pt}\selectfont\heavyfont \@covertitle}\\[0.8cm]
                     {\fontsize{27pt}{40pt}\selectfont\calligra \@coverengtitle}
                 \end{tabular}
             };
 
-            \node[anchor=south west, inner sep=0pt, text=covertext1] at ([shift={(3.5cm, 1cm)}]current page.south west) {
+
+            % 信息区域
+            \node[
+                anchor=south west,
+                inner sep=0pt,
+                text=covertext1
+            ]
+            at ([shift={(3.5cm,1cm)}]current page.south west) {
                 \begin{tabular}{l}
-                    {\fontsize{16pt}{30pt}\selectfont \bfseries Updated:\!\!} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \today}\\
-                    {\fontsize{16pt}{30pt}\selectfont \bfseries Created:} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \@coverdate}\\
-                    {\fontsize{16pt}{30pt}\selectfont \bfseries Author:~} \ {\fontsize{16pt}{30pt}\selectfont \bfseries \@coverauthor}
+                    {\fontsize{16pt}{30pt}\selectfont\bfseries Updated:\!\!}
+                    \ {\fontsize{16pt}{30pt}\selectfont\bfseries\today}\\
+                    {\fontsize{16pt}{30pt}\selectfont\bfseries Created:}
+                    \ {\fontsize{16pt}{30pt}\selectfont\bfseries\@coverdate}\\
+                    {\fontsize{16pt}{30pt}\selectfont\bfseries Author:~}
+                    \ {\fontsize{16pt}{30pt}\selectfont\bfseries\@coverauthor}
                 \end{tabular}
             };
 
-            \node[anchor=south west, rotate=90, text=covertext2] at ([shift={(1.5cm, 1cm)}]current page.south west) {
-                {\fontsize{24pt}{35pt}\selectfont {\calligra Powered by} \bfseries \LaTeX}
+
+            % Powered by LaTeX
+            \node[
+                anchor=south west,
+                rotate=90,
+                text=covertext2
+            ]
+            at ([shift={(1.5cm,1cm)}]current page.south west) {
+                {\fontsize{24pt}{35pt}\selectfont
+                {\calligra Powered by} \bfseries\LaTeX}
             };
 
-            \node[anchor=south, inner sep=0pt] at ([shift={(0.82cm, 8cm)}]current page.south west) {
+
+            % ORCID/GitHub
+            \node[
+                anchor=south,
+                inner sep=0pt
+            ]
+            at ([shift={(0.82cm,8cm)}]current page.south west) {
                 \begin{tabular}{c}
-                    \href{\@coverorcid}{\color{covertext2}\fontsize{20pt}{24pt}\selectfont \faOrcid} \\[0.1cm]
-                    \href{\@covergithub}{\color{covertext2}\fontsize{20pt}{24pt}\selectfont \faGithub}
+                    \href{\@coverorcid}{
+                        \color{covertext2}
+                        \fontsize{20pt}{24pt}\selectfont\faOrcid
+                    }\\[0.1cm]
+                    \href{\@covergithub}{
+                        \color{covertext2}
+                        \fontsize{20pt}{24pt}\selectfont\faGithub
+                    }
                 \end{tabular}
             };
+
         \end{tikzpicture}
+
         \vfill
+
     \end{titlepage}
+
     \restoregeometry
 }
+
 \makeatother
+
 % #endregion
 
+% !设置目录样式
+
+% @order: 3
+% @description: 设置目录样式
 
 % !设置目录
 % #region
+
+% 目录标题样式
 \titleformat{name={\chapter},numberless}[block]
     {\Huge\heavyfont}
     {}
     {0pt}
     {#1}
+
+
+% 目录条目样式
 \titlecontents{chapter}
-    [0pt]                   % 左边距
-    {\addvspace{1em}\bfseries} % 上方间距 + 字体加粗
+    [0pt]
+    {\addvspace{1em}\bfseries}
     {Chapter~\thecontentslabel\hspace{1em}}
-    {}                      % 无编号时的格式
-    {\hfill\contentspage}   % 页码右对齐
-\makeatletter
+    {}
+    {\hfill\contentspage}
+
+
+% 生成目录
 \newcommand{\makecontents}{
     \let\oldcleardoublepage\cleardoublepage
     \let\cleardoublepage\clearpage
+
     \frontmatter
+
     \pagestyle{plain}
+
     \begingroup
-        \ctexset{contentsname = {目~录}}
+        \ctexset{
+            contentsname = {目~录}
+        }
         \tableofcontents
     \endgroup
+
     \mainmatter
+
     \let\cleardoublepage\oldcleardoublepage
 }
-\makeatother
+
 % #endregion
 
+% !设置彩色文本框样式
+
+% @order: 4
+% @description: 设置彩色文本框样式
 
 % !文本框设置
 % #region
@@ -419,7 +578,6 @@
     #1                          % 允许传入额外参数
 }
 
-
 \newtcolorbox{extension}[2][]{
     myTitleStyle,               % 调用通用标题栏样式
     colback=PurpleLight,         % 内容背景色（建议根据需要调整色值）
@@ -433,53 +591,70 @@
     },
     #1                          % 允许传入额外参数（如调整边距等）
 }
-
-
-% --- 5. 适配 cleveref 引用 (可选) ---
-\crefname{solution}{解答}{解答}
-\crefformat{solution}{#2解答~#1#3}
 % #endregion
 
+% !设置有序列表与无序列表样式
+
+% @order: 5
+% @description: 设置有序列表与无序列表样式
 
 % !列表样式设置
 % #region
-\SetEnumitemKey{circ}{ % 圆圈上标有序列表样式
+
+\SetEnumitemKey{circ}{
     label=\bfseries\itshape\arabic*\,${}^\circ$,
     itemsep=0pt,
     labelindent=0.7em,
     parsep=0pt,
     leftmargin=*
 }
-\SetEnumitemKey{property}{ % 性质有序列表样式
+
+\SetEnumitemKey{property}{
     label=\colorbox{black}{\textcolor{white}{\bfseries 性质\,\arabic*}},
     leftmargin=0pt,
     itemindent=*
 }
+
 \newsavebox{\solbox}
+
 \SetEnumitemKey{solution}{%
     label={%
         \begingroup
-        \setlength{\fboxsep}{2pt}% 1. 缩小内边距（控制整体高度）
-        \sbox{\solbox}{\textcolor{white}{\bfseries 解法}}% 2. 测量“解法”二字的真实尺寸
+        \setlength{\fboxsep}{2pt}
+        \sbox{\solbox}{\textcolor{white}{\bfseries 解法}}
         \fcolorbox{black}{black}{\textcolor{white}{\usebox{\solbox}}}%
         \,\fbox{%
-            % 3. 动态将内部宽度设为与“解法”总高度相等，确保构成标准正方形
-            \makebox[\dimexpr\ht\solbox+\dp\solbox\relax][c]{%
-                \vphantom{\usebox{\solbox}}\smash{\itshape\bfseries\!\arabic*}%
+            \makebox[
+                \dimexpr\ht\solbox+\dp\solbox\relax
+            ][c]{%
+                \vphantom{\usebox{\solbox}}
+                \smash{\itshape\bfseries\!\arabic*}%
             }%
         }%
         \endgroup
-    },%
-    itemsep=0pt,%
-    leftmargin=0pt,%
-    itemindent=*%
+    },
+    itemsep=0pt,
+    leftmargin=0pt,
+    itemindent=*
 }
 
 % 无序列表全局样式
-\setlist[itemize,1]{label={\faCaretRight},leftmargin=2em}
-\setlist[itemize,2]{label={\faAngleRight},leftmargin=1em}
+\setlist[itemize,1]{
+    label={\faCaretRight},
+    leftmargin=2em
+}
+
+\setlist[itemize,2]{
+    label={\faAngleRight},
+    leftmargin=1em
+}
+
 % #endregion
 
+% !设置图表标题格式、交叉引用格式
+
+% @order: 6
+% @description: 设置图表标题格式、交叉引用格式
 
 % !图表标题与引用设置
 % #region
@@ -610,12 +785,19 @@
 \crefrangemultiformat{question}{#3\questionname\,#1#4\,-\,#5#2#6\,}{、\!#3\questionname\,#1#4\,-\,#5#2#6\,}{、\!#3\,#1#4\,-\,#5#2#6\,}{和#3\questionname\,#1#4\,-\,#5#2#6\,}
 \Crefrangemultiformat{question}{#3\questionname\,#1#4\,-\,#5#2#6\,}{、\!#3\questionname\,#1#4\,-\,#5#2#6\,}{、\!#3\,#1#4\,-\,#5#2#6\,}{和#3\questionname\,#1#4\,-\,#5#2#6\,}
 
+\crefname{solution}{解答}{解答}
+\crefformat{solution}{#2解答~#1#3}
+
 % 引用上标设置
 \let\citeoriginal\cite
 \RenewDocumentCommand{\cite}{m}
     {\textsuperscript{\citeoriginal{#1}}}
 % #endregion
 
+% !设置页面页眉页脚样式
+
+% @order: 7
+% @description: 设置页面页眉页脚样式
 
 % !页眉页脚样式设置
 % #region
@@ -629,14 +811,23 @@
 \setcounter{page}{1}
 % #endregion
 
+% !处理宏包兼容性问题、冲突修复以及无关警告屏蔽
+
+% @order: 8
+% @description: 处理宏包兼容性问题、冲突修复以及无关警告屏蔽
 
 % !雪豹闭嘴
 % #region
+
 % 隐去siunitx包和physics包的冲突报警
-\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\AtBeginDocument{
+    \RenewCommandCopy\qty\SI
+}
+
 \ExplSyntaxOn
 \msg_redirect_name:nnn{siunitx}{physics-pkg}{none}
 \ExplSyntaxOff
+
 
 % 解决unicode-math包导致的字体冲突问题
 \AtBeginDocument{
@@ -644,21 +835,66 @@
     \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}
 }
 
+
+% 屏蔽无意义警告
 \WarningFilter{caption}{Unused \captionsetup}
 \vbadness=10000
+
 % #endregion
 
-% [baseSettings.tex]-[myCommands.tex]
-% [baseSettings.tex]-[myCommands.tex]
+% !自定义常用命令
+
+% @order: 20
+% @description: 自定义常用命令
 
 % !设置自定义功能
-\newcommand{\vect}[1]{\symbf{#1}} % 粗体向量
-\newcommand{\overtext}[2]{\stackon[0.5pt]{\textbf{#1}}{\textsf{\textbf{\fontsize{5pt}{5pt}\selectfont #2}}}} % 文本顶部英文
-\newcommand{\dashedmid}{\mathrel{\tikz[baseline=0pt]{\draw[dashed, dash pattern=on 2.4pt off 2.4pt, line width=0.6pt] (0,-0.55ex) -- (0,1.85ex);}}} % 虚竖线
+% #region
+
+% 数学命令
+\RenewDocumentCommand{\va}{m}{\overrightarrow{#1}}
 \newcommand{\ee}{\mathrm{e}} % 正体自然常数e
 \newcommand{\ii}{\mathrm{i}} % 正体虚数i
-\newcommand{\circnum}[1]{{\bfseries\itshape{#1}\,${}^\circ$}} % 圆圈序号
-\newcommand{\wiki}[1]{\href{#1}{\raisebox{1.2ex}{\textcolor{black}{\scriptsize\faWikipediaW}}}} % wiki图标超链接
-\newcommand{\video}[1]{\href{#1}{\raisebox{1.2ex}{\textcolor{black}{\scriptsize\faPlayCircle[regular]}}}} % 视频超链接
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\endinput
+
+% 文本装饰命令
+\newcommand{\overtext}[2]{
+    \stackon[0.5pt]
+    {\textbf{#1}}
+    {\textsf{\textbf{\fontsize{5pt}{5pt}\selectfont #2}}}
+}
+
+\newcommand{\circnum}[1]{
+    {\bfseries\itshape{#1}\,${}^\circ$}
+}
+
+% 图形符号命令
+\newcommand{\dashedmid}{
+    \mathrel{
+        \tikz[baseline=0pt]{
+            \draw[
+                dashed,
+                dash pattern=on 2.4pt off 2.4pt,
+                line width=0.6pt
+            ]
+            (0,-0.55ex)--(0,1.85ex);
+        }
+    }
+}
+
+% 超链接图标命令
+\newcommand{\wiki}[1]{
+    \href{#1}{
+        \raisebox{1.2ex}
+        {\textcolor{black}{\scriptsize\faWikipediaW}}
+    }
+}
+
+\newcommand{\video}[1]{
+    \href{#1}{
+        \raisebox{1.2ex}
+        {\textcolor{black}{\scriptsize\faPlayCircle[regular]}}
+    }
+}
+
+% #endregion
+

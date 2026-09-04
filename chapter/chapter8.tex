@@ -1,0 +1,34 @@
+\chapter{空间解析几何}
+\section{向量与坐标系}
+\subsection{向量的定义与性质}
+\begin{definition}
+    空间中既有大小又有方向的量称为\overtext{向量}{vector}，记作$\vb{v}$.它的大小记为$|\vb{v}|$.
+    \begin{itemize}
+        \item 对于两个大小相等、方向相同的向量$\vb{a},\vb{b}$，称二者相等，记为$\vb{a} = \vb{b}$.
+        \item 大小为$0$的向量称为\overtext{零向量}{zero vector}，记作$\vb{0}$，它没有确定的方向.
+        \item 大小相等而方向相反的向量称为\overtext{负向量}{negative vector}，记作$-\vb{v}$.
+        \item 大小为$1$的向量称为\overtext{单位向量}{unit vector}，记为$\vb{e_v} = \dfrac{\vb{v}}{|\vb{v}|}$.
+    \end{itemize}
+\end{definition}
+
+\begin{enumerate}[property]
+    \item 向量具有加法且具备如下性质：
+    \begin{itemize}
+        \item \textbf{交换律：}$\vb{a + b = b + a}$.
+        \item \textbf{结合律：}$\vb{(a + b) + c = a + (b + c)}$.
+        \item \textbf{零元与逆元：}$\vb{a + 0 = a},\quad \vb{a + (-a) = 0}$.
+    \end{itemize}
+    上述性质利用平行四边形法则或三角形法则易证.
+    \item 向量具有数乘.设$\lambda,\mu \in \mathbb{R}$，满足：
+    \begin{itemize}
+        \item $\lambda(\vb{a+b}) = \lambda\vb{a} + \lambda\vb{b}$.
+        \item $(\lambda + \mu)\vb{a} = \lambda\vb{a} + \mu\vb{a}$.
+        \item $(\lambda\mu)\vb{a} = \lambda(\mu\vb{a})$.
+    \end{itemize}
+\end{enumerate}
+
+\begin{theorem}
+    设$\vb{a,b}$是两个向量，则：
+    \[\vb{|a+b| \leqslant |a| + |b|}\]
+    当且仅当存在非负实数$\lambda$满足$\vb{a} = \lambda\vb{b}$，等号成立.
+\end{theorem}
