@@ -32,3 +32,39 @@
     \[\vb{|a+b| \leqslant |a| + |b|}\]
     当且仅当存在非负实数$\lambda$满足$\vb{a} = \lambda\vb{b}$，等号成立.
 \end{theorem}
+
+
+\subsection{向量的共线与共面}
+\begin{definition}
+    如果通过平移：
+    \begin{itemize}
+        \item 能使一组向量$\vb{a,b}$同处一条直线上，那么称它们是\textbf{共线}或\overtext{平行}{parallel}的，记为$\vb{a}//\vb{b}$.
+        \item 能使一组向量$\vb{a,b,c}$同处一个平面上，那么称它们是\textbf{共面}的.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    \begin{itemize}
+        \item 两个向量$\vb{a,b}$共线，当且仅当它们线性相关，即存在不全为零的实数$\lambda,\mu$满足：
+        \[\lambda\vb{a} + \mu\vb{b} = \vb{0}\]
+        \item 三个向量$\vb{a,b,c}$共面，当且仅当它们线性相关，即存在三个不全为零的实数$\lambda,\mu,\nu$满足：
+        \[\lambda\vb{a} + \mu\vb{b} + \nu\vb{c} = \vb{0}\]
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    以两个向量$\vb{a,b}$的证明为例：
+
+    \textbf{充分性：}设非零向量$\vb{a,b}$共线，即：
+    \[\vb{a} = \pm k \vb{b},\quad k = \frac{|\vb{a}|}{|\vb{b}|} \neq 0 \quad\Rightarrow\quad \vb{a} \mp k \vb{b} = \vb{0}\]
+    取$\lambda = 1 \neq 0,\mu = \mp k \neq 0$，满足：
+    \[\lambda \vb{a} + \mu \vb{b} = \vb{0}\]
+
+    \textbf{必要性：}若存在不全为零的数$\lambda,\mu$使得：
+    \[\lambda \vb{a} + \mu \vb{b} = \vb{0}\]
+    不妨设$\lambda \neq 0$，则有：
+    \[\vb{a} = \frac{\mu}{\lambda}\vb{b}\]
+    满足共线的定义.
+
+    对于多个向量的证明，只需要对向量进行组合，构造共线向量即可.
+\end{proof}
