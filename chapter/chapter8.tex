@@ -38,7 +38,7 @@
 \begin{definition}
     如果通过平移：
     \begin{itemize}
-        \item 能使一组向量$\vb{a,b}$同处一条直线上，那么称它们是\textbf{共线}或\overtext{平行}{parallel}的，记为$\vb{a}//\vb{b}$.
+        \item 能使一组向量$\vb{a,b}$同处一条直线上，那么称它们是\textbf{共线}或\overtext{平行}{parallel}的，记为$\vb{a}\parallel\vb{b}$.
         \item 能使一组向量$\vb{a,b,c}$同处一个平面上，那么称它们是\textbf{共面}的.
     \end{itemize}
 \end{definition}
@@ -68,3 +68,83 @@
 
     对于多个向量的证明，只需要对向量进行组合，构造共线向量即可.
 \end{proof}
+
+
+\subsection{向量的内积和外积}
+\subsubsection{内积}
+设$\vb{a,b}$是两个向量，它们的夹角定义为$\theta = \theta(\vb{a,b}) \in [0,\pi]$，显然有$\theta(\vb{a,b}) = \theta(\vb{b,a})$.对于任意非零的实数$\lambda$满足：
+\[\theta(\lambda\vb{a,b}) = \begin{cases}
+    \theta(\vb{a,b}),\quad\lambda>0\\
+    \pi-\theta(\vb{a,b}),\quad\lambda<0
+\end{cases}\]
+
+\begin{definition}
+    定义两个向量$\vb{a,b}$的\overtext{内积}{inner product}\!\!\textbf{(\!\!\overtext{点乘}{dot product}\!\!、\overtext{数量积}{scalar product}\!\!)}为如下运算：
+    \[\vb{a}\cdot\vb{b} = (\vb{a},\vb{b}) \coloneq |\vb{a}| |\vb{b}| \cos\theta(\vb{a,b}) \in \mathbb{R},\quad \theta \in [0,\pi]\]
+    若其中一个向量是零向量，则规定点乘结果为$0$.
+\end{definition}
+
+显然，从定义上看，总是有：
+\[\begin{cases}
+    \vb{a \cdot b} > 0,\quad \theta(\vb{a,b}) < \dfrac{\pi}{2} \\[0.5em]
+    \vb{a \cdot b} = 0,\quad \theta(\vb{a,b}) = \dfrac{\pi}{2} \quad\Rightarrow\quad \text{此时称$\vb{a,b}$\overtext{正交}{orthogonal}或\overtext{垂直}{vertical}，记作$\vb{a}\perp\vb{b}$}
+\end{cases}\]
+几何上，$|\vb{a}|\cos\theta$就是$\vb{a}$在$\vb{b}$所在直线上投影向量$\vb{a_b}$的有向长度，有如下关系式：
+\[\vb{a_b} = (|\vb{a}|\cos\theta)\vb{e_b} = (\vb{a \cdot e_b})\vb{e_b}\]
+上式表明当$\theta \in [\frac{\pi}{2},\pi]$时，投影向量$\vb{e_b}$与$\vb{b}$共线但反向.
+
+于是点乘的含义可以理解为$\vb{a}$在$\vb{b}$方向上的投影向量的有向长度乘$\vb{b}$的长度，或是说与$\vb{b}$垂直的分量对$\vb{a \cdot b}$没有贡献.
+
+点乘具有如下性质：
+\begin{itemize}
+    \item \textbf{交换律：}$\vb{a \cdot b = b \cdot a}$.
+    \item \textbf{结合律：}$(\lambda \vb{a})\cdot \vb{b} = \lambda (\vb{a \cdot b})$.
+    \item \textbf{分配律：}$\vb{(a + b)\cdot c = a \cdot c + b \cdot c}$
+\end{itemize}
+
+
+\subsubsection{外积}
+对于不共面向量组$\{\vb{a,b,c}\}$，若其满足右手系，则$\{\vb{b,c,a}\},\{\vb{c,a,b}\}$仍是右手系，但$\{\vb{b,a,c}\}$是左手系.
+
+\begin{definition}
+    定义两个向量$\vb{a,b}$的\overtext{外积}{outer product}\!\!\textbf{(\!\!\overtext{叉乘}{cross product}\!\!、\overtext{向量积}{vector product}\!\!)}的结果为一个矢量，其大小规定为：
+    \[|\vb{a \times b}| \coloneq |\vb{a}||\vb{b}|\sin\theta(\vb{a,b}),\quad \theta\in [0,\pi]\]
+    方向规定为$\vb{a \times b}$与$\vb{a,b}$垂直，且$\{\vb{a,b,a \times b}\}$构成右手系.
+
+    若其中一个向量是零向量，则规定叉乘结果也是零向量.
+\end{definition}
+
+显然，从定义上看，若是两个向量贡献，其叉乘结果是零向量.
+
+从几何上看，外积$\vb{a \times b}$的大小即为以$\vb{a,b}$为邻边的平行四边形的面积.
+
+叉乘具有如下性质：
+\begin{itemize}
+    \item $(\lambda\vb{a})\times\vb{b} = \vb{a}\times(\lambda\vb{b}) = \lambda(\vb{a}\times\vb{b})$.
+    \item \textbf{反称性：}$\vb{a \times b = -a \times b}$.
+    \item \textbf{分配律：}$\vb{a \times (b + c) = a \times b + a \times c}$.
+\end{itemize}
+
+
+\subsubsection{混合积}
+\begin{definition}
+    称$\vb{(a \times b)\cdot c}$为三个向量$\vb{a,b,c}$的\overtext{混合积}{mixed product}.
+\end{definition}
+
+从几何上看，混合积结果的绝对值是以$\vb{a,b,c}$为棱的平行六面体的体积.
+
+若是有$\vb{(a \times b)\cdot c} = 0$，则表明$\vb{a,b,c}$共面.
+
+混合积具有\overtext{轮换对称性}{cyclic symmetry}，即：
+\[\vb{a \times b}\cdot c = \vb{b \times c}\cdot a = \vb{c \times a}\cdot b\]
+
+
+\subsubsection{有向长度、面积和体积}
+\begin{definition}
+    有向长度、面积和体积即为具备正负性的长度、面积和体积，规定：
+    \begin{itemize}
+        \item 当$\theta(\vb{a,b})$为锐角时，有向长度$|\vb{a}|\cos\theta$为正；当$\theta(\vb{a,b})$为钝角时为负.
+        \item 当$\{\vb{a,b,a \times b}\}$构成右手系时，有向面积$\vb{a \times b}$为正，反之构成左手系则为负.
+        \item 当$\{\vb{a,b,c}\}$构成右手系时，有向体积$\vb{(a \times b)\cdot c}$为正，反之构成左手系则为负.
+    \end{itemize}
+\end{definition}
