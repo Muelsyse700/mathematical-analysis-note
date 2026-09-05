@@ -1,8 +1,6 @@
-% @name: core-setting
 % @description: 自动生成的LaTeX设置文件
 
-% !宏包依赖
-
+% @name: used-package.tex
 % @order: 0
 % @description: 宏包依赖
 
@@ -16,6 +14,7 @@
 % 数学环境
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage{mathtools}
+\usepackage{nicematrix}
 \usepackage{extarrows}
 \usepackage{stackengine}
 \usepackage{unicode-math, physics, esint, cases}
@@ -62,8 +61,7 @@
 \usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
 \usepackage[capitalize, nameinlink, noabbrev]{cleveref}
 
-% !设置全局字体、页面布局
-
+% @name: font-and-layout-setting.tex
 % @order: 1
 % @description: 设置全局字体、页面布局
 
@@ -177,8 +175,7 @@
 
 % #endregion
 
-% !设置封面样式
-
+% @name: cover-setting.tex
 % @order: 2
 % @description: 设置封面样式
 
@@ -303,8 +300,7 @@
 
 % #endregion
 
-% !设置目录样式
-
+% @name: content-setting.tex
 % @order: 3
 % @description: 设置目录样式
 
@@ -351,8 +347,7 @@
 
 % #endregion
 
-% !设置彩色文本框样式
-
+% @name: box-setting.tex
 % @order: 4
 % @description: 设置彩色文本框样式
 
@@ -593,8 +588,7 @@
 }
 % #endregion
 
-% !设置有序列表与无序列表样式
-
+% @name: list-setting.tex
 % @order: 5
 % @description: 设置有序列表与无序列表样式
 
@@ -651,8 +645,7 @@
 
 % #endregion
 
-% !设置图表标题格式、交叉引用格式
-
+% @name: caption-and-reference-setting.tex
 % @order: 6
 % @description: 设置图表标题格式、交叉引用格式
 
@@ -794,8 +787,7 @@
     {\textsuperscript{\citeoriginal{#1}}}
 % #endregion
 
-% !设置页面页眉页脚样式
-
+% @name: header-footer-setting.tex
 % @order: 7
 % @description: 设置页面页眉页脚样式
 
@@ -811,8 +803,7 @@
 \setcounter{page}{1}
 % #endregion
 
-% !处理宏包兼容性问题、冲突修复以及无关警告屏蔽
-
+% @name: compatibility-fixes.tex
 % @order: 8
 % @description: 处理宏包兼容性问题、冲突修复以及无关警告屏蔽
 
@@ -842,8 +833,7 @@
 
 % #endregion
 
-% !自定义常用命令
-
+% @name: my-command.tex
 % @order: 20
 % @description: 自定义常用命令
 

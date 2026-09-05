@@ -150,13 +150,13 @@
 \end{definition}
 
 
-\subsection{向量的坐标表示}
+\subsection{向量的坐标表示与空间坐标系}
 \begin{definition}
-    设集合$V$由全部空间向量构成的集合，在其上定义了向量的加法和数乘，称$V$是一个\overtext{线性空间}{linear space}\textbf{向量空间}.
+    设集合$V$由全部空间向量构成的集合，在其上定义了向量的加法和数乘，称$V$是一个\overtext{线性空间}{linear space}\textbf{(向量空间)}.
 
     称$V$中三个不共面的向量组$\{\vb{e}_1,\vb{e}_2,\vb{e_3}\}$为$V$的一组\overtext{基向量}{basis vectors}，简称\overtext{基}{base}.
 
-    选定一个原点$O$，称$[O;\vb{e}_1,\vb{e}_2,\vb{e}_3]$为$V$中的一个\overtext{仿射坐标系}{affine coordinate system}，其中一向量$\vb{x}$对应的坐标$(x_1,x_2,x_3)$称为\overtext{仿射坐标}{affine coordinates}.
+    选定一个原点$O$，称$\mathbb{F} = [O;\vb{e}_1,\vb{e}_2,\vb{e}_3]$为$V$中的一个\overtext{仿射坐标系}{affine coordinate system}，其中一向量$\vb{x}$对应的坐标$(x_1,x_2,x_3)$称为\overtext{仿射坐标}{affine coordinates}.
 \end{definition}
 
 \begin{theorem}
@@ -165,7 +165,7 @@
 \end{theorem}
 
 \begin{definition}
-    取线性空间$V$中的$\{\vb{i,j,k}\}$是两两正交且形成右手系的单位向量，称他们为$V$的\overtext{标准正交基}{orthonormal basis}，称$[O;\vb{i,j,k}]$为\overtext{直角坐标系}{cartesian coordinate system}.
+    取线性空间$V$中的$\{\vb{i,j,k}\}$是两两正交且形成右手系的单位向量，称他们为$V$的\overtext{标准正交基}{orthonormal basis}，称$\mathbb{F} = [O;\vb{i,j,k}]$为\overtext{直角坐标系}{cartesian coordinate system}.
 \end{definition}
 
 直角坐标系中满足如下等式：
@@ -185,3 +185,23 @@
     b_1 & b_2 & b_3 \\
     c_1 & c_2 & c_3
 \end{vmatrix}\]
+
+\begin{theorem}
+    \textbf{Cauchy-Schwarz不等式}
+    \[(a_1b_1 + a_2b_2 + a_3b_3)^2 \leqslant (a_1^2 + a_2^2 + a_3^2)(b_1^2 + b_2^2 + b_3^2)\]
+\end{theorem}
+
+\begin{proof}
+    设有$\vb{a} = (a_1,a_2,a_3),\vb{b}=(b_1,b_2,b_3)$，则不等式等价为：
+    \[(\vb{a \cdot b})^2 = (|\vb{a}||\vb{b}|\cos\theta)^2 \leqslant |\vb{a}|^2 |\vb{b}|^2\]
+    显然得证.
+\end{proof}
+
+\begin{definition}
+    在空间中取定一点$O$，则空间中任意一点$P$对应一个向量$\va{OP}$，称为$P$的\overtext{位置向量}{positional vector}，记作$\vb{r}(P)$，在直角坐标系下具有如下对应关系：
+    \[P \leftrightarrow \va{OP} = x\vb{i} + y\vb{j} + z\vb{k} \leftrightarrow (x,y,z)\]
+    $\va{OP}$的方向可由$\va{OP}$与三个坐标轴的夹角，即\overtext{方向角}{direction angles}来刻画：
+    \[x = |\va{OP}|\cos\alpha,\quad y = |\va{OP}|\cos\beta,\quad z = |\va{OP}|\cos\gamma\]
+    称方向角的余弦为\overtext{方向余弦}{direction cosines}.
+\end{definition}
+注意到，$\va{OP}$的方向余弦构成了$\va{OP}$方向上的一个单位向量$(\cos\alpha,\cos\beta,\cos\gamma)$.
