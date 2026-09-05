@@ -148,3 +148,40 @@
         \item 当$\{\vb{a,b,c}\}$构成右手系时，有向体积$\vb{(a \times b)\cdot c}$为正，反之构成左手系则为负.
     \end{itemize}
 \end{definition}
+
+
+\subsection{向量的坐标表示}
+\begin{definition}
+    设集合$V$由全部空间向量构成的集合，在其上定义了向量的加法和数乘，称$V$是一个\overtext{线性空间}{linear space}\textbf{向量空间}.
+
+    称$V$中三个不共面的向量组$\{\vb{e}_1,\vb{e}_2,\vb{e_3}\}$为$V$的一组\overtext{基向量}{basis vectors}，简称\overtext{基}{base}.
+
+    选定一个原点$O$，称$[O;\vb{e}_1,\vb{e}_2,\vb{e}_3]$为$V$中的一个\overtext{仿射坐标系}{affine coordinate system}，其中一向量$\vb{x}$对应的坐标$(x_1,x_2,x_3)$称为\overtext{仿射坐标}{affine coordinates}.
+\end{definition}
+
+\begin{theorem}
+    若线性空间$V$中存在一组基$\{\vb{e}_1,\vb{e}_2,\vb{e}_3\}$，则对$\forall \vb{x} \in V$，都存在唯一的一组数$(x_1,x_2,x_3)$使得：
+    \[\vb{x} = x_1\vb{e}_1 + x_2\vb{e}_2 + x_3\vb{e}_3 \quad\text{或}\quad \vb{x} \mapsto (x_1,x_2,x_3)\]
+\end{theorem}
+
+\begin{definition}
+    取线性空间$V$中的$\{\vb{i,j,k}\}$是两两正交且形成右手系的单位向量，称他们为$V$的\overtext{标准正交基}{orthonormal basis}，称$[O;\vb{i,j,k}]$为\overtext{直角坐标系}{cartesian coordinate system}.
+\end{definition}
+
+直角坐标系中满足如下等式：
+\begin{gather*}
+    \vb{i \cdot i} = \vb{j \cdot j} = \vb{k \cdot k} = 1 \\
+    \vb{i \cdot j} = \vb{j \cdot k} = \vb{k \cdot i} = 0 \\
+    \vb{i \times i} =\vb{j \times j} = \vb{k \times k} = \vb{0} \\
+    \vb{i \times j} = \vb{k},\quad \vb{j \times k} = \vb{i},\quad \vb{k \times i} = \vb{j}
+\end{gather*}
+根据上述内容不难推出内积、外积和混合积的坐标表示：
+\[\vb{a \cdot b} = a_1b_1 + a_2b_2 + a_3b_3,\quad \vb{a \times b} = \begin{vmatrix}
+    \vb{i} & \vb{j} & \vb{k} \\
+    a_1 & a_2 & a_3 \\
+    b_1 & b_2 & b_3
+\end{vmatrix},\quad \vb{(a \times b)\cdot c} = \begin{vmatrix}
+    a_1 & a_2 & a_3 \\
+    b_1 & b_2 & b_3 \\
+    c_1 & c_2 & c_3
+\end{vmatrix}\]
