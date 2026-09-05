@@ -205,3 +205,56 @@
     称方向角的余弦为\overtext{方向余弦}{direction cosines}.
 \end{definition}
 注意到，$\va{OP}$的方向余弦构成了$\va{OP}$方向上的一个单位向量$(\cos\alpha,\cos\beta,\cos\gamma)$.
+
+
+\section{坐标变换和其它常用坐标系}
+\subsection{坐标变换}
+\subsubsection{平移}
+将坐标系$\mathbb{F}$平移得到的新坐标系$\mathbb{F'}$，平移向量为$\va{OO'} = a\vb{i} + b\vb{j} + c\vb{k}$.设$P$在两个坐标系下的位置向量为：
+\[\va{OP} = x\vb{i} + y\vb{j} + z\vb{k},\qquad \va{O'P} = x'\va{i} + y'\va{j} + z'\va{k}\]
+则根据$\va{O'P} = \va{OP} - \va{OO'}$可得平移后的坐标：
+\[x'=x-a,\quad y'=y-b,\quad z'=z-c\]
+
+
+\subsubsection{旋转}
+假设$\mathbb{F'}$由$\mathbb{F}$保持原点不动旋转得到，设两个坐标系基向量两两之间的夹角为：
+\begin{gather*}
+    \begin{NiceArray}{c|ccc}
+        & \vb{i} & \vb{j} & \vb{k} \\
+        \Hline
+        \vb{i'} & \alpha_1 & \beta_1 & \gamma_1 \\
+        \vb{j'} & \alpha_2 & \beta_2 & \gamma_2 \\
+        \vb{k'} & \alpha_3 & \beta_3 & \gamma_3 \\
+    \end{NiceArray} \quad\Rightarrow\quad \begin{cases}
+        \vb{i'} = \cos\alpha_1\vb{i} + \cos\beta_1\vb{j} + \cos\gamma_1\vb{k} \\
+        \vb{j'} = \cos\alpha_2\vb{i} + \cos\beta_2\vb{j} + \cos\gamma_2\vb{k} \\
+        \vb{k'} = \cos\alpha_3\vb{i} + \cos\beta_3\vb{j} + \cos\gamma_3\vb{k}
+    \end{cases}\\
+    \begin{bmatrix}
+        \cos\alpha_1 & \cos\beta_1 & \cos\gamma_1 \\
+        \cos\alpha_2 & \cos\beta_2 & \cos\gamma_2 \\
+        \cos\alpha_3 & \cos\beta_3 & \cos\gamma_3
+    \end{bmatrix} \begin{bmatrix}
+        \vb{i} \\ \vb{j} \\ \vb{k}
+    \end{bmatrix} =  \begin{bmatrix}
+        \vb{i'} \\ \vb{j'} \\ \vb{k'}
+    \end{bmatrix} 
+\end{gather*}
+也就是说，左边的$3 \times 3$矩阵实现了旋转变换操作.
+
+
+\subsection{其它坐标系}
+\begin{itemize}
+    \item \textbf{极坐标：}极坐标$(r,\theta)$与直角坐标$(x,y)$之间的变换关系为：
+    \[\begin{cases}
+        x = r\cos\theta \\
+        y = r\sin\theta
+    \end{cases} \Leftrightarrow\quad \begin{cases}
+        r = \sqrt{x^2 + y^2} \\
+        \theta = \arctan\dfrac{y}{x}
+    \end{cases}\]
+    \item \textbf{柱坐标：}柱坐标$(r,\theta,z)$与直角坐标$(x,y,z)$之间的变换关系为：
+    \[x = r\cos\theta,\quad y = r\sin\theta,\quad z = z\]
+    \item \textbf{球坐标：}球坐标$(r,\theta,\varphi)$与直角坐标$(x,y,z)$之间的变换关系为：
+    \[x = r\sin\theta\cos\varphi,\quad y = r\sin\theta\sin\varphi,\quad z = r\cos\theta\]
+\end{itemize}
