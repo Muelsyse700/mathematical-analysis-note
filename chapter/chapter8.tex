@@ -369,3 +369,113 @@
     \in (0,1) \quad\Rightarrow\quad \text{直线与平面相交.}\\
     = 0 \quad\Rightarrow\quad \text{直线平行于平面.}\\
 \end{cases}\]
+
+
+\section{二次曲面}
+\subsection{柱面}
+\begin{definition}
+    曲线$F(x,y) = 0$在空间坐标系下$Oxy$平面内的表达式为：
+    \[\begin{cases}
+        F(x,y) = 0\\
+        z = 0
+    \end{cases}\]
+    上述曲线称为\overtext{准线}{directrix}.取一条垂直于$Oxy$平面的直线，使其沿着准线移动，形成的面称为\overtext{柱面}{cylindrical surface}，其方程为：
+    \[F(x,y) = 0\]
+    称动垂线为这个柱面的\overtext{母线}{generatrix}.
+\end{definition}
+
+常见的圆锥曲线方程在空间坐标下则变成相应的柱面：
+\begin{itemize}
+    \item \textbf{椭圆柱面：}$\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$.
+    \item \textbf{双曲柱面：}$\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$.
+    \item \textbf{抛物柱面：}$y^2 - 2px = 0,\quad p>0$.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{quadratic-surface/cylinderical-surface/fig.pdf}
+    \caption{椭圆柱面、双曲柱面与抛物柱面及其准线}
+\end{figure}
+
+
+\subsection{旋转面}
+\begin{definition}
+    设空间中$Oyz$平面上有一曲线$\begin{cases}
+        F(y,z) = 0,\quad y>0\\
+        x = 0
+    \end{cases}$，使其绕$z$轴旋转得到一个曲面，称为\overtext{旋转曲面}{rotating surface}，其方程为：
+    \[F(\pm\sqrt{x^2 + y^2},z) = 0\]
+    即绕哪个轴旋转，就将平面曲线方程的另一个变量替换为圆的方程.
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{quadratic-surface/rotating-surface/fig.pdf}
+    \vspace{-3em}
+    \caption{旋转曲面}
+\end{figure}
+
+
+\subsection{椭球面}
+\begin{definition}
+    由下述方程描述的曲面称为\overtext{椭球面}{ellipsoid surface}：
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1,\quad a,b,c>0\]
+\end{definition}
+
+一般的椭球面并不一定是旋转面，只有三个半轴中有两个一样长的才是旋转椭球面，若有三个一样长的半轴，则退化为球面.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{quadratic-surface/ellipsoid-surface/fig.pdf}
+    \vspace{-3em}
+    \caption{椭球面、旋转椭球面和球面}
+\end{figure}
+
+
+\subsection{双曲面}
+\begin{definition}
+    由下述方程描述的曲面称为\overtext{单叶双曲面}{hyperboloid of one sheet}： 
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1,\quad a,b,c>0\]
+    含有两个减号，由下述方程描述的曲面称为\overtext{双叶双曲面}{hyperboloid of two sheets}： 
+    \[\frac{x^2}{a^2} - \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1,\quad a,b,c>0\]
+    双叶双曲线上离原点最近的点称为双叶双曲面的\overtext{顶点}{vertex}
+\end{definition}
+
+
+\subsection{二次锥面}
+\begin{definition}
+    由下述方程描述的曲面称为\overtext{二次锥面}{quadric cone}：
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 0,\quad a,b,c>0\]
+    二次锥面由通过原点$O$的与平面交角相同的直线所构成，称为锥面的\textbf{母线}，点$O$称为锥面的\textbf{顶点}.
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{quadratic-surface/hyperboloid-and-cone-surface/fig.pdf}
+    \vspace{-2.25em}
+    \caption{单叶双曲面、双叶双曲面和二次锥面}
+\end{figure}
+
+
+\subsection{椭圆抛物面}
+\begin{definition}
+    由下述方程定义的曲面称为\overtext{椭圆抛物面}{elliptic paraboloid}：
+    \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = z,\quad a,b>0\]
+\end{definition}
+
+
+\subsection{双曲抛物面(马鞍面)}
+\begin{definition}
+    由下述方程定义的曲面称为\overtext{双曲抛物面}{hyperbolic paraboloid}，也称作\overtext{马鞍面}{saddle surface}：
+    \[\frac{x^2}{a^2} - \frac{y^2}{b^2} = z,\quad a,b>0\]
+\end{definition}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{quadratic-surface/paraboloid-surface/fig.pdf}
+    \vspace{-5.25em}
+    \caption{椭圆抛物面和双曲抛物面}
+\end{figure}
+
+实际上，上述二次曲面都是一个一般的三元二次方程的退化或经坐标变换后的形式：
+\[a_{11}x^2 + a_{22}y^2 + a_{33}z^2 + 2a_{12}xy + 2a_{13}xz + 2a_{23}yz + 2b_1x + 2b_2y + 2b_3z + c = 0\]
