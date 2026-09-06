@@ -258,3 +258,57 @@
     \item \textbf{球坐标：}球坐标$(r,\theta,\varphi)$与直角坐标$(x,y,z)$之间的变换关系为：
     \[x = r\sin\theta\cos\varphi,\quad y = r\sin\theta\sin\varphi,\quad z = r\cos\theta\]
 \end{itemize}
+
+
+\section{平面与直线}
+\subsection{平面方程}
+\subsubsection{平面的一般方程}
+平面的一般方程来自于如下方式的构造：在给定一点$P_0(x_0,y_0,z_0)$上延伸出一个向量$\vb{n} = (a,b,c)$，取一个平面过点$P_0$且垂直于这个向量.
+
+按照上述构造的过程，取平面上任意一点$P(x,y,z)$，必然有$\vb{n}\cdot\va{P_0P} = 0$，即：
+\[a(x-x_0) + b(y-y_0) + c(z-z_0) = 0\]
+令$d \equiv -(ax_0 + by_0 + cz_0)$，即：
+\[ax + by + cz + d = 0\]
+满足上式的点$(x,y,z)$一定在上述平面上，上式称为\textbf{平面的一般方程}.
+
+上式也意味着，对于表示为平面的一般方程的平面，取$x,y,z$的系数即位其法向量.
+
+
+\subsubsection{平面的截距式方程}
+平面的截距式方程来自于如下方式的构造：对于不共线的三个点$P_1,P_2,P_3$，必有$\va{P_1P_2},\va{P_1P_3}$形成一个平面，所以由外积可以得到这个平面点法向量$\va{P_1P_2}\times\va{P_1P_3}$.
+
+取平面上任意一点$P(x,y,z)$，总是有：
+\[(\va{P_1P_2} \times \va{P_1P_3}) \cdot \va{P_1P} = \begin{vmatrix}
+    x_2 - x_1 & y_2-y_1 & z_2-z_1 \\
+    x_3 - x_1 & y_3-y_1 & z_3-z_1 \\
+    x - x_1 & y-y_1 & z-z_1
+\end{vmatrix} = 0\]
+特别地，若是取三个坐标轴上的点$(\alpha,0,0),(0,\beta,0),(0,0,\gamma)$构造平面，上述方程简化为\textbf{平面的截距式方程}：
+\[\frac{x}{\alpha} + \frac{y}{\beta} + \frac{z}{\gamma} = 1\]
+
+
+\subsubsection{两平面的关系}
+平面间相交与平行的关系主要是通过法向量之间的关系来确定的：
+\begin{itemize}
+    \item \textbf{平行：}若两平面平行，则有$\vb{n}_1 \parallel \vb{n}_2$.即存在$\lambda \neq 0$使得$\vb{n}_1 = \lambda \vb{n}_2$.
+    
+    对于平面的一般方程，有$a_1 = \lambda a_2, b_1 = \lambda b_2, c_1 = \lambda c_2$，若同时又有$d_1 = \lambda d_2$，则两平面重合.
+    \item \textbf{相交：}两平面的法向量不平行，则两平面相交，相交的二面角为：
+    \[\theta = \arccos\frac{|\vb{n}_1 \cdot \vb{n}_2|}{|\vb{n}_1||\vb{n}_2|}\]
+\end{itemize}
+
+
+\subsubsection{点到平面的距离}
+设有平面外一点$P_0(x_0,y_0,z_0)$，过点$P_0$作平面的垂线，垂足为$P_1$.在平面上任取一点$P(x,y,z)$，设$\va{PP_0}$与平面法向量$\vb{n} = (a,b,c)$的夹角为$\theta$，则有：
+\begin{align*}
+    |\va{P_0P_1} &= |\va{PP_0}||\cos\theta| = \left|\frac{\vb{n}}{|\vb{n}|}\cdot\va{PP_0}\right| = \frac{|a(x_0-x) + b(y_0-y) + c(z_0-z)|}{\sqrt{a^2 + b^2 + c^2}}\\
+    &= \frac{|ax_0 + by_0 + cz_0 +d|}{\sqrt{a^2 + b^2 + c^2}}
+\end{align*}
+其分子相当于把平面外一点的坐标代入平面方程.
+
+空间中的一张平面将空间分为平面法向所指的一侧(上方)、平面本身、法向所指的另一侧(下方).判断一个点属于哪个部分，主要是看$\va{PP_0}$与法向量$\vb{n}$的夹角：
+\[\vb{n}\cdot\va{PP_0} = ax_0 + by_0 + cz_0 + d\begin{cases}
+    >0 \quad\Rightarrow\quad \text{是锐角，$P_0$在平面的上方.}\\
+    =0 \quad\Rightarrow\quad \text{是直角，$P_0$在平面内.}\\
+    <0 \quad\Rightarrow\quad \text{是钝角，$P_0$在平面的下方.}
+\end{cases}\]
