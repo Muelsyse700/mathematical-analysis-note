@@ -301,7 +301,7 @@
 \subsubsection{点到平面的距离}
 设有平面外一点$P_0(x_0,y_0,z_0)$，过点$P_0$作平面的垂线，垂足为$P_1$.在平面上任取一点$P(x,y,z)$，设$\va{PP_0}$与平面法向量$\vb{n} = (a,b,c)$的夹角为$\theta$，则有：
 \begin{align*}
-    |\va{P_0P_1} &= |\va{PP_0}||\cos\theta| = \left|\frac{\vb{n}}{|\vb{n}|}\cdot\va{PP_0}\right| = \frac{|a(x_0-x) + b(y_0-y) + c(z_0-z)|}{\sqrt{a^2 + b^2 + c^2}}\\
+    |\va{P_0P_1}| &= |\va{PP_0}||\cos\theta| = \left|\frac{\vb{n}}{|\vb{n}|}\cdot\va{PP_0}\right| = \frac{|a(x_0-x) + b(y_0-y) + c(z_0-z)|}{\sqrt{a^2 + b^2 + c^2}}\\
     &= \frac{|ax_0 + by_0 + cz_0 +d|}{\sqrt{a^2 + b^2 + c^2}}
 \end{align*}
 其分子相当于把平面外一点的坐标代入平面方程.
@@ -311,4 +311,61 @@
     >0 \quad\Rightarrow\quad \text{是锐角，$P_0$在平面的上方.}\\
     =0 \quad\Rightarrow\quad \text{是直角，$P_0$在平面内.}\\
     <0 \quad\Rightarrow\quad \text{是钝角，$P_0$在平面的下方.}
+\end{cases}\]
+
+
+\subsection{直线方程}
+\subsubsection{直线的点向式方程}
+直线的点向式方程来自于如下方式的构造：设直线$L$过一点$P_0(x_0,y_0,z_0)$且其平行于方向向量$\vb{v} = (l,m,n)$，则对于平面上任意一点$P(x,y,z)$有：
+\[\va{OP_0} - \va{OP} = t\vb{v} \quad\Rightarrow\quad \begin{cases}
+    x = x_0 + lt\\
+    y = y_0 + mt\\
+    z = z_0 + nt
+\end{cases}\]
+上述方程组为直线的\textbf{参数方程}，将其联立消去$t$则得到直线的\textbf{点向式方程}：
+\[\frac{x-x_0}{l} = \frac{y-y_0}{m} = \frac{z-z_0}{n}\]
+根据上述方程构造的原理，上式中若有$l,m,n$为$0$的情况，应等价于对应分子等于$0$.
+
+设若直线过给定点$P_1(x_1,y_1,z_1),P_2(x_2,y_2,z_2)$，其点向式方程为：
+\[\frac{x-x_1}{x_2-x_1} = \frac{y-y_1}{y_2-y_1} = \frac{z-z_1}{z_2-z_1}\]
+
+
+\subsubsection{直线的一般方程}
+直线的一般方程来自于如下方式的构造：联立两个平面的一般方程，则得到它们的交线.设交线上一点$P(x,y,z)$，其应满足：
+\[\begin{cases}
+    a_1x + b_1y + c_1z + d_1 = 0\\
+    a_2x + b_2y + c_2z + d_2 = 0
+\end{cases}\]
+上式称为\textbf{直线的一般方程}，其方向向量$\vb{v} = \vb{n}_1 \times \vb{n}_2$.
+
+
+
+
+\subsubsection{两直线的位置关系}
+对于给定的两条直线，设其上各有任意一点$P_1(x_1,y_1,z_1),P_2(x_2,y_2,z_2)$，其共面的条件是$\va{P_1P_2},\vb{v}_1,\vb{v}_2$三向量共面，即其混合积为$0$：
+\[(\vb{v}_1 \times \vb{v}_2) \cdot \va{P_1P_2} = \begin{vmatrix}
+    x_2 - x_1 & y_2-y_1 & z_2-z_1 \\
+    l_1 & m_1 & n_1 \\
+    l_2 & m_2 & n_2
+\end{vmatrix} = 0\]
+则两直线不共面的条件则为上式不为$0$.
+
+对于共面的两直线，其夹角$\theta$满足：
+\[\cos\theta = \frac{\vb{v}_1 \cdot \vb{v}_2}{|\vb{v}_1||\vb{v}_2|} \begin{cases}
+    = \pm 1 \quad\Rightarrow\quad \text{两直线平行.}\\
+    \in (-1,1) \quad\Rightarrow\quad \text{两直线相交.}
+\end{cases}\]
+
+
+\subsubsection{点到直线的距离}
+设有直线外一点$P_0(x_0,y_0,z_0)$、直线上任意一点$P(x,y,z)$，则$P_0$到直线的距离为：
+\[d = |\va{PP_0}|\sin\theta = \frac{|\vb{v}\times\va{PP_0}|}{|\vb{v}|}\]
+
+
+\subsubsection{直线与平面的位置关系}
+直线与平面的关系主要是通过直线与平面的交角来确定的.设平面法向量$\vb{n}$与直线方向向量$\vb{v}$的夹角为$\theta$，则直线与平面的交角$\varphi = \frac{\pi}{2}-\theta$或$-\frac{\pi}{2}+\theta$，于是有：
+\[\sin\varphi = |\cos\theta| = \frac{|\vb{n \cdot v}|}{|\vb{n}||\vb{v}|} \begin{cases}
+    = 1 \quad\Rightarrow\quad \text{直线垂直于平面.}\\
+    \in (0,1) \quad\Rightarrow\quad \text{直线与平面相交.}\\
+    = 0 \quad\Rightarrow\quad \text{直线平行于平面.}\\
 \end{cases}\]
