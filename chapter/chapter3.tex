@@ -148,19 +148,19 @@
 记平面上有一参数方程，表示为$\begin{cases}
     x = \varphi(t) = x(t) \\
     y = \psi(t) = y(t)
-\end{cases}$，或$\vect{r}(t) = (x(t),y(t))$.
+\end{cases}$，或$\vb{r}(t) = (x(t),y(t))$.
 \begin{definition}
-    如果$\exists \vect{a}=(a_1,a_2)$，对$\forall \varepsilon>0$都$\exists \delta > 0$在$0<|t-t_0|<\delta$时，满足$|\vect{r}(t)-\vect{a}|<\varepsilon$，则称$\vect{a}$是$\vect{r}(t)$在$t\to t_0$时的极限.
+    如果$\exists \vb{a}=(a_1,a_2)$，对$\forall \varepsilon>0$都$\exists \delta > 0$在$0<|t-t_0|<\delta$时，满足$|\vb{r}(t)-\vb{a}|<\varepsilon$，则称$\vb{a}$是$\vb{r}(t)$在$t\to t_0$时的极限.
 \end{definition}
 
 \begin{definition}
-    若有$\lim\limits_{t \to t_0}\vect{r}(t) = \vect{r}(t_0)$，则称$\vect{r}(t)$在$t_0$连续.
+    若有$\lim\limits_{t \to t_0}\vb{r}(t) = \vb{r}(t_0)$，则称$\vb{r}(t)$在$t_0$连续.
 \end{definition}
 
 \begin{definition}
-    设$\vect{r}(t)$在$t_0$的邻域内有定义，若有：
-    \[\lim\limits_{\Delta t \to 0} \dfrac{\vect{r}(t+\Delta t) - \vect{r}(t)}{\Delta t} = \vect{r}'(t) = (x'(t),y'(t))\]
-    存在且有限，则称之为$\vect{r}(t)$的导数.
+    设$\vb{r}(t)$在$t_0$的邻域内有定义，若有：
+    \[\lim\limits_{\Delta t \to 0} \dfrac{\vb{r}(t+\Delta t) - \vb{r}(t)}{\Delta t} = \vb{r}'(t) = (x'(t),y'(t))\]
+    存在且有限，则称之为$\vb{r}(t)$的导数.
 \end{definition}
 
 尽管向量值函数的几个性质看上去与一般的函数一致，但实际上并不是所有的一般函数导数的性质都能推广到向量值函数上.
@@ -373,7 +373,7 @@ $F(x)$作为函数图像与端点连线的差值，其两端差值为$0$，则�
     \[\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}\]
 \end{theorem}
 
-从图像上看，Cauchy中值定理表达的是对于参数方程$\vect{r} = (f(x),g(x))$在$x \in [a,b]$上的曲线，其上必有一点的切线与曲线端点连线平行.
+从图像上看，Cauchy中值定理表达的是对于参数方程$\vb{r} = (f(x),g(x))$在$x \in [a,b]$上的曲线，其上必有一点的切线与曲线端点连线平行.
 
 \begin{proof}
     这个证明实际上就是对证明Lagrange中值定理方法的推广.把构造函数里的常数都用$g(c)$来替换：

@@ -34,10 +34,6 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[most, theorems, breakable]{tcolorbox}
 
-% 标题与目录
-\usepackage[explicit]{titlesec}
-\usepackage{titletoc}
-
 % 字符、图标、化学
 \usepackage{calligra, fontawesome5}
 \usepackage[version=4]{mhchem}
@@ -48,16 +44,13 @@
 % 定理管理
 \usepackage{thmtools}
 
-% 日期
-\usepackage[style=iso]{datetime2}
-
 % 参考文献
 \usepackage[numbers, sort&compress]{natbib}
 
 % 警告控制
 \usepackage{silence}
 
-% 超链接与引用（必须最后）
+% 超链接与引用(必须最后)
 \usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
 \usepackage[capitalize, nameinlink, noabbrev]{cleveref}
 
@@ -85,7 +78,6 @@
 \setCJKsansfont{Source Han Sans SC}[
     BoldFont={Source Han Sans SC Bold}
 ]
-\newCJKfontfamily\fangsong{FangSong}
 \newCJKfontfamily\heavyfont{Source Han Serif SC Heavy}
 \setCJKmonofont{PingFang SC}
 
@@ -112,6 +104,10 @@
     chapter/beforeskip=0pt,
     chapter/afterskip=0pt,
 }
+
+% 标题与目录设置
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
 
 % Chapter样式
 \titleformat{\chapter}[display]
@@ -169,18 +165,60 @@
     inter-unit-product = \ensuremath{\cdot}
 }
 
-% 表格格式
+% 设置目录
+% 目录标题样式
+\titleformat{name={\chapter},numberless}[block]
+    {\Huge\heavyfont}
+    {}
+    {0pt}
+    {#1}
+
+
+% 目录条目样式
+\titlecontents{chapter}
+    [0pt]
+    {\addvspace{1em}\bfseries}
+    {Chapter~\thecontentslabel\hspace{1em}}
+    {}
+    {\hfill\contentspage}
+
+
+% 生成目录
+\newcommand{\makecontents}{
+    \let\oldcleardoublepage\cleardoublepage
+    \let\cleardoublepage\clearpage
+
+    \frontmatter
+
+    \pagestyle{plain}
+
+    \begingroup
+        \ctexset{
+            contentsname = {目~录}
+        }
+        \tableofcontents
+    \endgroup
+
+    \mainmatter
+
+    \let\cleardoublepage\oldcleardoublepage
+}
+
+% 表格列样式设置
 \renewcommand{\tabularxcolumn}[1]{m{#1}}
 \newcolumntype{L}{>{\hbadness=10000\relax}X}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X} % 左对齐可换行
+\newcolumntype{Z}{>{\centering\arraybackslash}X}   % 居中对齐
 
 % #endregion
 
-% @name: cover-setting.tex
+% @name: cover-or-title-setting.tex
 % @order: 2
 % @description: 设置封面样式
 
 % !设置封面
 % #region
+\usepackage[style=iso]{datetime2} % 日期
 
 \makeatletter
 
@@ -297,53 +335,6 @@
 }
 
 \makeatother
-
-% #endregion
-
-% @name: content-setting.tex
-% @order: 3
-% @description: 设置目录样式
-
-% !设置目录
-% #region
-
-% 目录标题样式
-\titleformat{name={\chapter},numberless}[block]
-    {\Huge\heavyfont}
-    {}
-    {0pt}
-    {#1}
-
-
-% 目录条目样式
-\titlecontents{chapter}
-    [0pt]
-    {\addvspace{1em}\bfseries}
-    {Chapter~\thecontentslabel\hspace{1em}}
-    {}
-    {\hfill\contentspage}
-
-
-% 生成目录
-\newcommand{\makecontents}{
-    \let\oldcleardoublepage\cleardoublepage
-    \let\cleardoublepage\clearpage
-
-    \frontmatter
-
-    \pagestyle{plain}
-
-    \begingroup
-        \ctexset{
-            contentsname = {目~录}
-        }
-        \tableofcontents
-    \endgroup
-
-    \mainmatter
-
-    \let\cleardoublepage\oldcleardoublepage
-}
 
 % #endregion
 
@@ -651,7 +642,6 @@
 
 % !图表标题与引用设置
 % #region
-\DeclareCaptionFont{fangsong}{\fangsong} % 使用ctex的仿宋命令
 \captionsetup[table]{
 	skip = 0pt,
     labelsep = quad
@@ -661,10 +651,6 @@
 	justification = centering,
     skip = 0pt
 }
-
-% 表格列样式设置
-\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X} % 左对齐可换行
-\newcolumntype{Z}{>{\centering\arraybackslash}X}   % 居中对齐
 
 % 参数含义 1、单数名称；2、复数名称
 \captionsetup[subfigure]{labelformat=simple}
@@ -873,17 +859,17 @@
 
 % 超链接图标命令
 \newcommand{\wiki}[1]{
-    \href{#1}{
+    \!\!\href{#1}{
         \raisebox{1.2ex}
         {\textcolor{black}{\scriptsize\faWikipediaW}}
-    }
+    }\!\!\!\!
 }
 
 \newcommand{\video}[1]{
-    \href{#1}{
+    \!\!\href{#1}{
         \raisebox{1.2ex}
         {\textcolor{black}{\scriptsize\faPlayCircle[regular]}}
-    }
+    }\!\!\!\!
 }
 
 % #endregion

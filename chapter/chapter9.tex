@@ -1,0 +1,198 @@
+\chapter{多变量函数的微分学}
+\section{多变量函数及其连续性}
+
+
+\subsection{点集的结构}
+多变量函数是定义在高维空间点集上的函数，为了满足所要研究函数的性质，需要对这个点集所具有的结构做进一步的规定.
+
+\begin{definition}
+    定义集合$\mathbb{R}^n$是有序$n$元实数组的集合：
+    \[\mathbb{R}^n \coloneq \{(x_1,x_2,\cdots,x_n)\,|\,x_i \in \mathbb{R}\}\]
+    其中的元素$\vb{x} = (x_1,x_2,\cdots,x_n)$称为$\mathbb{R}^n$中的一个点.
+\end{definition}
+
+\subsubsection{实线性空间}
+\begin{definition}
+    对于$\mathbb{R}^n$中的两点$\vb{x}=(x_1,\cdots,x_n),\vb{y}=(y_1,\cdots,y_n)$，定义加法运算：
+    \[\vb{x} + \vb{y} \coloneq (x_1+y_1,\cdots,x_n+y_n)\]
+    定义数乘运算：
+    \[\forall \lambda \in \mathbb{R},\quad \lambda\vb{x} \coloneq (\lambda x_1,\cdots,\lambda x_n)\]
+    定义有上述运算的空间称为\overtext{实线性空间}{real linear space}或\overtext{实向量空间}{real vector space}.
+\end{definition}
+
+
+\subsubsection{赋范空间}
+\begin{definition}
+    在线性空间上定义\overtext{范数}{norm}运算：
+    \[\left\|\vb{x}\right\| \coloneq \sqrt{x_1^2 + \cdots + x_n^2}\]
+    称定义有范数的线性空间为\overtext{赋范空间}{normed space}\!\wiki{https://zh.wikipedia.org/wiki/\%E8\%B3\%A6\%E7\%AF\%84\%E5\%90\%91\%E9\%87\%8F\%E7\%A9\%BA\%E9\%96\%93}.
+\end{definition}
+
+
+\subsubsection{度量空间}
+\begin{definition}
+    在赋范空间上定义\overtext{距离}{metric}的概念：
+    \[\rho(\vb{x},\vb{y}) \coloneq \left\|\vb{x} - \vb{y}\right\| = \sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}\]
+    其满足距离的四条公理：
+    \begin{enumerate}[circ]
+        \item \textbf{非负性：}$\rho(\vb{x,y}) \geqslant 0$.
+        \item \textbf{不可区分性}$\rho(\vb{x,y})\Leftrightarrow \vb{x=y}$.
+        \item \textbf{对称性：}$\rho(\vb{x,y}) = \rho(\vb{y,x})$.
+        \item \textbf{三角不等式：}$\rho(\vb{x,y})\leqslant\rho(\vb{x,z}) + \rho(\vb{y,z})$.
+    \end{enumerate}
+    称定义有距离的空间为\overtext{度量空间}{metric space}\!\wiki{https://zh.wikipedia.org/wiki/\%E5\%BA\%A6\%E9\%87\%8F\%E7\%A9\%BA\%E9\%97\%B4}.
+\end{definition}
+
+
+\subsubsection{拓扑空间}
+为了定义极限，要为集合赋予「一点附近」的概念.这样的空间称为\overtext{拓扑空间}{topological space}\!\wiki{https://zh.wikipedia.org/wiki/\%E6\%8B\%93\%E6\%89\%91\%E7\%A9\%BA\%E9\%97\%B4}.在拓扑空间中，可以定义以下概念：
+
+\begin{definition}
+    设有一点$\vb{x}_0$，称满足如下定义的集合为一个\overtext{开球}{open ball}：
+    \[B(\vb{x}_0,r) = \{\vb{x}\,|\,\rho(\vb{x},\vb{x}_0) < r\}\]
+    除去中心点$\vb{x}_0$，则得到\overtext{去心开球}{punctured open ball}的定义：
+    \[B_-(\vb{x}_0,r) = \{\vb{x}\,|\,0 < \rho(\vb{x},\vb{x}_0) < r\}\]
+\end{definition}
+
+\begin{definition}
+    邻域是包含某个开球的集合：
+    \begin{itemize}
+        \item 称$U$是$\vb{x}_0$的\overtext{邻域}{neighborhood}，当且仅当$\exists r>0$使得$B(\vb{x}_0,r)\subseteq U$.
+        \item 称$U_-$是$\vb{x}_0$的\overtext{去心邻域}{punctured neighborhood}，当且仅当$\exists r>0$使得$B_-(\vb{x}_0,r)\subseteq U_-$.
+    \end{itemize}
+\end{definition}
+
+从邻域的定义不难发现，邻域只要能够包含某个开球即可，并没有固定的形状，常用的是球形或方形.
+
+\begin{definition}
+    若对于一个点集$E$，$\exists R>0$使得$E \subset B(O,R)$，则称$E$是\textbf{有界的}，其中$O$是坐标原点.
+
+    定义有界非空点集$E$的\overtext{直径}{diameter}为集合中任意两点距离的上确界，记作：
+    \[\mathrm{diam}\, E = \sup\{\rho({\vb{x,y}})\,|\,\vb{x,y}\in E\}\]
+\end{definition}
+
+\begin{definition}
+    设$E \subset \mathbb{R}^n$是一个点集，$\mathbb{R}^n$中不属于$E$的部分称为$E$的\overtext{余集}{complement}，记作$E^c$，显然有$(E^c)^c = E$.平面上的点按照其与$E$的关系分为以下三种：
+    \begin{enumerate}[circ]
+        \item 如果$\exists r>0$，使得$B(\vb{x}_0,r) \subset E$，则称$\vb{x}_0$是$E$的\overtext{内点}{interior point}.$E$中全体内点组成的集合称为$E$的\overtext{核}{interior}，记作$E^\circ$.
+        \item 如果$\exists r>0$，使得$B(\vb{x}_0,r) \subset E^c$，则称$\vb{x}_0$是$E$的\overtext{外点}{exterior point}.
+        \item 如果$\forall r>0$，使得$B(\vb{x}_0,r)$中既有$E$的点，又有$E^c$的点，则称$\vb{x}_0$为$E$的\overtext{边界点}{boundary point}.$E$的全体边界点的集合称为$E$的\overtext{边界}{boundary}，记作$\partial E$.
+    \end{enumerate}
+\end{definition}
+
+显然按照边界点的定义，边界点既可以在$E$中，也可以不在$E$中.
+
+\begin{definition}
+    \begin{itemize}
+        \item 对于$E$中的点，如果$\exists r>0$，使得$B(\vb{x}_0,r) \cap E = \vb{x}_0$，那么称$\vb{x}_0$是$E$的\overtext{孤立点}{}.
+        \item 对于空间中一点$\vb{x}_0$，如果$\forall r > 0$，使得$B_-(\vb{x}_0,r)$中总是有$E$中的点，称$\vb{x}_0$为$E$的\overtext{聚点}{}.
+    \end{itemize}
+\end{definition}
+
+根据上述定义，$E$的聚点不一定在$E$中，$E$的边界点要么是聚点，要么是孤立点.不孤立的$E$的边界点则一定是聚点，在$E$中的内点也一定是聚点.
+
+\begin{definition}
+    设$E \subset \mathbb{R}^n$，若$E = E^\circ$，即$E$中的点都是$E$的内点，则称$E$是一个\overtext{开集}{open set}；若$E$的余集$E^c$是开集，则称$E$是\overtext{闭集}{close set}.
+\end{definition}
+
+按照上述定义，在$\mathbb{R}^n$中，只有整个空间$\mathbb{R}^n$和空集$\emptyset$既是\overtext{既开又闭集}{clopen set}.一方面，它们中没有不是内点的点，另一方面，二者互为余集，因此也是闭集.
+
+\begin{definition}
+    设$E \in \mathbb{R}^n$，记$\overline{E} = E \cup \{E\text{的所有聚点}\}$，称为$E$的\overtext{闭包}{}.
+\end{definition}
+可以认为$E$的闭包就是$E$本身加上所有从极限上能够靠近到的点，或者说是$E$中所有点加上不在$E$中的$E$的边界点.
+
+开集和闭集具有如下性质：
+\begin{enumerate}[property]
+    \item 两个开集的并或交仍是开集，两个闭集的并或交仍是闭集.
+    \begin{proof}
+        以开集之交的证明为例：设有开集$E_1,E_2$，$\forall M \in E_1 \cap E_2$，满足$M \in E_1$且$M \in E_2$.对$M \in E_1$，$\exists r_1 > 0$使得$B(M,r_1) \subset E_1$；对$M \in E_2$，$\exists r_2 > 0$使得$B(M,r_2) \subset E_2$.
+
+        不妨取$r = \min\{r_1,r_2\}$，则对$\forall M \in E_1 \cap E_2$，$\exists r$满足$B(M,r) \subset (E_1 \cap E_2)$.
+    \end{proof}
+    \item $E\subset\mathbb{R}^n$是开集，当且仅当$\partial E \cap E = \emptyset$.
+    \item $E\subset\mathbb{R}^n$是闭集，当且仅当$\partial E \subset E$.
+    \item $E\subset\mathbb{R}^n$是闭集，当且仅当$E = \overline{E}$.
+\end{enumerate}
+\begin{mistake}
+    设有命题$p,q,q'$，若有$p\Leftrightarrow q$且$p\Leftrightarrow q'$，则命题$q$和$q'$在表述上可以不一致，但是在逻辑上一定等价，即$q \Leftrightarrow q'$.
+\end{mistake}
+
+\begin{definition}
+    对于点集$E \subset \mathbb{R}^n$，如果存在两个非空开集$A,B$使得$E = A \cup B$时，则称$E$是\textbf{不}\!\!\overtext{连通}{connected}的，否则称$E$是连通的.
+\end{definition}
+
+
+\begin{definition}
+    \textbf{连续曲线}是由如下参数方程表示函数的图像：
+    \[\vb{r}(t) = (x(t),t(t)),\quad t\in[\alpha,\beta]\]
+    其中$x(t),y(t)$均为$[\alpha,\beta]$上的连续函数.若上式满足对任意的$\alpha \leqslant t_1 < t_2 \leqslant \beta$有$(x(t_1),y(t_1)) \neq (x(t_2),y(t_2))$，即该曲线不存在自相交，则称曲线为一条\textbf{简单曲线(Jordan曲线)}.
+
+    若曲线的两端点重合，即$(x(\alpha),y(\alpha)) = (x(\beta),y(\beta))$，则称为\textbf{闭曲线}.
+\end{definition}
+
+\begin{definition}
+    对于点集$E$中任意两点$P,Q$，若在$E$中存在一条连续曲线将$P$和$Q$连接起来，则称$E$是\overtext{道路连通}{path connected}或\overtext{弧连通}{arc connected}的.
+\end{definition}
+
+\begin{theorem}
+    道理连通集一定是连通的，反之则不然.
+\end{theorem}
+
+\begin{proof}
+    取$E = A \cup B$且$A \cap B = \emptyset$.取$\forall M_1 \in A,\forall M_2 \in B$，因为$E$是道路连通的，因此存在连续曲线：
+    \[\vb{r}(t) = (x(t),y(t)),\quad t\in[\alpha,\beta]\quad\text{且}\quad\vb{r}(\alpha) = M_1,\vb{r}(\beta) = M_2\]
+
+    设$t_0 = \inf\{t\,|\,\vb{r}(t) \in B\}$，此时分两种情况讨论.若$\vb{r}(t_0)\in A$，则$\forall\varepsilon > 0$，$\exists\delta>0$使得在$|t-t_0|<\delta$时有：
+    \[|x(t) - x(t_0)| < \frac{\varepsilon}{2},\qquad |y(t) - y(t_0)| < \frac{\varepsilon}{2}\]
+    若是取$t=t',\quad t_0 < t < t_0 + \delta$，则显然$\vb{r}(t') \in B$.
+
+    即在$B(\vb{r}(t_0),\varepsilon)$中对$\forall \varepsilon>0$都存在$B$中的点，则表明$\vb{r}(t_0)\in A$是$B$的聚点，满足连通的定义.
+\end{proof}
+
+\begin{definition}
+    道路连通的开集称为\overtext{开区域}{open domain}，开区域的闭包称为\overtext{闭区域}{close region}，统称为\overtext{区域}{region}.
+\end{definition}
+
+\begin{definition}
+    如果区域$D$内任意一条简单闭曲线的内部仍在$D$内，即$D$内没有空洞，那么称$D$是\overtext{单连通}{simply connected}的，反之则称为\overtext{多连通}{multiply connected}的.
+\end{definition}
+
+
+\subsection{平面上的点集}
+\subsubsection{平面点列的极限}
+\begin{definition}
+    设$\{M_n\}$是平面点列，如有$M_0 \in \mathbb{R}^2$使得$\lim \rho(M_n,M_0) = 0$，则称点列$\{M_n\}$为\textbf{收敛点列}，$M_0$称为点列的\textbf{极限}.记作：
+    \[\lim_{n \to \infty} M_n  = M_0\]
+\end{definition}
+
+平面上的点列不一定需要以直线逼近其极限，可以由任意的轨迹逼近.
+
+\begin{theorem}
+    设$M_n(x_n,y_n)$，则有：
+    \[\lim M_n = M_0 \quad\Leftrightarrow\quad \begin{cases}
+        \lim x_n = x_0 \\
+        \lim y_n = y_0
+    \end{cases}\]
+\end{theorem}
+
+\begin{proof}
+    注意到有以下不等式：
+    \begin{gather*}
+        |x_n-x_0| \leqslant \rho(M_n,M_0) \leqslant |x_n-x_0| + |y_n-y_0| \\
+        |y_n-y_0| \leqslant \rho(M_n,M_0) \leqslant |x_n-x_0| + |y_n-y_0|
+    \end{gather*}
+    根据三明治法则，即得证.
+\end{proof}
+
+\begin{theorem}
+    平面上的有界点列必有收敛子列.
+\end{theorem}
+
+\begin{proof}
+    设有$M_n(x_n,y_n)$，若$\{x_n\}$有界，则必有收敛子列$\{x_{n_k}\}$，则$\{x_{n_k}\}$的子列$\{x_{n_k'}\}$也收敛.
+
+    若$\{y_n\}$有界，则必有子列$\{y_{n_k}\}$有界，则其进一步有有界子列$\{y_{n_k'}\}$收敛.
+
+    则平面上点列$\{M_n\}$必有收敛子列$\{M_{n_k'}\}$.
+\end{proof}
