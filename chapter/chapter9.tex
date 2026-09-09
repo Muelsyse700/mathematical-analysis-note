@@ -196,3 +196,46 @@
 
     则平面上点列$\{M_n\}$必有收敛子列$\{M_{n_k'}\}$.
 \end{proof}
+
+
+\subsection{多变量函数}
+\subsubsection{多变量函数的定义}
+$n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\mathbb{R},i=1,2,\cdots,n\}$中的点$\vb{x}$对应一个向量：
+\[\vb{x} = x_1\vb{e}_1 + x_2\vb{e}_2 + \cdots + x_n\vb{e}_n\]
+其中$\vb{e}_i$是$\mathbb{R}_n$的标准正交基.
+
+\begin{definition}
+    设$D \subset \mathbb{R}^n$，则从$D$到直线上的映射称为一个\overtext{$n$元函数}{$n$-variable function}，记作：
+    \[f:D \to \mathbb{R} \quad\text{或}\quad z = f(x_1,x_2,\cdots,x_n)\]
+\end{definition}
+
+对于二元函数$z=f(x,y),(x,y)\in D \subset \mathbb{R}^n$，如果把$z$所在的数轴垂直于$Oxy$平面放置并形成右手系，则得到一个三维空间$Oxyz$上的一张曲面：
+\[S = \{(x,y,f(x,y))\,|\,(x,y)\in D\}\]
+若在$Oxy$平面上取使得$f(x,y)$等于一固定常数$c$的点的集合：
+\[L_c = \{(x,y)\,|\,f(x,y)=c\}\]
+则得到了$Oxy$平面上的一条或几条曲线，或若干点，或为空集，称为\overtext{等值线}{contour line}.
+
+
+\subsection{多变量函数的复合}
+将两个二元函数复合，得到的仍是二元函数；将二元函数和一元函数复合得到的则是一元函数.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{composition-of-multivar-func/fig.pdf}
+    \caption{多变量函数的复合映射过程}
+\end{figure}
+
+
+\subsection{向量值函数}
+向量值函数就是一个从$n$维空间$\mathbb{R}^n$到$m$维空间$\mathbb{R}^m$的映射：
+\[\vb{f}: D \to \mathbb{R}^m,\quad D \subset \mathbb{R}^n \quad\text{或}\quad \vb{f}:(x_1,x_2,\cdots,x_n)\mapsto(y_1,y_2,\cdots,y_m)\]
+应当注意的是，向量值函数$\vb{f}$的每一个分量$y_i$都是所有自变量的多元函数：
+\[y_i = f_i(x_1,x_2,\cdots,x_n),\quad i = 1,2,\cdots,m\]
+当维数$m=n$时，如果映射可逆，那么称为相同维数空间之间的变换，可逆意味着变换过程中没有发生信息丢失.
+
+常用的向量值函数有$\mathbb{R}\to\mathbb{R}^3$的映射：
+\[\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j} + z(t)\vb{k},\quad t\in[\alpha,\beta]\subset\mathbb{R}\]
+这将一维的参数$t$映射到了三维空间的一条曲线上，即空间曲线的参数方程表示，称为\overtext{参数曲线}{parametric curve}.
+
+还有$\mathbb{R}^2 \to \mathbb{R}^3$的映射：
+\[\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k},\quad (u,v)\in D \subset \mathbb{R}^2\]
+这是将二维参数数组$(u,v)$映射到了三维空间中的一张曲面上，称为\overtext{参数曲面}{parameter surface}.
