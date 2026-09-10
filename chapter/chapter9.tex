@@ -239,3 +239,105 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 还有$\mathbb{R}^2 \to \mathbb{R}^3$的映射：
 \[\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k},\quad (u,v)\in D \subset \mathbb{R}^2\]
 这是将二维参数数组$(u,v)$映射到了三维空间中的一张曲面上，称为\overtext{参数曲面}{parameter surface}.
+
+
+\subsection{多变量函数的极限}
+\begin{definition}
+    设$z=f(x,y),(x,y)\in D$，$M_0(x_0,y_0)$是$D$的聚点.若是对$\forall \varepsilon > 0$，$\exists \delta > 0$，当$M(x,y)\in D$满足：
+    \begin{gather*}
+        \text{圆心去心邻域：}0 < \rho(M,M_0) = \sqrt{(x-x_0)^2 + (y-y_0)^2} < \delta\\
+        \text{方形去心邻域：}|x-x_0|<\delta,|y-y_0|<\delta,\quad(x,y)\neq (x_0,y_0)
+    \end{gather*}
+    使得$|f(M)-a|<\varepsilon$，则称当$M$趋于$M_0$时，$f(M)$以$a$为\textbf{极限}，记作：
+    \[\lim_{M \to M_0}f(M) = a \quad\text{或}\quad \lim_{(x,y)\to(x_0,y_0)}f(x,y) = a \quad\text{或}\quad \lim_{\substack{x \to x_0 \\ y \to y_0}}f(x,y) = a\]
+\end{definition}
+
+\begin{question}
+    证明：$\displaystyle \lim_{(x,y)\to(x_0,y_0)}\frac{x^2y^2}{x^4+y^2} = 0$.
+\end{question}
+
+\begin{proof}
+    \[\left|\frac{x^2y^2}{x^4+y^2}\right| = \frac{|y|}{|x^4+y^2|}\cdot|x^2 y| \leqslant \frac{|y|}{|x^4+y^2|}\cdot\frac{|x^4+y^2|}{2} = \frac{|y|}{2}\]
+    若有极限成立，则上式应满足$\forall \varepsilon > 0$，$\exists\delta>0$使得$|x-0|<\delta,|y-0|<\delta$时有$\frac{|y|}{2} < \varepsilon$.故而取$\delta = 2\varepsilon$，使得上述极限存在且等于$0$.
+\end{proof}
+
+\begin{question}
+    证明：$\displaystyle \lim_{(x,y)\to(x_0,y_0)}\frac{x^3+y^3}{x^2+y^2} = 0$.
+\end{question}
+
+\begin{proof}
+    取$x = r\cos\theta, y = r\sin\theta, r \to 0$，有：
+    \[\left|\frac{r^3(\cos^3\theta + \sin^3\theta)}{r^2}\right| \leqslant r\]
+    对$\forall \varepsilon > 0$，取$\delta = \varepsilon$，使得$r = \rho((x,y),0) < \delta$时有：
+    \[\left|\frac{x^3+y^3}{x^2+y^2} - 0\right| \leqslant \varepsilon\]
+    故而极限存在且为$0$.
+\end{proof}
+
+\begin{theorem}
+    设$z=f(x,y),(x,y)\in D$，有$D(x_0,y_0)$是$D$的一个聚点，则有函数极限：
+    \[\lim_{(x,y)\to(x_0,y_0)}f(x,y) = a\]
+    的充分必要条件是对任何收敛于$(x_0,y_0)$的点列$(x_n,y_n),(x_n,y_n)\neq(x_0,y_0)$都满足：
+    \[\lim_{n \to \infty}f(x_n,y_n) = a\]
+\end{theorem}
+
+根据\cref{subsec:LimitProperty}中性质7的证明，分别对上述定理中的$x,y$分别证明，而后合并为$\rho((x,y),(x_0,y_0))$进一步证明即可.
+
+\begin{theorem}
+    设$z = f(u,v)$，其中$u=u(x,y),v=v(x,y)$，若：
+    \begin{enumerate}[circ]
+        \item $\lim\limits_{(u,v) \to (u_0,v_0)}f(u,v) = a$
+        \vspace{0.5em}
+        \item $\lim\limits_{(x,y) \to (x_0,y_0)}u(x,y) = u_0,\quad \lim\limits_{(x,y) \to (x_0,y_0)}v(x,y) = v_0$
+    \end{enumerate}
+    则$\lim\limits_{(x,y) \to (x_0,y_0)}f(u(x,y),v(x,y)) = a$.
+\end{theorem}
+
+\begin{proof}
+    对于$\forall \varepsilon > 0$，根据条件\circnum{1}，必定$\exists\delta' > 0$，使得当$|u-u_0|<\delta',|v-v_0|<\delta'$时，有$|f(u,v)-a|<\varepsilon$.
+
+    根据条件\circnum{2}，对于一个给定的$\delta'>0$，一定$\exists \delta>0$在$|x-x_0|<\delta,|y-y_0|<\delta$且$(x,y)\neq(x_0,y_0)$时，满足$|u-u_0|<\delta',|v-v_0|<\delta'$.
+
+    综上所述，对于$\forall \varepsilon>0$，$\exists \delta>0$，在$|x-x_0|<\delta,|y-y_0|<\delta$且$(x,y)\neq(x_0,y_0)$时，满足：
+    \[|f(u(x,y),v(x,y))-a|<\varepsilon \quad\Rightarrow\quad \lim_{(x,y) \to (x_0,y_0)}f(u(x,y),v(x,y)) = a\]
+\end{proof}
+
+\begin{definition}
+    设函数$f(x,y)$在$(x_0,y_0)$附近有定义，先后对$x,y$求极限：
+    \[\lim_{y \to y_0} \lim_{x \to x_0}f(x,y),\qquad \lim_{x \to x_0} \lim_{y \to y_0}f(x,y)\]
+    如果上述极限存在，那么称之为函数$f(x,y)$在$(x_0,y_0)$处的\overtext{累次极限}{iterated limit}.
+\end{definition}
+
+通过举反例不难说明，累次极限与多变量函数的极限没有必然的联系，一个存在不代表另一个也存在.
+
+\begin{theorem}
+    设有$\lim\limits_{(x,y) \to (x_0,y_0)}f(x,y) = A$，如果对$y\neq y_0$，有$\varphi(y) = \lim\limits_{x \to x_0}f(x,y)$存在，则：
+    \[\lim_{y \to y_0}\left(\lim_{x \to x_0}f(x,y)\right) = A\]
+\end{theorem}
+
+\begin{proof}
+    对$\forall \varepsilon>0$，$\exists \delta > 0$，在$|x-x_0|<\delta,|y-y_0|<\delta$时满足：
+    \[|f(x,y)-A| < \frac{\varepsilon}{2} \quad\Leftrightarrow\quad A - \frac{\varepsilon}{2} < f(x,y) < A + \frac{\varepsilon}{2}\]
+    令$x \to x_0$，上式变为：
+    \[A - \frac{\varepsilon}{2} \leqslant \varphi(y) \leqslant A - \frac{\varepsilon}{2} \quad\Rightarrow\quad |\varphi(y) - A| \leqslant \frac{\varepsilon}{2} < \varepsilon\]
+    即对$\forall \varepsilon>0$，$\exists\delta>0$在$|y-y_0|$时满足$|\varphi(y) - A| < \varepsilon$，即：
+    \[\lim_{y \to y_0}\varphi(y) = A \quad\Rightarrow\quad \lim_{y \to y_0}\left(\lim_{x \to x_0}f(x,y)\right) = A\]
+    由此得证.
+\end{proof}
+
+\begin{theorem}
+    设$f(x,y)$在$M_0(x_0,y_0)$附近$B_-(M_0,r)$有定义，且在$M_0$处有有限极限$a$，$x=x(t),y=y(t)$在$0 < |t-t_0| < l$有定义，使得$\{(x(t),y(t))\,|\,0<|t-t_0|<l\}\subset B_-(M_0,r)$且$\lim\limits_{t \to t_0}x(t) = x_0,\lim\limits_{t \to t_0}y(t) = y_0$，则：
+    \[\lim_{t \to t_0}f(x(t),y(t)) = a\]
+\end{theorem}
+
+\begin{proof}
+    已知：
+    \[\lim_{(x,y)\to(x_0,y_0)}f(x,y) = a\]
+    即$\forall \varepsilon>0$，$\exists \delta_1 > 0$在$|\rho((x,y),(x_0,y_0))|<\delta_1$时满足$|f(x,y)-a|<\varepsilon$.
+
+    现选取一条任意路径$x=x(t),y=y(t)$，在$t\to t_0$时有$x \to x_0,y \to y_0$.即对$\forall \varepsilon > 0$，$\exists \delta_2>0$，使得$0 < \sqrt{(x(t)-x_0)^2+(y(t)-y_0)^2} = \rho((x,y),(x_0,y_0)) < \delta_2$时满足：
+    \[|x(t)-x_0|<\varepsilon,\qquad |y(t)-y_0|<\varepsilon\]
+    不妨取$\delta = \min\{\delta_1,\delta_2\}$，即这个$\delta$对任意一条路径在$|\rho((x,y),(x_0,y_0))|<\delta$时满足：
+    \[\lim_{t \to t_0}f(x(t),y(t)) = a\]
+\end{proof}
+
+上述定理表明，只要极限存在，则平面上的点沿任何路径趋于$(x_0,y_0)$时，极限都存在且一致.这个定理主要用于证明极限不存在的情形，只要能找到一条路径使得极限不存在或不一致即可.
