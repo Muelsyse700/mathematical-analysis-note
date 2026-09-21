@@ -21,7 +21,8 @@
 \usepackage{siunitx}
 
 % 文本与列表
-\usepackage{enumitem, ragged2e}
+\usepackage[inline]{enumitem}
+\usepackage{ragged2e}
 
 % 绘图与图像
 \usepackage{tikz}
@@ -534,35 +535,35 @@
     },
     #1
 }
-\newtcolorbox{solution}[1][]{
-    myTitleStyle,               % 调用通用标题栏样式
-    colback=GreenLight,         % 内容背景色
-    colframe=GreenDeep,         % 边框颜色
-    colbacktitle=GreenDeep,     % 标题栏背景色
-    title={解答}, % 自动编号标题 (关联问题的编号)
+\NewTColorBox{solution}{o}
+{
+    myTitleStyle,
+    colback=GreenLight,
+    colframe=GreenDeep,
+    colbacktitle=GreenDeep,
+    title={\IfValueTF{#1}{#1\enspace 解答}{解答}},
     after title={\hfill \faAngleDown},
     overlay unbroken and last={
         \node[anchor=south east, inner sep=6pt] 
             at (frame.south east) {\color{GreenDeep}\faCheckDouble};
     },
-    #1                          % 允许传入额外参数
 }
 % 定义“证明”环境
 \makeatletter
 \@ifundefined{proof}{}{\let\proof\relax \let\endproof\relax}
 \makeatother
-\newtcolorbox{proof}[1][]{
-    myTitleStyle,               % 调用通用标题栏样式
-    colback=GreenLight,         % 内容背景色
-    colframe=GreenDeep,         % 边框颜色
-    colbacktitle=GreenDeep,     % 标题栏背景色
-    title={证明}, % 自动编号标题 (关联问题的编号)
+\NewTColorBox{proof}{o}
+{
+    myTitleStyle,
+    colback=GreenLight,
+    colframe=GreenDeep,
+    colbacktitle=GreenDeep,
+    title={\IfValueTF{#1}{#1\enspace 证明}{证明}},
     after title={\hfill \faAngleDown},
     overlay unbroken and last={
         \node[anchor=south east, inner sep=6pt] 
             at (frame.south east) {\color{GreenDeep}\faSquare[regular]};
     },
-    #1                          % 允许传入额外参数
 }
 
 \newtcolorbox{extension}[2][]{
@@ -624,6 +625,36 @@
     itemindent=*
 }
 
+\SetEnumitemKey{par}{
+    label=\bfseries(\arabic*),
+    ref=\arabic*,
+    itemsep=0pt,
+    parsep=0pt,
+    leftmargin=*
+}
+
+\SetEnumitemKey{pari}{
+    label=\raisebox{0.175em}{\footnotesize\bfseries(\arabic*)},
+    ref=\arabic*,
+    itemjoin=\quad,
+    itemjoin*=\quad
+}
+
+\SetEnumitemKey{dot}{
+    label={\bfseries\arabic*.},
+    ref=\arabic*,
+    itemsep=0pt,
+    parsep=0pt,
+    leftmargin=*
+}
+
+\SetEnumitemKey{doti}{
+    label=\raisebox{0.075em}{\footnotesize\bfseries\arabic*.},
+    ref=\arabic*,
+    itemjoin=\quad,
+    itemjoin*=\quad
+}
+
 % 无序列表全局样式
 \setlist[itemize,1]{
     label={\faCaretRight},
@@ -636,6 +667,7 @@
 }
 
 % #endregion
+
 
 % @name: caption-and-reference-setting.tex
 % @order: 6
@@ -833,6 +865,7 @@
 \newcommand{\ee}{\mathrm{e}} % 正体自然常数e
 \newcommand{\ii}{\mathrm{i}} % 正体虚数i
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\skipitem}[1][1]{\addtocounter{enumi}{#1}} % 跳过enumerate编号
 
 % 文本装饰命令
 \newcommand{\overtext}[2]{

@@ -186,6 +186,7 @@
 \end{proof}
 
 \begin{theorem}
+    \label{thm:2DBolzanoWeierstrass}
     平面上的有界点列必有收敛子列.
 \end{theorem}
 
@@ -341,3 +342,96 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 \end{proof}
 
 上述定理表明，只要极限存在，则平面上的点沿任何路径趋于$(x_0,y_0)$时，极限都存在且一致.这个定理主要用于证明极限不存在的情形，只要能找到一条路径使得极限不存在或不一致即可.
+
+
+\subsection{多变量函数的连续性}
+\subsubsection{多元函数连续性与一致连续性的定义}
+\begin{definition}
+    设$f(x,y)$在$M_0(x_0,y_0)$的邻域$B(M_0,r)$上有定义，若存在极限：
+    \[\lim_{\substack{x \to x_0 \\ y \to y_0}}f(x,y) = f(x_0,y_0) \quad\text{或}\quad \lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}}f(x_0+\Delta x, y_0+\Delta y) = f(x_0,y_0)\]
+    则称$f$在$(x_0,y_0)$处\textbf{连续}.
+\end{definition}
+
+\begin{question}
+    证明在定义域$xy>-1$内，下列函数在$(0,0)$处连续：
+    \[f(x,y) = \begin{cases}
+        \ln(1+xy)^{\frac{1}{xy}},\quad xy \neq 0\\
+        1,\quad xy = 0
+    \end{cases}\]
+\end{question}
+
+\begin{proof}
+    注意到有：
+    \[\lim\limits_{u \to 0}\ln(1+u)^{\frac{1}{u}} = 1\]
+    即对$\forall \varepsilon > 0$，$\exists \delta'>0$，使得$|u| < \delta'$时满足：
+    \[\left|\ln(1+u)^{\frac{1}{u}} - 1\right| < \varepsilon\]
+    取$\delta = \sqrt{\delta'} > 0$，在$|x|<\delta,|y|<\delta$时有$|xy|<\delta'$，进而满足：
+    \[|f(x,y)-f(0,0)| = \left|\ln(1+xy)^{\frac{1}{xy}} - 1\right| < \varepsilon\]
+    故而函数在$(0,0)$处连续.
+\end{proof}
+
+从上述例题不难看出，如果多元函数在一点连续，在该点固定其它变量得到的单变量函数也在这一点连续，反之则不然.
+
+例如对于函数：
+\[f(x,y) = \begin{cases}
+    \displaystyle \frac{2xy}{x^2+y^2},\quad (x,y) \neq (0,0)\\
+    0,\quad (x,y) = (0,0)
+\end{cases}\]
+对于单变量函数$f(x,0),f(0,y)$都在$x=0$或$y=0$时连续，但是若是以另一条轨迹，如沿着$y=x$向$(0,0)$逼近，则函数不连续：
+\[\lim_{\substack{x \to 0 \\ y \to 0}}\frac{2xy}{x^2+y^2} = 1 \neq f(0,0)\]
+同样地，在多变量函数中也存在一致连续性的概念：
+\begin{definition}
+    设$f$在区域$D$上连续，对$\forall \varepsilon > 0$，$\exists \delta>0$使得区域上任意两点$(x,y)$和$(x',y')$在满足：
+    \[\rho = \sqrt{(x-x')^2 + (y-y')^2} < \delta \quad\text{或}\quad |x'-x|<\delta,|y'-y|<\delta\]
+    时使得$|f(x',y')-f(x,y)|<\varepsilon$，就称$f$在$D$上\textbf{一致连续}.
+\end{definition}
+
+
+\subsubsection{连续多元函数的性质}
+\begin{enumerate}[property]
+    \item 连续函数的加、减、乘、除(分母不为$0$)也是连续函数.\\
+    特别地，对于除法：
+    \[\lim\limits_{(x,y) \to (x_0,y_0)}\frac{f(x,y)}{g(x,y)} = \frac{f(x_0,y_0)}{g(x_0,y_0)}\]
+    若是$f(x,y)$在$D$上连续，并且有$f(x_0,y_0) > 0$则一定存在$(x_0,y_0)$的一个邻域$I_{x_0}$，使得当$(x,y)\in I_{x_0}$时，$f(x,y) > 0$.这就像一块布，提起一点周围也会跟着升高，这就是连续函数极限的局部保号性.
+    \item 连续函数的复合仍然连续.
+    \item \textbf{(介值定理)}如果连续函数$f(M)$的定义域$D$是道路连通的，那么对于任意两点$M_1,M_2\in D$，$f$在$D$中能够取到$f(M_1)$和$f(M_2)$中的所有值.
+    \begin{proof}
+        由于$f(M)$的定义域$D$是道路连通的，故而必然存在连续曲线：
+        \[L:\quad\vb{r}(t)=(x(t),y(t)),\quad t\in[\alpha,\beta]\quad\begin{cases}
+            \vb{r}(\alpha) = M_1\\
+            \vb{r}(\beta) = M_2
+        \end{cases}\]
+        对单变量函数$\vb{r}(t)$，作为连续函数的复合，其在$[\alpha,\beta]$上连续，因而对于$\forall c$满足$f(M_1) < c < f(M_2)$，根据\cref{thm:IntermediateValueTheorem}\textbf{(单变量连续函数的介值定理)}，总是有$t_0\in[\alpha,\beta]$使得$f(\vb{r}(t_0)) = c$：
+        \[f(\vb{r}(\alpha)) = f(M_1) < f(\vb{r}(t_0)) < f(M_2) = f(\vb{r}(\beta))\]
+    \end{proof}
+    \item \textbf{(最值定理)}有界闭集上的连续函数一定能取到最大值或最小值.
+    \begin{proof}
+        假设连续函数$f(x,y)$在有界闭集$D$上无上界.则对于$\forall n$，总是$\exists (x_n,y_n) \in D$，使得$f(x_n,y_n) > n$.
+            
+        对于有界闭集上的点列$(x_n,y_n)$，根据\cref{thm:2DBolzanoWeierstrass}，其必有收敛子列$(x_{n_k},y_{n_k}) \to (x_0,y_0)$，且收敛点仍在$D$内.
+
+        根据$f(x,y)$的连续性，有：
+        \[f(x_0,y_0) = \lim\limits_{k \to \infty}f(x_{n_k},y_{n_k}) \geqslant \lim\limits_{k \to \infty}n_k = \infty\]
+        上述结果与$f(x,y)$连续的定义相矛盾，故而连续的$f(x,y)$在其定义域$D$上必有上界.
+
+        有上界则必有上确界，记：
+        \[A = \sup_{(x,y)\in D}f(x,y)\]
+        则对$\forall n>0$有$A-\frac{1}{n}$不是上确界，则$\exists (x_n,y_n) \in D$使得：
+        \[A \geqslant f(x_n,y_n) > A-\frac{1}{n}\]
+        则根据三明治定理$n \to \infty$时，$f(x,y)$能够取到最大值.最小值的证明同理.
+    \end{proof}
+    \cref{thm:TheMostValuableTheorem}是上述定理的单变量形式.
+    \item \textbf{(Heine-Cantor定理)}有界闭集上的连续函数一定是一致连续的.\\
+    \begin{proof}
+        假设$f(x,y)$在有界闭集$D$上连续但不一致连续，那么$\exists\varepsilon_0 > 0$，取$\delta = \frac{1}{n}$，其中$n$为任意正整数，在$D$中不妨取两个点列$\{(x_n,y_n)\}$与$\{(x'_n,y'_n)\}$满足：
+        \[|x'_n - x_n| < \delta = \frac{1}{n},\quad |y'_n-y_n| < \delta = \frac{1}{n}\]
+        但是又有：
+        \[|f(x'_n,y'_n) - f(x_n,y_n)| \geqslant \varepsilon_0\]
+        由于有界闭集中的点列必有收敛子列，所以$\{(x_n,y_n)\}$与$\{(x'_n,y'_n)\}$可以各取出一个序号相同的收敛子列，并满足：
+        \[|x'_{n_k} - x_{n_k}| < \delta = \frac{1}{n_k},\quad |y'_{n_k}-y_{n_k}| < \delta = \frac{1}{n_k}\]
+        由三明治定理可知$k \to \infty$时两个子列收敛于同一点$(x_0,y_0)$，于是有：
+        \[\lim\limits_{k \to \infty}|f(x'_{n_k},y'_{n_k}) - f(x_{n_k},y_{n_k})| = |f(x_0,y_0) - f(x_0,y_0)| = 0 \geqslant \varepsilon_0\]
+        与$\varepsilon > 0$矛盾，故而$f$在$D$上是一致连续的.
+    \end{proof}
+    \cref{thm:HeineCantorTheorem}是上述定理的单变量形式.
+\end{enumerate}

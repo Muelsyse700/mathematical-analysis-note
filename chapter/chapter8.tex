@@ -5,7 +5,7 @@
     空间中既有大小又有方向的量称为\overtext{向量}{vector}，记作$\vb{v}$.它的大小记为$|\vb{v}|$.
     \begin{itemize}
         \item 对于两个大小相等、方向相同的向量$\vb{a},\vb{b}$，称二者相等，记为$\vb{a} = \vb{b}$.
-        \item 大小为$0$的向量称为\overtext{零向量}{zero vector}，记作$\vb{0}$，它没有确定的方向.
+        \item 大小为$0$的向量称为\overtext{零向量}{zero vector}，记作$\bm{0}$，它没有确定的方向.
         \item 大小相等而方向相反的向量称为\overtext{负向量}{negative vector}，记作$-\vb{v}$.
         \item 大小为$1$的向量称为\overtext{单位向量}{unit vector}，记为$\vb{e_v} = \dfrac{\vb{v}}{|\vb{v}|}$.
     \end{itemize}
@@ -46,9 +46,9 @@
 \begin{theorem}
     \begin{itemize}
         \item 两个向量$\vb{a,b}$共线，当且仅当它们线性相关，即存在不全为零的实数$\lambda,\mu$满足：
-        \[\lambda\vb{a} + \mu\vb{b} = \vb{0}\]
+        \[\lambda\vb{a} + \mu\vb{b} = \bm{0}\]
         \item 三个向量$\vb{a,b,c}$共面，当且仅当它们线性相关，即存在三个不全为零的实数$\lambda,\mu,\nu$满足：
-        \[\lambda\vb{a} + \mu\vb{b} + \nu\vb{c} = \vb{0}\]
+        \[\lambda\vb{a} + \mu\vb{b} + \nu\vb{c} = \bm{0}\]
     \end{itemize}
 \end{theorem}
 
@@ -56,12 +56,12 @@
     以两个向量$\vb{a,b}$的证明为例：
 
     \textbf{充分性：}设非零向量$\vb{a,b}$共线，即：
-    \[\vb{a} = \pm k \vb{b},\quad k = \frac{|\vb{a}|}{|\vb{b}|} \neq 0 \quad\Rightarrow\quad \vb{a} \mp k \vb{b} = \vb{0}\]
+    \[\vb{a} = \pm k \vb{b},\quad k = \frac{|\vb{a}|}{|\vb{b}|} \neq 0 \quad\Rightarrow\quad \vb{a} \mp k \vb{b} = \bm{0}\]
     取$\lambda = 1 \neq 0,\mu = \mp k \neq 0$，满足：
-    \[\lambda \vb{a} + \mu \vb{b} = \vb{0}\]
+    \[\lambda \vb{a} + \mu \vb{b} = \bm{0}\]
 
     \textbf{必要性：}若存在不全为零的数$\lambda,\mu$使得：
-    \[\lambda \vb{a} + \mu \vb{b} = \vb{0}\]
+    \[\lambda \vb{a} + \mu \vb{b} = \bm{0}\]
     不妨设$\lambda \neq 0$，则有：
     \[\vb{a} = \frac{\mu}{\lambda}\vb{b}\]
     满足共线的定义.
@@ -172,7 +172,7 @@
 \begin{gather*}
     \vb{i \cdot i} = \vb{j \cdot j} = \vb{k \cdot k} = 1 \\
     \vb{i \cdot j} = \vb{j \cdot k} = \vb{k \cdot i} = 0 \\
-    \vb{i \times i} =\vb{j \times j} = \vb{k \times k} = \vb{0} \\
+    \vb{i \times i} =\vb{j \times j} = \vb{k \times k} = \bm{0} \\
     \vb{i \times j} = \vb{k},\quad \vb{j \times k} = \vb{i},\quad \vb{k \times i} = \vb{j}
 \end{gather*}
 根据上述内容不难推出内积、外积和混合积的坐标表示：
