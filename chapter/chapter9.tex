@@ -493,3 +493,62 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
     \end{align*}
     由此得证.
 \end{proof}
+
+
+\subsection{多变量函数的可微性}
+与单变量函数微分的定义类似，多变量函数的微分定义如下：
+\begin{definition}
+    设$f(x,y)$是定义在区域$D \subset \mathbb{R}^2$上的二元函数，如果在$D$中一点$(x_0,y_0)$的附近，函数$f(x,y)$所表示的曲面可以近似于过$f(x_0,y_0)$的一个平面，即有：
+    \[f(x,y) = f(x_0,y_0) + a(x-x_0) + b(y-y_0) + o(\rho)\]
+    其中$a,b$为常数，$\rho = \sqrt{(x-x_0)^2 + (y-y_0)^2}$.则称$f(x,y)$在$(x_0,y_0)$\textbf{可微}.
+\end{definition}
+
+设有二元函数作为一个映射：
+\[f:\mathbb R^2\to\mathbb R,\qquad f=f(x,y)\]
+并记自变量增量向量为：
+\[\Delta\vb{\rho} \coloneq (\Delta x,\Delta y),\qquad \rho\coloneq\left\|\Delta\vb{\rho}\right\|\]
+若存在唯一的线性映射$\mathcal A:\mathbb R^2\to\mathbb R$，使得：
+\[f(x+\Delta x,y+\Delta y)-f(x,y) = \mathcal A(\Delta\vb{\rho})+o(\rho),\qquad\rho\to0\]
+则称$f$在点$(x,y)$处可微，并定义微分映射
+\[\dd: f\longmapsto \dd f\coloneq\mathcal A\]
+因此，$\dd{f}$本身是一个从增量向量空间到函数值变化空间的线性映射，即：
+\[\dd f:\mathbb R^2\to\mathbb R,\qquad\Delta f = \dd f(\Delta\vb{\rho})+o(\rho)\]
+由于任意从$\mathbb R^2$到$\mathbb R$的线性映射均可表示为$\mathcal A(\Delta x,\Delta y) = a\Delta x+b\Delta y$，故有：
+\[\dd f(\Delta\vb{\rho}) = a\Delta x+b\Delta y\]
+另一方面，考虑两个坐标函数
+\[\begin{cases}
+    x:\mathbb R^2\to\mathbb R,\qquad x(x,y)=x\\
+    y:\mathbb R^2\to\mathbb R,\qquad y(x,y)=y
+\end{cases}\]
+按照与$f$相同的定义，对坐标函数$x$有：
+\[x(x+\Delta x,y+\Delta y)-x(x,y)=\Delta x\]
+由于其增量本身就是关于$\Delta\vb{\rho}$的线性函数，因此有$\begin{cases}
+    \dd x(\Delta\vb{\rho}) = \Delta x \\
+    \dd y(\Delta\vb{\rho}) = \Delta y
+\end{cases}$.于是，$\dd x,\dd y$就是两个基本的线性映射：
+\[\dd x:\Delta\vb{\rho}\mapsto\Delta x,\qquad\dd y:\Delta\vb{\rho}\mapsto\Delta y\]
+因此
+\[\dd f(\Delta\vb{\rho})=a\dd{x}(\Delta\vb{\rho})+b\dd{y}(\Delta\vb{\rho}) \quad\Rightarrow\quad \dd{f} = a\dd{x} + b\dd{y}\]
+
+\begin{theorem}
+    设函数$f(x,y)$在$(x_0,y_0)$可微，则有：
+    \begin{enumerate}[circ]
+        \item $f(x,y)$在$(x_0,y_0)$连续.
+        \item $f(x,y)$在$(x_0,y_0)$的两个偏导数都存在，且$\displaystyle\pdv{f}{x}=a,\pdv{f}{y}=b$，即：
+        \[\dd{f} = \pdv{f}{x}\dd{x} + \pdv{f}{y}\dd{y}\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    因为$f$在$(x,y)$可微，则有：
+    \[f(x+\Delta x,y+\Delta y) - f(x,y) = a\Delta{x} + b\Delta{y} + o(\rho)\]
+    当$\Delta x \to 0,\Delta y \to 0$时，有：
+    \[|f(x+\Delta x,y+\Delta y) - f(x,y)| \leqslant |a||\Delta x| + |b||\Delta y| + o(\rho) \to 0\]
+    即表明其满足连续的条件：
+    \[\lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}} f(x+\Delta x,y+\Delta y) = f(x,y)\]
+    \circnum{1}证毕.注意到若取$\Delta y = 0$，有：
+    \[f(x+\Delta x,y) - f(x,y) = a\Delta x + o(\Delta x)\]
+    两边同除以$\Delta x$并取极限：
+    \[\lim_{\Delta x \to 0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x} = \lim_{\Delta x \to 0}\left(a+\frac{o(\Delta x)}{\Delta x}\right) = a = \pdv{f}{x}\]
+    同理有$\displaystyle b =\pdv{f}{y}$，\circnum{2}证毕.
+\end{proof}
