@@ -529,6 +529,7 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 \[\dd x:\Delta\vb{\rho}\mapsto\Delta x,\qquad\dd y:\Delta\vb{\rho}\mapsto\Delta y\]
 因此
 \[\dd f(\Delta\vb{\rho})=a\dd{x}(\Delta\vb{\rho})+b\dd{y}(\Delta\vb{\rho}) \quad\Rightarrow\quad \dd{f} = a\dd{x} + b\dd{y}\]
+在上述基于映射的定义的基础上，可以很好地将微分的定义推广到$n$元函数.
 
 \begin{theorem}
     设函数$f(x,y)$在$(x_0,y_0)$可微，则有：
@@ -551,4 +552,44 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
     两边同除以$\Delta x$并取极限：
     \[\lim_{\Delta x \to 0}\frac{f(x+\Delta x,y)-f(x,y)}{\Delta x} = \lim_{\Delta x \to 0}\left(a+\frac{o(\Delta x)}{\Delta x}\right) = a = \pdv{f}{x}\]
     同理有$\displaystyle b =\pdv{f}{y}$，\circnum{2}证毕.
+\end{proof}
+
+与单变量情形不同的是，即使多变量函数$f(x,y)$的偏导数都存在，既不能保证$f$的连续性，也不能保证$f$的可微性.
+
+现在研究加入一些条件限制后，偏导数与连续性和可微性的关系能否发生变化.
+
+\begin{theorem}
+    设函数$f(x,y)$在区域$D$内存在两个偏导数.
+    \begin{enumerate}
+        \item 如果偏导数$f'_x(x,y),f'_y(x,y)$在$D$内有界，那么$f$在$D$内连续.
+        \item 如果偏导数$f'_x(x,y),f'_y(x,y)$在$D$内连续，那么$f$在$D$内可微.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    要证明$f(x,y)$连续，即要估计$|f(x+\Delta x,y+\Delta y) - f(x,y)|$的值：
+    \[|f(x+\Delta x,y+\Delta y) - f(x,y)| \!\!\leqslant\!\! |f(x+\Delta x,y+\Delta y) - f(x+\Delta x,y)| + |f(x+\Delta x,y) - f(x,y)|\]
+    上式中，利用Lagrange中值公式有：
+    \[\begin{cases}
+        |f(x+\Delta x,y+\Delta y) - f(x+\Delta x,y)| = |f'_y(x+\Delta x,y+\theta_1\Delta y)\Delta y|,\,0<\theta_1<1\\
+        |f(x+\Delta x,y) - f(x,y)| = |f'_x(x+\theta_2\Delta x,y)\Delta x|,\,0<\theta_2<1
+    \end{cases}\]
+    若偏导数有界：$\begin{cases}
+        |f'_x(x,y)|\leqslant M\\
+        |f'_y(x,y)|\leqslant M
+    \end{cases}$.则在$\Delta x \to 0,\Delta y \to 0$时有：
+    \[|f(x+\Delta x,y+\Delta y) - f(x,y)| \leqslant M|\Delta y| + M|\Delta x| \to 0\]
+    即表明在偏导数有界时连续，\circnum{1}得证.
+
+    根据可微的定义，要证明可微性，即要证明在$\Delta x \to 0,\Delta y \to 0$时有：
+    \[\lim_{\rho \to 0}\frac{|f(x+\Delta x,y+\Delta y) - f(x,y) - f'_x \Delta x - f'_y \Delta y|}{\rho} = 0\]
+    注意到，根据Lagrange中值公式有：
+    \begin{align*}
+        &\frac{|f(x+\Delta x,y+\Delta y) - f(x,y) - f'_x \Delta x - f'_y \Delta y|}{\rho} \\
+        \leqslant & \frac{|(f'_y(x+\Delta x,y+\theta_1\Delta y)-f'_y(x,y))\Delta y| + |(f'_x(x+\theta_2\Delta x,y)-f'_x(x,y))\Delta x|}{\rho} \\
+        \leqslant & |f'_y(x+\Delta x,y+\theta_1\Delta y)-f'_y(x,y)| + |f'_x(x+\theta_2\Delta x,y)-f'_x(x,y)|
+    \end{align*}
+    若引入两个偏导数的连续性：
+    \[\lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}}f'_y(x+\Delta x,y+\Delta y) = f'_y(x,y),\quad \lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}}f'_x(x+\Delta x,y+\Delta y) = f'_x(x,y)\]
+    则有$|f'_y(x+\Delta x,y+\theta_1\Delta y)-f'_y(x,y)| + |f'_x(x+\theta_2\Delta x,y)-f'_x(x,y)| \to 0$成立，进而可微性得证，\circnum{2}证毕.
 \end{proof}
