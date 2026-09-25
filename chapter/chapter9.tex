@@ -627,3 +627,40 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 注意到，一个方向向量$\vb{e}$与一点梯度的内积为$\vb{e}$方向的方向导数：
 \[\symbf{\nabla} f \cdot \vb{e} = \pdv{f}{\vb{e}} = |\symbf{\nabla}f|\cos\theta\]
 也可以说，$f$在$(x,y)$上沿$\vb{e}$的方向导数是梯度在这个方向上的投影.这同时表明，沿着梯度的方向就是$f$在$(x,y)$附近变化率最大的方向.
+
+
+\subsection{复合函数的微分和一阶微分形式的不变性}
+\begin{theorem}
+    设$z = f(\xi,\eta)$在$\tilde{D}$中可微；$\xi = \varphi(x,y),\eta = \psi(x,y)$在$D$中可微.则$z = f(\varphi(x,y),\psi(x,y))$作为$(x,y)\in\tilde{D}$中的函数也可微.
+\end{theorem}
+
+\begin{proof}
+    根据$z = f(\xi,\eta)$的可微性，有：
+    \[\Delta z = f(\xi+\Delta\xi,\eta+\Delta\eta) - f(\xi,\eta) = c_1\Delta\xi + c_2\Delta\eta + o(\tilde{\rho})\]
+    其中$\tilde{\rho} = \sqrt{(\Delta\xi)^2 + (\Delta\eta)^2}$.又根据$\xi=\varphi(x,y),\eta=\psi(x,y)$的可微性：
+    \begin{gather*}
+        \Delta \xi = \varphi(x+\Delta x,y+\Delta y) - \varphi(x,y) = a_1\Delta x + a_2\Delta y + o(\rho)\\
+        \Delta \eta = \psi(x+\Delta x,y+\Delta y) - \psi(x,y) = b_1\Delta x + b_2\Delta y + o(\rho)
+    \end{gather*}
+    其中$\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}$，将以上二式代入$\Delta z$的表达式中：
+    \[\Delta z = (c_1 a_1 + c_2 b_1)\Delta x + (c_1 a_2 + c_2 b_2)\Delta y + c_1 o(\rho) + c_2 o(\rho) + o(\tilde{\rho})\]
+    要证存在常数$A,B$使得$\Delta z =A\Delta x + B\Delta y + o(\rho)$，只需证明$\lim\limits_{\rho \to 0}\dfrac{o(\tilde{\rho})}{\rho} = 0$.
+    根据$\tilde{\rho} = \sqrt{(\Delta\xi)^2 + (\Delta\eta)^2}$，有：
+    \[\frac{\tilde{\rho}^2}{\rho^2} = \left(\frac{a_1\Delta x + a_2\Delta y + o(\rho)}{\rho}\right)^2 + \left(\frac{b_1\Delta x + b_2\Delta y + o(\rho)}{\rho}\right)^2\]
+    注意到$\rho\to0$时有$\Delta x\to0,\Delta y\to0$，进而$\Delta\xi\to0,\Delta\eta\to0$，使得$\tilde{\rho}\to0$.且$|a_1|,|a_2|,|b_1|,|b_2|$小于$1$，故而$\frac{\tilde{\rho}}{\rho}$是有界的.从而有：
+    \[\lim_{\rho\to0}\frac{o(\tilde{\rho})}{\rho} = \lim_{\rho\to0}\frac{o(\tilde{\rho})}{\tilde{\rho}}\cdot\frac{\tilde{\rho}}{\rho} = \lim_{\tilde{\rho}\to0}\frac{o(\tilde{\rho})}{\tilde{\rho}}\cdot\frac{\tilde{\rho}}{\rho} = 0\]
+    由此得证.
+\end{proof}
+在上述推导中，不难得到以下两个结论：
+\begin{theorem}
+    \textbf{一阶微分形式的不变性}
+
+    对于函数$z = f(\xi,\eta) = g(x,y)$，$z$的微分关于两组自变量$(\xi,\eta)$和$(x,y)$的微分形式是相等的，即：
+    \[\dd{z} = \pdv{z}{\xi}\dd{\xi} + \pdv{z}{\eta}\dd{\eta} = \pdv{z}{x}\dd{x} + \pdv{z}{y}\dd{y}\]
+\end{theorem}
+\begin{theorem}
+    \textbf{链式法则}
+
+    对复合函数$f(\xi,\eta),\xi = \varphi(x,y),\eta = \psi(x,y)$，有：
+    \[\pdv{f}{x} = \pdv{f}{\xi}\pdv{\xi}{x} + \pdv{f}{\eta}\pdv{\eta}{x},\qquad \pdv{f}{y} = \pdv{f}{\xi}\pdv{\xi}{y} + \pdv{f}{\eta}\pdv{\eta}{y}\]
+\end{theorem}
