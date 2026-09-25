@@ -560,7 +560,7 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 
 \begin{theorem}
     设函数$f(x,y)$在区域$D$内存在两个偏导数.
-    \begin{enumerate}
+    \begin{enumerate}[circ]
         \item 如果偏导数$f'_x(x,y),f'_y(x,y)$在$D$内有界，那么$f$在$D$内连续.
         \item 如果偏导数$f'_x(x,y),f'_y(x,y)$在$D$内连续，那么$f$在$D$内可微.
     \end{enumerate}
@@ -593,3 +593,37 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
     \[\lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}}f'_y(x+\Delta x,y+\Delta y) = f'_y(x,y),\quad \lim_{\substack{\Delta x \to 0 \\ \Delta y \to 0}}f'_x(x+\Delta x,y+\Delta y) = f'_x(x,y)\]
     则有$|f'_y(x+\Delta x,y+\theta_1\Delta y)-f'_y(x,y)| + |f'_x(x+\theta_2\Delta x,y)-f'_x(x,y)| \to 0$成立，进而可微性得证，\circnum{2}证毕.
 \end{proof}
+
+
+\subsection{方向导数与梯度}
+偏导数是沿着$x$或$y$方向在$f(x,y)$曲面上的导数，而对于其它方向上的导数，则引入方向导数的定义.
+
+设$L$是过$(x,y)$的一条射线，其方向向量$\vb{e}$可以表示为：
+\[\vb{e} = \cos\alpha\vb{i} + \cos\beta\vb{j},\quad\alpha+\beta=\frac{\pi}{2}\]
+则有$L$上一动点$(x+t\cos\alpha,y+t\cos\beta)$，于是在$\vb{e}$方向上，$f(x,y)$变成了关于$t$的函数$f(t)$.
+\begin{definition}
+    如果下列极限存在，那么称极限值为$f$在$(x,y)$处沿方向$\vb{e}$的\overtext{方向导数}{directional derivative}，并记作：
+    \[\pdv{f}{\vb{e}} \coloneq \lim_{t \to 0}\frac{f(x+t\cos\alpha,y+t\cos\beta)-f(x,y)}{t}\]
+\end{definition}
+
+\begin{theorem}
+    设$f(x,y)$是平面区域$D$上的可微函数，则$f(x,y)$在$D$中任何一点沿任何方向$\vb{e}$的方向导数都存在，而且有：
+    \[\pdv{f}{\vb{e}} = \pdv{f}{x}\cos\alpha + \pdv{f}{y}\cos\beta\]
+\end{theorem}
+
+\begin{proof}
+    根据可微性有：
+    \[f(x+\Delta x,y+\Delta y) - f(x,y) = f'_x(x,y)\Delta x + f'_y(x,y)\Delta y + o(\rho)\]
+    特别取$\Delta x = t\cos\alpha,\Delta y = t\cos\beta$，则有$\rho = |t|$，上式两边同除以$t$取极限：
+    \[\pdv{f}{\vb{e}} = f'_x\cos\alpha + f'_y\cos\beta\]
+    由此得证.
+\end{proof}
+
+\begin{definition}
+    称由函数的偏导数所决定的向量$\displaystyle\left(\pdv{f}{x},\pdv{f}{y}\right)$为$f(x,y)$在$(x,y)$处的\overtext{梯度}{gradient}，记作：
+    \[\symbf{\nabla} f = \mathbf{grad}\,f \coloneq \left(\pdv{f}{x},\pdv{f}{y}\right) = \pdv{f}{x}\vb{i} + \pdv{f}{y}\vb{j}\]
+\end{definition}
+
+注意到，一个方向向量$\vb{e}$与一点梯度的内积为$\vb{e}$方向的方向导数：
+\[\symbf{\nabla} f \cdot \vb{e} = \pdv{f}{\vb{e}} = |\symbf{\nabla}f|\cos\theta\]
+也可以说，$f$在$(x,y)$上沿$\vb{e}$的方向导数是梯度在这个方向上的投影.这同时表明，沿着梯度的方向就是$f$在$(x,y)$附近变化率最大的方向.
