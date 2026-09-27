@@ -720,3 +720,152 @@ Jacobi行列式是同维度向量值函数复合求导的基本计算手段.记�
     \textbf{Jacobi行列式的链式法则}
     \[\pdv{(\xi,\eta)}{(x,y)} = \pdv{(\xi,\eta)}{(u,v)}\pdv{(u,v)}{(x,y)}\]
 \end{theorem}
+
+
+\section{隐函数定理和逆映射定理}
+若$\mathbb{R}^2$中的点$(x,y)$满足$F(x,y) = 0$，则$F$给出了$\mathbb{R}^2$上的一条曲线，或一种函数关系.
+
+例如，$F(x,y) = ax + by + c = 0$给出了一条直线.这条直线可以显式地表示为：
+\[y = -\frac{1}{b}(ax + c),\quad b \neq 0 \quad\text{或}\quad x = -\frac{1}{a}(by + c),\quad a \neq 0\]
+
+而$F(x,y) = x^2 + y^2 - 1 = 0$给出了一个单位圆.要想将其显式地表示，需要将其分为上下半圆两个方程：
+$\begin{cases}
+    y = \sqrt{1-x^2} \\
+    y = -\sqrt{1-x^2}
+\end{cases}$，特别注意到它们的导数$y' = \dfrac{\pm x}{\sqrt{1-x^2}}$中$x$不能取到$\pm 1$，则圆左右两端点的切线无法被描述.为了完整的描述这个圆的性质，在前述两个方程的基础上还要再引入两个方程$\begin{cases}
+    x = \sqrt{1-y^2} \\
+    x = -\sqrt{1-y^2}
+\end{cases}$，总共四个方程才能完整显式地描述.
+
+又例如方程$F(x,y) = \sin(x+y) + 2x + y = 0$根本无法得出显表示；$F(x,y) = x^2 + y^2 + 1 = 0$根本没有实数解.
+
+因此，不能总是期待得到显表示，或是从显表示中得到函数的可微性，这就是研究隐函数的必要性.
+
+\subsection{隐函数的存在性和微商}
+假如方程$F(x,y) = 0$在$(x_0,y_0)$邻域内存在隐函数，不妨设为$y = f(x)$，则有$F(x,f(x)) \equiv 0$，两边求导，得到隐函数的导数：
+\[F'_x + F'_y f'(x) = 0 \quad\Rightarrow\quad f'(x) = \dv{y}{x} = -\frac{F'_x(x,y)}{F'_y(x,y)}\]
+上述分析表明，即使不能得到隐函数的显表示，求取以$x$和$f(x)$表示的导数仍然是可行的.
+
+\begin{theorem}
+    \textbf{隐函数存在定理}
+    \label{thm:ExistenceOfImplicitFunctions}
+
+    设开区域$D \subset \mathbb{R}^2$，$(x_0,y_0) \in D$.如果$F(x,y)$在$D$中有定义且满足：
+    \begin{enumerate}[circ]
+        \item $F(x,y) \in C^1(D)$，即$F$在$D$中有连续的一阶偏导数.
+        \item $F(x_0,y_0) = 0$.
+        \item $F'_y(x_0,y_0) \neq 0$.
+    \end{enumerate}
+    那么存在$(x_0,y_0)$的一个矩形开邻域$(a,b) \times (c,d) \subset D$，使得对每一个$x \in (a,b)$，方程$F(x,y) = 0$存在唯一解$y = f(x)$，满足$y_0 = f(x_0)$且$y = f(x)$连续并有下列微商：
+    \[f'(x) = \dv{y}{x} = -\frac{F'_x(x,y)}{F'_y(x,y)}\]
+    特别地，若条件\circnum{3}改为$F'_x(x_0,y_0) \neq 0$，则存在隐函数$x = g(y)$具有上述类似特性.
+\end{theorem}
+
+曲线$F(x,y) = 0$在$(x_0,y_0)$的邻域内有隐函数$y = f(x)$的几何含义是：在$(x_0,y_0)$邻域内曲线$F(x,y) = 0$可以用$y = f(x)$表示.
+
+\begin{figure}[H]
+    \centering
+    \vspace{-4em}
+    \includegraphics[width=\textwidth]{existence-of-inplicit-func/fig.pdf}
+    \vspace{-4em}
+    \caption{隐函数的几何含义}
+\end{figure}
+
+\begin{proof}
+    \textbf{存在性：}
+    
+    根据条件\circnum{3}有$F'_y(x_0,y_0) \neq 0$，不妨设$F'_y(x_0,y_0) > 0$.则根据连续的保号性，存在$(x_0,y_0)$的邻域$[a',b'] \times [c,d] \subset D$，使得$F'_y(x,y)$在其上大于$0$.
+
+    换言之，固定一个$\forall x \in [a',b']$，$F(x,y)$作为关于$y$的函数由于其导数严格大于$0$，$F(x,y)$在$y \in [c,d]$上严格单调增.
+
+    特别地，取$x_0 \in [a',b']$，有$F(x_0,y)$在$y \in [c,d]$上严格单调增，则有：
+    \[F(x_0,c) < F(x_0,y_0) < F(x_0,d)\]
+    根据条件\circnum{2}，有$F(x_0,y_0) = 0$，则有：
+    \[F(x_0,c) < 0,\qquad F(x_0,d) > 0\]
+    由$x$在$[a',b']$上的任意性，上述结论可以推广到$x_0$的邻域$(a,b)$上，即：
+    \[F(x,c) < 0 < F(x,d),\quad x \in (a,b) \subset [a',b']\]
+    根据介值定理和$F(x_0,y)$的严格单调增，对于一个固定的$x \in (a,b)$，在$(c,d)$中存在唯一的$y = f(x)$使得$F(x,f(x)) = 0$.即$y = f(x)$是满足$F(x,y) = 0$的隐函数，且有$F(x_0,y_0) = 0$.
+
+    \textbf{可微性：}
+
+    对$\forall x \in (a,b)$，取$\Delta x$使得$(x + \Delta x) \in (a,b)$，并且记$\Delta y = f(x+\Delta x) - f(x)$.
+
+    $(x,f(x))$和$(x+\Delta x,f(x+\Delta x))$仍在隐函数存在的邻域内，因此有：
+    \[F(x,f(x)) = F(x+\Delta x,f(x+\Delta x)) = F(x+\Delta x,y+\Delta y) = 0\]
+    于是有：
+    \begin{align*}
+        0 =& F(x+\Delta x,y+\Delta y) - F(x,y) \\
+        =& (F(x+\Delta x,y+\Delta y) - F(x+\Delta x,y)) + (F(x+\Delta x,y) - F(x,y))
+    \end{align*}
+    根据Lagrange中值公式，有$0<\theta_1<1,0<\theta_2<1$使得：
+    \begin{gather*}
+        0 = F'_y(x+\Delta x,y+\theta_1\Delta y)\Delta y + F'_x(x+\theta_2\Delta x,y)\Delta x \\
+        \Delta y = -\frac{F'_x(x+\theta_2\Delta x,y)}{F'_y(x+\Delta x,y+\theta_1\Delta y)}\Delta x
+    \end{gather*}
+    根据条件\circnum{1}，$F'_x,F'_y$在$D$中连续，同时根据条件\circnum{3}分母不为$0$，因而存在一个$(x_0,y_0)$的邻域使得有界性成立：
+    \[|\Delta y| = \frac{|F'_x(x+\theta_2\Delta x,y)|}{|F'_y(x+\Delta x,y+\theta_1\Delta y)|}|\Delta x| \leqslant M|\Delta x|\]
+    上式表明，当$\Delta x \to 0$时，有$|\Delta y| = |f(x+\Delta x) - f(x)| \to 0$，即$y = f(x)$连续.于是有：
+    \[\dv{y}{x} = \lim_{\Delta x \to 0}\frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0}\left(-\frac{F'_x(x+\theta_2\Delta x,y)}{F'_y(x+\Delta x,y+\theta_1\Delta y)}\right) = -\frac{F'_x(x,y)}{F'_y(x,y)}\]
+\end{proof}
+
+\begin{mistake}
+    关于\cref{thm:ExistenceOfImplicitFunctions}\textbf{(隐函数存在定理)}的条件\circnum{3}：$F'_y(x_0,y_0)\neq 0$只是隐函数存在的充分条件，而不是必要条件.
+
+    也就是说，就算$F'_y(x_0,y_0) = 0$，也可能有隐函数.
+\end{mistake}
+
+\begin{theorem}
+    若一般曲线$F(x,y) = 0$在$(x_0,y_0)$处自相交，则其在这一点的两个偏导数必定为$0$.
+\end{theorem}
+
+\begin{proof}
+    自相交则表明$(x_0,y_0)$的邻域内不存在隐函数，因为不满足函数的单值条件.不存在隐函数，则\cref{thm:ExistenceOfImplicitFunctions}\textbf{(隐函数存在定理)}中的三个条件至少有一个为假，显然对于一般曲线\circnum{1}和\circnum{2}都为真，故而：
+    \[F'_x(x_0,y_0) = F'_y(x_0,y_0) = 0\]
+\end{proof}
+
+前述推导都是二维空间中的一个二维方程，接下来对隐函数的存在条件和隐函数的计算方法做一定的推广.
+\subsubsection{三维空间中的一个方程}
+三维空间中有一个方程意味着三个变量具有一个约束，即其中一个变量由另外两个变量决定，下列方程隐函数是二元的，且隐函数只有一个.
+\[F(x,y,z) = 0\]
+如果存在$(x_0,y_0,z_0)$使得$F(x_0,y_0,z_0) = 0$，同时在$(x_0,y_0,z_0)$邻域内存在隐函数$z = f(x,y)$，则有：
+\[F(x,y,f(x,y)) \equiv 0\]
+对上式分别对$x,y$求导，由此解得隐函数$z = f(x,y)$的两个偏导数：
+\[\pdv{z}{x} = -\frac{F'_x(x,y,z)}{F'_z(x,y,z)},\quad\pdv{z}{y} = -\frac{F'_y(x,y,z)}{F'_z(x,y,z)}\]
+上述偏导数成立的条件是$F'_z(x_0,y_0,z_0) \neq 0$.同理，若取隐函数为$x = x(y,z)$和$y = y(x,z)$，则也有相应的要求.由于隐函数的取法具有任意性，所以要想使隐函数存在，要满足在$(x_0,y_0,z_0)$上$F'_x,F'_y,F'_z$都不为$0$，即：
+\[\symbf{grad}\,F(x_0,y_0,z_0) \neq \bm{0}\]
+总而言之，隐函数存在的一个条件是有连续偏导数、有一个解且该点处梯度不为$\bm{0}$.
+
+
+\subsubsection{三维空间中两个方程构成的方程组}
+对以下方程，意味着有三个变量两个约束，隐函数是单变量的，且隐函数有两个.
+\[\begin{cases}
+    F(x,y,z) = 0 \\
+    G(x,y,z) = 0
+\end{cases}\]
+如果上述方程组有一个解$(x_0,y_0,z_0)$且在这个解的邻域内有隐函数：
+\[\begin{cases}
+    y = y(x)\\
+    z = z(x)
+\end{cases} \Rightarrow\quad \begin{cases}
+    F(x,y(x),z(x)) = 0\\
+    G(x,y(x),z(x)) = 0\\
+\end{cases}\]
+对$x$求导，得到两个隐函数关于$x$的导数：
+\[y'(x) = -\frac{F'_x G'_z - F'_z G'_x}{F'_y G'_z - F'_z G'_y},\qquad z'(x) = \frac{F'_x G'_y - F'_y G'_x}{F'_y G'_z - F'_z G'_y}\]
+上述导数存在的条件是关于$y,z$的Jacobi行列式不为零：
+\[\pdv{(F,G)}{(y,z)} = \begin{vmatrix}
+    \displaystyle\pdv{F}{y} & \displaystyle\pdv{F}{z} \\
+    \displaystyle\pdv{G}{y} & \displaystyle\pdv{G}{z} \\
+\end{vmatrix} \neq 0\]
+若取其它隐函数也有类似的要求：
+\[\pdv{(F,G)}{(x,y)} \neq 0,\quad \pdv{(F,G)}{(y,z)} \neq 0,\quad\pdv{(F,G)}{(x,z)} \neq 0 \quad\Leftrightarrow\quad \symbf{grad}\,F \times \symbf{grad}\,G \neq 0\]
+于是隐函数存在的一个条件是均有连续偏导数，有一个解，在这个解处两个梯度的叉乘不为零.
+
+
+\subsubsection{四维空间中两个方程构成的方程组}
+对方程：
+\[\begin{cases}
+    F(x,y,u,v) = 0 \\
+    G(x,y,u,v) = 0
+\end{cases}\]
+有四个变量两个约束，有两个二元隐函数.其它推导过程与条件同上.
