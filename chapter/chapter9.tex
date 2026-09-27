@@ -709,6 +709,7 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
     特别地，当$m=n$时，上述矩阵为方阵，其行列式称为\textbf{Jacobi行列式}，记作：
     \[\det\vb{J}_{\vb{x}}(\vb{f}) = \pdv{(y_1,y_2,\cdots,y_n)}{(x_1,x_2,\cdots,x_n)}\]
 \end{definition}
+从几何上看，Jacobi行列式就是经过同维度映射$\vb{f}$后微元的缩放因子.
 
 Jacobi行列式是同维度向量值函数复合求导的基本计算手段.记有两个映射：
 \[\begin{cases}
@@ -869,3 +870,31 @@ $\begin{cases}
     G(x,y,u,v) = 0
 \end{cases}\]
 有四个变量两个约束，有两个二元隐函数.其它推导过程与条件同上.
+
+
+\subsection{逆映射的微商}
+在一元函数中，反函数存在的条件是$y=f(x)$有连续的导函数，且$f'(x_0)\neq 0$.它此前的证明是通过$f'(x)$连续所具有的局部保号性，推出$x_0$邻域内$f(x)$的严格单调性，进而证明反函数$x = f^{-1}(y)$存在且等于$[f'(x)]^{-1}$.
+
+利用隐函数存在定理，可以从另一个角度给出证明.
+
+\begin{proof}
+    已知$f'(x_0)\neq 0$，令$F(x,y) = y - f(x)$，考虑方程：
+    \[F(x,y) = y - f(x) = 0\]
+    注意到有$F'_x(x_0,y_0) = f'(x_0) \neq 0$，根据隐函数存在定理，存在隐函数$x = x(y) = f^{-1}(y)$，同时得到其导数为：
+    \[\dv{x}{y} = \dv{f^{-1}}{y} = -\frac{F'_y}{F'_x} = \frac{1}{f'(x)} \quad\Rightarrow\quad \dv{f^{-1}}{y}\dv{f}{x} = 1\]
+\end{proof}
+
+\begin{theorem}
+    \textbf{逆映射定理}
+
+    设映射$(x,y)\mapsto(u,v):\begin{cases}
+        u = u(x,y) \in C^1 \\
+        v = v(x,y) \in C^1
+    \end{cases}$，若在一点$(x_0,y_0)$处有$\displaystyle\pdv{(u,v)}{(x,y)}\neq 0$，则在$(u_0,v_0) = (u(x_0,y_0),v(x_0,y_0))$的邻域内存在逆映射$(u,v)\mapsto(x,y):\begin{cases}
+        x = x(u,v)\\
+        y = y(u,v)
+    \end{cases}$，且$x(u,v),y(u,v)$均可导，其偏导数的Jacobi行列式满足：
+    \[\pdv{(x,y)}{(u,v)}\cdot\pdv{(u,v)}{(x,y)} = 1\]
+\end{theorem}
+
+逆映射定理所要求的Jacobi行列式不为零，意味着正映射过程中不得发生降维，否则造成了信息丢失，逆映射无法确立.
