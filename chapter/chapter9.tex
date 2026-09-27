@@ -664,3 +664,59 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
     对复合函数$f(\xi,\eta),\xi = \varphi(x,y),\eta = \psi(x,y)$，有：
     \[\pdv{f}{x} = \pdv{f}{\xi}\pdv{\xi}{x} + \pdv{f}{\eta}\pdv{\eta}{x},\qquad \pdv{f}{y} = \pdv{f}{\xi}\pdv{\xi}{y} + \pdv{f}{\eta}\pdv{\eta}{y}\]
 \end{theorem}
+
+
+\subsection{向量值函数的微商和微分}
+\begin{definition}
+    若下列极限存在，则称之为向量值函数$\vb{r}(t)$关于$t$的导数：
+    \[\vb{r}'(t) = \dv{\vb{r}(t)}{t} \coloneq \lim_{\Delta t \to 0}\frac{\vb{r}(t+\Delta t) - \vb{r}(t)}{\Delta t}\]
+\end{definition}
+从几何上看，$\vb{r}(t)$在$t_0$的导数$\vb{r}'(t)$就是参数曲线在对应$t_0$一点上的切向量，指向$t$增加的方向.
+
+引进向量的微分：
+\[\dd{\vb{r}(t)} = \dv{\vb{r(t)}}{t}\dd{t} \quad\text{或}\quad \dd{\vb{r}} = \dd{x}\vb{i} + \dd{y}\vb{j} + \dd{z}\vb{k}\]
+向量值函数微分的向量运算满足如下性质：
+\begin{enumerate}[property]
+    \item $\displaystyle\dv{t}(f\vb{a}) = f\dv{\vb{a}}{t} + \dv{f}{t}\vb{a}$
+    \item $\displaystyle\dv{t}(\vb{a \cdot b}) = \dv{\vb{a}}{t}\cdot\vb{b} + \vb{a}\cdot\dv{\vb{b}}{t}$
+    \item $\displaystyle\dv{t}(\vb{a \times b}) = \dv{\vb{a}}{t}\times\vb{b} + \vb{a}\times\dv{\vb{b}}{t}$
+\end{enumerate}
+
+接下来在向量值函数的基础上讨论求导与微分在更一般函数上的情形.
+
+设有映射$\vb{f}:\mathbb{R}^n \to \mathbb{R}^m$，即$n$维向量$\vb{x}$到$m$维向量$\vb{y}$的映射：
+\[\vb{y} = (y_1,y_2,\cdots,y_m) = (f_1(\vb x),f_2(\vb x),\cdots,f_m(\vb x))\]
+定义对$\vb{f}$的微分就是对每一个分量的微分：
+\[\dd{\vb{f(x)}} = (\dd{f_1(\vb{x})},\dd{f_2(\vb{x})},\cdots,\dd{f_m(\vb{x})}),\quad\dd{f_j} = \sum_{i=1}^{n}\pdv{f_j}{x_i}\dd{x_i},\quad j = 1,2,\cdots,m\]
+上述运算写为矩阵形式就是：
+\[\begin{bmatrix}
+    \dd{f_1} \\ \vdots \\ \dd{f_m}
+\end{bmatrix} = \begin{bmatrix}
+    \displaystyle\pdv{f_1}{x_1} & \cdots & \displaystyle\pdv{f_1}{x_n} \\
+    \vdots & & \vdots \\
+    \displaystyle\pdv{f_m}{x_1} & \cdots & \displaystyle\pdv{f_m}{x_n} \\
+\end{bmatrix} \begin{bmatrix}
+        \dd{x_1} \\ \vdots \\ \dd{x_n}
+\end{bmatrix}\]
+为了进一步简化计算，作如下定义：
+\begin{definition}
+    称下列矩阵为向量值函数$\vb{f(\vb{x})}$的\textbf{Jacobi矩阵}：
+    \[\vb{J}_{\vb x}(\vb f) = \begin{bmatrix}
+    \displaystyle\pdv{f_1}{x_1} & \cdots & \displaystyle\pdv{f_1}{x_n} \\
+    \vdots & & \vdots \\
+    \displaystyle\pdv{f_m}{x_1} & \cdots & \displaystyle\pdv{f_m}{x_n} \\
+    \end{bmatrix}_{m \times n}\]
+    特别地，当$m=n$时，上述矩阵为方阵，其行列式称为\textbf{Jacobi行列式}，记作：
+    \[\det\vb{J}_{\vb{x}}(\vb{f}) = \pdv{(y_1,y_2,\cdots,y_n)}{(x_1,x_2,\cdots,x_n)}\]
+\end{definition}
+
+Jacobi行列式是同维度向量值函数复合求导的基本计算手段.记有两个映射：
+\[\begin{cases}
+    (x,y)\mapsto(u,v):& u = u(x,y),\quad v = v(x,y)\\
+    (u,v)\mapsto(\xi,\eta):& \xi = \xi(u(x,y),v(x,y)),\quad \eta = \eta(u(x,y),v(x,y))
+\end{cases}\]
+它们复合后的映射为$(x,y)\mapsto(\xi,\eta)$，$\xi$和$\eta$分别对$x$和$y$的偏导数就是复合函数的偏导数，这个过程中的Jacobi行列式满足：
+\begin{theorem}
+    \textbf{Jacobi行列式的链式法则}
+    \[\pdv{(\xi,\eta)}{(x,y)} = \pdv{(\xi,\eta)}{(u,v)}\pdv{(u,v)}{(x,y)}\]
+\end{theorem}

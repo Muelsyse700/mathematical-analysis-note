@@ -521,19 +521,25 @@
 % 定义“问题”与“解答(证明)”环境
 \newcounter{question}[subsection]
 \renewcommand{\thequestion}{\arabic{question}}
-\newtcolorbox{question}[1][]{
+\NewTColorBox{question}{o}
+{
     myThemStyle,
-    colback=GrayLight,   % 背景色
-    colframe=GrayDeep,   % 边框色
+    colback=GrayLight,
+    colframe=GrayDeep,
     before upper={
-        \refstepcounter{question}
-        \textcolor{GrayDeep}{\textbf{问题~\thequestion}}~
+        \IfValueTF{#1}
+        {
+            \textcolor{GrayDeep}{\textbf{问题~#1}}~
+        }
+        {
+            \refstepcounter{question}
+            \textcolor{GrayDeep}{\textbf{问题~\thequestion}}~
+        }
     },
     overlay unbroken and last={
         \node[anchor=south east, inner sep=6pt] 
             at (frame.south east) {\color{GrayDeep}\faQuestion};
     },
-    #1
 }
 \NewTColorBox{solution}{o}
 {
