@@ -898,3 +898,98 @@ $\begin{cases}
 \end{theorem}
 
 逆映射定理所要求的Jacobi行列式不为零，意味着正映射过程中不得发生降维，否则造成了信息丢失，逆映射无法确立.
+
+
+\subsection{从微分看隐函数定理}
+根据\cref{thm:ExistenceOfImplicitFunctions}\textbf{(隐函数存在定理)}中的条件\circnum{1}：$F(x,y)\in C^1(D)$，因而有：
+\[\dd{F} = F'_x\dd{x} + F'_y\dd{y}\]
+加入条件\circnum{2}：$F(x,y)=0$，若能给出隐函数$y = f(x)$，则在隐函数生效的邻域内有：
+\[F(x,f(x))\equiv 0 \quad\Rightarrow\quad \dd{F} = F'_x\dd{x} + F'_y\dd{y} = 0\] 
+同理若给出的隐函数为$x = g(y)$，同样有上式.对于上式，只要有一个系数不为零，即满足隐函数存在定理的条件\circnum{3}，不妨设$F'_y \neq 0$，则可以得到隐函数的微分：
+\[\dd{y} = f'(x)\dd{x} = -\frac{F'_x(x,f(x))}{F'_y(x,f(x))}\dd{x}\]
+从上述推导推广至$n$个变量、一个方程约束的情形：
+\begin{gather*}
+    F(x_1,x_2,\cdots,x_n) = 0,\quad (x_1,x_2,\cdots,x_n) \in D \subset \mathbb{R}^n\\
+    \dd{F} = F'_{x_1}\dd{x_1} + F'_{x_2}\dd{x_2} + \cdots + F'_{x_n}\dd{x_n} = 0
+\end{gather*}
+其中，不妨设$F'_{x_n} \neq 0$，则有：
+\[\dd{x_n} = -\frac{1}{F'_{x_n}}(F'_{x_1}\dd{x_1} + \cdots + F'_{x_{n-1}}\dd{x_{n-1}}) \quad\Rightarrow\quad \pdv{x_n}{x_j} = -\frac{F'_{x_j}}{F'_{x_n}},\quad j = 1,\cdots,n-1\]
+在上述推导中可以发现两个事实：
+\begin{itemize}
+    \item 约束方程的微分可以写为各自变量微分的线性组合.
+    \item 某个自变量的微分可以写为剩余自变量微分的线性组合，且各项系数是与之对应的偏导数.
+\end{itemize}
+接下来，进一步推广至$n$个变量，$m$个约束方程：
+\[F_i(x_1,\cdots,x_n) \in C^1(D),\quad i = 1,2,\cdots,m \quad\Rightarrow\quad \begin{cases}
+    F_1(x_1,\cdots,x_n) = 0\\
+    F_2(x_1,\cdots,x_n) = 0\\
+    \vdots\\
+    F_m(x_1,\cdots,x_n) = 0
+\end{cases}\]
+对上述方程组微分，得到如下线性方程组：
+\[\begin{cases}
+    \displaystyle\dd{F_1} = \pdv{F_1}{x_1}\dd{x_1} + \cdots + \pdv{F_1}{x_n}\dd{x_n} = 0 \\[1em]
+    \displaystyle\dd{F_2} = \pdv{F_2}{x_1}\dd{x_1} + \cdots + \pdv{F_2}{x_n}\dd{x_n} = 0 \\[1em]
+    \vdots\\
+    \displaystyle\dd{F_m} = \pdv{F_m}{x_1}\dd{x_1} + \cdots + \pdv{F_m}{x_n}\dd{x_n} = 0
+\end{cases}\]
+将上述线性方程组移项并写成矩阵形式，不妨设$m < n$：
+\begin{align*}
+    \begin{bmatrix}
+        \displaystyle\pdv{F_1}{x_1} & \cdots & \displaystyle\pdv{F_1}{x_m} \\
+        \vdots & & \vdots\\
+        \displaystyle\pdv{F_m}{x_1} & \cdots & \displaystyle\pdv{F_m}{x_m} \\
+    \end{bmatrix}\begin{bmatrix}
+        \dd{x_1} \\ \vdots \\ \dd{x_m}
+    \end{bmatrix} &= \begin{bmatrix}
+        \displaystyle -\pdv{F_1}{x_{m+1}}\dd{x_{m+1}} -\cdots -\pdv{F_1}{x_{n}}\dd{x_{n}}\\
+        \vdots \\
+        \displaystyle -\pdv{F_m}{x_{m+1}}\dd{x_{m+1}} -\cdots -\pdv{F_m}{x_{n}}\dd{x_{n}}\\
+    \end{bmatrix}\\
+    \underbrace{\begin{bmatrix}
+        \displaystyle\pdv{F_1}{x_1} & \cdots & \displaystyle\pdv{F_1}{x_m} \\
+        \vdots & & \vdots\\
+        \displaystyle\pdv{F_m}{x_1} & \cdots & \displaystyle\pdv{F_m}{x_m} \\
+    \end{bmatrix}}_{\vb{J}_1} \begin{bmatrix}
+        \dd{x_1} \\ \vdots \\ \dd{x_m}
+    \end{bmatrix} &= -\underbrace{\begin{bmatrix}
+        \displaystyle\pdv{F_1}{x_{m+1}} & \cdots & \displaystyle\pdv{F_1}{x_n} \\
+        \vdots & & \vdots\\
+        \displaystyle\pdv{F_m}{x_{m+1}} & \cdots & \displaystyle\pdv{F_m}{x_n} \\
+    \end{bmatrix}}_{\vb{J}_2}\begin{bmatrix}
+        \dd{x_{m+1}} \\ \vdots \\ \dd{x_n}
+    \end{bmatrix}
+\end{align*}
+记上述方程中左边的Jacobi矩阵为$\vb{J}_1$，右边的为$\vb{J}_2$.
+求解上述方程，首先应当保证$\det \vb{J}_1 \neq 0$，这样才能求逆.
+\begin{gather*}
+    \begin{bmatrix}
+        \dd{x_1} \\ \vdots \\ \dd{x_m}
+    \end{bmatrix} = -\vb{J}_1^{-1} \vb{J}_2 \begin{bmatrix}
+        \dd{x_{m+1}} \\ \vdots \\ \dd{x_n}
+    \end{bmatrix} = \begin{bmatrix}
+    \displaystyle\pdv{x_1}{x_{m+1}} & \cdots & \displaystyle\pdv{x_1}{x_n} \\
+    \vdots & & \vdots \\
+    \displaystyle\pdv{x_m}{x_{m+1}} & \cdots & \displaystyle\pdv{x_m}{x_n} \\
+\end{bmatrix} \begin{bmatrix}
+        \dd{x_{m+1}} \\ \vdots \\ \dd{x_n}
+    \end{bmatrix}
+\end{gather*}
+显然，上式中的$x_1,\cdots,x_m$都是关于$x_{m+1},\cdots,x_n$的隐函数，记这些隐函数的偏导数构成的Jacobi矩阵为$D\vb{f}$
+\[\begin{cases}
+    x_1 = f_1(x_{m+1},\cdots,x_n) \\
+    \vdots \\
+    x_m = f_m(x_{m+1},\cdots,x_n) \\
+\end{cases} \Rightarrow\quad D\vb{f} \coloneq \begin{bmatrix}
+    \displaystyle\pdv{f_1}{x_{m+1}} & \cdots & \displaystyle\pdv{f_1}{x_n} \\
+    \vdots & & \vdots \\
+    \displaystyle\pdv{f_m}{x_{m+1}} & \cdots & \displaystyle\pdv{f_m}{x_n} \\
+\end{bmatrix} = \begin{bmatrix}
+    \displaystyle\pdv{x_1}{x_{m+1}} & \cdots & \displaystyle\pdv{x_1}{x_n} \\
+    \vdots & & \vdots \\
+    \displaystyle\pdv{x_m}{x_{m+1}} & \cdots & \displaystyle\pdv{x_m}{x_n} \\
+\end{bmatrix}\]
+结合上述二式，得到如下结论：
+\[D\vb{f} = -\vb{J}_1^{-1}\vb{J}_2\]
+其中$\vb{J}_1$是$F$对设为隐函数变量的Jacobi矩阵，$\vb{J}_2$是$F$对其余变量的Jacobi矩阵.
+这就是求解多变量函数隐函数偏导数的方法.二元函数的结论$\dv{y}{x} = -\frac{F'_x}{F'_y}$就是上述公式的退化形式.
