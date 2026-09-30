@@ -1057,3 +1057,38 @@ $\begin{cases}
 \[l \coloneq \lim_{\left\|T\right\|\to0}l(T) = \int_{\alpha}^{\beta}f(t)\dd{t} = \int_{\alpha}^{\beta}|\vb{r}'(t)|\dd{t} = \int_{\alpha}^{\beta}\sqrt{{x'}^2(t) + {y'}^2(t) + {z'}^2(t)}\dd{t}\]
 特别地，对于逐段光滑曲线，其弧长可以上式作分段积分求和.若是平面曲线，取$z(t)\equiv0$即可.若平面曲线由显表示$y=f(x)$给出，上式可简化为：
 \[l \coloneq \int_{a}^{b}\sqrt{1+{f'}^2(x)}\dd{x},\quad x\in[a,b]\]
+
+
+\subsubsection{弧长参数}
+设正则曲线$L$上有一从起点$A$出发的动点$M(t)$，则$A$到$M(t)$弧长为：
+\[s(t) = \int_{\alpha}^{t}|\vb{r}'(\tau)|\dd{\tau},\quad t\in[\alpha,\beta]\]
+上式是一个变上限积分给出的函数$s(t)$，根据正则曲线的性质，$s(t)$是严格单调增的，因而存在反函数$t(s)$.于是，曲线也可以以弧长为参数表达：
+\[\vb{r} = \vb{r}(t) = \vb{r}(s),\quad x=x(s),y=y(s),z=z(s)\]
+由于弧长作为曲线自身固有的几何量，不受外部坐标变化的影响，因此将以$s$为参数的参数曲线方程称为\textbf{自然方程}.
+
+根据一阶微分形式的不变性，有：
+\[\dd{\vb{r}} = \vb{r}'(t)\dd{t} = \vb{r}'(s)\dd{s}\]
+根据反函数的性质，有：
+\[\dv{s}{t} = |\vb{r}'(t)|,\quad \dv{t}{s} = \frac{1}{|\vb{r}'(s)|} \quad\Rightarrow\quad \vb{r}'(s) = \vb{r}'(t)\dv{s}{t} = \frac{\vb{r}'(t)}{|\vb{r}'(t)|}\]
+即以弧长为参数的切向量是单位向量，进而推出：
+\[|\vb{r}'(s)|^2 = \left(\dv{x}{s}\right)^2 + \left(\dv{y}{s}\right)^2 + \left(\dv{z}{s}\right)^2 = 1 \quad\Rightarrow\quad (\dd{s})^2 = (\dd{x})^2 + (\dd{y})^2 + (\dd{z})^2\]
+上述结论可以看作是微元形式的勾股定理.
+
+
+\subsubsection{曲率}
+在物理学中，习惯上认为$\dot{x}$是$x$对时间$t$的导数.但是在数学的习惯上，记：
+\[\dot{\vb{r}} = \dv{\vb{r}}{s},\quad \ddot{\vb{r}} = \dv[2]{\vb{r}}{s},\quad \vb{r}' = \dv{\vb{r}}{t},\quad \vb{r}'' = \dv[2]{\vb{r}}{t}\]
+\begin{definition}
+    假定对正则曲线$L$有连续的二阶导数.由于切向量$\dot{\vb{r}}$是单位向量，总是有$\dot{\vb{r}}\cdot\dot{\vb{r}} = 1$，从而有：
+    \[\dv{s}(\dot{\vb{r}}\cdot\dot{\vb{r}}) = 2\dot{\vb{r}}\cdot\ddot{\vb{r}} = 0\]
+    即只要$\ddot{\vb{r}}\neq\bm{0}$，则$\ddot{\vb{r}}$与$\dot{\vb{r}}$是正交的，故而称$\ddot{\vb{r}}$为曲线$L$的\overtext{主法向量}{principal normal vector}.记：
+    \[\vb{\kappa} \coloneq \dot{\vb{r}}\times\ddot{\vb{r}}\]
+    显然$\vb{\kappa}$与$\dot{\vb{r}}$也是正交的，称其为$L$的\overtext{副法向量}{binormal vector}.
+\end{definition}
+设切向量在曲线$L$上一段长度为$\Delta s$弧上的转角为$\Delta\alpha$.在$\Delta\alpha\to0$时，有：
+\[\Delta\alpha \sim \tan\Delta\alpha \sim \Delta\dot{\vb{r}} \quad\Leftrightarrow\quad \lim_{\Delta s \to 0}\frac{\Delta\dot{\vb{r}}}{\Delta\alpha} = 1\]
+模仿\cref{def:2DCurvature}\textbf{(平面曲率的定义)}，不妨认为空间曲线的曲率也可以这样定义：
+\[\kappa = \lim_{\Delta s \to 0}\left|\frac{\Delta\alpha}{\Delta s}\right| = \lim_{\Delta s \to 0}\left|\frac{\Delta\dot{\vb{r}}}{\Delta s}\right| = |\ddot{\vb{r}}| = |\vb{\kappa}|\]
+不难推出一般参数表示下曲线的曲率表达式：
+\[\vb{\kappa}(t) = \frac{\vb{r}'(t)\times\vb{r}''(t)}{|\vb{r}'(t)|^3}\]
+特别地，对于平面曲线，其副法向量始终与$z$轴平行.
