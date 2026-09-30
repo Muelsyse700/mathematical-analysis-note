@@ -1092,3 +1092,25 @@ $\begin{cases}
 不难推出一般参数表示下曲线的曲率表达式：
 \[\vb{\kappa}(t) = \frac{\vb{r}'(t)\times\vb{r}''(t)}{|\vb{r}'(t)|^3}\]
 特别地，对于平面曲线，其副法向量始终与$z$轴平行.
+
+
+\subsection{参数曲面}
+参数曲面以向量值函数表示为：
+\[\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k},\quad (u,v)\in D \subset\mathbb{R}^2\]
+\subsubsection{切平面}
+除了有限个点和曲线段上，设$\vb{r}(u,v)$有连续的偏导数：
+\[\begin{cases}
+    \vb{r}'_u = \pdv{\vb{r}}{u} = \pdv{x}{u}\vb{i} + \pdv{y}{u}\vb{j} + \pdv{z}{u}\vb{k} \\
+    \vb{r}'_v = \pdv{\vb{r}}{v} = \pdv{x}{v}\vb{i} + \pdv{y}{v}\vb{j} + \pdv{z}{v}\vb{k} \\
+\end{cases}\]
+显然，根据偏导数的几何性质，$\vb{r}'_u$和$\vb{r}'_v$分别是参数曲面上两不同曲线交点处的两个切向量，而过这一点处的切平面的法向量为$\vb{r}'_u \times \vb{r}'_v$.记单位法向量为：
+\[\vb{n} = \frac{\vb{r}'_u \times \vb{r}'_v}{|\vb{r}'_u \times \vb{r}'_v|}\]
+
+
+\subsubsection{法向量场}
+曲面上有一个连续变化的法向量场：
+\[\vb{r}'_u(u,v) \times \vb{r}'_v(u,v) = \pdv{(y,z)}{(u,v)}\vb{i} + \pdv{(z,x)}{(u,v)}\vb{j} + \pdv{(x,y)}{(u,v)}\vb{k}\]
+这个法向量场中每一点处的法向量的长度实际上是曲面在一点处的切平面上以$\vb{r}'_u$和$\vb{r}'_v$为边的平行四边形的面积，同时也是这一点附近曲面面积的近似.
+\begin{definition}
+    若参数曲面$\vb{r}(u,v)$有连续的偏导数，且$\vb{r}'_u(u,v) \times \vb{r}'_v(u,v) \neq \bm{0}$，即任意一点附近曲面面积不为$0$.则称这样的曲面是\overtext{光滑曲面}{smooth surface}或\overtext{分片光滑曲面}{piecewise smooth surface}
+\end{definition}
