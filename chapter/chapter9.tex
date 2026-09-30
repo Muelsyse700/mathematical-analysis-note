@@ -990,6 +990,70 @@ $\begin{cases}
     \displaystyle\pdv{x_m}{x_{m+1}} & \cdots & \displaystyle\pdv{x_m}{x_n} \\
 \end{bmatrix}\]
 结合上述二式，得到如下结论：
-\[D\vb{f} = -\vb{J}_1^{-1}\vb{J}_2\]
-其中$\vb{J}_1$是$F$对设为隐函数变量的Jacobi矩阵，$\vb{J}_2$是$F$对其余变量的Jacobi矩阵.
+\[D\vb{f} = -\vb{J}_1^{-1}\vb{J}_2,\quad \det \vb{J}_1 \neq 0\]
+其中$\vb{J}_1$是$F$对设为隐函数的变量的Jacobi矩阵，$\vb{J}_2$是$F$对其余变量的Jacobi矩阵.
 这就是求解多变量函数隐函数偏导数的方法.二元函数的结论$\dv{y}{x} = -\frac{F'_x}{F'_y}$就是上述公式的退化形式.
+
+
+\section{空间曲线与曲面}
+用点的集合能够表示空间中的一个几何对象.例如：
+\[\begin{cases}
+    \text{平面曲线：}\{(x,y)\,|\,y = f(x)\} \Leftrightarrow \vb{r}(x) = (x,f(x)) = x\vb{i} + f(x)\vb{j} \\
+    \text{空间曲面：}\{(x,y,z)\,|\,z = f(x,y)\} \Leftrightarrow \vb{r}(x,y) = (x,y,f(x,y)) = x\vb{i} + y\vb{j} + f(x,y)\vb{k} \\
+\end{cases}\]
+转为参数表示则为：
+\[\begin{cases}
+    \text{参数曲线：}\{(x(t),y(t),z(t))\,|\,t\in[\alpha,\beta]\}\subset\mathbb{R}^3 \\
+    \text{参数曲面：}\{(x(u,v),y(u,v),z(u,v))\,|\,(u,v)\in D \subset\mathbb{R}^2\}\subset\mathbb{R}^3
+\end{cases}\]
+隐表示的平面曲线则为$F(x,y)=0$，空间曲面$F(x,y,z)=0$，空间曲线则以两个空间曲面联立消自由度，表示为$\begin{cases}
+    F(x,y,z) = 0\\
+    G(x,y,z) = 0
+\end{cases}$.
+
+
+\subsection{参数曲线}
+\subsubsection{切向量与切线方程}
+已知参数曲线在一点$M(x(t_0),y(t_0),z(t_0))$的切向量为：
+\[\vb{r}'(t_0) = x'(t_0)\vb{i} + y'(t_0)\vb{j} + z'(t_0)\vb{k}\]
+对应的点向式切线方程为：
+\[\frac{x - x(t_0)}{x'(t_0)} = \frac{y - y(t_0)}{y'(t_0)} = \frac{z - z(t_0)}{z'(t_0)}\]
+对应的法平面方程为：
+\[x'(t_0)(x-x(t_0)) + y'(t_0)(y-y(t_0)) + z'(t_0)(z-z(t_0)) = 0\]
+\begin{definition}
+    对于参数曲线，若有$x'(t),y'(t),z'(t)$连续，那么称曲线是\overtext{光滑曲线}{smooth curve}.当曲线连续且分成有限光滑曲线段，则称曲线是\overtext{逐段光滑}{piecewise smooth}的.当曲线上对于$t_0$一点有$|\vb{r}'(t_0)|\neq0$，则称该点为曲线的\overtext{正则点}{regular point}，否则称为\overtext{奇点}{singular point}.如果曲线上的所有点都是正则点，则称该曲线为\overtext{正则曲线}{regular curve}.
+\end{definition}
+
+
+\subsubsection{弧长}
+对光滑参数曲线$\vb{r}(t)$的参变量$t$做分割：
+\[T:\alpha = t_0 < t_1 < \cdots < t_n = \beta\]
+则曲线的总长度为：
+\begin{align*}
+    l(T) &= \sum_{i=1}^{n}|\vb{r}(t_i) - \vb{r}(t_{i-1})| \\
+    &= \sum_{i=1}^{n}\sqrt{[x(t_i)-x(t_{i-1})]^2 + [y(t_i)-y(t_{i-1})]^2 + [z(t_i)-z(t_{i-1})]^2}
+\end{align*}
+根据Lagrange微分中值公式，取$t_{i-1} < \xi_i,\eta_i,\zeta_i < t_i$，$\Delta t_i = t_i - t_{i-1}$：
+\[l(T) = \sum_{i=1}^{n}\sqrt{{x'}^2(\xi_i) + {y'}^2(\eta_i) + {z'}^2(\zeta_i)}\Delta t_i\]
+注意到，上式不是标准的Riemann和形式，应当为其构造一个近似的Riemann和.
+
+对于光滑曲线，$x'(t),y'(t),z'(t)$是连续的，故而：
+\[f(\xi,\eta,\zeta) = \sqrt{{x'}^2(\xi) + {y'}^2(\eta) + {z'}^2(\zeta)}\]
+是定义在三维闭区间$[\alpha,\beta]^3$上的三元连续函数，进而其一致连续，即$\forall\varepsilon>0$，$\exists\delta_1>0$，使得在$\left\|T\right\|<\delta_1$时，对任意$(\xi_i,\eta_i,\zeta_i)\in[t_{i-1},t_i]^3$都有：
+\begin{align*}
+    \left|\sqrt{{x'}^2(\xi_i) + {y'}^2(\eta_i) + {z'}^2(\zeta_i)} - \sqrt{{x'}^2(t_i) + {y'}^2(t_i) + {z'}^2(t_i)}\right| &< \varepsilon \\
+    \left|f(\xi_i,\eta_i,\zeta_i) - f(t_i)\right| &< \varepsilon \\
+    \left|\sum_{i=1}^{n}f(\xi_i,\eta_i,\zeta_i)\Delta t_i - \sum_{i=1}^{n}f(t_i)\Delta t_i\right| &< \varepsilon\sum_{i=1}^{n}\Delta t_i
+\end{align*}
+上式中，$f(t_i)$因$x'(t),y'(t),z'(t)$的连续而连续，根据\cref{thm:ClassOfIntegrableFunctions}\textbf{(连续必可积)}和Riemann可积的定义：对$\forall\varepsilon>0$，$\exists\delta_2>0$使得在$\left\|T\right\|<\delta_2$时有：
+\[\left|\sum_{i=1}^{n}f(t_i)\Delta t_i - \int_{\alpha}^{\beta}f(t)\dd{t}\right| < \varepsilon\]
+于是当$\left\|T\right\|<\delta = \min\{\delta_1,\delta_2\}$时，有：
+\begin{align*}
+    \left|\sum_{i=1}^{n}f(\xi_i,\eta_i,\zeta_i)\Delta t_i - \sum_{i=1}^{n}f(t_i)\Delta t_i\right| + \left|\sum_{i=1}^{n}f(t_i)\Delta t_i - \int_{\alpha}^{\beta}f(t)\dd{t}\right| &< \varepsilon\sum_{i=1}^{n}\Delta t_i + \varepsilon
+\end{align*}
+对于左边又有：
+\[\left|l(T) - \int_{\alpha}^{\beta}\!\!f(t)\dd{t}\right| \leqslant \left|\sum_{i=1}^{n}f(\xi_i,\eta_i,\zeta_i)\Delta t_i - \sum_{i=1}^{n}f(t_i)\Delta t_i\right| + \left|\sum_{i=1}^{n}f(t_i)\Delta t_i - \int_{\alpha}^{\beta}\!\!f(t)\dd{t}\right|\]
+因而将光滑曲线$L$的弧长$l$定义为：
+\[l \coloneq \lim_{\left\|T\right\|\to0}l(T) = \int_{\alpha}^{\beta}f(t)\dd{t} = \int_{\alpha}^{\beta}|\vb{r}'(t)|\dd{t} = \int_{\alpha}^{\beta}\sqrt{{x'}^2(t) + {y'}^2(t) + {z'}^2(t)}\dd{t}\]
+特别地，对于逐段光滑曲线，其弧长可以上式作分段积分求和.若是平面曲线，取$z(t)\equiv0$即可.若平面曲线由显表示$y=f(x)$给出，上式可简化为：
+\[l \coloneq \int_{a}^{b}\sqrt{1+{f'}^2(x)}\dd{x},\quad x\in[a,b]\]
