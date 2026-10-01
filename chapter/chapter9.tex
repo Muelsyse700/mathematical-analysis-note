@@ -975,12 +975,12 @@ $\begin{cases}
         \dd{x_{m+1}} \\ \vdots \\ \dd{x_n}
     \end{bmatrix}
 \end{gather*}
-显然，上式中的$x_1,\cdots,x_m$都是关于$x_{m+1},\cdots,x_n$的隐函数，记这些隐函数的偏导数构成的Jacobi矩阵为$D\vb{f}$
+显然，上式中的$x_1,\cdots,x_m$都是关于$x_{m+1},\cdots,x_n$的隐函数，记这些隐函数的偏导数构成的Jacobi矩阵为$\mathcal{D}\vb{f}$
 \[\begin{cases}
     x_1 = f_1(x_{m+1},\cdots,x_n) \\
     \vdots \\
     x_m = f_m(x_{m+1},\cdots,x_n) \\
-\end{cases} \Rightarrow\quad D\vb{f} \coloneq \begin{bmatrix}
+\end{cases} \Rightarrow\quad \mathcal{D}\vb{f} \coloneq \begin{bmatrix}
     \displaystyle\pdv{f_1}{x_{m+1}} & \cdots & \displaystyle\pdv{f_1}{x_n} \\
     \vdots & & \vdots \\
     \displaystyle\pdv{f_m}{x_{m+1}} & \cdots & \displaystyle\pdv{f_m}{x_n} \\
@@ -990,7 +990,7 @@ $\begin{cases}
     \displaystyle\pdv{x_m}{x_{m+1}} & \cdots & \displaystyle\pdv{x_m}{x_n} \\
 \end{bmatrix}\]
 结合上述二式，得到如下结论：
-\[D\vb{f} = -\vb{J}_1^{-1}\vb{J}_2,\quad \det \vb{J}_1 \neq 0\]
+\[\mathcal{D}\vb{f} = -\vb{J}_1^{-1}\vb{J}_2,\quad \det \vb{J}_1 \neq 0\]
 其中$\vb{J}_1$是$F$对设为隐函数的变量的Jacobi矩阵，$\vb{J}_2$是$F$对其余变量的Jacobi矩阵.
 这就是求解多变量函数隐函数偏导数的方法.二元函数的结论$\dv{y}{x} = -\frac{F'_x}{F'_y}$就是上述公式的退化形式.
 
@@ -1151,3 +1151,58 @@ $\begin{cases}
 
 曲线一点的切向量$\vb{l}$必然垂直于两个曲面在这一点的法向量，于是有：
 \[\vb{l} = \grad F \times \grad G = \pdv{(F,G)}{(y,z)}\vb{i} + \pdv{(F,G)}{(z,x)}\vb{j} + \pdv{(F,G)}{(x,y)}\vb{k}\]
+
+
+\section{多变量函数的Taylor公式与极值}
+\subsection{二元函数的微分中值定理}
+\begin{definition}
+    称一个区域为\overtext{凸区域}{}，当这个区域中的任意两点的连线仍在这个区域中.
+\end{definition}
+设凸区域中两点$(x,y)$和$(x+h,y+k)$的线段为$L$：
+\[L: \{(x+th,y+tk)\,|\,t\in[0,1]\}\]
+用一个函数来表示，就是：
+\[\varphi(t) = f(x+th,y+tk),\quad t\in[0,1] \begin{cases}
+    \varphi(0) = f(x,y) \\
+    \varphi(1) = f(x+h,y+k)
+\end{cases}\]
+根据一元函数的Lagrange中值公式：
+\[\varphi(1) - \varphi(0) = \varphi'(0 + \theta\cdot 1)\cdot 1 = \varphi'(\theta),\quad 0<\theta<1\]
+而$\varphi'(t) = hf'_x(x+th,y+tk) + kf'_y(x+th,y+tk)$，由此得到二元函数的中值公式：
+\begin{theorem}
+    \textbf{二元函数的微分中值公式}
+
+    设函数$f(x,y)$在一个凸区域$D$内有连续的偏导数，则对$D$内任何两点$(x_1,y_1),(x_2,y_2)$存在位于连接它们的直线段上一点$(\xi,\zeta)$使得：
+    \[f(x_2,y_2) - f(x_1,y_1) = (x_2-x_1)f'_x(\xi,\zeta) + (y_2-y_1)f'_y(\xi,\zeta)\]
+\end{theorem}
+
+由此得到以下推论：
+\begin{theorem}
+    若函数$f(x,y)$在凸区域$D$内有偏导数且$f'_x = f'_y \equiv 0$，则该函数一定是一个常值函数.
+
+    事实上，只要$D$是道路连通的开集，同样适用上述结论.可以将非凸区域切分成凸区域，连续应用上述结论.
+\end{theorem}
+
+模仿上述推导过程，将中值定理推广到$n$维：
+\[f(x_1+h_1,\cdots,x_n+h_n) - f(x_1,\cdots,x_n) = \sum_{i=1}^{n}f'_{x_i}(x_1+\theta h_1,\cdots,x_n+\theta h_n)h_i\]
+
+对于向量值函数，微分中值公式不适用，例如：
+\[\vb{r}(t) = \cos t\vb{i} + \sin t\vb{j}\]
+如果有$\vb{r}(\pi)-\vb{r}(0) = \vb{r}'(\theta)(\pi - 0)$，则会推导出$\sin\theta=\dfrac{2}{\pi}$而$\cos\theta = 0$，这显然不可能.
+
+但是，可以提出一个类似的中值公式：
+\begin{theorem}
+    \textbf{拟微分中值公式}
+
+    设有$\vb{r}:[a,b]\to\mathbb{R}^2$，有$\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j}$连续可导，则$\exists\theta\in[a,b]$使得：
+    \[|\vb{r}(b) - \vb{r}(a)| \leqslant |\vb{r}'(\theta)|(b-a)\]
+\end{theorem}
+
+\begin{proof}
+    设$\varphi(t) = (\vb{r}(b) - \vb{r}(a))\cdot\vb{r}(t),t\in[a,b]$.有：
+    \[\varphi(b) - \varphi(a) = (\vb{r}(b) - \vb{r}(a))\cdot(\vb{r}(b) - \vb{r}(a)) = |\vb{r}(b) - \vb{r}(a)|^2\]
+    同时根据一元函数的中值公式，$\exists\theta\in(0,1)$使得：
+    \[\varphi(b) - \varphi(a) = \varphi'(\theta)(b-a) = (\vb{r}(b)-\vb{r}(a))\cdot\vb{r}'(\theta)(b-a)\]
+    根据\cref{thm:CauchySchwarzInequality}\textbf{(Cauchy-Schwarz不等式)}有：
+    \[|\vb{r}(b)-\vb{r}(a)|^2 = |(\vb{r}(b) - \vb{r}(a))\cdot\vb{r}'(\theta)|(b-a) \leqslant |\vb{r}(b)-\vb{r}(a)||\vb{r}'(\theta)|(b-a)\]
+    由此得证.
+\end{proof}
