@@ -461,7 +461,7 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 混合偏导数求导的顺序不同，得到的结果不一定相同.
 
 \begin{theorem}
-    设$f(x,y)$在区域$D$内有定义，如果$\pdv{f}{x}{y}$和$\pdv{f}{y}{x}$连续，那么二者相等，或者说求导的次序可交换.
+    设$f(x,y)$在区域$D$内有定义，如果$\displaystyle\pdv{f}{x}{y}$和$\displaystyle\pdv{f}{y}{x}$连续，那么二者相等，或者说求导的次序可交换.
 \end{theorem}
 
 \begin{proof}
@@ -621,7 +621,7 @@ $n$维实数组空间$\mathbb{R}^n = \{\vb{x} = (x_1,x_2,\cdots,x_n)\,|\,x_i\in\
 
 \begin{definition}
     称由函数的偏导数所决定的向量$\displaystyle\left(\pdv{f}{x},\pdv{f}{y}\right)$为$f(x,y)$在$(x,y)$处的\overtext{梯度}{gradient}，记作：
-    \[\symbf{\nabla} f = \mathbf{grad}\,f \coloneq \left(\pdv{f}{x},\pdv{f}{y}\right) = \pdv{f}{x}\vb{i} + \pdv{f}{y}\vb{j}\]
+    \[\symbf{\nabla} f = \grad f \coloneq \left(\pdv{f}{x},\pdv{f}{y}\right) = \pdv{f}{x}\vb{i} + \pdv{f}{y}\vb{j}\]
 \end{definition}
 
 注意到，一个方向向量$\vb{e}$与一点梯度的内积为$\vb{e}$方向的方向导数：
@@ -833,7 +833,7 @@ $\begin{cases}
 对上式分别对$x,y$求导，由此解得隐函数$z = f(x,y)$的两个偏导数：
 \[\pdv{z}{x} = -\frac{F'_x(x,y,z)}{F'_z(x,y,z)},\quad\pdv{z}{y} = -\frac{F'_y(x,y,z)}{F'_z(x,y,z)}\]
 上述偏导数成立的条件是$F'_z(x_0,y_0,z_0) \neq 0$.同理，若取隐函数为$x = x(y,z)$和$y = y(x,z)$，则也有相应的要求.由于隐函数的取法具有任意性，所以要想使隐函数存在，要满足在$(x_0,y_0,z_0)$上$F'_x,F'_y,F'_z$都不为$0$，即：
-\[\symbf{grad}\,F(x_0,y_0,z_0) \neq \bm{0}\]
+\[\grad F(x_0,y_0,z_0) \neq \bm{0}\]
 总而言之，隐函数存在的一个条件是有连续偏导数、有一个解且该点处梯度不为$\bm{0}$.
 
 
@@ -859,7 +859,7 @@ $\begin{cases}
     \displaystyle\pdv{G}{y} & \displaystyle\pdv{G}{z} \\
 \end{vmatrix} \neq 0\]
 若取其它隐函数也有类似的要求：
-\[\pdv{(F,G)}{(x,y)} \neq 0,\quad \pdv{(F,G)}{(y,z)} \neq 0,\quad\pdv{(F,G)}{(x,z)} \neq 0 \quad\Leftrightarrow\quad \symbf{grad}\,F \times \symbf{grad}\,G \neq 0\]
+\[\pdv{(F,G)}{(x,y)} \neq 0,\quad \pdv{(F,G)}{(y,z)} \neq 0,\quad\pdv{(F,G)}{(x,z)} \neq 0 \quad\Leftrightarrow\quad \grad F \times \grad G \neq 0\]
 于是隐函数存在的一个条件是均有连续偏导数，有一个解，在这个解处两个梯度的叉乘不为零.
 
 
@@ -1100,8 +1100,8 @@ $\begin{cases}
 \subsubsection{切平面}
 除了有限个点和曲线段上，设$\vb{r}(u,v)$有连续的偏导数：
 \[\begin{cases}
-    \vb{r}'_u = \pdv{\vb{r}}{u} = \pdv{x}{u}\vb{i} + \pdv{y}{u}\vb{j} + \pdv{z}{u}\vb{k} \\
-    \vb{r}'_v = \pdv{\vb{r}}{v} = \pdv{x}{v}\vb{i} + \pdv{y}{v}\vb{j} + \pdv{z}{v}\vb{k} \\
+    \displaystyle\vb{r}'_u = \pdv{\vb{r}}{u} = \pdv{x}{u}\vb{i} + \pdv{y}{u}\vb{j} + \pdv{z}{u}\vb{k} \\[1em]
+    \displaystyle\vb{r}'_v = \pdv{\vb{r}}{v} = \pdv{x}{v}\vb{i} + \pdv{y}{v}\vb{j} + \pdv{z}{v}\vb{k} \\
 \end{cases}\]
 显然，根据偏导数的几何性质，$\vb{r}'_u$和$\vb{r}'_v$分别是参数曲面上两不同曲线交点处的两个切向量，而过这一点处的切平面的法向量为$\vb{r}'_u \times \vb{r}'_v$.记单位法向量为：
 \[\vb{n} = \frac{\vb{r}'_u \times \vb{r}'_v}{|\vb{r}'_u \times \vb{r}'_v|}\]
@@ -1114,3 +1114,40 @@ $\begin{cases}
 \begin{definition}
     若参数曲面$\vb{r}(u,v)$有连续的偏导数，且$\vb{r}'_u(u,v) \times \vb{r}'_v(u,v) \neq \bm{0}$，即任意一点附近曲面面积不为$0$.则称这样的曲面是\overtext{光滑曲面}{smooth surface}或\overtext{分片光滑曲面}{piecewise smooth surface}
 \end{definition}
+
+
+\subsection{隐式曲线和隐式曲面}
+\subsubsection{平面隐式曲线}
+设$F(x,y) \in C^2(D)$，由方程$F(x,y) = 0$可以给出一条隐式曲线.若有$\grad F = F'_x\vb{i} + F'_y\vb{j} \neq \bm{0}$，不妨设有隐函数$y = f(x)$，同时有$f'(x) = -\frac{F'_x(x,y)}{F'_y(x,y)}$.曲线上一点$(x_0,y_0)$的切线和曲率可表示为：
+\begin{gather*}
+    (x-x_0)f'(x) - (y-y_0) = 0 \quad\Rightarrow\quad (x-x_0)F'_x + (y-y_0)F'_y = 0 \\
+    \kappa = \frac{f''(x)}{\left[1+{f'}^2(x)\right]^{3/2}} = \frac{-{F'_y}^2 F''_{xx} + 2F'_x F'_y F''_{xy} - {F'_x}^2 F''_{yy}}{\left[{F'_x}^2 + {F'_y}^2\right]^{3/2}}
+\end{gather*}
+
+\begin{mistake}
+    上式中的$f''(x)$计算时要注意，$F'_x(x,f(x))$和$F'_y(x,f(x))$都是关于$x$的复合函数，在对其求导时要使用链式法则：
+    \[\dv{x}F'_x(x,f(x)) = F''_{xx} + F''_{xy}f'(x),\qquad \dv{x}F'_y(x,f(x)) = F''_{yx} + F''_{yy}f'(x)\]
+\end{mistake}
+
+若隐函数以$x = g(y)$表示，得到的结果与前述无异，这表明对于切线方程、曲率，$x,y$是对称的.
+
+从几何上看，方程$F(x,y) = 0$表示了一条等值线，而$F(x,y) = c$所表示的任意等值线由于导数相同，其所具有的切线方程、曲率的表达式与$F(x,y) = 0$时的情形一致.
+
+另一方面，从几何角度观察$\grad F = F'_x\vb{i} + F'_y\vb{j} \neq \bm{0}$这个条件，它可以被重新表述为：只有在有起伏(梯度)时，才存在等值线.
+
+
+\subsubsection{空间隐式曲面}
+设$F(x,y,z) \in C^2(V)$，方程$F(x,y,z) = 0$给出了空间中的一张隐式曲面.从几何上看，$F(x,y,z) = c$是空间中的一张等值面.
+
+如果有一点$(x_0,y_0,z_0)$的$\grad F \neq \bm{0}$，则可以充分地推出在这一点附近有一个连续可导的隐函数，同时曲面上过这一点存在任意的光滑曲线：
+\[\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j} + z(t)\vb{k},\quad F(x(t),y(t),z(t)) = 0\]
+对$F(x(t),y(t),z(t)) = 0$两端对$t$求导，则可以得到：
+\[F'_x x'(t) + F'_y y'(t) + F'_z z'(t) = 0 \quad\Leftrightarrow\quad \grad{F}\cdot\vb{r}'(t) = 0\]
+即表明$\grad F$是隐曲面一点处的法向量.
+
+
+\subsubsection{空间隐式曲线}
+空间隐式曲线由两个相交的空间隐式曲面给出.设$F(x,y,z) \in C^2(V),G(x,y,z) \in C^2(V)$，且有$\grad F \neq \bm{0},\grad G \neq \bm{0}$.
+
+曲线一点的切向量$\vb{l}$必然垂直于两个曲面在这一点的法向量，于是有：
+\[\vb{l} = \grad F \times \grad G = \pdv{(F,G)}{(y,z)}\vb{i} + \pdv{(F,G)}{(z,x)}\vb{j} + \pdv{(F,G)}{(x,y)}\vb{k}\]
