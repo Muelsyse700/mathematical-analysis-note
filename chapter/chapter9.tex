@@ -1206,3 +1206,53 @@ $\begin{cases}
     \[|\vb{r}(b)-\vb{r}(a)|^2 = |(\vb{r}(b) - \vb{r}(a))\cdot\vb{r}'(\theta)|(b-a) \leqslant |\vb{r}(b)-\vb{r}(a)||\vb{r}'(\theta)|(b-a)\]
     由此得证.
 \end{proof}
+
+
+\subsection{二元函数的Taylor公式}
+设$(x_0,y_0)$是区域$D$的内点，在它的凸邻域内函数$f(x,y)\in C^{n+1}$.设有连接$(x_0,y_0)$和$(x,y)\begin{cases}
+    x = x_0 + th \\
+    y = y_0 + tk
+\end{cases}$两点的直线段$\varphi(t) = f(x_0+th,y_0+tk),t\in[0,1]$，求导得：
+\[\varphi'(t) = hf'_x(x_0+th,y_0+tk) + kf'_y(x_0+th,y_0+tk) = \mathcal{D}f(x_0+th,y_0+tk)\]
+其中微分算子$\displaystyle\mathcal{D}\coloneq h\pdv{x} + k\pdv{y}$.对于二阶导：
+\begin{align*}
+    \varphi''(t) &= h^2f''_{xx}(x_0+th,y_0+tk) + 2hkf''_{yx}(x_0+th,y_0+tk)+k^2f''_{yy}(x_0+th,y_0+tk) \\
+    &= \mathcal{D}^2f(x_0+th,y_0+tk)
+\end{align*}
+利用数学归纳法不难证明：
+\[\varphi^{(m)}(t) = \sum_{i+j=m}\frac{m!}{i!j!}h^i k^j\frac{\partial^m f}{\partial x^i \partial y^j}(x_0+th,y_0+tk) = \mathcal{D}^m f(x_0+th,y_0+tk)\]
+对一元函数$\varphi(t)$在$t_0 = 0$处展开，即在$(x,y)$附近展开，得到Maclaurin公式：
+\[\varphi(t) = \sum_{m=0}^{n}\frac{\varphi^{(m)}(0)}{m!}t^m + \frac{\varphi^{(n+1)}(\theta t)}{(n+1)!}t^{n+1},\quad 0< \theta < 1\]
+取$t = 1$，则有$f(x,y)$在$(x_0,y_0)$处的展开式：
+\begin{theorem}
+    \textbf{二元函数的Taylor公式}
+    \[f(x,y) = \sum_{m=0}^{n}\frac{1}{m!}\mathcal{D}^m f(x_0,y_0) + R_n\]
+
+    其中余项$R_n = \dfrac{1}{(n+1)!}\mathcal{D}^{n+1}f(x_0+\theta h,y_0+\theta k),0<\theta<1$.
+\end{theorem}
+
+特别地，由于$f(x,y) \in C^{n+1}$，连续必有界，因此在$(x_0,y_0)$邻域内：
+\[\left|\frac{\partial^{n+1}f(x,y)}{\partial x^i \partial y^j}\right| \leqslant M\]
+当$h \to 0,k \to 0$时，对$R_n$中$\mathcal{D}^{n+1}$所展开的每一个偏导项都有：
+\[\left|\frac{m!}{i!j!}h^i k^j \frac{\partial^m f(x,y)}{\partial x^i \partial y^j}\right| = \frac{m!}{i!j!}|h^i||k^j|\left|\frac{\partial^mf(x,y)}{\partial x^i \partial y^j}\right| \leqslant \frac{m!}{i!j!}|h^i||k^j|M\]
+对上式累加求和：
+\[|\mathcal{D}^{n+1}f(x,y)| = \left|\sum_{m=0}^{n+1}\frac{m!}{i!j!}h^i k^j \frac{\partial^m f(x,y)}{\partial x^i \partial y^j}\right| \leqslant \sum_{m=0}^{n+1}\frac{m!}{i!j!}|h^i||k^j|M = M(|h|+|k|)^{n+1}\]
+进而根据$R_n = \dfrac{\mathcal{D}^{n+1}f(x,y)}{(n+1)!}$：
+\[|R_n| \leqslant \frac{M}{(n+1)!}(|h|+|k|)^{n+1}\]
+取$\rho = \sqrt{h^2 + k^2}$，有$|h|\leqslant\rho,|k|\leqslant\rho$，于是：
+\[|R_n| \leqslant \frac{M}{(n+1)!}(|h|+|k|)^{n+1} \leqslant \frac{2^{n+1}M}{(n+1)!}\rho^{n+1} \quad\Rightarrow\quad 0 \leqslant \frac{|R_n|}{\rho^n} \leqslant \frac{2^{n+1}M}{(n+1)!}\rho\]
+在$h\to0,k\to0$时$\rho \to 0$，根据三明治定理：
+\[\frac{|R_n|}{\rho^n} \to 0 \quad\Rightarrow\quad \lim_{\rho\to0}\frac{|R_n|}{\rho^n} = 0 \quad\Rightarrow\quad R_n = o(\rho^n)\]
+上述Taylor公式的推导及证明过程完全可以推广到$n$维.
+
+特别地，注意到在$(X_1,\cdots,X_n)$处$n$维一阶Taylor展开的公式为：
+\begin{align*}
+    f(x_1,\cdots,x_n) &= f(X_1,\cdots,X_n) + \sum_{i=1}^{n}h_i f'_{x_i} + R_1 \\
+    &= f(X_1,\cdots,X_n) + (h_1,\cdots,h_n)\cdot\grad{f} + R_1
+\end{align*}
+定义$\vb{h} \coloneq (h_1,\cdots,h_n)$，称$\vb{H}_f \coloneq \begin{bmatrix}
+    f''_{x_1 x_1} & \cdots & f''_{x_1 x_n} \\
+    \vdots & \ddots & \vdots \\
+    f''_{x_n x_1} & \cdots & f''_{x_n x_n}
+\end{bmatrix}$为\textbf{Hessian矩阵}，上式可写为如下二次型的形式：
+\[f(x_1,\cdots,x_n) = f(X_1,\cdots,X_n) + \vb{h}\vb{H}_f\vb{h}^{\top} + R_1\]
