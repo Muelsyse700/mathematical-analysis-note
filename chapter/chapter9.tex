@@ -1245,17 +1245,28 @@ $\begin{cases}
 \[\frac{|R_n|}{\rho^n} \to 0 \quad\Rightarrow\quad \lim_{\rho\to0}\frac{|R_n|}{\rho^n} = 0 \quad\Rightarrow\quad R_n = o(\rho^n)\]
 上述Taylor公式的推导及证明过程完全可以推广到$n$维.
 
-特别地，注意到在$(X_1,\cdots,X_n)$处$n$维一阶Taylor展开的公式为：
-\begin{align*}
-    f(x_1,\cdots,x_n) &= f(X_1,\cdots,X_n) + \sum_{i=1}^{n}h_i f'_{x_i} + R_1 \\
-    &= f(X_1,\cdots,X_n) + (h_1,\cdots,h_n)\cdot\grad{f} + R_1
-\end{align*}
-定义$\vb{h} \coloneq (h_1,\cdots,h_n)$，称$\vb{H}_f \coloneq \begin{bmatrix}
-    f''_{x_1 x_1} & \cdots & f''_{x_1 x_n} \\
-    \vdots & \ddots & \vdots \\
-    f''_{x_n x_1} & \cdots & f''_{x_n x_n}
-\end{bmatrix}$为\textbf{Hessian矩阵}，上式可写为如下二次型的形式：
-\[f(x_1,\cdots,x_n) = f(X_1,\cdots,X_n) + \vb{h}\vb{H}_f\vb{h}^{\top} + R_1\]
+\begin{extension}{$n$维函数的一阶与二阶Taylor公式}
+    定义：
+    \[\vb{X} \coloneq (X_1,\cdots,X_n),\quad \vb{h} \coloneq (h_1,\cdots,h_n),\quad \vb{x} \coloneq (x_1,\cdots,x_n) = \vb{X} + \vb{h}\]
+    同样地，设有：
+    \[\varphi(t) = f(\vb{X} + t\vb{h})\]
+    根据链式法则，其一阶导为：
+    \[\varphi'(t) = \sum_{i=1}^{n}\pdv{f}{x_i}\dv{x_i}{t} = \sum_{i=1}^{n}h_i f'_{x_i} = \vb{h}\cdot\grad f \eqcolon \mathcal{D}f\]
+    代入上式到单变量的一阶Taylor公式中，得到在$(X_1,\cdots,X_n)$处$n$维一阶Taylor展开的公式：
+    \[f(\vb{x}) = f(\vb{X}) + \vb{h}\cdot\grad{f} + R_1\]
+    接下来考察二阶展开，$\varphi(t)$的二阶导为：
+    \[\varphi''(t) = \dv{t}\varphi'(t) = \sum_{i=1}^{n}h_i\dv{t}f'_{x_i}\]
+    又根据链式法则有：
+    \[\dv{t}f'_{x_i} = \sum_{j=1}^{n}\pdv{f'_{x_i}}{x_j}\dv{x_j}{t} = \sum_{j=1}^{n}h_j f''_{x_i x_j}\]
+    代回$\varphi''(t)$得到：
+    \[\varphi''(t) = \sum_{i=1}^{n}\sum_{j=1}^{n}h_i h_j f''_{x_i x_j} = \vb{h} \begin{bmatrix}
+        f''_{x_1 x_1} & \cdots & f''_{x_1 x_n} \\
+        \vdots & \ddots & \vdots \\
+        f''_{x_n x_1} & \cdots & f''_{x_n x_n}
+    \end{bmatrix} \vb{h}^\top = \vb{h}\vb{H}_f\vb{h}^\top\]
+    称$\vb{H}_f$为\textbf{Hessian矩阵}.将上式代入单变量Taylor公式，得到$n$维二阶Taylor公式：
+    \[f(\vb{x}) = f(\vb{X}) + \vb{h}\cdot\grad{f} + \frac{1}{2}\vb{h}\vb{H}_f\vb{h}^{\top} + R_2\]
+\end{extension}
 
 
 \subsection{二元函数的极值}
@@ -1272,3 +1283,75 @@ $\begin{cases}
 \begin{definition}
     在一点使函数一阶偏导数为$0$的点称为函数的\textbf{驻点}，是成为极值点的必要条件.
 \end{definition}
+
+为了进一步甄别驻点中的极值点，比较驻点去心邻域内的值.根据驻点一阶偏导为$0$的性质，由二阶Taylor公式得：
+\[f(x,y) - f(x_0,y_0) = \frac{1}{2}(h,k)\vb{H}_f (h,k)^\top + o(\rho^2) = \frac{1}{2}\begin{bmatrix}
+    h & k
+\end{bmatrix}\begin{bmatrix}
+    A & B \\ B & C
+\end{bmatrix}\begin{bmatrix}
+    h \\ k
+\end{bmatrix} + o(\rho^2)\]
+其中$\rho = \sqrt{h^2+k^2},A = f''_{xx},B = f''_{xy},C = f''_{yy}$.取：
+\[Q(h,k) = \begin{bmatrix}
+    h & k
+\end{bmatrix}\begin{bmatrix}
+    A & B \\ B & C
+\end{bmatrix}\begin{bmatrix}
+    h \\ k
+\end{bmatrix} = Ah^2 + 2Bhk + Ck^2\]
+显然，$f(x,y)-f(x_0,y_0)$的正负性依赖于$Q$.
+\begin{definition}
+    称$Q = Ah^2 + 2Bhk + Ck^2$这样满足$Q(\lambda h,\lambda k) = \lambda^2Q(h,k)$的多项式为\overtext{二次型}{quadratic form}.设$\vb{v} = (h,k)$.
+    \begin{enumerate}[circ]
+        \item 若对$\forall\vb{v}\neq\bm{0}$，$Q$的取值恒为正或负，则称$Q$是\overtext{正定的}{positive definite}或\overtext{负定的}{negative definite}，统称为\overtext{定的}{definite}.
+        \item 若对$\forall\vb{v}$，$Q$可能为正的，也可能为负的，则称$Q$为\overtext{不定的}{indefinite}.
+        \item 若对于某些$\vb{v}\neq\bm{0}$，$Q = 0$，而对于其他的$\vb{v}\neq\bm{0}$，$Q$恒为正或负，则称$Q$是\overtext{半正定的}{positive semidefinite}或\overtext{半负定的}{negative semidefinite}，统称为\overtext{半定的}{semidefinite}.
+    \end{enumerate}
+\end{definition}
+
+对于二次型$Q = Ah^2 + 2Bhk + Ck^2$，若取$\lambda = \frac{h}{k}$，不难得到其判别式为：
+\[\Delta = 4B^2 - 4AC \quad\Rightarrow\quad \Delta = B^2 - AC\]
+
+\begin{theorem}
+    \begin{enumerate}[circ]
+        \item $Q$是定的，当且仅当$\Delta > 0$.若$A > 0$，则为正定的；若$A < 0$，则为负定的.
+        \item $Q$是不定的，当且仅当$\Delta < 0$.
+        \item $Q$是半定的，当且仅当$\Delta = 0$.
+    \end{enumerate}
+\end{theorem}
+上述定理的证明是显然的.
+
+\begin{theorem}
+    设$(x_0,y_0)$是函数的$f(x,y)$的一个驻点，其二阶Taylor展开式中的二次型若有：
+    \begin{enumerate}[circ]
+        \item 当$\Delta > 0$时，$A>0$则$(x_0,y_0)$是函数的极小值点；$A<0$则$(x_0,y_0)$是极大值点.
+        \item 当$\Delta < 0$时，$(x_0,y_0)$不是函数的极值点.
+        \item 当$\Delta = 0$时，无法判断$(x_0,y_0)$是否是极值点，需要进一步观察后续展开项.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    首先证明\circnum{1}，设$(h,k)\neq\bm{0}$，引入变量对$h,k$进行归一化操作：
+    \[u = \frac{h}{\sqrt{h^2+k^2}} = \frac{h}{\rho},\quad v = \frac{k}{\sqrt{h^2+k^2}} = \frac{k}{\rho}\]
+    则在单位圆周$u^2+v^2=1$上定义有连续函数$\varphi(u,v) = Au^2+2Buv+Cv^2$：
+    \[Q(h,k) = \rho^2\varphi(u,v)\]
+    若$Q$是正定的，即$B^2-AC > 0$，则可以推出在圆周上任意一点$\varphi(u,v)>0$.
+
+    单位圆周作为一个有界闭集，根据最值定理，其上存在最小值$m>0$.故而总是有$Q > m\rho^2$，进一步有：
+    \[f(x,y)-f(x_0,y_0) = \frac{1}{2}Q + o(\rho^2) \geqslant \rho^2\left[\frac{m}{2} + \frac{o(\rho^2)}{\rho^2}\right]\]
+    上式在$\rho$充分小时(对应极小值点在局部最小的特性)，必有$f(x,y)-f(x_0,y_0) > 0$，故而$(x_0,y_0)$是极小值点.
+
+    负定对应极大值的情形，同理可证.
+
+    接下来证明\circnum{2}，因为$Q$是不定的，因而$\exists(h_1,k_1),(h_2,k_2)$使得：
+    \[Q(h_1,k_1) = \rho^2_1\varphi(u_1,v_1) > 0,\quad Q(h_2,k_2) = \rho^2_2\varphi(u_2,v_2) < 0\]
+    因此，$\exists m$使得：
+    \[\varphi(u_1,v_1) > m > 0 > -m > \varphi(u_2,v_2) \quad\Rightarrow\quad \begin{cases}
+        Q(h_1,k_1) > m\rho_1^2 \\
+        Q(h_2,k_2) < m\rho_2^2
+    \end{cases} \]
+    令$h \equiv th_1,k\equiv tk_1,t\in[0,1]$，则有$\rho = t\rho_1$，由二阶Taylor公式有：
+    \[f(x_0+th_1,y_0+tk_1)-f(x_0,y_0) = \frac{1}{2}Q(th_1,tk_1)+o(t^2\rho_!^2) > t^2\rho_1^2\left[\frac{m}{2}+\frac{o(t^2\rho_1^2)}{t^2\rho_1^2}\right]\]
+    与\circnum{1}同理，存在足够小的$\rho$(或者说足够小的$t$)使得$f(x_0+th_1,y_0+tk_1)-f(x_0,y_0)>0$.同理上述推导，又存在足够小的$t$使得$f(x_0+th_1,y_0+tk_1)-f(x_0,y_0)<0$.因而$(x_0,y_0)$不是极值点.
+\end{proof}
