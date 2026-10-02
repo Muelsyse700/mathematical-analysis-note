@@ -1256,3 +1256,19 @@ $\begin{cases}
     f''_{x_n x_1} & \cdots & f''_{x_n x_n}
 \end{bmatrix}$为\textbf{Hessian矩阵}，上式可写为如下二次型的形式：
 \[f(x_1,\cdots,x_n) = f(X_1,\cdots,X_n) + \vb{h}\vb{H}_f\vb{h}^{\top} + R_1\]
+
+
+\subsection{二元函数的极值}
+\begin{definition}
+    设$f(x)$在区域$D$中有定义，$M_0(x_0,y_0) \in D$.若在$M_0$的邻域内恒有：
+    \[f(x,y) \leqslant f(x_0,y_0) \quad\text{或}\quad f(x,y) \geqslant f(x_0,y_0)\]
+    则称$f(x_0,y_0)$是$f(x,y)$的一个\textbf{极大值}或\textbf{极小值}，$M_0$称为极值点.
+\end{definition}
+
+\begin{theorem}
+    若$f(x,y)$有偏导数，$(x_0,y_0)$是极值点，则有$f'_x(x_0,y_0) = f'_y(x_0,y_0) = 0$.反之不然.
+\end{theorem}
+
+\begin{definition}
+    在一点使函数一阶偏导数为$0$的点称为函数的\textbf{驻点}，是成为极值点的必要条件.
+\end{definition}
