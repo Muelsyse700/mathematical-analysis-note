@@ -1355,3 +1355,69 @@ $\begin{cases}
     \[f(x_0+th_1,y_0+tk_1)-f(x_0,y_0) = \frac{1}{2}Q(th_1,tk_1)+o(t^2\rho_!^2) > t^2\rho_1^2\left[\frac{m}{2}+\frac{o(t^2\rho_1^2)}{t^2\rho_1^2}\right]\]
     与\circnum{1}同理，存在足够小的$\rho$(或者说足够小的$t$)使得$f(x_0+th_1,y_0+tk_1)-f(x_0,y_0)>0$.同理上述推导，又存在足够小的$t$使得$f(x_0+th_1,y_0+tk_1)-f(x_0,y_0)<0$.因而$(x_0,y_0)$不是极值点.
 \end{proof}
+
+
+\subsection{条件极值}
+设$D \subset \mathbb{R}^2$上定义的函数$z = f(x,y)$有连续的偏导数.若有方程$\varphi(x,y)=0$给出$D$内的一条光滑曲线：
+\[L = \{(x,y)\,|\,\varphi(x,y) = 0\}\]
+求取在这条曲线$L$路径上$f(x,y)$极值的问题，称为\textbf{条件极值}问题.
+
+如果方程$\varphi(x,y) = 0$存在隐函数$y = y(x)$，那么$f(x,y)$在$L$上的值可以表示为：
+\[z = z(x) = f(x,y(x)),\quad (x,y)\in L\]
+条件极值问题由此转换为单变量函数$z(x)$的极值问题.设$x = a$是它的一个驻点，令$y(a) = b$，则根据驻点处一阶导为$0$的定义：
+\begin{gather*}
+    z'(a) = f'_x(a,b) + f'_y(a,b)y'(a) = f'_x(a,b) - f'_y(a,b)\frac{\varphi'_x(a,b)}{\varphi'_y(a,b)} = 0 \\
+    \Rightarrow\quad \frac{f'_x(a,b)}{\varphi'_x(a,b)} = \frac{f'_y(a,b)}{\varphi'_y(a,b)} \equiv -\lambda \quad\Rightarrow\quad \begin{cases}
+        f'_x(a,b) + \lambda\varphi'_x(a,b) = 0\\
+        f'_y(a,b) + \lambda\varphi'_y(a,b) = 0\\
+    \end{cases}
+\end{gather*}
+两式相加，最终得到：
+\[\grad f(a,b) + \lambda\grad\varphi(a,b) = \bm{0}\]
+即$f(x,y)$和$\varphi(x,y)$的梯度在$(a,b)$处共线时取到极值.
+
+综上，条件极值点应满足：
+\begin{theorem}
+    \textbf{Lagrange乘数法}
+    \label{thm:LagrangeMultiplierMethod}
+
+    条件极值点应满足如下驻点方程：
+    \[\begin{cases}
+        f'_x(x,y) + \lambda\varphi'_x(x,y) = 0 \\
+        f'_y(x,y) + \lambda\varphi'_y(x,y) = 0 \\
+        \varphi(x,y) = 0
+    \end{cases}\]
+    而后再根据其它条件进一步判断是否为极值点.
+\end{theorem}
+
+\begin{figure}[H]
+    \centering
+    \vspace{-1.5em}
+    \includegraphics[width=\textwidth]{constrained-extremum/fig.pdf}
+    \caption{条件极值的几何含义}
+\end{figure}
+
+\begin{question}
+    试将正数$a$分成$n$个正数的和，使这$n$个正数的乘积最大.
+\end{question}
+
+\begin{solution}
+    设$a = \sum_{i=1}^{n}x_i$，则问题可表述为在约束条件$\sum_{i=1}^{n}x_i = a$的条件下，求取函数：
+    \[u = u(x_1,\cdots,x_n) = \prod_{i=1}^{n}x_i\]
+    的最大值.取辅助函数：
+    \[F(x_1,\cdots,x_n)\ = \prod_{i=1}^{n}x_i + \lambda\sum_{i=1}^{n}x_i\]
+    根据\cref{thm:LagrangeMultiplierMethod}\textbf{(Lagrange乘数法)}，有驻点方程组：
+    \[\begin{cases}
+        \displaystyle F'_{x_1} = \frac{1}{x_1}\prod_{i=1}^{n} + \lambda = 0 \\
+        \displaystyle F'_{x_2} = \frac{1}{x_2}\prod_{i=1}^{n} + \lambda = 0 \\
+        \cdots \\
+        \displaystyle F'_{x_n} = \frac{1}{x_n}\prod_{i=1}^{n} + \lambda = 0 \\
+        \displaystyle\sum_{i=1}^{n} - a = 0
+    \end{cases} \quad\Rightarrow\quad x_1 = x-2 = \cdots = x_n = \frac{a}{n}\]
+    显然$u(x_1,\cdots,x_n)$是连续的，且有一个上界$a^n$.对于满足约束条件的边界点$u$的取值为$0$：
+    \begin{gather*}
+        x_1 = a,\quad x_2,\cdots,x_n = 0 \quad\Rightarrow\quad u = 0 \\
+        x_1 = 0,\quad \sum_{i=2}^{n}x_i = a \quad\Rightarrow\quad u = 0
+    \end{gather*}
+    因此前面推得的驻点就是最大值点，最大值为$\left(\dfrac{a}{n}\right)^n$.
+\end{solution}
