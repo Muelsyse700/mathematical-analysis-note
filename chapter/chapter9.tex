@@ -1421,3 +1421,18 @@ $\begin{cases}
     \end{gather*}
     因此前面推得的驻点就是最大值点，最大值为$\left(\dfrac{a}{n}\right)^n$.
 \end{solution}
+
+
+\section{向量场的微商}
+\subsection{向量场}
+\begin{definition}
+    \overtext{向量场}{vector field}指的是空间中某个区域每一点对应一个向量.如果引入直角坐标系$[O;\vb{i},\vb{j},\vb{k}]$，一点对应的向量$\vb{v}$可表示为：
+    \[\vb{v}(x,y,z) = P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k},\quad(x,y,z)\in D \subset \mathbb{R}^3\]
+    $P,Q,R$称为向量场的\overtext{分量函数}{component functions}.当下列极限存在时，定义其为向量场的偏导数：
+    \[\pdv{\vb{v}}{x} = \lim_{\Delta x \to 0}\frac{\vb{v}(x+\Delta x,y,z) - \vb{v}(x,y,z)}{\Delta x}\]
+    若其有连续的偏导数，则称向量场$\vb{v}$为\overtext{光滑向量场}{smooth vector field}.
+\end{definition}
+
+\begin{definition}
+    \overtext{数量场}{scalar field}指的是空间中某个区域每一点对应一个数量.
+\end{definition}
