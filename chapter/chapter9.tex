@@ -1561,3 +1561,20 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
         它对应的是$\Omega$上的一个数量场$h$.
     \end{itemize}
 \end{definition}
+
+
+\subsection{微分形式的外积}
+将$\dd{x},\dd{y},\dd{z}$之间定义的外积运算进一步推广到微分形式上，规定微分形式之间的外积满足结合律，在同次微分形式之间满足分配律.
+
+不难证明有如下运算结果：
+\begin{enumerate}[circ]
+    \item 两个1-形式：
+    \[\omega^1_{\vb{v}_1}\wedge\omega^1_{\vb{v}_2} = \omega^2_{\vb{v}_1\times\vb{v}_2}\]
+    \item 一个1-形式和一个2-形式：
+    \[\omega^1_{\vb{v}}\wedge\omega^2_{\vb{u}} = \omega^3_{\vb{v\cdot u}}\]
+    \item 三个1-形式：
+    \[\omega^1_{\vb{v}_1}\wedge\omega^1_{\vb{v}_2}\wedge\omega^1_{\vb{v}_3} = \omega^3_{\vb{v}_1 \times \vb{v}_2 \cdot \vb{v}_3}\]
+    \item 0-形式和其它形式：
+    \[\omega^0_\varphi\wedge\omega^1_{\vb{v}} = \omega^1_{\varphi\vb{v}},\quad \omega^0_\varphi\wedge\omega^2_{\vb{u}} = \omega^2_{\varphi\vb{u}},\quad\omega^0_\varphi\wedge\omega^3_h = \omega^3_{\varphi h}\]
+\end{enumerate}
+对于三维空间，微分形式的外积只有以上四种情况.
