@@ -1510,7 +1510,7 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
 \[\overset{\text{坐标变化}\,\longmapsto\,\text{实际距离}}{\dd{q_i}\mapsto h_i\dd{q_i}} \quad\Rightarrow\quad \dd{l_i}=h_i\dd{q_i}\]
 其中$h_i$称为第$i$个坐标方向的\textbf{尺度因子}，$h_i$并不一定是常数，而可能随所在位置发生变化.
 
-若三个坐标方向在每一点都相互正交，则称这个坐标系为\overtext{正交曲线坐标系}{}.此时微小位移可以表示为
+若三个坐标方向在每一点都相互正交，则称这个坐标系为\overtext{正交曲线坐标系}{orthogonal curvilinear coordinates}.此时微小位移可以表示为
 
 \begin{align*}
     \dd{\vb r} &= \pdv{\vb{r}}{q_1}\dd{q_1} + \pdv{\vb{r}}{q_2}\dd{q_2} + \pdv{\vb{r}}{q_3}\dd{q_3} \\
@@ -1542,7 +1542,7 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
 
 注意到，可以构造三个不同空间的基：
 \[\{\dd{x},\dd{y},\dd{z}\},\quad \{\dd{x}\wedge\dd{y},\dd{y}\wedge\dd{z},\dd{z}\wedge\dd{x}\},\quad\{\dd{x}\wedge\dd{y}\wedge\dd{z}\}\]
-分别对应三组生成元.由它们生成的元素分别称为1次、2次、3次\overtext{微分形式}{}，或简称为\textbf{形式}.同时，约定由$\{x,y,z\}$生成的一般函数对应0次微分形式.
+分别对应三组生成元.由它们生成的元素分别称为1次、2次、3次\overtext{微分形式}{differential form}，或简称为\textbf{形式}.同时，约定由$\{x,y,z\}$生成的一般函数对应0次微分形式.
 
 \begin{definition}
     设$\Omega$是$\mathbb{R}^3$中的区域.
@@ -1554,7 +1554,7 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
         \[\omega^1_{\vb{v}} = A\dd{x} + B\dd{y} + C\dd{z}\]
         它对应了$\Omega$上的一个向量场$\vb{v} = A\vb{i} + B\vb{j} + C\vb{k}$.
         \item \textbf{2次微分形式}是$\dd{x}\wedge\dd{y},\dd{y}\wedge\dd{z},\dd{z}\wedge\dd{x}$的任意线性组合，记作：
-        \[\omega^2_{\vb{v}} = D\dd{x}\wedge\dd{y} + E\dd{y}\wedge\dd{z} + F\dd{z}\wedge\dd{x}\]
+        \[\omega^2_{\vb{v}} = D\dd{y}\wedge\dd{z} + E\dd{z}\wedge\dd{x} + F\dd{x}\wedge\dd{y}\]
         它对应了$\Omega$上的一个向量场$\vb{v} = D\vb{i} + E\vb{j} + F\vb{k}$.
         \item \textbf{3次微分形式}以$\Omega$上函数$h(x,y,z)$为系数，记作：
         \[\omega^3_h = h\dd{x}\wedge\dd{y}\wedge\dd{z}\]
@@ -1578,3 +1578,65 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
     \[\omega^0_\varphi\wedge\omega^1_{\vb{v}} = \omega^1_{\varphi\vb{v}},\quad \omega^0_\varphi\wedge\omega^2_{\vb{u}} = \omega^2_{\varphi\vb{u}},\quad\omega^0_\varphi\wedge\omega^3_h = \omega^3_{\varphi h}\]
 \end{enumerate}
 对于三维空间，微分形式的外积只有以上四种情况.
+
+
+\subsection{微分形式的外微分}
+显然，0-形式的微分是1-形式，那么1-形式及以上的微分结果是什么呢？
+\begin{definition}
+    假设以下函数和微分形式的系数均在$\Omega\subset\mathbb{R}^3$上具有连续的各阶偏导.称微分形式的微分为\overtext{外微分}{exterior derivative}，是一个从低次形式到高一次形式的映射：
+    \[\dd: p\text{次形式}\to p+1\text{次形式}\]
+\end{definition}
+在三维区域$\Omega\subset\mathbb{R}^3$上：
+\begin{enumerate}[circ]
+    \item 0-形式的外微分(数量场的梯度)：
+    \[\dd{\omega^0_\varphi} \coloneq \pdv{\varphi}{x}\dd{x} + \pdv{\varphi}{y}\dd{y} + \pdv{\varphi}{z}\dd{z} = \omega^1_{\grad\varphi} = \omega^1_{\nabla\varphi}\]
+    \item 1-形式的外微分(向量场的旋度)：
+    \begin{align*}
+        \dd{\omega^1_{\vb{v}}} &\coloneq \dd{(P\dd{x}+Q\dd{y}+R\dd{z})} = \dd{P}\wedge\dd{x} + \dd{Q}\wedge\dd{y} + \dd{R}\wedge\dd{z} \\
+        &= \left(\pdv{R}{y}-\pdv{Q}{z}\right)\dd{y}\wedge\dd{z} + \left(\pdv{P}{z}-\pdv{R}{x}\right)\dd{z}\wedge\dd{x} + \left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\wedge\dd{y} \\
+        &= \omega^2_{\rot\vb{v}} = \omega^2_{\nabla\times\vb{v}}
+    \end{align*}
+    \item 2-形式的外微分(向量场的散度)：
+    \begin{align*}
+        \dd{\omega^2_{\vb{v}}} &\coloneq \dd{(P\dd{y}\wedge\dd{z} + Q\dd{z}\wedge\dd{x} + R\dd{x}\wedge\dd{y})} \\
+        &= \dd{P}\wedge\dd{y}\wedge\dd{z} + \dd{Q}\wedge\dd{z}\wedge\dd{x} + \dd{R}\wedge\dd{x}\wedge\dd{y} \\
+        &= \left(\pdv{P}{x} + \pdv{Q}{y} + \pdv{R}{z}\right)\dd{x}\wedge\dd{y}\wedge\dd{z} \\
+        &= \omega^3_{\operatorname{div}\vb{v}} = \omega^3_{\nabla\cdot\vb{v}}
+    \end{align*}
+    \item 3-形式的外微分(恒为0)：
+    \[\dd{\omega^3_h} \equiv 0\]
+\end{enumerate}
+
+\begin{lemma}
+    \textbf{Poincaré引理}
+
+    设微分形式$\omega$的系数具有二阶连续偏导数，则有：
+    \[\dd^2\omega = \dd{(\dd{\omega})} = 0\]
+\end{lemma}
+
+\begin{proof}
+    对于2-形式和3-形式，其两次外微分为$0$是显然的.首先证明0-形式，由于梯度场无旋：
+    \[\dd(\dd{\omega^0_\varphi}) = \dd{\omega^1_{\nabla\varphi}} = \omega^2_{\nabla\times(\nabla\varphi)} \equiv 0\]
+    接下来证明1-形式，由于旋度场无散：
+    \[\dd{(\dd{\omega^1_{\vb{v}}})} = \dd{\omega^2_{\nabla\times\vb{v}}} = \omega^3_{\nabla\cdot(\nabla\times\vb{v})} \equiv 0\]
+    由此得证.
+\end{proof}
+
+\begin{definition}
+    对于给定的微分形式$\omega$，如果存在一个低一次的微分形式$\theta$使得$\omega$是$\theta$的外微分，即有$\dd{\theta} = \omega$，则称$\omega$是一个\overtext{恰当微分形式}{exact differential form}
+\end{definition}
+
+\begin{theorem}
+    \textbf{Poincaré引理之逆定理}
+
+    如果$\omega$满足$\dd{\omega} = 0$，且它的定义域满足一定条件，那么它是恰当的，即存在原形式.
+\end{theorem}
+
+
+\subsection{微分形式在高维空间的推广}
+在高维空间$\mathbb{R}^n$中，0-形式就是$n$元可微函数全体；1-形式就是：
+\[\omega^1 \coloneq \sum_{i=1}^{n}a_i(\vb{x})\dd{x_i}\]
+$p$-形式则为：
+\[\omega^p \coloneq \sum_{1\leqslant i_1 < \cdots < i_p \leqslant n} a_{i_1\cdots i_p}(\vb{x})\dd{x_{i_1}}\wedge\cdots\wedge\dd{x_{i_p}}\]
+$p$-形式的全体元素构成一个$\displaystyle\binom{n}{p}$维空间.外微分则定义为一个保持线性和数乘的映射：
+\[\dd:V^p\to V^{p+1},\quad p = 0,1,\cdots,n-1\]
