@@ -1436,3 +1436,91 @@ $\begin{cases}
 \begin{definition}
     \overtext{数量场}{scalar field}指的是空间中某个区域每一点对应一个数量.
 \end{definition}
+
+
+\subsection{梯度、散度与旋度}
+\begin{definition}
+    在直角坐标系下，称以下算符为\textbf{Hamilton算符}或\textbf{Nabla算符}：
+    \[\nabla \coloneq \vb{i}\pdv{x} + \vb{j}\pdv{y} + \vb{k}\pdv{z}\]
+\end{definition}
+
+函数的微分可以表示为：
+\[\dd{\varphi} = \pdv{\varphi}{x}\dd{x} + \pdv{\varphi}{y}\dd{y} + \pdv{\varphi}{z}\dd{z} = \nabla\varphi \cdot \dd{\vb{r}}\]
+$\nabla$算符具有微商和向量两种运算属性，它也可以像向量一样发生数乘、点乘、叉乘运算.
+
+\begin{definition}
+    在直角坐标系下设有向量场$\vb{v}(x,y,z)$和数量场$\varphi(x,y,z)$：
+    \begin{itemize}
+        \item \overtext{梯度}{gradient}\textbf{(数乘：数量场$\to$向量场)}
+        \[\grad\varphi \coloneq \nabla\varphi = \pdv{\varphi}{x}\vb{i} + \pdv{\varphi}{y}\vb{j} + \pdv{\varphi}{z}\vb{k}\]
+        \item \overtext{散度}{divergence}\textbf{(点乘：向量场$\to$数量场)}
+        \[\operatorname{div}\vb{v} \coloneq \nabla\cdot\vb{v} = \pdv{P}{x} + \pdv{Q}{y} + \pdv{R}{z}\]
+        \item \overtext{旋度}{curl}\textbf{(叉乘：向量场$\to$向量场)}
+        \[\rot\vb{v} \coloneq \nabla\times\vb{v} = \begin{vmatrix}
+            \vb{i} & \vb{j} & \vb{k} \\
+            \displaystyle\pdv{x} & \displaystyle\pdv{y} & \displaystyle\pdv{z} \\
+            P & Q & R
+        \end{vmatrix}\]
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    \textbf{Hamilton算符的运算规则}
+    \begin{gather*}
+        \underset{\text{类似分配律}}{\begin{cases}
+            \nabla(\varphi+\psi) = \nabla\varphi + \nabla\psi \\
+            \nabla\cdot(\vb{a}+\vb{b}) = \nabla\cdot\vb{a} + \nabla\cdot\vb{b} \\
+            \nabla\times(\vb{a}+\vb{b}) = \nabla\times\vb{a} + \nabla\times\vb{b} \\
+        \end{cases}}
+        \underset{\text{类似乘法的导数}}{\begin{cases}
+            \nabla(\varphi\psi) = \varphi\nabla\psi + \psi\nabla\varphi \\
+            \nabla\cdot(\varphi\vb{a}) = \nabla\varphi\cdot\vb{a} + \varphi\nabla\cdot\vb{a} \\
+            \nabla\times(\varphi\vb{a}) = \nabla\varphi\times\vb{a} + \varphi\nabla\times\vb{a} \\
+        \end{cases}}\\
+        \nabla\cdot(\vb{a}\times\vb{b}) = \nabla\times\vb{a}\cdot\vb{b} - \nabla\times\vb{b}\cdot\vb{a}
+    \end{gather*}
+\end{theorem}
+
+\begin{theorem}
+    \begin{gather*}
+        \text{\textbf{梯度场无旋：}}\rot\grad\varphi = \nabla\times\nabla\varphi = \bm{0} \\
+        \text{\textbf{旋度场无散：}} \operatorname{div}\rot\vb{a} = \nabla\cdot(\nabla\times\vb{a}) = 0
+    \end{gather*}
+\end{theorem}
+
+\begin{definition}
+    称以下算符为\textbf{Laplace算符}：
+    \[\Delta \coloneq \nabla\cdot\nabla = \pdv[2]{}{x} + \pdv[2]{}{y} + \pdv[2]{}{z}\]
+\end{definition}
+
+
+\subsection{Hamilton算符在柱面和球面坐标系中的表示}
+在以往的直角坐标系$[O;x,y,z]$中，在$x,y,z$三个方向坐标值分别发生微小变化$\dd{x},\dd{y},\dd{z}$，对应的实际变化距离为$\dd{x},\dd{y},\dd{z}$，即：
+\[\overset{\text{坐标变化}\,\longmapsto\,\text{实际距离}}{\dd{x}\mapsto\dd{x},\quad\dd{y}\mapsto \dd{y},\quad\dd{z}\mapsto\dd{z}}\]
+
+在柱面坐标系$[O;r,\theta,z]$中，在极角方向上移动，相当于在半径为$r$的圆上移动，三个坐标值发生微小变化对应的实际距离变化为：
+\[\overset{\text{坐标变化}\,\longmapsto\,\text{实际距离}}{\dd{r}\mapsto\dd{r},\quad\dd{\theta}\mapsto r\dd{\theta},\quad\dd{z}\mapsto\dd{z}}\]
+
+在球面坐标系$[O;r,\theta,\varphi]$中，极角方向上的移动与柱坐标原理一致，而在方位角方向上的移动则是在半径为$r \sin\theta$的圆上移动，实际距离变化为：
+\[\overset{\text{坐标变化}\,\longmapsto\,\text{实际距离}}{\dd{r}\mapsto\dd{r},\quad\dd{\theta}\mapsto r\dd{\theta},\quad\dd{\varphi}\mapsto r\sin\theta\dd{\varphi}}\]
+
+由上述三种坐标系可以发现，虽然坐标变量的含义不同，但始终可以研究一个共同的问题：某一坐标值发生微小变化时，对应的实际距离发生了多大的变化.
+
+对于任意一个坐标系$[O;q_1,q_2,q_3]$，若沿第$i$个坐标方向发生微小坐标变化$\dd{q_i}$，对应的实际距离变化为$\dd{l_i}$，则记：
+\[\overset{\text{坐标变化}\,\longmapsto\,\text{实际距离}}{\dd{q_i}\mapsto h_i\dd{q_i}} \quad\Rightarrow\quad \dd{l_i}=h_i\dd{q_i}\]
+其中$h_i$称为第$i$个坐标方向的\textbf{尺度因子}，$h_i$并不一定是常数，而可能随所在位置发生变化.
+
+若三个坐标方向在每一点都相互正交，则称这个坐标系为\overtext{正交曲线坐标系}{}.此时微小位移可以表示为
+
+\begin{align*}
+    \dd{\vb r} &= \pdv{\vb{r}}{q_1}\dd{q_1} + \pdv{\vb{r}}{q_2}\dd{q_2} + \pdv{\vb{r}}{q_3}\dd{q_3} \\
+    &= h_1\dd{q_1}\vb e_1+h_2\dd{q_2}\vb e_2+h_3\dd{q_3}\vb e_3
+\end{align*}
+
+其中$\vb e_i$为第$i$个坐标方向上的单位向量，有$\displaystyle\vb{e}_i = \pdv{\vb{r}}{q_i}\bigg/\left|\pdv{\vb{r}}{q_i}\right|,h_i = \left|\pdv{\vb{r}}{q_i}\right|$.
+
+\begin{definition}
+    在正交曲线坐标系中，Hamilton算符被定义为：
+    \[\nabla \coloneq  \sum_{i=1}^{3}\vb{e}_i\pdv{l_i} \xlongequal{l = hq} \sum_{i=1}^{3}\vb{e}_i \frac{1}{h_i} \pdv{q_i}\]
+\end{definition}
+相应的梯度、散度、旋度都可以由上述定义推出.
