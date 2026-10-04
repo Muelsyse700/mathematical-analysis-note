@@ -1524,3 +1524,40 @@ $\nabla$算符具有微商和向量两种运算属性，它也可以像向量一
     \[\nabla \coloneq  \sum_{i=1}^{3}\vb{e}_i\pdv{l_i} \xlongequal{l = hq} \sum_{i=1}^{3}\vb{e}_i \frac{1}{h_i} \pdv{q_i}\]
 \end{definition}
 相应的梯度、散度、旋度都可以由上述定义推出.
+
+
+\section{微分形式}
+假设有关于$\dd{x_1},\dd{x_2},\cdots,\dd{x_n}$任意的线性组合：
+\[\omega = A_1(\vb{x})\dd{x_1} + \cdots + A_n(\vb{x})\dd{x_n}\]
+关于上式的讨论不再局限于具体函数的微分.只有当每一项的系数恰好是某个函数的对应偏导数时，它才是某个函数的微分.
+
+
+\subsection{微分形式的空间}
+在$\dd{x},\dd{y},\dd{z}$之间定义外积运算「$\wedge$」，并满足如下规则：
+\begin{gather*}
+    \dd{x}\wedge\dd{x} = \dd{y}\wedge\dd{y} = \dd{z}\wedge\dd{z} = 0 \\
+    \dd{x}\wedge\dd{y} = -\dd{y}\wedge\dd{x},\quad \dd{y}\wedge\dd{z} = -\dd{z}\wedge\dd{y},\quad \dd{z}\wedge\dd{x} = -\dd{x}\wedge\dd{z}
+\end{gather*}
+其满足结合律并具有反称性.
+
+注意到，可以构造三个不同空间的基：
+\[\{\dd{x},\dd{y},\dd{z}\},\quad \{\dd{x}\wedge\dd{y},\dd{y}\wedge\dd{z},\dd{z}\wedge\dd{x}\},\quad\{\dd{x}\wedge\dd{y}\wedge\dd{z}\}\]
+分别对应三组生成元.由它们生成的元素分别称为1次、2次、3次\overtext{微分形式}{}，或简称为\textbf{形式}.同时，约定由$\{x,y,z\}$生成的一般函数对应0次微分形式.
+
+\begin{definition}
+    设$\Omega$是$\mathbb{R}^3$中的区域.
+    \begin{itemize}
+        \item \textbf{0次微分形式}是$\Omega$上的可微函数$\varphi$，记作：
+        \[\omega^0_\varphi = \varphi\]
+        它对应的是$\Omega$上的一个数量场$\varphi$.
+        \item \textbf{1次微分形式}是$\dd{x},\dd{y},\dd{z}$的任意线性组合，记作：
+        \[\omega^1_{\vb{v}} = A\dd{x} + B\dd{y} + C\dd{z}\]
+        它对应了$\Omega$上的一个向量场$\vb{v} = A\vb{i} + B\vb{j} + C\vb{k}$.
+        \item \textbf{2次微分形式}是$\dd{x}\wedge\dd{y},\dd{y}\wedge\dd{z},\dd{z}\wedge\dd{x}$的任意线性组合，记作：
+        \[\omega^2_{\vb{v}} = D\dd{x}\wedge\dd{y} + E\dd{y}\wedge\dd{z} + F\dd{z}\wedge\dd{x}\]
+        它对应了$\Omega$上的一个向量场$\vb{v} = D\vb{i} + E\vb{j} + F\vb{k}$.
+        \item \textbf{3次微分形式}以$\Omega$上函数$h(x,y,z)$为系数，记作：
+        \[\omega^3_h = h\dd{x}\wedge\dd{y}\wedge\dd{z}\]
+        它对应的是$\Omega$上的一个数量场$h$.
+    \end{itemize}
+\end{definition}
