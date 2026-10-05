@@ -93,3 +93,73 @@
         \[\iint_D f = f(P)\sigma(D)\]
     \end{enumerate}
 \end{theorem}
+
+
+\subsection{二重积分的计算}
+对于矩形区域$D = [a,b]\times[c,d]$，设有$f(x,y)$在$D$上可积，由两个分割得到一个矩形分割：
+\begin{gather*}
+    \begin{cases}
+        T_x: a = x_0 < x_1 < \cdots < x_n = b \\
+        T_y: c = y_0 < y_1 < \cdots < y_m = d
+    \end{cases}\\
+    \Rightarrow\quad T:D_{ij} = [x_{i-1},x_i]\times[y_{j-1},y_j],\quad i = 1,\cdots,n;\,j = 1,\cdots,m
+\end{gather*}
+特别有$\sigma(D_{ij})=(x_i-x_{i-1})(y_j-y_{j-1}) = \Delta x_i \Delta y_i$.
+
+在$D_{ij}$中任取一点$M_{ij}(\xi_i,\eta_j)$，则函数$f(x,y)$在$D$中的Riemann和为：
+\[S(T,M) = \sum_{i,j}f(M_{ij})\Delta x_i \Delta y_j\]
+由于$f$在$D$上可积，于是$\forall\varepsilon > 0$，$\exists\delta > 0$，在$\left\|T\right\|<\delta$时，对$\forall M_{ij}\in D_{ij}$有：
+\begin{gather*}
+    A = \lim_{\left\|T\right\|\to0}\sum_{i,j}^{n,m}f(M_{ij})\Delta x_i \Delta y_j \quad\Leftrightarrow\quad A - \frac{\varepsilon}{2} < \sum_{i,j}^{n,m}f(M_{ij})\Delta x_i \Delta y_j < A + \frac{\varepsilon}{2} \\
+    \Rightarrow\quad A-\frac{\varepsilon}{2} < \sum_{j=1}^{m}\underbrace{\left[\sum_{i=1}^{n}f(\xi_i,\eta_j)\Delta x_i\right]}_\text{Riemann和}\Delta y_j < A + \frac{\varepsilon}{2}
+\end{gather*}
+若对于任何固定的$y \in [c,d]$，$f(x,y)$作为关于$x$的函数在$[a,b]$上可积，则有：
+\[\lim_{\left\|T_x\right\|\to0}\sum_{i=1}^{n}f(\xi_i,\eta_j)\Delta x_i = \int_{a}^{b}f(x,\eta_j)\dd{x} = \varphi(\eta_j)\]
+此外，注意到：
+\begin{gather*}
+    \left\|T\right\| = \max_{\substack{1\leqslant i \leqslant n \\ 1\leqslant j \leqslant m}}\operatorname{diam} D_{ij} = \sqrt{(\Delta x_i)^2 + (\Delta y_j)^2} < \Delta x_i + \Delta y_j\\
+    \Rightarrow\quad \max\left\{\left\|T_x\right\|,\left\|T_y\right\|\right\} < \left\|T\right\| < \max_{1\leqslant i \leqslant n}\Delta x_i + \max_{1\leqslant j \leqslant m}\Delta y_j = \left\|T_x\right\| + \left\|T_y\right\|
+\end{gather*}
+因而在$\left\|T_x\right\|\to0$时，由于$\left\|T\right\| < \delta$，故而只要$\left\|T_y\right\|<\delta$就有：
+\[A - \varepsilon < A - \frac{\varepsilon}{2} \leqslant \sum_{j=1}^{m}\varphi(\eta_j)\Delta y_j \leqslant A + \frac{\varepsilon}{2} < A + \varepsilon\]
+上式表明$\varphi(y)$在$[c,d]$上可积，且有：
+\[\int_{c}^{d}\varphi(y)\dd{y} = \int_{c}^{d}\left[\int_{a}^{b} f(x,y) \dd{x}\right]\dd{y} = \iint_D f(x,y)\dd{x}\dd{y}\]
+由此得到以下定理：
+\begin{theorem}
+    设$f(x,y)$在$D = [a,b]\times[c,d]$上可积.
+    \begin{enumerate}[circ]
+        \item 若对$\forall y \in [c,d]$，$f(x,y)$作为$x$的函数在$[a,b]$上可积，则函数$\varphi(y) = \int_{a}^{b}f(x,y)\dd{x}$关于$y$在$[c,d]$上可积，并且有：
+        \[\int_{c}^{d}\varphi(y)\dd{y} = \int_{c}^{d}\dd{y}\int_{a}^{b}f(x,y)\dd{x} = \iint_D f(x,y)\dd{x}\dd{y}\]
+        \item 若对$\forall x \in [a,b]$，$f(x,y)$作为$y$的函数在$[c,d]$上可积，则函数$\varphi(x) = \int_{c}^{d}f(x,y)\dd{y}$关于$x$在$[a,b]$上可积，并且有：
+        \[\int_{a}^{b}\varphi(x)\dd{x} = \int_{a}^{b}\dd{x}\int_{c}^{d}f(x,y)\dd{y} = \iint_D f(x,y)\dd{x}\dd{y}\]
+        \item 若$f(x,y)$同时满足\circnum{1}和\circnum{2}，则积分的次序可交换：
+        \[\iint_D f(x,y)\dd{x}\dd{y} = \int_{c}^{d}\dd{y}\int_{a}^{b}f(x,y)\dd{x} = \int_{a}^{b}\dd{x}\int_{c}^{d}f(x,y)\dd{y}\]
+    \end{enumerate}
+\end{theorem}
+上述将二重积分转化为先对一个变量做单变量积分，再对另一个变量做单变量积分的过程称为\textbf{累次积分}.
+
+前述讨论都是基于矩形积分区域进行的讨论.接下来讨论其它形状的区域：
+\begin{theorem}
+    设$f(x,y)$在有界闭区域$D$上可积.
+    \begin{enumerate}[circ]
+        \item 设$D = \{(x,y)\,|\,a \leqslant x \leqslant b,y_1(x)\leqslant y \leqslant y_2(x)\}$，其中$y_1(x),y_2(x)$在$[a,b]$上连续.若对$\forall x \in[a,b]$，$f(x,y)$在$[y_1(x),y_2(x)]$上关于$y$可积，则有：
+        \[\iint_D f(x,y)\dd{x}\dd{y} = \int_{a}^{b}\dd{x}\int_{y_1(x)}^{y_2(x)}f(x,y)\dd{y}\]
+        \item 设$D = \{(x,y)\,|\,x_1(y) \leqslant x \leqslant x_2(y),c \leqslant y \leqslant d\}$，其中$x_1(y),x_2(y)$在$[c,d]$上连续.若对$\forall y \in[c,d]$，$f(x,y)$在$[x_1(y),x_2(y)]$上关于$x$可积，则有：
+        \[\iint_D f(x,y)\dd{x}\dd{y} = \int_{c}^{d}\dd{y}\int_{x_1(y)}^{x_2(y)}f(x,y)\dd{x}\]
+        \item 若$f(x,y)$连续且积分区域$D$可以分别表述为\circnum{1}和\circnum{2}中的两种形式，则累次积分顺序可交换：
+        \[\iint_D f(x,y)\dd{x}\dd{y} = \int_{c}^{d}\dd{y}\int_{x_1(y)}^{x_2(y)}f(x,y)\dd{x} = \int_{a}^{b}\dd{x}\int_{y_1(x)}^{y_2(x)}f(x,y)\dd{y}\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \circnum{1}的证明：设$D \subset [a,b]\times[c,d]$，对于$D$上的函数$f(x,y)$，设有如下函数$f^*$在$[a,b]\times[c,d]$上：
+    \[f^*(x,y) = \begin{cases}
+        f(x,y),\quad (x,y)\in D \\
+        0,\quad (x,y)\notin D
+    \end{cases}\]
+    记$D^* = [a,b]\times[c,d] \setminus D$，有：
+    \[\iint_{[a,b]\times[c,d]}f^*(x,y)\dd{x}\dd{y} = \iint_D\!\! f^*(x,y)\dd{x}\dd{y} + \iint_{D^*}\!\!f^*(x,y)\dd{x}\dd{y} = \iint_D\!\! f(x,y)\dd{x}\dd{y}\]
+    将积分区域变换为矩形后，模仿矩形区域积分的有关证明即可得证.
+
+    关于\circnum{2}和\circnum{3}的证明同理，且如果积分区域可以通过分解变为若干块满足\circnum{1}或\circnum{2}要求的子区域，各子区域分块积分之和即为整个区域的积分.
+\end{proof}
