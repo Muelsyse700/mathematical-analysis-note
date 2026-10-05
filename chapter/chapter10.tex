@@ -1,0 +1,37 @@
+\chapter{多变量函数的重积分}
+\section{二重积分}
+\subsection{平面区域的面积}
+记平面点集$D$的面积为$\sigma(D) \geqslant 0$，并满足：
+\begin{enumerate}[property]
+    \item 约定面积的单位为边长为1的正方形面积，边长为$l$的正方形面积为$l^2$.\\
+    \textit{这规定了面积数值的尺度，使得边长为$l$的正方形面积是$l^2$而不是$100l^2$.}
+    \item 如果$D$由无公共内点的有限个集合组成，则其满足可加性$\sigma(D) = \sum\sigma(D_i)$.
+    \textit{这确保了此后进行分割操作的合理性.}
+\end{enumerate}
+设$D$是一个有界集合，则必然存在一个正方形$[a,b]\times[a,b]$能够将其「框住」，即$D\subset[a,b]\times[a,b]$.对正方形做分割：
+\[T:a = x_0 < x_1 < \cdots < x_n = b\]
+由此得到$n^2$个小正方形.记完全包含于$D$内的小正方形面积之和为$\sigma_T^-(D)$，所有与$D$有公共点的小正方形面积为$\sigma_T^+(D)$.
+
+随着分割的加细，$\sigma_T^-$单调递增且有上界$(b-a)^2$，$\sigma_T^+$单调递减且有下界$0$.根据\cref{thm:MonotoneBounded}\textbf{(单调有界原理)}，当$\left\|T\right\|\to0$时，$\sigma_T^-(D)$和$\sigma_T^+(D)$必有极限.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{region-partition/fig.pdf}
+    \caption{二维区域的分割}
+\end{figure}
+
+\begin{definition}
+    设$D$是有界的平面点集.令$D\subset[a,b]\times[a,b]$，如果对于任意分割$T:a = x_0 < x_1 < \cdots < x_n = b$有下列极限相等：
+    \[\lim_{\left\|T\right\|\to0}\sigma_T^+(D) = \lim_{\left\|T\right\|\to0}\sigma_T^-(D)\]
+    则称$D$是\textbf{Jordan可测的}.上述极限的值称为$D$的\textbf{测度}，当极限值为$0$是，称$D$为\textbf{零测集}.
+\end{definition}
+
+\begin{theorem}
+    $D$是Jordan可测的，当且仅当其边界$\partial D$的测度为$0$.
+\end{theorem}
+
+\begin{proof}
+    易证$\partial D$是零测集时，$D$可测：
+    \[0 \leqslant \sigma_T^+(D) - \sigma_T^-(D) \leqslant \sigma_T^+(\partial D)\]
+    反向的证明暂略.
+\end{proof}
