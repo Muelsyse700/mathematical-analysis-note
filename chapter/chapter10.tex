@@ -163,3 +163,27 @@
 
     关于\circnum{2}和\circnum{3}的证明同理，且如果积分区域可以通过分解变为若干块满足\circnum{1}或\circnum{2}要求的子区域，各子区域分块积分之和即为整个区域的积分.
 \end{proof}
+
+\begin{question}
+    计算：$\displaystyle\int_{1}^{2}y\dd{y}\int_{y}^{2}\frac{\sin x}{x^2-1}\dd{x}$.
+\end{question}
+
+\begin{solution}
+    由于原式的积分顺序需要先求$\dfrac{\sin x}{x^2-1}$的原函数，十分复杂，考虑先将积分区域表示出来，改换积分顺序.
+    \begin{align*}
+        \text{原式} &= \iint_{\,\substack{1\leqslant y \leqslant 2 \\ y\leqslant x \leqslant 2}}\frac{y \sin x}{x^2-1}\dd{x}\dd{y} = \int_{1}^{2}\frac{\sin x}{x^2-1}\dd{x}\int_{1}^{x}y\dd{y} \\
+        &= \frac{1}{2}\int_{1}^{2}\frac{\sin x}{x^2-1}(x^2-1)\dd{x} = \frac{1}{2}(\cos 1 - \cos 2)
+    \end{align*}
+\end{solution}
+
+\begin{question}
+    求由$x^2 + y^2 \leqslant a^2$和$x^2 + z^2 \leqslant a^2$相交部分的立体的体积$V$.
+\end{question}
+
+\begin{solution}
+    相交所得到的图形在在第一卦限表现为底部为四分之一圆$D:x^2 + y^2 \leqslant a^2,x\in[0,a], y\in[0,a]$，顶部是圆柱侧面的一部分$z = \sqrt{a^2 - x^2},x\in[0,a]$.
+    \begin{align*}
+        \frac{1}{8}V &= \iint_D \sqrt{a^2 - x^2}\dd{x}\dd{y} = \int_{0}^{a}\sqrt{a^2-x^2}\dd{x}\int_{0}^{\sqrt{a^2-x^2}}\dd{y} \\
+        &= \int_{0}^{a}(a^2-x^2)\dd{x} = \frac{2}{3}a^3
+    \end{align*}
+\end{solution}
