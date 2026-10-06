@@ -269,3 +269,24 @@
     由此求得正态分布的概率积分：
     \[\int_{0}^{+\infty}\ee^{-x^2}\dd{x} = \frac{\sqrt{\pi}}{2}\]
 \end{extension}
+
+\begin{question}
+    求$\displaystyle I = \iint_D\frac{\dd{x}\dd{y}}{xy(\ln^2 x + \ln^2 y)}$，其中$D$是在第一象限中由$x^2+y^2 = 1$和$x + y = 1$围成的区域.
+\end{question}
+
+\begin{solution}
+    首先换元$x\equiv\ee^{r\cos\theta},y\equiv\ee^{r\sin\theta}$，计算其Jacobi行列式：
+    \[\left|\pdv{(x,y)}{(r,\theta)}\right| = r\ee^{r\cos\theta + r\sin\theta}\]
+    于是原式变为：
+    \[I = \iint_{D'}\frac{1}{\ee^{r\cos\theta + r\sin\theta} r^2}r\ee^{r\cos\theta + r\sin\theta}\dd{r}\dd{\theta} = \iint_{D'}\frac{1}{r}\dd{r}\dd{\theta}\]
+    接下来考察积分区域的变化.其中直线$x+y-1=0$变为一条隐式曲线$\ee^{r\cos\theta} + \ee^{r\sin\theta} - 1 = 0$.由于：
+    \[x,y\in[0,1] \quad\Rightarrow\quad \cos\theta\leqslant0,\quad \sin\theta\leqslant 0 \quad\Rightarrow\quad \theta\in\left[\pi,\frac{3}{2}\pi\right]\]
+    同时总是有$\pdv{r}\left(\ee^{r\cos\theta} + \ee^{r\sin\theta} - 1\right) \neq 0$，根据隐函数存在定理有$r = \varphi(\theta)$.
+
+    积分区域的另一个边界$x^2+y^2-1=0$也被映射为一条隐式曲线$\ee^{2r\cos\theta} + \ee^{2r\sin\theta} - 1 = 0$，与直线同理，也推出$\theta$具有与直线相同的定义域，并且存在隐函数$r = \psi(\theta)$.
+
+    即新的积分区域$D'$是$O'r\theta$平面上由两条平行于$r$轴的直线$\theta = \pi,\theta=\frac{3}{2}\pi$和两条隐式曲线$\varphi(\theta),\psi(\theta)$围成的区域.
+
+    特别地，对于形如$\ee^{R\cos\theta}+\ee^{R\sin\theta}-1=0$的方程，其隐函数此前定义为$R = \varphi(\theta)$.对第一条曲线$R=r$，对第二条曲线，$R = 2r$，因而有$2r = \varphi(\theta) = 2\psi(\theta)$.注意到有$\psi(\theta) < \varphi(\theta)$，于是积分进一步写为：
+    \[I = \int_{\pi}^{\frac{3}{2}\pi}\dd{\theta}\int_{\psi(\theta)}^{\varphi(\theta)}\frac{1}{r}\dd{r} = \ln r\Big|_{\psi(\theta)}^{2\psi(\theta)}\cdot\pi = \frac{\pi}{2}\ln 2\]
+\end{solution}
