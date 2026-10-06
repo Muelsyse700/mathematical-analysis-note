@@ -187,3 +187,85 @@
         &= \int_{0}^{a}(a^2-x^2)\dd{x} = \frac{2}{3}a^3
     \end{align*}
 \end{solution}
+
+
+\section{二重积分的换元}
+二重积分的换元法，实际上是在一个新的被积区域上作矩形分割，将其映射到原积分区域的非矩形分割上.
+\subsection{坐标曲线和面积元素}
+设$D$上的$(x,y)$可换元为$(u,v)$，即设有：
+\[(u,v)\mapsto(x,y):x = x(u,v),\quad y=y(u,v),\quad (u,v)\in D'\]
+通过固定$u$或$v$，可以给出$D'$中的矩形分割，对应$D$中由曲线族分割的网格.则$D'$中的一个小矩形$[u,u+\Delta u]\times[v,v+\Delta v]$对应$D$中的一个小曲边四边形：
+\begin{align*}
+    (u,v)&\mapsto M_1(x_1,y_1) &(u+\Delta u,v)\mapsto M_2(x_2,y_2)\\
+    (u,v+\Delta v)&\mapsto M_3(x_3,y_3) &(u+\Delta u,v+\Delta v)\mapsto M_4(x_4,y_4)
+\end{align*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.28]{double-integral-substitution/fig.pdf}
+    \caption{二重积分换元的映射关系}
+\end{figure}
+
+当分割变细时，曲边四边形的面积可以表示为：
+\[\Delta\sigma \approx \left|\va{M_1M_2}\times\va{M_1M_4}\right| = |(x_2-x_1)(y_4-y_1) - (x_4-x_1)(y_2-y_1)|\]
+假设$x(u,v),y(u,v)$可微，则有：
+\begin{align*}
+    x_2-x_1 &= \pdv{x}{u}\Delta u + o(\Delta u) &x_4-x_1 = \pdv{x}{v}\Delta v + o(\Delta v) \\
+    y_2-y_1 &= \pdv{y}{u}\Delta u + o(\Delta u) &y_4-y_1 = \pdv{y}{v}\Delta v + o(\Delta v)
+\end{align*}
+略去高阶无穷小量，得到小曲边四边形面积$\Delta\sigma$与小矩形面积$\Delta u \Delta v$之间的关系：
+\[\Delta\sigma \approx\left|\pdv{x}{u}\pdv{y}{v} - \pdv{y}{u}\pdv{x}{v}\right|\Delta u \Delta v = \left|\pdv{(x,y)}{(u,v)}\right|\Delta u \Delta v\]
+上式中的Jacobi矩阵描述了坐标变换导致的面积变化率，显然应当有$\displaystyle\pdv{(x,y)}{(u,v)}\neq 0$.
+
+
+\subsection{二重积分的换元}
+设$f(x,y)\in C(D)$，对区域$D'$作矩形分割.由于有小区域$D'_{ij}$到$D_{ij}$的映射：
+\[\sigma(D_{ij}) \approx \left|\pdv{(x,y)}{(u,v)}\right|_{(u_i,v_j)} \Delta u_i \Delta v_j\]
+由此有Riemann和：
+\begin{align*}
+    \iint_D f(x,y)\dd{x}\dd{y} &= \sum_{i,j}f(\xi_{ij},\eta_{ij})\sigma(D_{ij}) \\
+    &= \sum_{i,j}f(x(u_i,v_j),y(u_i,v_j))\left|\pdv{(x,y)}{(u,v)}\right|_{(u_i,v_j)}\Delta u_i \Delta v_j
+\end{align*}
+进而推出：
+\begin{theorem}
+    \textbf{二重积分的换元法}
+
+    设$D$是$Oxy$平面中的可测有界闭区域，$f(x,y)\in C(D)$，当变换$(u,v)\mapsto(x,y)$是从$O'uv$平面上可测的有界区域$D'$到$Oxy$平面上$D$的有连续偏导数的1-1映射并满足$\displaystyle\pdv{(x,y)}{(u,v)}\neq 0$，则有：
+    \[\iint_D f(x,y)\dd{x}\dd{y} = \iint_{D'}f(x(u,v),y(u,v))\left|\pdv{(x,y)}{(u,v)}\right|\dd{u}\dd{v}\]
+    \textit{其中的Jacobi行列式可视为微元面积的缩放因子.特别对于直角坐标到极坐标的变换，这个因子为$r$.}
+\end{theorem}
+
+关于二重积分换元法的严格证明，留待后续进行.
+
+\begin{question}
+    求椭球$\displaystyle\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} \leqslant 1$的体积$V$.
+\end{question}
+
+\begin{solution}
+    椭球上半部分的函数为：
+    \[z = c\sqrt{1-\frac{x^2}{a^2}-\frac{y^2}{b^2}},\quad (x,y)\in D = \left\{(x,y)\,\bigg|\,\frac{x^2}{a^2}+\frac{y^2}{b^2}\leqslant 1\right\}\]
+    于是有：
+    \[V = 2c \iint_D\sqrt{1-\frac{x^2}{a^2}-\frac{y^2}{b^2}}\dd{x}\dd{y}\]
+    (椭圆$\to$圆)令$x \equiv as,y \equiv bt$，积分区域变为$D' = \{(s,t)\,|\,s^2+t^2\leqslant 1\}$，于是有：
+    \[V = 2abc \iint_{D'}\sqrt{1-s^2-t^2}\dd{s}\dd{t}\]
+    (圆$\to$矩形)令$s \equiv r\cos\theta,t \equiv r\sin\theta$，积分区域变为$D'' = \{(r,\theta)\,|\,r\in[0,1],\theta\in[0,2\pi]\}$，有：
+    \[V = 2abc\iint_{D''}\sqrt{1-r^2}r\dd{r}\dd{\theta} = abc\int_{0}^{2\pi}\dd{\theta}\int_{0}^{1}\sqrt{1-r^2}\dd{r^2} = \frac{4}{3}\pi abc\]
+\end{solution}
+
+\begin{extension}{概率积分}
+    反常积分$\displaystyle\int_{-\infty}^{+\infty}\ee^{-x^2}\dd{x}$没有原函数，难以求解.但是通过巧妙的构造，可以得出其结果.
+    
+    考虑求$\displaystyle\iint_{x^2+y^2\leqslant R^2}\ee^{-x^2-y^2}\dd{x}\dd{y}$：
+    \[\iint_{x^2+y^2\leqslant R^2}\ee^{-x^2-y^2}\dd{x}\dd{y} = \int_{0}^{2\pi}\dd{\theta}\int_{0}^{R}\ee^{-r^2}r\dd{r} = \pi\left(1-\ee^{-R^2}\right)\]
+    注意到：
+    \[\left(\int_{-R}^{R}\ee^{-x^2}\dd{x}\right) = \int_{-R}^{R}\ee^{-x^2}\dd{x}\int_{-R}^{R}\ee^{-y^2}\dd{y} = \iint_{\,\substack{-R\leqslant x \leqslant R \\ -R\leqslant y \leqslant R}}\ee^{-x^2-y^2}\dd{x}\dd{y}\]
+    显然上述积分区域是一个边长为$2R$的正方形，它有一个半径为$R$的内切圆和一个半径为$\sqrt{2}R$的外切圆.由于被积函数$\ee^{-x^2-y^2}$恒大于$0$，因而有如下不等式：
+    \begin{gather*}
+        \iint_{x^2+y^2\leqslant R^2}\ee^{-x^2-y^2}\dd{x}\dd{y} \leqslant \left(\int_{-R}^{R}\ee^{-x^2}\dd{x}\right)^2 \leqslant \iint_{x^2+y^2\leqslant 2R^2}\ee^{-x^2-y^2}\dd{x}\dd{y} \\
+        \pi\left(1-\ee^{-R^2}\right) \leqslant \left(\int_{-R}^{R}\ee^{-x^2}\dd{x}\right)^2 \leqslant \pi\left(1-\ee^{-2R^2}\right)
+    \end{gather*}
+    若使$R \to \infty$，则根据三明治定理有：
+    \[\lim_{R \to 0}\int_{-R}^{R}\ee^{-x^2}\dd{x} = \int_{-\infty}^{+\infty}\ee^{-x^2}\dd{x} = \sqrt{\pi}\]
+    由此求得正态分布的概率积分：
+    \[\int_{0}^{+\infty}\ee^{-x^2}\dd{x} = \frac{\sqrt{\pi}}{2}\]
+\end{extension}
