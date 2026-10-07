@@ -363,3 +363,38 @@ $S(T)$中剩余的两个求和号也基于同样的方法转换为积分，最�
     \end{gather*}
     最终得到$\displaystyle I = \frac{\pi^2}{32}$.
 \end{solution}
+
+\begin{question}
+    设$f(x,y)$连续，证明：
+    \[\left(\int_{a}^{b}\dd{x}\left(\int_{c}^{d}f(x,y)\dd{y}\right)^2\right)^{\frac{1}{2}} \leqslant \int_{c}^{d}\dd{y}\left(\int_{a}^{b}f^2(x,y)\dd{x}\right)^{\frac{1}{2}}\]
+\end{question}
+
+\begin{proof}
+    \begin{align*}
+        (\text{左边})^2 &= \int_{a}^{b}\dd{x}\left(\int_{c}^{d}f(x,y)\dd{y}\right)\left(\int_{c}^{d}f(x,z)\dd{z}\right) \\
+        &= \iiint_V f(x,y) f(x,z) \dd{x}\dd{y}\dd{z},\quad V = \left\{(x,y,z)\,|\, x \in [a,b],(y,z)\in[c,d]^2\right\} \\
+        &= \int_{c}^{d}\dd{y}\int_{c}^{d}\dd{z}\int_{a}^{b}f(x,y)f(x,z)\dd{x}
+    \end{align*}
+    根据\cref{thm:CauchySchwarzInequality}\textbf{(Cauchy-Schwarz不等式)}，上式满足：
+    \begin{gather*}
+        \int_{c}^{d}\!\!\!\dd{y}\int_{c}^{d}\!\!\!\dd{z}\int_{a}^{b}\!\!\!f(x,y)f(x,z)\dd{x} \leqslant \int_{c}^{d}\!\!\!\dd{y}\int_{c}^{d}\!\!\!\dd{z}\left(\int_{a}^{b}\!\!\!f^2(x,y)\dd{y}\right)^{\frac{1}{2}}\left(\int_{a}^{b}\!\!\!f^2(x,z)\dd{z}\right)^{\frac{1}{2}} \\
+        (\text{左边})^2 \leqslant \int_{c}^{d}\!\!\!\dd{y}\left(\int_{a}^{b}\!\!\!f^2(x,y)\dd{y}\right)^{\frac{1}{2}} \cdot \int_{c}^{d}\!\!\!\dd{z}\left(\int_{a}^{b}\!\!\!f^2(x,z)\dd{z}\right)^{\frac{1}{2}} = (\text{右边})^2
+    \end{gather*}
+    由此得证.
+\end{proof}
+
+
+\section{\texorpdfstring{$n$重积分}{n重积分}}
+\subsection{\texorpdfstring{$n$重累次积分及其换元法}{n重累次积分及其换元法}}
+对于在$n$维方体$I = I_1 \times \cdots \times I_n$上的连续函数$f(x_1,\cdots,x_n)$的积分，其可以化为累次积分：
+\[\int\cdots\int_I f(x_1,\cdots,x_n)\dd{x_1}\cdots\dd{x_n} = \int_{a_1}^{b_1}\dd{x_1}\cdots\int_{a_n}^{b_n}f(x_1,\cdots,x_n)\dd{x_n}\]
+对于$n$维换元，应满足函数的定义域$V=\{\vb{x}=(x_1,\cdots,x_n)\in\mathbb{R}^n\}$在关于$(x_1,\cdots,x_{n-1})$所在的$n-1$维子空间$\mathbb{R}^{n-1}$中的投影是有界闭区域$D \subset \mathbb{R}^{n-1}$，并且对$\forall\vb{x}$的第$n$个分量$x_n$满足：
+\[\varphi_1(x_1,\cdots,x_{n-1}) \leqslant x_n \leqslant \varphi_2(x_1,\cdots,x_{n-1})\]
+则换元公式为：
+\begin{theorem}
+    \textbf{$n$重积分的换元公式}
+    \begin{align*}
+        &\int\cdots\int_V f(x_1,\cdots,x_n)\dd{x_1}\cdots\dd{x_n} \\
+        =& \int\cdots\int_{V'}f(x_1(u_1,\cdots,u_n),\cdots,x_n(u_1,\cdots,u_n))\left|\pdv{(x_1,\cdots,x_n)}{(u_1,\cdots,u_n)}\right|\dd{u_1}\cdots\dd{u_n}
+    \end{align*}
+\end{theorem}
