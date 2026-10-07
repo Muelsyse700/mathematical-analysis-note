@@ -235,6 +235,14 @@
     \textit{其中的Jacobi行列式可视为微元面积的缩放因子.特别对于直角坐标到极坐标的变换，这个因子为$r$.}
 \end{theorem}
 
+\begin{mistake}
+    在以往的一元积分的换元法中，往往认为换元过程可以通过将换元表达式放入$\dd$中进行求导得到，例如将$x$换元为$x^2$有$2x\dd{x} = \dd{(x^2)}$.
+
+    但是这个过程并不完全适用于重积分，因为一元积分所谓「求导」的过程实际上是乘上一个一阶的Jacobi行列式，恰好对应求一阶导.但对于二重或更高重的积分，求两个一阶导并不等价于相应阶数的Jacobi行列式，所以不能用一元积分的方法理解.
+
+    有时候高阶的Jacobi行列式会退化为普通的一阶求导，比如在累次积分的过程中做单变量换元，那么仍可以用一元积分的方法.
+\end{mistake}
+
 关于二重积分换元法的严格证明，留待后续进行.
 
 \begin{question}
@@ -289,4 +297,69 @@
 
     特别地，对于形如$\ee^{R\cos\theta}+\ee^{R\sin\theta}-1=0$的方程，其隐函数此前定义为$R = \varphi(\theta)$.对第一条曲线$R=r$，对第二条曲线，$R = 2r$，因而有$2r = \varphi(\theta) = 2\psi(\theta)$.注意到有$\psi(\theta) < \varphi(\theta)$，于是积分进一步写为：
     \[I = \int_{\pi}^{\frac{3}{2}\pi}\dd{\theta}\int_{\psi(\theta)}^{\varphi(\theta)}\frac{1}{r}\dd{r} = \ln r\Big|_{\psi(\theta)}^{2\psi(\theta)}\cdot\pi = \frac{\pi}{2}\ln 2\]
+\end{solution}
+
+
+\section{三重积分}
+三重积分与二重积分无本质区别，构造Riemann和的方法也一致.性质如\textbf{可积必有界}、\textbf{连续必可积}等也与后者保持一致.
+
+
+\subsection{三重积分的累次积分}
+设$f(x,y,z)$在$V = I_1\times I_2 \times I_3 = [a_1,b_1]\times[a_2,b_2]\times[a_3,b_3]$上连续，采用如下分割：
+\begin{gather*}
+    T_x:a_1 = x_0 < x_1 < \cdots < x_n = b_1 \\
+    T_y:a_2 = y_0 < y_1 < \cdots < y_m = b_2 \\
+    T_z:a_3 = z_0 < z_1 < \cdots < z_k = b_3
+\end{gather*}
+由此构造Riemann和：
+\[S(T) = \sum_{i=1}^{n}\sum_{j=1}^{m}\sum_{l=1}^{k}f(\xi_i,\eta_j,\zeta_l)\Delta x_i \Delta y_j \Delta z_l 
+= \sum_{i=1}^{n}\sum_{j=1}^{m}\left[\sum_{l=1}^{k}f(\xi_i,\eta_j,\zeta_l)\Delta z_l\right]\Delta x_i \Delta y_j\]
+同二次积分一样，在$\left\|T_z\right\| \to 0$时，括号内的式子可写为积分，并转为另外两个变量的函数：
+\[\lim_{\left\|T_z\right\|\to0}\sum_{l=1}^{k}f(\xi_i,\eta_j,\zeta_l)\Delta z_l = \int_{a_3}^{b_3}f(\xi_i,\eta_j,z)\dd{z} = \varphi(\xi_i,\eta_j)\]
+$S(T)$中剩余的两个求和号也基于同样的方法转换为积分，最终得到：
+\[\iiint_V f(x,y,z)\dd{x}\dd{y}\dd{z} = \int_{a_1}^{b_1}\dd{x}\int_{a_2}^{b_2}\dd{y}\int_{a_3}^{b_3}f(x,y,z)\dd{z}\]
+因为此前假设的连续性，积分次序可以交换，同时积分区域具有可加性.
+
+
+\subsection{三重积分的换元}
+依旧与二重积分一致的推导过程，变换$(u,v,w)\mapsto(x,y,z)$将$O'uvw$空间中的区域1-1映射到$Oxyz$空间中.坐标变换导致的微元体积变化依然可以用Jacobi行列式作为缩放因子：
+\[\dd{V} = \dd{x}\dd{y}\dd{z} = \left|\pdv{(x,y,z)}{(u,v,w)}\right|\dd{u}\dd{v}\dd{w}\]
+由此有：
+\begin{theorem}
+    \textbf{三重积分的换元法}
+    \[\iiint_V\!\! f(x,y,z)\dd{x}\dd{y}\dd{z} =\! \iiint_{V'}\!\!\!f(x(u,v,w),y(u,v,w),z(u,v,w))\left|\pdv{(x,y,z)}{(u,v,w)}\right|\dd{u}\dd{v}\dd{w}\]
+    \textit{特别地，对于直角坐标系到球坐标系的变换，其Jacobi行列式为$r^2 \sin\theta$.}
+\end{theorem}
+
+\begin{question}
+    计算：$\displaystyle I = \iiint_{[0,1]^3}\frac{\dd{u}\dd{v}\dd{w}}{(1+u^2+v^2+w^2)^2}$.
+\end{question}
+
+\begin{solution}
+    首先，观察积分区域是一个正方体，考虑累次积分；而后观察被积函数含有平方项，考虑球坐标.为了将二者结合起来，首先观察对称性.注意到，积分区域可以只取半个沿对角面切开的三棱柱：
+    \[I = 2\iiint_V\frac{\dd{u}\dd{v}\dd{w}}{(1+u^2+v^2+w^2)^2},\quad V = \{(u,v,w)\,|\, 0\leqslant v \leqslant u \leqslant 1, 0\leqslant w \leqslant 1\}\]
+    先转换到柱坐标，令$u\equiv r\cos\theta, v\equiv r\sin\theta, w\equiv w$，积分区域发生如下变化：
+    \[0\leqslant r\sin\theta \leqslant r\cos\theta \leqslant 1 \quad\Rightarrow\quad 0 \leqslant \theta \leqslant \frac{\pi}{4},\quad 0\leqslant r \leqslant \frac{1}{\cos\theta} = \sec\theta\]
+    由此得到：
+    \[I = 2\iiint_{V'}\!\frac{r \dd{r}\dd{\theta}\dd{w}}{(1+w^2+r^2)^2},\quad V' = \left\{(r,\theta,w)\,\Big|\, 0\leqslant r \leqslant \sec\theta, 0\leqslant\theta\leqslant\frac{\pi}{4},0\leqslant w \leqslant 1\right\}\]
+    而后转换至球坐标，令$w \equiv \tan\varphi$，由此有$0\leqslant\varphi\leqslant\dfrac{\pi}{4},\dd{w} = \sec^2\varphi\dd{\varphi}$：
+    \begin{gather*}
+        I = 2\iiint_{V''}\frac{r\sec^2\varphi\dd{r}\dd{\theta}\dd{\varphi}}{(1+r^2+\tan^2\varphi)^2} = 2\iiint_{V''}\frac{r\sec^2\varphi\dd{r}\dd{\theta}\dd{\varphi}}{(r^2+\sec^2\varphi)^2} \\
+        V'' = \left\{(r,\theta,\varphi)\,\Big|\,0\leqslant r \leqslant\sec\theta,0\leqslant\theta\leqslant\frac{\pi}{4},0\leqslant\varphi\leqslant\frac{\pi}{4}\right\}
+    \end{gather*}
+    由于$r$的上限中包含有变量$\theta$，因此先对$r$积分：
+    \begin{align*}
+        I &= 2\iint_{[0,\frac{\pi}{4}]^2}\dd{\theta}\dd{\varphi}\int_{0}^{\sec\theta}\frac{r\sec^2\varphi}{(r^2+\sec^2\varphi)^2}\dd{r} \\
+        &= \iint_{[0,\frac{\pi}{4}]^2}\sec^2\varphi\dd{\theta}\dd{\varphi}\int_{0}^{\sec\theta}\frac{\dd{(r^2)}}{(r^2+\sec^2\varphi)^2} \\
+        &= - \iint_{[0,\frac{\pi}{4}]^2}\sec^2\varphi\dd{\theta}\dd{\varphi} \cdot \left.\frac{1}{r^2+\sec^2\varphi}\right|_{r=0}^{r=\sec\theta} \\
+        &= \iint_{[0,\frac{\pi}{4}]^2}\left(1-\frac{\sec^2\varphi}{\sec^2\theta+\sec^2\varphi}\right)\dd{\theta}\dd{\varphi} \\
+        &= \left(\frac{\pi}{4}\right)^2 - \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\varphi}{\sec^2\theta+\sec^2\varphi}\dd{\theta}\dd{\varphi}
+    \end{align*}
+    上式中，记$\displaystyle A = \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\varphi}{\sec^2\theta+\sec^2\varphi}\dd{\theta}\dd{\varphi}$，根据$\varphi$和$\theta$的对称性则有：
+    \begin{gather*}
+        A = \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\varphi}{\sec^2\theta+\sec^2\varphi}\dd{\theta}\dd{\varphi} = \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\theta}{\sec^2\varphi+\sec^2\theta}\dd{\theta}\dd{\varphi} \\
+        2A = \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\varphi}{\sec^2\theta+\sec^2\varphi}\dd{\theta}\dd{\varphi} + \iint_{[0,\frac{\pi}{4}]^2}\frac{\sec^2\theta}{\sec^2\varphi+\sec^2\theta}\dd{\theta}\dd{\varphi} = \iint_{[0,\frac{\pi}{4}]^2}1\dd{\theta}\dd{\varphi} \\
+        \Rightarrow\quad A = \frac{1}{2}\left(\frac{\pi}{4}\right)^2
+    \end{gather*}
+    最终得到$\displaystyle I = \frac{\pi^2}{32}$.
 \end{solution}
