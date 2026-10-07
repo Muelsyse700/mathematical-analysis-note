@@ -398,3 +398,44 @@ $S(T)$中剩余的两个求和号也基于同样的方法转换为积分，最�
         =& \int\cdots\int_{V'}f(x_1(u_1,\cdots,u_n),\cdots,x_n(u_1,\cdots,u_n))\left|\pdv{(x_1,\cdots,x_n)}{(u_1,\cdots,u_n)}\right|\dd{u_1}\cdots\dd{u_n}
     \end{align*}
 \end{theorem}
+
+
+\subsection{\texorpdfstring{$n$重积分的应用}{n重积分的应用}}
+\subsubsection{\texorpdfstring{$n$维单形的体积}{n维单形的体积}}
+$n$维单形指的是$\mathbb{R}^n$中这样的点集：
+\[S_n(a) = \{(x_1,\cdots,x_n)\,|\,x_1,\cdots,x_n \geqslant 0;x_1+\cdots+x_n \leqslant a\}\]
+记其体积为$\sigma(S_n(a))$，满足：
+\[\sigma(S_n(a)) = \int_{S_n(a)}\dd{\sigma}\]
+换元，令$x_i \equiv at_i$，变换的Jacobi行列式等于$a^n$，于是有：
+\[\sigma(S_n(a)) = \int_{A_n(a)}\dd{\sigma} = a^n \int_{S_n(1)}\dd{\sigma} = a^n \sigma(S_n(1))\]
+对于固定的$t\in[0,1]$，$t_n = t$与$S_n(1)$相截所形成的截口是由：
+\[S_{n-1}(1-t) = \{(x_1,\cdots,x_{n-1})\,|\,x_1,\cdots,x_{n-1}\geqslant 0; x_1+\cdots+x_{n-1}\leqslant 1-t\}\]
+构成的$n-1$维单形.于是有：
+\[\sigma(S_n(1)) = \int_{0}^{1}\dd{t}\int\cdots\int_{S_{n-1}(1-t)}\dd{t_1}\cdots\dd{t_{n-1}} = \int_{0}^{1}\sigma(S_{n-1}(1-t))\dd{t}\]
+类似地，通过换元法可以得到：
+\[\sigma(S_n(1)) = \int_{0}^{1}(1-t)^{n-1}\sigma(S_{n-1}(1))\dd{t} = \sigma(S_{n-1}(1))\int_{0}^{1}(1-t)^{n-1}\dd{t} = \frac{1}{n}\sigma(S_{n-1}(1))\]
+由此得到一个递推公式，进而解得：
+\[\sigma(S_n(1)) = \frac{1}{n!} \quad\Rightarrow\quad \sigma(S_n(a)) = \frac{a^n}{n!}\]
+
+
+\subsubsection{\texorpdfstring{$n$维球体的体积}{n维球体的体积}}
+$n$维球体，即：
+\[B_n(a) = \{(x_1,\cdots,x_n)\,|\,x_1^2+\cdots+x_n^2 \leqslant a^2\}\]
+类似单形的计算，有：
+\[\sigma(B_n(a)) = \int_{B_n(a)}\dd{\sigma} = a^n\int_{B_n(1)}\dd{\sigma} = a^n \sigma(B_n(1))\]
+取$t_{n-1}\equiv u,t_n\equiv v$，联立：
+\[\begin{cases}
+    u^2 + v^2 \leqslant 1 \\
+    t_1^2 + \cdots + t_n^2 \leqslant 1
+\end{cases}\Rightarrow\quad t_1^2+\cdots+t_{n-2}^2 \leqslant 1-u^2-v^2\]
+即它们的截口为一个$n-2$维的球$B_{n-2}(\sqrt{1-u^2-v^2})$.由累次积分可得：
+\begin{align*}
+    \sigma(B_n(1)) &= \underset{B_n(1)}{\int}\dd{\sigma} = \underset{u^2+v^2\leqslant1}{\iint}\dd{u}\dd{v} \underset{B_{n-2}(\sqrt{1-u^2-v^2})}{\int\cdots\int}\dd{t_1}\cdots\dd{t_{n-2}} \\
+    &= \sigma(B_{n-2}(1))\underset{u^2+v^2\leqslant1}{\iint}(\sqrt{1-u^2-v^2})^{n-2}\dd{u}\dd{v}
+\end{align*}
+对于上式中的二重积分，作极坐标变换$u\equiv r\cos\theta,v\equiv r\sin\theta$：
+\[\underset{u^2+v^2\leqslant1}{\iint}(\sqrt{1-u^2-v^2})^{n-2}\dd{u}\dd{v} = \int_{0}^{2\pi}\dd{\theta}\int_{0}^{1}(\sqrt{1-r^2})^{n-2}r\dd{r} = \frac{2\pi}{n}\]
+得到递推公式：
+\[\sigma(B_n(1)) = \frac{2\pi}{n}\sigma(B_{n-2}(1))\]
+由此推出：
+\[\sigma(B_{2n}(a)) = \frac{\pi^n}{n!}a^{2n},\qquad \sigma(B_{2n-1}(a)) = \frac{2^n \pi^{n-1}}{(2n-1)!!}a^{2n-1}\]
