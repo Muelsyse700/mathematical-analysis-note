@@ -12,3 +12,42 @@
 要想求取原函数$F(x,y)$，就要尝试作积分：
 \[\iint_D \dd{F(x,y)} = \int_L \nabla F \cdot \dd{\vb{r}}\]
 显然，后者是一个向量场上的积分，在解决这个问题之前，首先要解决数量场上的积分.
+
+
+\subsection{基本概念}
+\begin{definition}
+    \label{def:LineIntegral1}
+    设$\mathbb{R}^3$中有一条光滑曲线$L$，数量场$\varphi(x,y,z)$定义在包含$L$的区域$D$上且连续.作$L$的任意分割$M_0,\cdots,M_n$，每一段弧$\wideparen{M_{i-1}M_i}$上任取一点$N_i(\xi_i,\eta_i,\zeta_i)$，记弧长为$\Delta s_i$，取$\lambda = \max\{|\Delta s_i|,i=1,\cdots,n\}$，如果下列求和的极限存在：
+    \[\lim_{\lambda\to0}\sum_{i=1}^{n}\varphi(\xi_i,\eta_i,\zeta_i)\Delta s_i \eqcolon \int_L\varphi(x,y,z)\dd{s}\]
+    则称函数或数量场$\varphi(x,y,z)$在曲线$L$上可积.相应的极限值称为\overtext{第一型曲线积分}{line integral of the first kind}或\overtext{数量场在曲线上的积分}{line integral of a scalar field}.
+\end{definition}
+
+\subsection{数量场在曲线上积分的计算}
+对于光滑曲线$L$的参数方程：
+\[L:\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j} + z(t)\vb{k},\quad t\in[\alpha,\beta]\]
+在参数区间上作对应分割点$M_1,\cdots,M_n$的分割：
+\[T:\alpha = t_0 < t_1 < \cdots < t_n = \beta\]
+根据积分中值定理和切向量的计算公式，有：
+\[\Delta s_i = \int_{t_{i-1}}^{t_i}|\vb{r}'(t)|\dd{t} = |\vb{r}'(\theta_i)|\Delta t_i,\quad \theta_i \in [t_{i-1},t_i]\]
+设$(\xi_i,\eta_i,\zeta_i) = (x(\tau_i),y(\tau_i),z(\tau_i))$，其中$\tau\in[t_{i-1},t_i]$，故而\cref{def:LineIntegral1}中的求和有：
+\[\sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))\Delta s_i = \sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))|\vb{r}'(\theta_i)|\Delta t_i\]
+对上式右边进行修正，使其满足Riemann和的形式：
+\[\text{右边} = \sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))|\vb{r}'(\tau_i)|\Delta t_i + \sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))[|\vb{r}'(\theta_i)|-|\vb{r}'(\tau_i)|]\Delta t_i\]
+由于$L$是光滑曲线，故而$\vb{r}'(t)$连续，进而通过$\varphi(x(\tau_i),y(\tau_i),z(\tau_i))|\vb{r}'(\tau_i)|$连续推出其可积.
+
+根据可积的定义，对$\forall\varepsilon>0$，$\exists\delta_1>0$，在$\left\|T\right\|<\delta_1$时有：
+\[\left|\sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))|\vb{r}'(\tau_i)|\Delta t_i - \int_{\alpha}^{\beta}\varphi(x(t),y(t),z(t))|\vb{r}'(t)|\dd{t}\right| < \varepsilon\]
+在闭区间$[\alpha,\beta]$上，$\varphi(x(t),y(t),z(t))$因其连续而有界，即$|\varphi|\leqslant M$.而$|\vb{r}'(t)|$因其连续而一致连续，即$\exists\delta_2$，对$\forall t,t'\in[\alpha,\beta]$，在$|t-t'|<\delta_2$时有：
+\[||\vb{r}'(t)|-|\vb{r}'(t')||<\varepsilon\]
+进一步当$\left\|T\right\|<\delta_2$时，对$\forall\theta_i,\tau_i\in[t_{i-1},t_i]$有$|\theta_i-\tau_i|\leqslant\Delta t_i \leqslant\left\|T\right\|\leqslant\delta_2$，从而有：
+\[\left|\sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))[|\vb{r}'(\theta_i)|-|\vb{r}'(\tau_i)|]\Delta t_i\right| < M(\beta-\alpha)\varepsilon\]
+当$\left\|T\right\| < \delta = \min\{\delta_1,\delta_2\}$时：
+\[\left|\sum_{i=1}^{n}\varphi(x(\tau_i),y(\tau_i),z(\tau_i))|\vb{r}'(\tau_i)|\Delta s_i - \int_{\alpha}^{\beta}\varphi(x(t),y(t),z(t))|\vb{r}'(t)|\dd{t}\right| < \varepsilon + M(\beta-\alpha)\varepsilon\]
+由此得到：
+\begin{theorem}
+    设$\varphi(x,y,z)$在光滑曲线$L$上连续，则其在$L$上可积：
+    \begin{align*}
+        \int_L \varphi(x,y,z)\dd{s} &= \int_{\alpha}^{\beta}\varphi(x(t),y(t),z(t))|\vb{r}'(t)|\dd{t} \\
+        &=\int_{\alpha}^{\beta}\varphi(x(t),y(t),z(t))\sqrt{x'^2(t)+y'^2(t)+z'^2(t)}\dd{t}
+    \end{align*}
+\end{theorem}
