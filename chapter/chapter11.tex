@@ -51,3 +51,57 @@
         &=\int_{\alpha}^{\beta}\varphi(x(t),y(t),z(t))\sqrt{x'^2(t)+y'^2(t)+z'^2(t)}\dd{t}
     \end{align*}
 \end{theorem}
+
+
+\section{数量场在曲面上的积分}
+\subsection{曲面的面积}
+设有一个从$O'uv$平面上有界区域$D$到$Oxyz$空间中一张光滑参数曲面$S$的映射：
+\[(u,v)\mapsto(x,y,z):\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k},\quad (u,v)\in D \subset\mathbb{R}^2\]
+在区域$D$上作矩形分割，得到一个小矩形区域$D_{ij}$到$S$上一个子曲面$S_{ij}$的映射：
+\[D_{ij} = \{(u,v)\,|\,(u,v)\in[u_i,u_{i+1}]\times[v_i,v_{i+1}]\}\quad \to \quad S_{ij}\]
+当$\Delta u_i,\Delta v_i$都很小时，$S_{ij}$近似为一个平行四边形，其一对邻边的向量可表示为：
+\begin{gather*}
+    \vb{r}(u_{i+1},v_j) - \vb{r}(u_i,v_j) = \vb{r}'_u(u_i,v_j)\Delta u_i + o(\Delta u_i)\\
+    \vb{r}(u_i,v_{j+1}) - \vb{r}(u_i,v_j) = \vb{r}'_v(u_i,v_j)\Delta v_j + o(\Delta v_j)\\
+    \Rightarrow\quad \sigma(S_{ij}) \approx |\vb{r}'_u(u_i,v_j) \times \vb{r}'_v(u_i,v_j)|\Delta u_i \Delta v_j
+\end{gather*}
+积分得到曲面$S$的面积：
+\[\sigma(S) = \iint_D |\vb{r}'_u(u_i,v_j) \times \vb{r}'_v(u_i,v_j)|\dd{u}\dd{v}\]
+
+\begin{mistake}
+    这样的映射过程令人想到重积分换元时的映射，变换因子就是相应的Jacobi行列式.但是换元映射是在同维度下进行的，而这里是把$\mathbb{R}^2$的网格映射到$\mathbb{R}^3$上的网格，尽管二者都是面，但是维度不同.
+\end{mistake}
+
+引入在微分几何中常用的记号：
+\begin{gather*}
+    E \coloneq {\vb{r'}_u}^2,\quad G \coloneq {\vb{r'}_v}^2,\quad F = \vb{r'}_u \cdot \vb{r'}_v \\
+    \dd{S} \coloneq |\vb{r}'_u(u_i,v_j) \times \vb{r}'_v(u_i,v_j)|\dd{u}\dd{v} = \sqrt{EG-F^2}\dd{u}\dd{v}
+\end{gather*}
+称$\dd{S}$为曲面的\textbf{面积元素}.
+
+有以下几类特例：
+\begin{itemize}
+    \item $F = \vb{r}'_u \cdot \vb{r}'_v = 0$，意味着$u$曲线和$v$曲线在$S$上的网格是处处垂直的.
+    \item 当$S \in \mathbb{R}^2$时，类似重积分换元，变换因子就是相应的Jacobi行列式，即：
+    \[|\vb{r}'_u\times\vb{r}'_v| = \left|\pdv{(x,y)}{(u,v)}\right| \quad\Rightarrow\quad \dd{\sigma} = \left|\pdv{(x,y)}{(u,v)}\right|\dd{u}\dd{v}\]
+    \item 若曲面$S$由二元函数$z = f(x,y)$给出，曲面面积公式可写为：
+    \[\sigma(S) = \iint_D\sqrt{1+{f'_x}^2 + {f'_y}^2}\dd{x}\dd{y}\]
+\end{itemize}
+
+
+\subsection{数量场在曲面上积分的计算}
+\begin{definition}
+    设$\mathbb{R}^3$中有一张光滑曲面$S$，数量场$\varphi(x,y,z)$定义在包含$S$的区域内且连续.将$S$分割为$n$块子曲面$S_i$，记其面积为$\sigma(S_i)$.在$S_i$上任取一点$M_i(\xi_i,\eta_i,\zeta_i)$，如果下列极限存在：
+    \[\lim_{\lambda\to0}\sum_{i=1}^{n}\varphi(\xi_i,\eta_i,\zeta_i)\sigma(S_i) \eqcolon \iint_S\varphi(x,y,z)\dd{S}\]
+    则称$\varphi(x,y,z)$在曲面$S$上可积，相应的极限值称为\overtext{第一型曲面积分}{surface integral of the first kind}.
+\end{definition}
+
+\begin{theorem}
+    设$\varphi(x,y,z)$在光滑曲面$S$上连续，则其在$S$上可积：
+    \begin{align*}
+        \iint_S \varphi(x,y,z)\dd{S} &= \iint_D \varphi(x(u,v),y(u,v),z(u,v))|\vb{r'}_u\times\vb{r'}_v|\dd{u}\dd{v} \\
+        &= \iint_D \varphi(x(u,v),y(u,v),z(u,v))\sqrt{EG-F^2}\dd{u}\dd{v}
+    \end{align*}
+\end{theorem}
+
+上述定理的证明过程类似于二重积分和曲线积分计算方法证明过程的结合.
