@@ -105,3 +105,24 @@
 \end{theorem}
 
 上述定理的证明过程类似于二重积分和曲线积分计算方法证明过程的结合.
+
+
+\section{向量场在曲线上的积分}
+\subsection{曲线的定向}
+对于一个向量场，例如重力场，沿着重力方向移动其做正功，逆向移动则做负功.从做功的数值上看，只有正负号的差别，但是在物理意义上大有不同.在物理上可以根据模型本身规定正负，但是在数学上就要做一个统一的约定.
+
+\begin{definition}
+    设$L$是连接空间两点$A,B$的曲线，规定其中一点为起点，就规定了$L$的方向.具有方向定义的曲线称为\overtext{定向曲线}{}，以$A$为起点的记作$L_{AB}$，反之则为$L_{BA}$.对于以参数方程表示的$L$：
+    \[L:\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j} + z(t)\vb{k},\quad \alpha\leqslant t \leqslant\beta\]
+    当$t$由$\alpha$向$\beta$递增时，$L$上对应点由$A$向$B$运动，则称$t$是$L_{AB}$的\overtext{正向参数}{}.
+
+    对于逐段光滑曲线，可以逐段选取正向参数，得到分段表示.
+    
+    对于平面上的简单闭曲线，则习惯上称其逆时针方向为正方向，或者说$L$内部区域在其正方向左边.
+\end{definition}
+
+对于参数曲线，其切向量总是指向参数增加的方向.因此指定单位切向量为：
+\[\begin{cases}
+    \vb{\tau} = \dfrac{\vb{r'}(t)}{|\vb{r'}(t)|} \quad&\Leftrightarrow\quad \text{正方向} \\[1em]
+    \vb{\tau} = -\dfrac{\vb{r'}(t)}{|\vb{r'}(t)|} \quad&\Leftrightarrow\quad \text{负方向} \\
+\end{cases}\]
