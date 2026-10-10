@@ -126,3 +126,53 @@
     \vb{\tau} = \dfrac{\vb{r'}(t)}{|\vb{r'}(t)|} \quad&\Leftrightarrow\quad \text{正方向} \\[1em]
     \vb{\tau} = -\dfrac{\vb{r'}(t)}{|\vb{r'}(t)|} \quad&\Leftrightarrow\quad \text{负方向} \\
 \end{cases}\]
+
+
+\subsection{向量场在曲线上积分的计算}
+\begin{definition}
+    设有空间区域$D$中的向量场$\vb{v} = P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k}$，在$D$内的定向曲线$L_{AB}$上沿其方向作分割$T:A = M_0,M_1,\cdots,M_n=B$，所截取得的有向弧段可表示为：
+    \[\Delta\vb{r}_i = \va{M_{i-1}M_i} = \Delta x_i \vb{i} + \Delta y_i \vb{j} + \Delta z_i \vb{k}\]
+    在弧段$\wideparen{M_{i-1}M_i}$上任取一点$N_i(\xi_i,\eta_i,\zeta_i)$，若下列和式的极限存在：
+    \[\lim_{\left\|T\right\|\to0}\sum_{i=1}^{n}\vb{v}(\xi_i,\eta_i,\zeta_i)\cdot\Delta\vb{r}_i \eqcolon \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}}\]
+    则称极限值为向量场$\vb{v}$沿路径$L_{AB}$可积，称$L_{AB}$为\overtext{积分路径}{}，极限值称为\overtext{第二型曲线积分}{}.
+
+    特别地，若$L$是封闭曲线，积分也称为向量场$\vb{v}$沿环路$L$的\overtext{环量}{}，记作：
+    \[\oint_L \vb{v}\cdot\dd{\vb{r}}\]
+\end{definition}
+
+对$L_{AB}$的参数区间作分割对应曲线上点的分割，令分割趋于$0$，根据Lagrange中值定理，$\exists \lambda_i,\mu_i,\nu_i \in [t_{i-1},t_i]$使得：
+\[\Delta\vb{r}_i = \Delta x_i\vb{i} + \Delta y_i\vb{j} + \Delta z_i\vb{k} = x'(\lambda_i)\Delta t_i \vb{i} + y'(\mu_i)\Delta t_i \vb{j} + z'(\nu_i)\Delta t_i \vb{k}\]
+在$[t_{i-1},t_i]$上再任取一点$\tau_i$使得$(x(\tau_i),y(\tau_i),z(\tau_i)) = (\xi_i,\eta_i,\zeta_i)$，由此将定义中的求和转换为一个类Riemann和：
+\begin{align*}
+    \sum_{i=1}^{n}\vb{v}(\xi_i,\eta_i,\zeta_i)\cdot\Delta\vb{r}_i =& \sum_{i=1}^{n}P(x(\tau_i),y(\tau_i),z(\tau_i))x'(\lambda_i)\Delta t_i \\
+    &+ \sum_{i=1}^{n}Q(x(\tau_i),y(\tau_i),z(\tau_i))y'(\mu_i)\Delta t_i \\
+    &+ \sum_{i=1}^{n}R(x(\tau_i),y(\tau_i),z(\tau_i))z'(\nu_i)\Delta t_i
+\end{align*}
+仿照第一型曲线积分的处理方法，将上式转换为三个Riemann和，并且修正项极限为$0$.最终得到：
+
+\begin{theorem}
+    设向量场$\vb{v}(x,y,z)$在含有光滑有向曲线$L_{AB}$的$D$上连续，则其在$L_{AB}$上可积：
+    \[\int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = \int_{\alpha}^{\beta}\vb{v}(\vb{r}(t))\cdot\vb{r}'(t)\dd{t} = \int_{\alpha}^{\beta}[Px'(t) + Qy'(t) + Rz'(t)]\dd{t}\]
+\end{theorem}
+向量场在曲线上的积分具有以下性质：
+\begin{enumerate}[property]
+    \item \textbf{线性性}：若$\vb{v} = c_1\vb{v_1} + c_2\vb{v_2}$，则有：
+    \[\int_L\vb{v}\cdot\dd{\vb{r}} = c_1\int_L\vb{v_1}\cdot\dd{\vb{r}} + c_2\int_L\vb{v_2}\cdot\dd{\vb{r}}\]
+    \item \textbf{积分曲线的可加性}：若$L_{AC}$是由$L_{AB}$和$L_{BC}$连接而成，则有：
+    \[\int_{L_{AC}}\vb{v}\cdot\dd{\vb{r}} = \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} + \int_{L_{BC}}\vb{v}\cdot\dd{\vb{r}}\]
+    \item \textbf{积分的方向性}：
+    \[\int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = -\int_{L_{BA}}\vb{v}\cdot\dd{\vb{r}}\]
+\end{enumerate}
+
+\begin{question}
+    设有引力场$\vb{F}=-k\dfrac{mM}{r^3}\vb{r}$，求质点$m$从一点$A$到另一点$B$运动时引力所做的功.
+\end{question}
+
+\begin{solution}
+    \begin{gather*}
+        W = \int_{L_{AB}}\vb{F}\cdot\dd{\vb{r}} = -kmM\int_{L_{AB}}\frac{1}{r^3}\vb{r}\cdot\dd{\vb{r}}\\
+        \vb{r}\cdot\dd{\vb{r}} = (xx'+yy'+zz')\dd{t} = \frac{1}{2}\dv{t}[x^2(t)+y^2(t)+z^2(t)]\dd{t} = \frac{1}{2}\dv{r^2}{t}\dd{t} = r\dd{r}\\
+        \Rightarrow\quad W = -kmM\int_{r_A}^{r_B}\frac{1}{r^2}\dd{r} = kmM\left(\frac{1}{r_B}-\frac{1}{r_A}\right)
+    \end{gather*}
+    上述推导表明，在重力场中重力做功只与始末位置有关，与具体路径无关.
+\end{solution}
