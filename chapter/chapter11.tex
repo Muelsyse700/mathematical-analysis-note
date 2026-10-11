@@ -176,3 +176,113 @@
     \end{gather*}
     上述推导表明，在重力场中重力做功只与始末位置有关，与具体路径无关.
 \end{solution}
+
+
+\subsection{Green定理}
+向量场沿路径的积分有的与路径有关，有的与路径无关，如何判别这两种向量场？
+
+设有一个二维光滑向量场$\vb{v} = P(x,y)\vb{i} + Q(x,y)\vb{j}$，有两条不同的连接$A$到$B$的路径$L_{AB}$和$\tilde{L}_{AB}$.则$L_{AB}$和$\tilde{L}_{BA}$构成一条封闭有向环路，若对于任意不自相交的封闭环路$L$，其路径积分为$0$，则该向量场的路径积分与路径无关.
+
+\begin{theorem}
+    \textbf{Green定理}
+
+    设$D$是有限条逐段光滑的封闭曲线$L$围成的平面闭区域，即$L=\partial D$，$\vb{v}=P(x,y)\vb{i}+Q(x,y)\vb{j}$是$D$上的光滑向量场，则：
+    \[\oint_{\partial D} P\dd{x} + Q\dd{y} = \iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}\]
+\end{theorem}
+
+\begin{proof}
+    \circnum{1}
+    设有曲边矩形区域$D_y$由两条光滑曲线$L_1,L_2$和两条平行于$y$轴的直线$L_2,L_4$围成：
+    \[\begin{cases}
+        L_1:y = \varphi_1(x) \\ L_3:y = \varphi_2(x)
+    \end{cases},x\in[a,b]\qquad\qquad \begin{cases}
+        L_2:x = b \\ L_4:x = a
+    \end{cases}\]
+    设$D_y$上有向量场$\vb{v}_x = P(x,y)\vb{i}$.
+    在$L_1$和$L_3$上$\vb{v}_x$分别满足：
+    \[\int_{L_1}P\dd{x} = \int_{a}^{b}P(x,\varphi_1(x))\dd{x}\qquad \int_{L_3}P\dd{x} = \int_{b}^{a}P(x,\varphi_2(x))\dd{x}\]
+    约定从$|\vb{r}|$最小的点逆时针出发，先经过较小的$\varphi_1(x)$，再经过较大的$\varphi_2(x)$：
+    \begin{align*}
+        \int_{L_1}P\dd{x} - \int_{L_3}P\dd{x} &= \int_{a}^{b}P(x,\varphi_1(x))\dd{x} - \int_{a}^{b}P(x,\varphi_2(x))\dd{x} \\
+        &= \int_{a}^{b}[P(x,\varphi_1(x)) - P(x,\varphi_2(x))]\dd{x} \\
+        &= -\int_{a}^{b}\dd{x}\int_{\varphi_1(x)}^{\varphi_2(x)}\pdv{P(x,y)}{y}\dd{y} \\
+        &= -\iint_{D_y}\pdv{P(x,y)}{y}\dd{x}\dd{y}
+    \end{align*}
+    在$L_2$和$L_4$上$P$由于$\dd{x}=0$因而其贡献为$0$，故而$\vb{v}_x$在$D_y$上满足Green公式：
+    \[\oint_{\partial D_y}\vb{v}_x\cdot\dd{\vb{r}} = -\iint_{D_y}\pdv{P}{y}\dd{x}\dd{y}\]
+    \textit{注意：负号来源于Newton-Leibniz公式对下限小于上限的要求.}
+
+    设有另一种曲边矩形区域$D_x = \{(x,y)\,|\,\psi_1(y)\leqslant x \leqslant \psi_2(y),c\leqslant y \leqslant d\}$，其上有向量场$\vb{v}_y = Q(x,y)\vb{j}$，类似关于$D_y$型区域的推导，在$D_x$上有：
+    \[\oint_{\partial D_x}\vb{v}_y\cdot\dd{\vb{r}} = \iint_{D_x}\pdv{Q}{x}\dd{x}\dd{y}\]
+    \textit{注意：此处没有负号，是因为约定从$|\vb{r}|$最小的点出发，在逆时针方向上先经过较大的$\psi_2(y)$，再经过较小的$\psi_1(y)$，天然满足Newton-Leibniz公式的顺序.}
+
+    \circnum{2}
+    设区域$D$能够分解为无公共内点，边界为逐段光滑曲线的若干小块：
+    \[D = \bigcup_{i=1}^n D_i\]
+    $\partial D_i$均取逆时针方向，如果Green公式在每个$D_i$上成立，则对整个$D$也成立.因为所有公共边界上的积分被相邻小块上不同方向的积分相抵消，则有：
+    \begin{align*}
+        \oint_{\partial D} P\dd{x} + Q\dd{y} &= \sum_i \oint_{\partial D_i}P\dd{x} + Q\dd{y} = \sum_i\iint_{D_i}\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y} \\
+        &= \iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}
+    \end{align*}
+    根据以上推导，若$D$可以分割为若干$D_y$型区域，对于向量场$\vb{v}_x$有：
+    \[\oint_{\partial D}\vb{v}_x\cdot\dd{\vb{r}} = \iint_{D}\left(-\pdv{P}{y}\right)\dd{x}\dd{y}\]
+    若$D$同时也可以分割为若干$D_x$型区域，对于向量场$\vb{v}_y$有：
+    \[\oint_{\partial D}\vb{v}_y\cdot\dd{\vb{r}} = \iint_{D}\left(\pdv{Q}{x}\right)\dd{x}\dd{y}\]
+    注意到$\vb{v} = P(x,y)\vb{i}+Q(x,y)\vb{j} = \vb{v}_x + \vb{v}_y$，则将以上二式相加则有：
+    \[\oint_{\partial D}\vb{v}\cdot\dd{\vb{r}} = \oint_{\partial D}(\vb{v}_x+\vb{v}_y)\cdot\dd{\vb{r}} = \iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}\]
+    由此得证.
+\end{proof}
+上述证明依然存在一些缺陷，没有给出Green定理适用区域的完整定义.
+
+通过构造特殊的向量场，Green定理可用于求取面积：
+\begin{theorem}
+    设$D$是满足Green定理条件的区域，且具有分段光滑的边界，则有：
+    \[\sigma(D) = \frac{1}{2}\oint_{\partial D}(-y\dd{x}+x\dd{y}) = \oint_{\partial D}(-y)\dd{x} = \oint_{\partial D}x\dd{y}\]
+\end{theorem}
+
+对于积分与路径无关的向量场，有如下结论：
+\begin{theorem}
+    设$D$是平面上的单连通区域，$\vb{v}$是$D$上的光滑向量场，则以下三个命题相互等价：
+    \begin{enumerate}[circ]
+        \item 向量场$\vb{v}$在区域$D$中的曲线积分与路径无关，记为：
+        \[\oint\vb{v}\cdot\dd{\vb{r}} = 0 \quad\text{或}\quad \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = \int_{A}^{B}\vb{v}\cdot\dd{\vb{r}}\]
+        \item 向量场$\vb{v}$是一个函数$\varphi(x,y)$的梯度场：
+        \[\vb{v} = \grad\varphi(x,y) = \nabla\varphi(x,y)\]
+        且这个函数$\varphi(x,y)$的非常数项是唯一的.
+        \item 向量场$\vb{v}$的两个分量满足：
+        \[\pdv{Q}{x}-\pdv{P}{y} = 0\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \circnum{1}$\Rightarrow$\circnum{2}：取$D$内一个固定点$(x_0,y_0)$和一个动点$(x,y)$，由于积分与路径无关，于是下列积分定义了一个函数映射：
+    \[\varphi:(x,y)\mapsto\int_{(x_0,y_0)}^{(x,y)}\vb{v}\cdot\dd{\vb{r}} = \int_{(x_0,y_0)}^{(x_y)}P\dd{x}+Q\dd{y}\]
+    若动点位于$(x_0+\Delta x,y_0)$，则$\dd{y}=0$，进而有：
+    \[\frac{\varphi(x_0+\Delta x,y_0) - \varphi(x_0,y_0)}{\Delta x} = \frac{1}{\Delta x}\int_{(x_0,y_0)}^{(x_0+\Delta x,y_0)}P\dd{x}\]
+    令$\Delta x \to 0$得到$\displaystyle\pdv{\varphi}{x} = P$.同理可得$\displaystyle\pdv{\varphi}{y} = Q$，即：
+    \[\vb{v} = \nabla\varphi(x,y) = \pdv{\varphi}{x}\dd{x}+\pdv{\varphi}{y}\dd{y}\]
+
+    \circnum{2}$\Rightarrow$\circnum{3}：由于$\vb{v}$是光滑向量场，因而对$\varphi(x,y)$的混合偏导次序可以交换：
+    \[\pdv{x}\pdv{\varphi}{y} - \pdv{y}\pdv{\varphi}{x} = 0\]
+
+    \circnum{3}$\Rightarrow$\circnum{1}：根据Green定理计算显然可得.
+\end{proof}
+
+\begin{theorem}
+    设$D$是平面上的单连通区域，$\vb{v}$是$D$上的光滑向量场，如果$\vb{v}$在$D$内的积分与路径无关，则对于区域$D$内的任意两点$A,B$有：
+    \[\int_{A}^{B}\vb{v}\cdot\dd{\vb{r}} = \varphi(B) - \varphi(A),\quad \nabla\varphi = \vb{v}\]
+    \textit{这个定理类似于单变量的Newton-Leibniz公式.}
+\end{theorem}
+
+\begin{proof}
+    任取一条连接$A,B$的曲线$L_{AB}$：
+    \[L_{AB}:x = x(t), y = y(t),\quad \alpha\leqslant t \leqslant \beta\]
+    因此有：
+    \begin{align*}
+        \int_{A}^{B}\vb{v}\cdot\dd{\vb{r}} &= \int_{L_{AB}}\grad\varphi\cdot\dd{\vb{r}} = \int_{L_{AB}}\varphi'_x\dd{x} + \varphi'_y\dd{y} \\
+        &= \int_{\alpha}^{\beta}[\varphi'_x(x(t),y(t))x'(t) + \varphi'_y(x(t),y(t))y'(t)]\dd{t} \\
+        &= \int_{\alpha}^{\beta}\dd{\varphi(x(t),y(t))} = \varphi(x(\beta),y(\beta)) - \varphi(x(\alpha),y(\alpha)) \\
+        &= \varphi(B) - \varphi(A)
+    \end{align*}
+    由此得证.
+\end{proof}
