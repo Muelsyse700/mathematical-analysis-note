@@ -314,4 +314,50 @@
 \end{itemize}
 
 对于有向曲面，可以定义有向面积的概念：
-\[\dd{\vb{S}}\coloneq \vb{n}\dd{S} = \frac{\vb{r}'_u\times\vb{r}'_v}{|\vb{r}'_u\times\vb{r}'_v|}|\vb{r}'_u\times\vb{r}'_v|\dd{u}\dd{v}\]
+\[\dd{\vb{S}}\coloneq \vb{n}\dd{S} = \frac{\vb{r}'_u\times\vb{r}'_v}{|\vb{r}'_u\times\vb{r}'_v|}|\vb{r}'_u\times\vb{r}'_v|\dd{u}\dd{v} = (\vb{r}'_u\times\vb{r}'_v)\dd{u}\dd{v}\]
+
+
+\subsection{向量场在曲面上积分的计算}
+\begin{definition}
+    设$\vb{v}(M)$是定义在定向曲面$S$上的一个向量场，$S$的正向为单位法向量$\vb{n}$，则下列积分：
+    \[\iint_S \vb{v}\cdot\dd{\vb{S}} \coloneq \iint_S\vb{v}\cdot\vb{n}\dd{S}\]
+    称为向量场$\vb{v}$在有向曲面$S$上的\overtext{第二型曲面积分}{surface integral of the second kind}.
+
+    特别地，若$S$是封闭曲面，积分也称为向量场$\vb{v}$通过封闭曲面$S$的\overtext{通量}{flux}.记作：
+    \[\oiint_S \vb{v}\cdot\dd{\vb{S}}\]
+\end{definition}
+
+向量场在曲面上的积分具有以下性质：
+\begin{enumerate}[property]
+    \item \textbf{线性性}：若$\vb{v} = c_1\vb{v}_1 + c_2\vb{v}_2$，则有：
+    \[\iint_S\vb{v}\cdot\dd{\vb{S}} = c_1\iint_S\vb{v}_1\cdot\dd{\vb{S}} + c_2\iint_S\vb{v}_2\cdot\dd{\vb{S}}\]
+    \item \textbf{积分曲面的可加性}：若定向曲面$S$是由$S_1$和$S_2$协调地拼接而成，则有：
+    \[\iint_S\vb{v}\cdot\dd{\vb{S}} = \iint_{S_1}\vb{v}\cdot\dd{\vb{S}} + \iint_{S_2}\vb{v}\cdot\dd{\vb{S}}\]
+    \item \textbf{积分的方向性}：以$S^+$和$S^-$表示曲面的两个不同定向：
+    \[\iint_{S^-}\vb{v}\cdot\vb{n^-}\dd{S} = -\iint_{S^+}\vb{v}\cdot\vb{n^+}\dd{S}\]
+\end{enumerate}
+
+\begin{theorem}
+    设具有正向参数表示的定向光滑曲面$S$上有一光滑向量场$\vb{v}$，其在$S$上可积：
+    \begin{align*}
+        \iint_S\vb{v}\cdot\dd{\vb{S}} &= \iint_D\vb{v}\cdot\vb{r}'_u\times\vb{r}'_v\dd{u}\dd{v} = \iint_D\begin{vmatrix}
+            P & Q & R \\ x'_u & y'_u & z'_u \\ x'_v & y'_v & z'_v
+        \end{vmatrix}\dd{u}\dd{v} \\
+        &= \iint_D\left[P\pdv{(y,z)}{(u,v)} + Q\pdv{(z,x)}{(u,v)} + R\pdv{(x,y)}{(u,v)}\right]\dd{u}\dd{v}
+    \end{align*}
+\end{theorem}
+
+上式中，积分的方向隐含在三个Jacobi行列式中，有向面积元可以表示为：
+\[\dd{\vb{S}} = (\vb{r}'_u\times\vb{r}'_v)\dd{u}\dd{v} = \left[\pdv{(y,z)}{(u,v)}\dd{u}\dd{v}\right]\vb{i} + \left[\pdv{(z,x)}{(u,v)}\dd{u}\dd{v}\right]\vb{j} + \left[\pdv{(x,y)}{(u,v)}\dd{u}\dd{v}\right]\vb{k}\]
+以微分形式的外积简化上式，记：$\displaystyle\dd{x}\wedge\dd{y} = \pdv{(x,y)}{(u,v)}\dd{u}\dd{v}$，则有：
+\[\dd{\vb{S}} = (\dd{y}\wedge\dd{z})\vb{i} + (\dd{z}\wedge\dd{x})\vb{j} + (\dd{x}\wedge\dd{y})\vb{k}\]
+注意到，对于上述用外积所表达的式子，满足此前定义的微分形式外积的性质：
+\[\dd{x}\wedge\dd{y} = \pdv{(x,y)}{(u,v)}\dd{u}\dd{v} = -\pdv{(y,x)}{(u,v)}\dd{u}\dd{v} = -\dd{y}\wedge\dd{x}\]
+因而这也为二阶微分形式的三个生成元作出了一个几何解释：有向面积元分别在三个坐标平面上的投影.
+
+在绝大多数教材中，都将$\dd{x}\wedge\dd{y}$简记为$\dd{x}\dd{y}$，因而第二型曲面积分也可以表示为：
+\begin{align*}
+    \iint_S\vb{v}\cdot\dd{\vb{S}} &= \iint_S P\dd{y}\wedge\dd{z} + Q\dd{z}\wedge\dd{x} + R\dd{x}\wedge\dd{y}\\
+    &= \iint_S P\dd{y}\dd{z} + Q\dd{z}\dd{x} + R\dd{x}\dd{y}
+\end{align*}
+应当注意的是，上式中的$\dd{x},\dd{y},\dd{z}$不再能随意交换顺序.
