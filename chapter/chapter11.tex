@@ -112,9 +112,9 @@
 对于一个向量场，例如重力场，沿着重力方向移动其做正功，逆向移动则做负功.从做功的数值上看，只有正负号的差别，但是在物理意义上大有不同.在物理上可以根据模型本身规定正负，但是在数学上就要做一个统一的约定.
 
 \begin{definition}
-    设$L$是连接空间两点$A,B$的曲线，规定其中一点为起点，就规定了$L$的方向.具有方向定义的曲线称为\overtext{定向曲线}{}，以$A$为起点的记作$L_{AB}$，反之则为$L_{BA}$.对于以参数方程表示的$L$：
+    设$L$是连接空间两点$A,B$的曲线，规定其中一点为起点，就规定了$L$的方向.具有方向定义的曲线称为\overtext{定向曲线}{oriented curve}，以$A$为起点的记作$L_{AB}$，反之则为$L_{BA}$.对于以参数方程表示的$L$：
     \[L:\vb{r}(t) = x(t)\vb{i} + y(t)\vb{j} + z(t)\vb{k},\quad \alpha\leqslant t \leqslant\beta\]
-    当$t$由$\alpha$向$\beta$递增时，$L$上对应点由$A$向$B$运动，则称$t$是$L_{AB}$的\overtext{正向参数}{}.
+    当$t$由$\alpha$向$\beta$递增时，$L$上对应点由$A$向$B$运动，则称$t$是$L_{AB}$的\overtext{正向参数}{positive parameter}.
 
     对于逐段光滑曲线，可以逐段选取正向参数，得到分段表示.
     
@@ -134,9 +134,9 @@
     \[\Delta\vb{r}_i = \va{M_{i-1}M_i} = \Delta x_i \vb{i} + \Delta y_i \vb{j} + \Delta z_i \vb{k}\]
     在弧段$\wideparen{M_{i-1}M_i}$上任取一点$N_i(\xi_i,\eta_i,\zeta_i)$，若下列和式的极限存在：
     \[\lim_{\left\|T\right\|\to0}\sum_{i=1}^{n}\vb{v}(\xi_i,\eta_i,\zeta_i)\cdot\Delta\vb{r}_i \eqcolon \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}}\]
-    则称极限值为向量场$\vb{v}$沿路径$L_{AB}$可积，称$L_{AB}$为\overtext{积分路径}{}，极限值称为\overtext{第二型曲线积分}{}.
+    则称极限值为向量场$\vb{v}$沿路径$L_{AB}$可积，称$L_{AB}$为\overtext{积分路径}{integration path}，极限值称为\overtext{第二型曲线积分}{line integral of the second kind}.
 
-    特别地，若$L$是封闭曲线，积分也称为向量场$\vb{v}$沿环路$L$的\overtext{环量}{}，记作：
+    特别地，若$L$是封闭曲线，积分也称为向量场$\vb{v}$沿环路$L$的\overtext{环量}{circulation}，记作：
     \[\oint_L \vb{v}\cdot\dd{\vb{r}}\]
 \end{definition}
 
@@ -234,6 +234,8 @@
 \end{proof}
 上述证明依然存在一些缺陷，没有给出Green定理适用区域的完整定义.
 
+在求取向量场在一些难以用参数方程表示的曲线上的积分时，可以将曲线连成封闭曲线，转而使用Green定理求解，而后再减掉新加入连线上的积分.
+
 通过构造特殊的向量场，Green定理可用于求取面积：
 \begin{theorem}
     设$D$是满足Green定理条件的区域，且具有分段光滑的边界，则有：
@@ -286,3 +288,30 @@
     \end{align*}
     由此得证.
 \end{proof}
+
+
+\section{向量场在曲面上的积分}
+\subsection{双侧曲面及其定向}
+\begin{definition}
+    设有一张光滑曲面$S$，其在每一点$M$都有非零的法向量$\vb{n}(M)$和$-\vb{n}(M)$.对任意一点$M_0\in S$，取定其中一个法向量，不妨取$\vb{n}(M_0)$，作任意一条过$M_0$的闭曲线$L$，使$M$从$M_0$出发，在每一点取连续变化的法向量$\vb{n}(M)$.
+    当$M$回到$M_0$时，若取到的法向量仍为$\vb{n}(M_0)$，则称$M_0$是曲面$S$的\overtext{双侧点}{two-sided point}.如果曲面上有一点是双侧的，则整个曲面称为\overtext{双侧曲面}{two-sided surface}或\overtext{可定向曲面}{orientable surface}.
+\end{definition}
+
+\begin{definition}
+    在可定向曲面$S$上指定一侧为正面，或者说，在曲面上指定一个连续的法向量场$\vb{n}$为正向，则称曲面为\textbf{定向曲面}.
+\end{definition}
+
+对于定向曲面$S$，设单位法向量场$\vb{n}$为正向，若$S$能够以参数方程表示：
+\[S:\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k}\]
+如果$\vb{r}'_u\times\vb{r}'_v$与定向$\vb{n}$的指向相同，则称$(u,v)$是$S$的\textbf{正向参数}，相反则为反向参数.若$(u,v)$是反向参数，则$(v,u)$是正向参数.
+
+有如下惯例：
+\begin{itemize}
+    \item 当曲面以$z=f(x,y)$显表示时，取与$z$轴正方向为锐角的方向为正向.所指向的一侧称为\textbf{上侧}，另一侧称为\textbf{下侧}.
+    \item 对于封闭曲面，取向外的方向为正向.靠外的一侧称为\textbf{外侧}，另一面则称为\textbf{内侧}.
+    \item 有时需要将有向曲面与有向曲线相协调，原则是曲面的取向与有向边界曲线的方向构成右手系.
+    \item 若曲面由两个双侧曲面拼接而成，则也可以规定逆时针有向边界，并且用右手法则协调两个曲面的正向.
+\end{itemize}
+
+对于有向曲面，可以定义有向面积的概念：
+\[\dd{\vb{S}}\coloneq \vb{n}\dd{S} = \frac{\vb{r}'_u\times\vb{r}'_v}{|\vb{r}'_u\times\vb{r}'_v|}|\vb{r}'_u\times\vb{r}'_v|\dd{u}\dd{v}\]
