@@ -185,6 +185,7 @@
 
 \begin{theorem}
     \textbf{Green定理}
+    \label{thm:GreenTheorem}
 
     设$D$是有限条逐段光滑的封闭曲线$L$围成的平面闭区域，即$L=\partial D$，$\vb{v}=P(x,y)\vb{i}+Q(x,y)\vb{j}$是$D$上的光滑向量场，则：
     \[\oint_{\partial D} P\dd{x} + Q\dd{y} = \iint_D\left(\pdv{Q}{x}-\pdv{P}{y}\right)\dd{x}\dd{y}\]
@@ -372,7 +373,7 @@
 \begin{question}
     计算曲面积分：
     \[\iint_S x^3\dd{y}\dd{z} + y^3\dd{z}\dd{x}\]
-    其中，$S$是上半椭球面$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} = 1(z\geqslant0)$，定向指向上侧.
+    其中，$S$是上半椭球面$\displaystyle\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} = 1(z\geqslant0)$，定向指向上侧.
 \end{question}
 
 \begin{solution}
@@ -392,3 +393,67 @@
     由此求得：
     \[\iint_S x^3\dd{y}\dd{z} + y^3\dd{z}\dd{x} = \frac{2}{5}\pi abc(a^2+b^2)\]
 \end{solution}
+
+
+\section{Gauss定理和Stokes定理}
+\subsection{Gauss定理}
+考察光滑向量场：
+\[\vb{v}(x,y,z) = P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k}\]
+通过空间中长方体$V = [0,a]\times[0,b]\times[0,c]$的表面$\partial V$外侧的通量.
+
+设$S_1:x=a,y=y,z=z;S_2:x=0,y=y,z=z$，对应的法向量分别为$\vb{n}_1 = \vb{i},\vb{n}_2=-\vb{i}$，故而有：
+\begin{gather*}
+    \iint_{S_1}\vb{v}\cdot\dd{\vb{S}} = \int_{0}^{c}\int_{0}^{b}P(a,y,z)\dd{y}\dd{z} \\
+    \iint_{S_2}\vb{v}\cdot\dd{\vb{S}} = -\int_{0}^{c}\int_{0}^{b}P(0,y,z)\dd{y}\dd{z}
+\end{gather*}
+因而在$S_1+S_2$上有：
+\begin{align*}
+    \iint_{S_1+S_2}\vb{v}\cdot\dd{\vb{S}} &= \int_{0}^{c}\int_{0}^{b}[P(a,y,z)-P(0,y,z)]\dd{y}\dd{z} \\
+    &= \int_{0}^{c}\int_{0}^{b}\int_{0}^{a}\pdv{P(x,y,z)}{x}\dd{x}\dd{y}\dd{z} = \iiint_V\pdv{P(x,y,z)}{x}\dd{x}\dd{y}\dd{z}
+\end{align*}
+同理对于剩下四个面有：
+\begin{gather*}
+    \iint_{S_3+S_4}\vb{v}\cdot\dd{\vb{S}} = \iiint_V\pdv{Q(x,y,z)}{y}\dd{x}\dd{y}\dd{z} \\
+    \iint_{S_5+S_6}\vb{v}\cdot\dd{\vb{S}} = \iiint_V\pdv{R(x,y,z)}{z}\dd{x}\dd{y}\dd{z}
+\end{gather*}
+将六个面合并，得到：
+\[\oiint_S \vb{v}\cdot\dd{\vb{S}} = \iiint_V\left(\pdv{P}{x}+\pdv{Q}{y}+\pdv{R}{z}\right)\dd{x}\dd{y}\dd{z}\]
+为了将Gauss定理推广到更广泛的区域中，可以模仿\cref{thm:GreenTheorem}\textbf{(Green定理)}的推广方法，先推广到一些更加普遍的子区域上.做如下证明准备：
+
+定义以下三种类型的区域：
+\begin{enumerate}[circ]
+    \item \textbf{$Z$型区域}：$V = \{(x,y,z)\,|\,z\in[z_1(x,y),z_2(x,y)],(x,y)\in D\}$\\
+    \textit{即一个中心轴平行于$z$轴，两端面由$z_1(x,y)$和$z_2(x,y)$显式表示的柱体.}
+    \item \textbf{$Y$型区域}：$V = \{(x,y,z)\,|\,y\in[y_1(z,x),y_2(z,x)],(z,x)\in D\}$\\
+    \textit{即一个中心轴平行于$y$轴，两端面由$y_1(z,x)$和$y_2(z,x)$显式表示的柱体.}
+    \item \textbf{$Z$型区域}：$V = \{(x,y,z)\,|\,x\in[x_1(y,z),x_2(y,z)],(y,z)\in D\}$\\
+    \textit{即一个中心轴平行于$x$轴，两端面由$x_1(y,z)$和$x_2(y,z)$显式表示的柱体.}
+\end{enumerate}
+
+\begin{theorem}
+    设$R(x,y,z)\in C^1$，$\vb{v}_z = R(x,y,z)\vb{k}$，$V$是$Z$型区域，则：
+    \[\iint_S \vb{v}_z\cdot\dd{\vb{S}} = \iiint_V\pdv{R}{z}\dd{x}\dd{y}\dd{z}\]
+    其中$S = \partial V$，定向为$V$的外侧.
+\end{theorem}
+
+\begin{proof}
+    显然，对于$Z$型区域，其侧面法向量与$z$轴垂直，故而其向量积分为$0$，因而只需考虑两个端面$S_1:z_1(x,y);S_2:z_2(x,y)$的积分：
+    \begin{align*}
+        \iint_S \vb{v}_z\cdot\dd{\vb{S}} &= \iint_{S_2}\vb{v}_z\cdot\dd{\vb{S}} + \iint_{S_1}\vb{v}_z\cdot\dd{\vb{S}} \\
+        &= \iint_DR(x,y,z_2(x,y))\dd{x}\dd{y} - \iint_DR(x,y,z_1(x,y))\dd{x}\dd{y}\\
+        &= \iint_D[R(x,y,z_2(x,y))-R(x,y,z_1(x,y))]\dd{x}\dd{y}\\
+        &= \iint_D\left(\int_{z_1(x,y)}^{z_2(x,y)}\pdv{R}{z}\dd{z}\right)\dd{x}\dd{y}\\
+        &= \iiint_V \pdv{R}{z}\dd{x}\dd{y}\dd{z}
+    \end{align*}
+\end{proof}
+同理可以推出对$X$型、$Y$型区域类似的结论.
+
+若一个区域$V$可以同时分解为上述类型的区域，并且相邻子区域公共边界上两侧的积分相互抵消，则有：
+\begin{theorem}
+    \textbf{Gauss定理}
+
+    设$\vb{v} = P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k}$是$V$上的光滑向量场，$V$是空间中分片光滑曲面围成的闭区域.如果$V$可以同时分解成有限个互不重叠的$X$型、$Y$型和$Z$型区域的并，则有：
+    \[\oiint_S P\dd{y}\dd{z} + Q\dd{z}\dd{x} + R\dd{x}\dd{y} = \iiint_V\left(\pdv{P}{x}+\pdv{Q}{y}+\pdv{R}{z}\right)\dd{x}\dd{y}\dd{z}\]
+    或者写为：
+    \[\oiint_S \vb{v}\cdot\dd{\vb{S}} = \iiint_V\nabla\cdot\vb{v}\dd{V} = \iiint_V\operatorname{div}\vb{v}\dd{V}\]
+\end{theorem}
