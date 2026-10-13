@@ -355,9 +355,40 @@
 \[\dd{x}\wedge\dd{y} = \pdv{(x,y)}{(u,v)}\dd{u}\dd{v} = -\pdv{(y,x)}{(u,v)}\dd{u}\dd{v} = -\dd{y}\wedge\dd{x}\]
 因而这也为二阶微分形式的三个生成元作出了一个几何解释：有向面积元分别在三个坐标平面上的投影.
 
+
 在绝大多数教材中，都将$\dd{x}\wedge\dd{y}$简记为$\dd{x}\dd{y}$，因而第二型曲面积分也可以表示为：
 \begin{align*}
     \iint_S\vb{v}\cdot\dd{\vb{S}} &= \iint_S P\dd{y}\wedge\dd{z} + Q\dd{z}\wedge\dd{x} + R\dd{x}\wedge\dd{y}\\
     &= \iint_S P\dd{y}\dd{z} + Q\dd{z}\dd{x} + R\dd{x}\dd{y}
 \end{align*}
 应当注意的是，上式中的$\dd{x},\dd{y},\dd{z}$不再能随意交换顺序.
+
+特别地，若$S$是显式表示，不妨设曲面上侧为正向，$(x,y)$则为曲面的正向参数，于是有：
+\[\iint_S \vb{v}\cdot\dd{\vb{S}} = \iint_D \begin{vmatrix}
+    P & Q & R \\ 1 & 0 & f'_x \\ 0 & 1 & f'_y
+\end{vmatrix}\dd{x}\dd{y} = \iint_D(-Pf'_x - Qf'_y + R)\dd{x}\dd{y}\]
+
+
+\begin{question}
+    计算曲面积分：
+    \[\iint_S x^3\dd{y}\dd{z} + y^3\dd{z}\dd{x}\]
+    其中，$S$是上半椭球面$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2} = 1(z\geqslant0)$，定向指向上侧.
+\end{question}
+
+\begin{solution}
+    将上半椭球面$S$表示成参数方程：
+    \[x = a\sin\theta\cos\varphi,\quad y = b\sin\theta,\quad z = c\cos\theta\]
+    其中，$\theta,\varphi$的变化范围是一个矩形区域：
+    \[D:0\leqslant\varphi\leqslant2\pi,\quad 0\leqslant\theta\leqslant\frac{\pi}{2}\]
+    在区域$D$中，仅有关于$(x,y)$的Jacobi行列式恒大于$0$：
+    \[\pdv{(x,y)}{(\theta,\varphi)} = ab\cos\theta\sin\theta > 0\]
+    因而向量$\vb{r}'_\theta\times\vb{r}'_\varphi$指向$S$的正向，从而有：
+    \begin{align*}
+        \iint_S x^3\dd{y}\dd{z} &= \iint_S a^3\sin^3\theta\cdot\pdv{(y,z)}{(\theta,\varphi)}\dd{\theta}\dd{\varphi}\\
+        &= a^3bc\int_{0}^{2\pi}\cos^4\varphi\dd{\varphi}\int_{0}^{\frac{\pi}{2}}\sin^5\theta\dd{\theta} = \frac{2}{5}\pi a^3bc
+    \end{align*}
+    同样有：
+    \[\iint_S y^3\dd{z}\dd{x} = \frac{2}{5}\pi ab^3c\]
+    由此求得：
+    \[\iint_S x^3\dd{y}\dd{z} + y^3\dd{z}\dd{x} = \frac{2}{5}\pi abc(a^2+b^2)\]
+\end{solution}
