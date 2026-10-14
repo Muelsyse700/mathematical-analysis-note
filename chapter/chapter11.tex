@@ -475,3 +475,48 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
     根据对称性，上式中关于$x$和$y$的三重积分等于$0$，而$S_0$上的面积分由于$z\equiv0$，故而也等于$0$，最终得到：
     \[I = 2\iiint_V z\dd{x}\dd{y}\dd{z} = \int_{0}^{a}z\dd{z}\underset{x^2+y^2\leqslant a^2-z^2}{\iint}\dd{x}\dd{y} = \frac{\pi a^4}{2}\]
 \end{solution}
+
+
+\subsection{Stokes定理}
+\begin{theorem}
+    \textbf{Stokes定理}
+
+    设$\vb{v}=P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k}$是$V$上的光滑向量场，$S$是分片具有二阶连续偏导数的光滑曲面，同时有界曲面$S$的边界记为曲线$L=\partial S$，则有：
+    \[\!\!\underset{L}{\oint} P\dd{x}+Q\dd{y}+R\dd{z}\! = \!\!\underset{S}{\iint}\!\!\left(\pdv{R}{y}-\pdv{Q}{z}\right)\!\dd{y}\dd{z} + \!\left(\pdv{P}{z}-\pdv{R}{x}\right)\!\dd{z}\dd{x} + \!\left(\pdv{Q}{x}-\pdv{P}{y}\right)\!\dd{x}\dd{y}\!\!\!\!\]
+    或者写为：
+    \[\oint_L\vb{v}\cdot\dd{\vb{R}} = \iint_S\rot\vb{v}\cdot\dd{\vb{S}} = \iint_S \nabla\times\vb{v}\cdot\dd{\vb{S}}\]
+\end{theorem}
+
+\begin{proof}
+    设$\mathbb{R}^3$中的$S$是定义域在$Ouv$平面上区域$D$的定向参数曲面：
+    \[S:\vb{r}(u,v) = x(u,v)\vb{i} + y(u,v)\vb{j} + z(u,v)\vb{k},\quad (u,v)\in D \subset\mathbb{R}^2\]
+    而区域$D$的边界曲线$\partial D$是定义域在$t$轴上$[\alpha,\beta]$区间的参数曲线：
+    \[\partial D: u = u(t),\quad v = v(t),\quad t\in[\alpha,\beta]\subset\mathbb{R}\]
+    故而有：
+    \begin{gather*}
+        L:\vb{r}(t) = \vb{r}(u(t),v(t)) = x(u(t),v(t))\vb{i} + y(u(t),v(t))\vb{j} + z(u(t),v(t))\vb{k},\quad t\in[\alpha,\beta]\\
+        t\mapsto(u,v)\mapsto(x,y,z)\qquad [\alpha,\beta]\to \partial D \to L = \partial S
+    \end{gather*}
+    其中定向曲线$L$与定向曲面$S$相协调，由此有：
+    \begin{gather*}
+        \dd{x} = x'_u\dd{u} + x'_v\dd{v} = (x'_u u'_t + x'_v v'_t)\dd{t} \\
+        \oint_L P\dd{x} = \int_{\alpha}^{\beta}P(x'_u u'_t + x'_v v'_t)\dd{t} = \int_{\partial D}(Px'_u)\dd{u} + (Px'_v)\dd{v}
+    \end{gather*}
+    由Green定理，将$\partial D$上的积分转到$D$上：
+    \[\oint_L P\dd{x} = \iint_D\left[\pdv{(Px'_v)}{u} - \pdv{(Px'_u)}{v}\right]\dd{u}\dd{v}\]
+    根据如下推导，$D$上的积分又可以转到$S$上：
+    \begin{gather*}
+        \pdv{(Px'_v)}{u} = (P'_x x'_u + P'_y y'_u + P'_z z'_u)x'_v + P x''_{vu} \\
+        \pdv{(Px'_u)}{v} = (P'_x x'_v + P'_y y'_v + P'_z z'_v)x'_u + P x''_{uv}
+    \end{gather*}
+    \begin{align*}
+        \iint_D\left[\pdv{(Px'_v)}{u} - \pdv{(Px'_u)}{v}\right]\dd{u}\dd{v} &= \iint_D\left[P'_z\pdv{(z,x)}{(u,v)} - P'_y\pdv{(x,y)}{(u,v)}\right]\dd{u}\dd{v} \\
+        \oint_L P\dd{x} &= \iint_S P'_z\dd{z}\dd{x} - P'_y\dd{x}\dd{y}
+    \end{align*}
+    最终形成$S \to D \xlongrightarrow{\text{Green}} \partial D \to t \to L = \partial S$，同理有：
+    \begin{gather*}
+        \oint_L Q\dd{y} = \iint_S Q'_x\dd{x}\dd{y} - Q'_z\dd{y}\dd{z} \\
+        \oint_L R\dd{z} = \iint_S R'_y\dd{y}\dd{z} - R'_x\dd{z}\dd{x}
+    \end{gather*}
+    由此得证.
+\end{proof}

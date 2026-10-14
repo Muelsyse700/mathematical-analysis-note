@@ -880,8 +880,10 @@
 \newcommand{\ee}{\mathrm{e}} % 正体自然常数e
 \newcommand{\ii}{\mathrm{i}} % 正体虚数i
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\let\grad\relax\DeclareMathOperator{\grad}{\symbf{grad}}
-\DeclareMathOperator{\rot}{\symbf{rot}}
+\let\grad\relax\DeclareMathOperator{\grad}{\symbf{grad}} % 散度
+\DeclareMathOperator{\rot}{\symbf{rot}} % 旋度
+
+% 圆弧符号
 \DeclareSymbolFont{ugmL}{OMX}{mdugm}{m}{n}
 \DeclareMathAccent{\wideparen}{\mathord}{ugmL}{"F3}
 
