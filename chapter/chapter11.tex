@@ -520,3 +520,16 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
     \end{gather*}
     由此得证.
 \end{proof}
+
+\begin{question}
+    设曲线$L$是椭圆抛物面$z = 3x^2 + 4y^2$与椭圆柱面$4x^2+y^2 = 4y$的交线，从$z$轴的正方向看，$L$的方向为顺时针，求向量场$\vb{v} = y(z+1)\vb{i} + zx\vb{j} + (xy-z)\vb{k}$沿$L$的环量.
+\end{question}
+
+\begin{solution}
+    设$D$为$Oxy$上的平面区域$4x^2+y^2\leqslant 4y$，$S$是曲面$z = 3x^2+4y^2,(x,y)\in D$的下侧，根据Stokes定理：
+    \[\oint_L \vb{v}\cdot\dd{\vb{r}} = \iint_S\begin{vmatrix}
+        \dd{y}\dd{z} & \dd{z}\dd{x} & \dd{x}\dd{y} \\
+        \displaystyle\pdv{x} & \displaystyle\pdv{y} & \displaystyle\pdv{z} \\
+        y(z+1) & zx & xy-z
+    \end{vmatrix} = -\iint_S\dd{x}\dd{y} = \iint_D\dd{x}\dd{y} = 2\pi\]
+\end{solution}
