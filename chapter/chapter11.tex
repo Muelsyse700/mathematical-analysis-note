@@ -457,3 +457,21 @@
     或者写为：
     \[\oiint_S \vb{v}\cdot\dd{\vb{S}} = \iiint_V\nabla\cdot\vb{v}\dd{V} = \iiint_V\operatorname{div}\vb{v}\dd{V}\]
 \end{theorem}
+
+Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不封闭的曲面，可以将其用一个简单曲面封上，利用Gauss定理求解后再将其减去.
+
+\begin{question}
+    求积分：
+    \[I = \iint_S x^2\dd{y}\dd{z} + y^2\dd{z}\dd{x} + z^2\dd{x}\dd{y}\]
+    其中$S:x^2+y^2+z^2 = a^2,z\geqslant0$，定向为外侧.
+\end{question}
+
+\begin{solution}
+    积分曲面是一个底面开口的半球面，为简化计算，用一个圆形底面$S_0:x^2+y^2\leqslant a^2,z=0$封住.记$\vb{v} = (x^2,y^2,z^2)$，由Gauss定理得：
+    \begin{align*}
+        I &= \iint_{S+S_0}\vb{v}\cdot\dd{\vb{S}} - \iint_{S_0}\vb{v}\cdot\dd{\vb{S}} = \oiint_{S+S_0}\vb{v}\cdot\dd{\vb{S}} - \iint_{S_0}\vb{v}\cdot\dd{\vb{S}}\\
+        &= 2\iiint_V (x+y+z)\dd{x}\dd{y}\dd{z} - \iint_{S_0}z^2\dd{x}\dd{y}
+    \end{align*}
+    根据对称性，上式中关于$x$和$y$的三重积分等于$0$，而$S_0$上的面积分由于$z\equiv0$，故而也等于$0$，最终得到：
+    \[I = 2\iiint_V z\dd{x}\dd{y}\dd{z} = \int_{0}^{a}z\dd{z}\underset{x^2+y^2\leqslant a^2-z^2}{\iint}\dd{x}\dd{y} = \frac{\pi a^4}{2}\]
+\end{solution}
