@@ -592,3 +592,68 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
         \rot\varphi = \nabla\times\varphi = \lim_{V\to P}\left[\frac{1}{\sigma(V)}\oiint_S\dd{\vb{S}}\times\vb{v}\right]
     \end{gather*}
 \end{theorem}
+
+
+\section{保守场}
+\subsection{保守场与势函数}
+\begin{definition}
+    设$\vb{v}=P\vb{i}+Q\vb{j}+R\vb{k}$是连通区域$V$内的光滑向量场，若$\vb{v}$在$V$内的曲线积分与路径无关，或$\vb{v}$沿$V$内任意封闭曲线的环量为$0$，即：
+    \[\int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = \int_{A}^{B}\vb{v}\cdot\dd{\vb{r}}\]
+    则称$\vb{v}$是区域$V$内的\overtext{保守场}{conservative field}.
+\end{definition}
+
+\begin{definition}
+    对于空间中单连通区域$V$，如果$V$内任何一条闭路$L$都存在一张以$L$为边界且完全包含在$V$内的分片光滑曲面，或是$V$内任何一条简单封闭曲线都可以在$V$内连续收缩为一点，则称$V$是\textbf{曲面单连通}的.
+\end{definition}
+例如，游泳圈就不是一个曲面单连通的物体.
+
+\begin{theorem}
+    设$V\subset\mathbb{R}^3$是曲面单连通区域，$\vb{v}=P\vb{i}+Q\vb{j}+R\vb{k}$是其上的光滑向量场，则有以下三个命题等价：
+    \begin{enumerate}[circ]
+        \item $\vb{v}$是保守场.
+        \item 存在一个数量场$\varphi$使得$\vb{v}=\nabla\varphi$，并称$\varphi$是向量场的\overtext{势函数}{potential function}.
+        \item $\vb{v}$满足$\nabla\times\vb{v}=\bm{0}$.
+    \end{enumerate}
+    或者说：\textbf{保守场}$\Leftrightarrow$\textbf{有势场}$\Leftrightarrow$\textbf{无旋场}
+\end{theorem}
+
+\begin{proof}
+    (\circnum{1}$\Rightarrow$\circnum{2})设$V$中有一固定点$M_0(x_0,y_0,z_0)$和一个动点$M(x,y,z)$，在保守场$\vb{v}$中，从$M_0$到$M$的积分值不依赖于路径的选取，从而在$V$上有一数量场$\varphi$：
+    \[(x,y,z)\mapsto\varphi(x,y,z) = \int_{M_0}^{M}\vb{v}\cdot\dd{\vb{r}} = \int_{M_0}^{M}P\dd{x}+Q\dd{y}+R\dd{z}\]
+    根据上式，以$(x,y,z)$为起点到$(x+\Delta x,y,z)$为终点的积分为：
+    \[\varphi(x+\Delta x,y,z) - \varphi(x,y,z) = \int_{(x,y,z)}^{(x+\Delta x,y,z)}P\dd{x}+Q\dd{y}+R\dd{z}\]
+    在平行于$x$轴的直线上有：
+    \[\frac{\varphi(x+\Delta x,y,z)-\varphi(x,y,z)}{\Delta x} = \frac{1}{\Delta x}\int_{x}^{x+\Delta x}P\dd{x}\]
+    两边取极限$\Delta x \to 0$，左边是导数的定义，右边是积分中值定理，有：
+    \[\pdv{\varphi}{x} = P(x,y,z)\]
+    同理有：
+    \[\pdv{\varphi}{y} = Q(x,y,z) \qquad \pdv{\varphi}{z} = R(x,y,z)\]
+    综合以上三式，得到$\nabla\varphi = \vb{v}$.
+
+    (\circnum{2}$\Rightarrow$\circnum{3})若$\exists\varphi$使得$\nabla\varphi = \vb{v}$，则有$\nabla\times\vb{v} = \nabla\times\nabla\varphi = \bm{0}$.
+
+    (\circnum{3}$\Rightarrow$\circnum{1})若$\nabla\times\vb{v}=\bm{0}$，在$V$内任取一条闭曲线$L$及其张成的$S$，根据Stokes定理：
+    \[\oint_L\vb{v}\cdot\dd{\vb{r}} = \iint_S\nabla\times\vb{v}\cdot\dd{\vb{S}} = 0\]
+    上式符合保守场的定义，得证.
+\end{proof}
+
+上述定理表明：
+\begin{itemize}
+    \item 一个数量场$\varphi$的梯度场$\nabla\varphi$一定是保守场.
+    \item 判断一个向量场是否为保守场，就是判断$\nabla\times\vb{v}$是否为$\bm{0}$.
+    \item 定理中要求曲面单连通，但是对于其他的连通区域保守必有势，有势必无旋，而无旋是否有势则依赖于曲面单连通性.
+\end{itemize}
+
+\begin{theorem}
+    设$\vb{v}$是区域$V$上的保守场，$\varphi$是$\vb{v}$的一个势函数，则有：
+    \[\int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = \int_A^B \vb{v}\cdot\dd{\vb{r}} = \int_{A}^{B}\dd{\varphi} = \varphi(B)-\varphi(A)\]
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+        \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} &= \int_{A}^{B}\nabla\varphi\cdot\vb{r}'(t)\dd{t}\\
+        &= \int_{\alpha}^{\beta}[\varphi'_x x'(t) + \varphi'_y y'(t) + \varphi'_z z'(t)]\dd{t}\\
+        &= \int_{\alpha}^{\beta}\dd{\varphi(x(t),y(t),z(t))}\\
+        &= \varphi(B) - \varphi(A)
+    \end{align*}
+\end{proof}
