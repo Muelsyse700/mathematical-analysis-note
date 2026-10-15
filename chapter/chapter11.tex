@@ -533,3 +533,62 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
         y(z+1) & zx & xy-z
     \end{vmatrix} = -\iint_S\dd{x}\dd{y} = \iint_D\dd{x}\dd{y} = 2\pi\]
 \end{solution}
+
+
+\section{其他形式的曲线、曲面积分}
+此前讨论的四种积分分别是：
+\[\text{第一型}\begin{cases}
+    \text{数量场在曲线上的积分}\\
+    \text{数量场在曲面上的积分}
+\end{cases}
+\quad\text{第二型}\begin{cases}
+    \text{向量场在有向曲线上的积分}\\
+    \text{向量场在有向曲面上的积分}
+\end{cases}\]
+它们的积分结果都是标量，第一型对应两个数量场相乘，第二型对应两个向量场的点乘.接下来讨论四种结果是矢量的积分，分别是曲线或曲面上的数量场和向量场的数乘、向量场和向量场的叉乘.
+
+\begin{theorem}
+    设$S$是空间中逐段光滑有界曲面，$S$的边界$\partial S$是逐段光滑封闭曲线，则有：
+    \begin{gather*}
+        \oint_{\partial S}\varphi\dd{\vb{r}} = \iint_S \dd{\vb{S}} \times \nabla\varphi \\
+        \oint_{\partial S}\dd{\vb{r}}\times\vb{v} = \iint_S(\dd{\vb{S}}\times\nabla)\times\vb{v}
+    \end{gather*}
+\end{theorem}
+
+\begin{proof}
+    设$\vb{a}$是一个常值向量，左点乘第一个等式的左边，得到：
+    \[\vb{a}\cdot\textcolor{GreenDeep}{\oint_{\partial S}\varphi\dd{\vb{r}}} = \oint_{\partial S}(\varphi\vb{a})\cdot\dd{\vb{r}} \xlongequal{\text{Stokes}} \iint_S \nabla\times(\varphi\vb{a})\cdot\dd{\vb{S}}\]
+    根据数量场的性质，$\varphi$可以从括号中提至$\nabla$后，又由混合积的轮换对称性得：
+    \[\iint_S \nabla\times(\varphi\vb{a})\cdot\dd{\vb{S}} = \iint_S \nabla\varphi \times \vb{a}\cdot\dd{\vb{S}} = \vb{a}\cdot\textcolor{GreenDeep}{\iint_S\dd{\vb{S}}\times\nabla\varphi}\]
+    第一个等式得证.同样地，对第二个等式：
+    \begin{align*}
+        \vb{a}\cdot\textcolor{GreenDeep}{\oint_{\partial S}\dd{\vb{r}}\times\vb{v}} &= \oint_{\partial S}\dd{\vb{r}}\cdot(\vb{v}\times\vb{a}) \xlongequal{\text{Stokes}} \iint_S \dd{\vb{S}}\cdot\nabla\times(\vb{v}\times\vb{a})\\
+        &= \iint_S \vb{v}\times\vb{a}\cdot(\dd{\vb{S}}\times\nabla) = \vb{a}\cdot\textcolor{GreenDeep}{\iint_S(\dd{\vb{S}}\times\nabla)\times\vb{v}}
+    \end{align*}
+    第二个等式得证.
+\end{proof}
+
+\begin{theorem}
+    设$V$是空间有界区域，$V$的边界$\partial V$是逐段光滑封闭曲面，则：
+    \begin{gather*}
+        \oiint_{\partial V}\varphi\dd{\vb{S}} = \iiint_V \nabla\varphi\dd{V}\\
+        \oiint_{\partial V}\dd{\vb{S}}\times\vb{v} = \iiint_V\nabla\times\vb{v}\dd{V}
+    \end{gather*}
+\end{theorem}
+
+\begin{proof}
+    设$\vb{a}$是一个常值向量，对第一个等式：
+    \[\vb{a}\cdot\textcolor{GreenDeep}{\oiint_{\partial V}\varphi\dd{\vb{S}}} = \oiint_{\partial V}(\varphi\vb{a})\cdot\dd{\vb{S}} \xlongequal{\text{Gauss}} \iiint_V\nabla\cdot(\varphi\vb{a})\dd{V} = \vb{a}\cdot\textcolor{GreenDeep}{\iiint_V\nabla\varphi\dd{V}}\]
+    第一个等式得证.由此对第二个等式：
+    \[\vb{a}\cdot\textcolor{GreenDeep}{\oiint_{\partial V}\dd{\vb{S}}\times\vb{v}} = \oiint_{\partial V}\dd{\vb{S}}\cdot(\vb{v}\times\vb{a}) \xlongequal{\text{Gauss}} \iiint_V\nabla\cdot(\vb{v}\times\vb{a})\dd{V} = \vb{a}\cdot\textcolor{GreenDeep}{\iiint_V\nabla\times\vb{v}\dd{V}}\]
+\end{proof}
+
+根据上一个定理的两个等式和Gauss定理，可以推出：
+\begin{theorem}
+    \textbf{梯度、散度和旋度的积分表示}
+    \begin{gather*}
+        \grad\varphi = \nabla\varphi = \lim_{V\to P}\left[\frac{1}{\sigma(V)}\oiint_S\varphi\dd{\vb{S}}\right]\\
+        \operatorname{div}\varphi = \nabla\cdot\varphi = \lim_{V\to P}\left[\frac{1}{\sigma(V)}\oiint_S\vb{v}\cdot\dd{\vb{S}}\right]\\
+        \rot\varphi = \nabla\times\varphi = \lim_{V\to P}\left[\frac{1}{\sigma(V)}\oiint_S\dd{\vb{S}}\times\vb{v}\right]
+    \end{gather*}
+\end{theorem}
