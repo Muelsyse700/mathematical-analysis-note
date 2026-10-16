@@ -657,3 +657,48 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
         &= \varphi(B) - \varphi(A)
     \end{align*}
 \end{proof}
+
+
+\subsection{无源场与向量势}
+\begin{definition}
+    称散度为$0$，即$\nabla\cdot\vb{v} = 0$的向量场为\overtext{无源场}{passive field}.
+\end{definition}
+
+\begin{definition}
+    设$\vb{v}$是空间区域$\mathbb{R}^3$中的光滑向量场，如果存在向量场$\vb{\alpha}$使得：
+    \[\vb{v} = \rot\vb{\alpha} = \nabla\times\vb{\alpha}\]
+    则称$\vb{\alpha}$为$\vb{v}$的\overtext{向量势}{vector potential}.
+\end{definition}
+
+\begin{theorem}
+    设$\vb{v}$是空间中的光滑向量场，则$\vb{v}$是无源场，当且仅当$\vb{v}$在任何一点的局部存在向量势.
+\end{theorem}
+
+\begin{proof}
+    \textbf{必要性：}\\
+    因为$\nabla\cdot\vb{v} = \nabla\cdot\nabla\times\vb{\alpha} = 0$，所以具有向量势的向量场$\vb{v}$一定是无源场
+
+    \textbf{充分性：}\\
+    设$\vb{v} = P\vb{i} + Q\vb{j} + R\vb{k}$，求是否存在$\vb{\alpha} = A\vb{i} + B\vb{j} + C\vb{k}$使得$\vb{v} = \nabla\times\vb{\alpha}$，即求解：
+    \[\begin{cases}
+        \displaystyle\pdv{C}{y} - \pdv{B}{z} = P(x,y,z) \\[1em]
+        \displaystyle\pdv{A}{z} - \pdv{C}{x} = Q(x,y,z) \\[1em]
+        \displaystyle\pdv{B}{x} - \pdv{A}{y} = R(x,y,z)
+    \end{cases}\]
+    上述方程组是一组PDE，只需要求出一个特解即可得证.不妨令$C\equiv 0$，则有：
+    \begin{gather*}
+        \pdv{A}{z} = Q(x,y,z) \quad\Rightarrow\quad A = \int_{z_0}^{z}Q(x,y,z)\dd{z} \\
+        -\pdv{B}{z} = P(x,y,z) \quad\Rightarrow\quad B = -\int_{z_0}^{z}P(x,y,z)\dd{z} + f(x,y)
+    \end{gather*}
+    上二式中不妨只保留一个相对于$z$的积分常数$f(x,y)$，将$A,B$代入第三个PDE，尝试求取$f(x,y)$：
+    \[R(x,y,z) = -\int_{z_0}^{z}\left(\pdv{P}{x}+\pdv{Q}{y}\right)\dd{z} + \pdv{f}{x}\]
+    根据$\nabla\times\vb{v} = P'_x + Q'_y + P'_z = 0$，上式有：
+    \begin{gather*}
+        R(x,y,z) = \int_{z_0}^{z}\pdv{R}{z}\dd{z} + \pdv{f}{x} = R(x,y,z) - R(x,y,z_0) + \pdv{f}{x}\\
+        \Rightarrow\quad f(x,y) = \int_{x_0}^{x}R(x,y,z_0)\dd{x}
+    \end{gather*}
+    最终，可以推出对任意无源场$\vb{v}$总是有一个向量势：
+    \[\vb{\alpha} = \left[\int_{z_0}^{z}Q(x,y,z)\dd{z}\right]\vb{i} + \left[-\int_{z_0}^{z}P(x,y,z)\dd{z} + \int_{x_0}^{x}R(x,y,z_0)\dd{x}\right]\vb{j}\]
+\end{proof}
+
+
