@@ -451,6 +451,7 @@
 若一个区域$V$可以同时分解为上述类型的区域，并且相邻子区域公共边界上两侧的积分相互抵消，则有：
 \begin{theorem}
     \textbf{Gauss定理}
+    \label{thm:GaussTheorem}
 
     设$\vb{v} = P(x,y,z)\vb{i} + Q(x,y,z)\vb{j} + R(x,y,z)\vb{k}$是$V$上的光滑向量场，$V$是空间中分片光滑曲面围成的闭区域.如果$V$可以同时分解成有限个互不重叠的$X$型、$Y$型和$Z$型区域的并，则有：
     \[\oiint_S P\dd{y}\dd{z} + Q\dd{z}\dd{x} + R\dd{x}\dd{y} = \iiint_V\left(\pdv{P}{x}+\pdv{Q}{y}+\pdv{R}{z}\right)\dd{x}\dd{y}\dd{z}\]
@@ -702,3 +703,27 @@ Gauss定理为求取第二型曲面积分提供了一种新的方法：对于不
 \end{proof}
 
 
+\section{微分形式的积分}
+\subsection{微分形式的积分}
+第二型曲线曲面积分可以用微分形式及其外微分表示：
+\begin{gather*}
+    \int_{L_{AB}}\vb{v}\cdot\dd{\vb{r}} = \int_{L_{AB}}\omega^1_{\vb{v}} \quad\Rightarrow\quad \oint_{\partial S} \omega^1_{\vb{v}} \xlongequal{\text{Green}} \iint_{S}\omega^2_{\nabla\times\vb{v}} = \iint_S \dd{\omega^1_{\vb{v}}} \\
+    \iint_S \vb{v}\cdot\dd{\vb{S}} = \iint_{S}\omega^2_{\vb{v}} \quad\Rightarrow\quad \oiint_{\partial V} \omega^2_{\vb{v}} \xlongequal{\text{Gauss}} \iiint_V \omega^3_{\nabla\cdot\vb{v}} = \iiint_V \dd{\omega^2_{\vb{v}}}
+\end{gather*}
+显然，以上二式具有一些共性.或者说，\cref{thm:GreenTheorem}\textbf{(Grenn公式)}、\cref{thm:GaussTheorem}\textbf{(Gauss公式)}，甚至\cref{thm:NewtonLeibnizTheorem}\textbf{(Newton-Leibniz公式)}存在一定的共性：
+\begin{theorem}
+    \textbf{Gauss-Stokes公式}
+    \[\int_{\partial\Omega}\omega = \int_{\Omega}\dd{\omega}\]
+\end{theorem}
+
+同时，关于保守场和无源场的有关表述也可以统一到微分形式中：
+\begin{itemize}
+    \item 向量场$\vb{v}$称为保守场，当且仅当对应的1-形式满足：$\dd{\omega^1_{\vb{v}}} = \omega^2_{\nabla\times\vb{v}} = 0$.
+    \item 向量场$\vb{v}$称为无源场，当且仅当对应的2-形式满足：$\dd{\omega^2_{\vb{v}}} = \omega^3_{\nabla\cdot\vb{v}} = 0$.
+\end{itemize}
+同时，根据\cref{thm:ConversePoincareLemma}\textbf{(Poincaré引理之逆定理)}的有关表述，对应保守场和无源场的微分形式都是恰当微分形式：
+\begin{itemize}
+    \item 对于恰当的保守场$\omega^1_{\vb{v}}$，存在0-形式$\omega^0_\varphi$，即势函数，使得$\omega^1_{\vb{v}} = \dd{\omega^0_\varphi}$.
+    \item 对于恰当的无源场$\omega^2_{\vb{v}}$，存在1-形式$\omega^1_{\vb{\alpha}}$，即向量势，使得$\omega^2_{\vb{v}} = \dd{\omega^1_{\vb{\alpha}}}$.
+\end{itemize}
+以上的内容，就是将向量场及其积分向高维推广的开始.
